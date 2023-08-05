@@ -188,6 +188,6 @@ class AppServiceProvider extends ServiceProvider
       //     'userLinks' => $userLinks,
 			// 		'contact' => $contact,
       //   ]);
-      }
+      // }
     }
 }
