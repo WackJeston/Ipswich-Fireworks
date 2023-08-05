@@ -1,0 +1,191 @@
+@use 'v';
+
+.table-title {
+	margin-top: 5px;
+	margin-bottom: 5px;
+}
+
+table {
+	position: relative;
+  width: 100%;
+  max-width: 100%;
+  border-collapse: collapse;
+	display: table;
+  table-layout: fixed;
+}
+
+tr {
+	display: flex;
+	align-items: center;
+	position: relative;
+}
+
+thead tr {
+  height: 35px;
+	border-bottom: 1px solid v.$gray-1;
+}
+
+tbody tr {
+  height: 30px;
+	border-bottom: 1px solid v.$bg-main;
+}
+
+tr th {
+  white-space: nowrap;
+}
+
+tr th, tr td {
+  padding-left: 7px;
+  text-align: left;
+	min-width: 30px;
+}
+
+tr th:last-child, tr td:last-child {
+  padding-right: 8px;
+}
+
+tr th:not(.tr-buttons),
+tr td:not(.tr-buttons) {
+	overflow: hidden;
+	white-space: nowrap;
+	text-overflow: ellipsis;
+}
+
+tr .tr-buttons {
+	position: absolute;
+	right: 0;
+	display: flex;
+	flex-direction: row;
+  margin-left: auto;
+  text-align: right;
+  white-space: nowrap;
+}
+
+tr i:not(.primary, .non-primary, .fa-xmark) {
+  position: relative;
+  font-size: 1.1rem;
+  text-align: right;
+  cursor: pointer;
+  color: v.$bg-dark;
+  margin-top: 3px;
+}
+
+tr i:not(tr:first-child, .primary, .non-primary) {
+  padding-left: 7px;
+}
+
+tr i:hover:not(.primary, .non-primary) {
+  color: v.$alt-semi-dark
+}
+
+tr i:hover .button-label:not(tr .button-label:hover) {
+  display: block;
+}
+
+tr .button-label {
+  margin: 0;
+  padding: 0;
+  display: none;
+  z-index: 2;
+}
+
+tr .button-label p {
+  position: absolute;
+  bottom: -20px;
+  right: 117%;
+  background-color: v.$bg-dark;
+  color: v.$white;
+  padding: 6px 10px 6px 8px;
+  border-radius: 5px;
+  font-family: 'Nunito', sans-serif;
+  font-size: 0.9rem;
+  font-weight: 600;
+}
+
+tr .button-label div {
+  position: absolute;
+  bottom: 2px;
+  right: 100%;
+  height: 12px;
+  width: 12px;
+  background-color: v.$bg-dark;
+  transform: rotate(45deg);
+  border-radius: 0 3px 0 10px;
+}
+
+table .empty-table {
+	display: flex;
+	align-items: center;
+  width: 100%;
+  opacity: 0.6;
+	height: 80px;
+	padding-left: 20px;
+}
+
+table .empty-table h3 {
+  color: v.$black;
+	margin: 0;
+}
+
+table .primary, table .non-primary {
+  font-size: 1.1rem;
+}
+
+table .primary {
+  color: v.$pale-green;
+}
+
+table .non-primary {
+  color: v.$pale-red;
+}
+
+table nav {
+	display: flex;
+	width: 100%;
+}
+
+table .pagination-controls {
+	display: flex;
+	flex-direction: row;
+	margin-left: auto;
+}
+
+table .fa-xmark {
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	position: absolute;
+	top: 10px;
+	right: 10px;
+	height: 20px;
+	width: 20px;
+	border-radius: 5px;
+	color: v.$black;
+	cursor: pointer;
+	font-size: 1rem;
+}
+
+table .fa-xmark:hover {
+	background-color: v.$black;
+	color: v.$white;
+}
+
+table td .toggle-true {
+	color: v.$pale-green;
+}
+
+table td .toggle-true:hover {
+	color: v.$pale-green-darker;
+}
+
+table td .toggle-false {
+	color: v.$pale-red;
+}
+
+table td .toggle-false:hover {
+	color: v.$pale-red-darker;
+}
+
+table .hide-mobile {
+	display: none;
+}
