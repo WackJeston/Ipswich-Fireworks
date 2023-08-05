@@ -3,7 +3,7 @@
 namespace App\Http\Controllers;
 
 use File;
-use App\dataTable;
+use App\DataTable;
 use App\dataForm;
 use Illuminate\Http\Request;
 use App\Models\Products;

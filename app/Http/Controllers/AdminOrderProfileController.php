@@ -6,7 +6,7 @@ use DB;
 use Hash;
 use Illuminate\Http\Request;
 use Illuminate\Validation\Rule;
-use App\dataTable;
+use App\DataTable;
 use App\dataForm;
 use App\Models\Orders;
 

@@ -5,7 +5,7 @@ namespace App\Http\Controllers;
 use DB;
 use File;
 use Illuminate\Http\Request;
-use App\dataTable;
+use App\DataTable;
 use App\dataForm;
 use App\Models\ProductCategories;
 use App\Models\ProductCategoryJoins;

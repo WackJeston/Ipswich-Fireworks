@@ -5,7 +5,7 @@ use File;
 use DB;
 use Illuminate\Http\Request;
 use Illuminate\Validation\Rule;
-use App\dataTable;
+use App\DataTable;
 use App\dataForm;
 use App\Models\Products;
 use App\Models\ProductImages;
