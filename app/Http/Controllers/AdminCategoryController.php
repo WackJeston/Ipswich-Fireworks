@@ -6,7 +6,7 @@ use DB;
 use File;
 use Illuminate\Http\Request;
 use App\DataTable;
-use App\dataForm;
+use App\DataForm;
 use App\Models\ProductCategories;
 use App\Models\ProductCategoryJoins;
 use App\Models\ProductCategoryImages;

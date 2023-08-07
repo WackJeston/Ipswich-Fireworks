@@ -5,7 +5,7 @@ namespace App\Http\Controllers;
 use DB;
 use Illuminate\Http\Request;
 use App\DataTable;
-use App\dataForm;
+use App\DataForm;
 use App\Models\ProductVariants;
 use App\Models\Products;
 

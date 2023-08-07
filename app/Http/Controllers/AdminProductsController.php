@@ -4,7 +4,7 @@ namespace App\Http\Controllers;
 
 use File;
 use App\DataTable;
-use App\dataForm;
+use App\DataForm;
 use Illuminate\Http\Request;
 use App\Models\Products;
 use App\Models\ProductImages;
