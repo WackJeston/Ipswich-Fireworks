@@ -55,23 +55,23 @@ class AppServiceProvider extends ServiceProvider
             "title"=>"website",
             "icon"=>"fa-solid fa-globe",
             "sublink"=>$subLinks = [
+							$homePage = [
+                "title"=>"home page",
+                "link"=>"/admin/home-page",
+                "icon"=>"fa-solid fa-house-chimney",
+              ],
               $contact = [
                 "title"=>"contact",
                 "link"=>"/admin/contact",
                 "icon"=>"fa-solid fa-address-card",
               ],
-              $landingZones = [
-                "title"=>"landing zones",
-                "link"=>"/admin/landing-zones",
-                "icon"=>"fa-solid fa-plane-arrival",
-              ],
             ],
           ],
-					$test = [
-						"title"=>"test",
-						"link"=>"/admin/test",
-						"icon"=>"fa-solid fa-flask-vial",
-					],
+					// $test = [
+					// 	"title"=>"test",
+					// 	"link"=>"/admin/test",
+					// 	"icon"=>"fa-solid fa-flask-vial",
+					// ],
         ];
 
         View::share([
@@ -109,7 +109,6 @@ class AppServiceProvider extends ServiceProvider
 
         View::share([
           'publicLinks' => $publicLinks,
-          'userLinks' => $userLinks,
 					'contact' => $contact,
         ]);
       }

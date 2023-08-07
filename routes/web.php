@@ -22,7 +22,7 @@ use App\Http\Controllers\AdminUsersController;
 use App\Http\Controllers\AdminUserProfileController;
 use App\Http\Controllers\AdminCustomersController;
 use App\Http\Controllers\AdminCustomerProfileController;
-use App\Http\Controllers\AdminLandingZonesController;
+use App\Http\Controllers\AdminHomePageController;
 
 
 // DataTable -----------------------------------------------------------------------------------
@@ -85,11 +85,9 @@ Route::group( ['middleware' => 'auth' ], function()
     Route::get('/customer-profileDelete/{id}', 'delete');
   });
 
-  Route::controller(AdminLandingZonesController::class)->group(function () {
-    Route::get('/admin/landing-zones', 'show');
-    Route::get('/landing-zonesShowZone/{zone}/{toggle}', 'showZone');
-    Route::post('/landing-zonesStoreSlide/{id}', 'storeSlide');
-    Route::get('landing-zonesDeleteSlide/{slideId}', 'deleteSlide');
-    Route::get('landing-zonesPrimarySlide/{slideId}', 'primarySlide');
+  Route::controller(AdminHomePageController::class)->group(function () {
+    Route::get('/admin/home-page', 'show');
+		Route::post('/admin-home-pageAddLandingZoneBanner', 'addLandingZoneBanner');
+		Route::post('/admin-home-pageDeleteLandingZoneBanner', 'deleteLandingZoneBanner');
   });
 });

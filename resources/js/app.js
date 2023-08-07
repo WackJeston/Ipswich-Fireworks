@@ -17,26 +17,10 @@ import Publicerror from './vue/components/public/site/publicError.vue'
 import Publicmessage from './vue/components/public/site/publicMessage.vue'
 import Publicalert from './vue/components/public/site/publicAlert.vue'
 
-import Publiclogin from './vue/components/public/auth/login.vue'
-import Publicsignup from './vue/components/public/auth/signup.vue'
-
 import Homelzcarousel from './vue/components/public/homepage/landingZoneCarousel.vue'
 import Homecategories from './vue/components/public/homepage/productCategories.vue'
 
-import Accountfunctions from './vue/components/public/account/accountFunctions.vue'
-import Accountorder from './vue/components/public/account/accountOrder.vue'
-
 import Contactmain from './vue/components/public/contactMain.vue'
-
-import Cartitems from './vue/components/public/cartItems.vue'
-
-import Checkoutaddresses from './vue/components/public/checkout/checkoutAddresses.vue'
-import Checkoutpayment from './vue/components/public/checkout/checkoutPayment.vue'
-import Checkoutreview from './vue/components/public/checkout/checkoutReview.vue'
-import Checkoutsuccess from './vue/components/public/checkout/checkoutSuccess.vue'
-
-import Products from './vue/components/public/products/products.vue'
-import Productpagemain from './vue/components/public/products/productPageMain.vue'
 
 
 // ADMIN
@@ -57,19 +41,7 @@ import Customerscreate from './vue/components/admin/customersCreate.vue'
 
 import Customerprofilefunctions from './vue/components/admin/customerProfileFunctions.vue'
 
-import Productscreate from './vue/components/admin/productsCreate.vue'
-
-import Productprofilefunctions from './vue/components/admin/productProfileFunctions.vue'
-
 import Lzhomecarousel from './vue/components/admin/home-carousel.vue'
-
-import Categorycreate from './vue/components/admin/categoryCreate.vue'
-
-import Categoryprofilefunctions from './vue/components/admin/categoryProfileFunctions.vue'
-
-import Variantscreate from './vue/components/admin/variantsCreate.vue'
-
-import Variantprofilefunctions from './vue/components/admin/variantProfileFunctions.vue'
 
 
 
@@ -94,45 +66,11 @@ const publicAlert = createApp({})
 publicAlert.component('publicalert', Publicalert).mount('#publicalert')
 
 
-const publicLogin = createApp({})
-publicLogin.component('publiclogin', Publiclogin).mount('#publiclogin')
-
-const publicSignup = createApp({})
-publicSignup.component('publicsignup', Publicsignup).mount('#publicsignup')
-
-
 const homeLzCarousel = createApp({})
 homeLzCarousel.component('homelzcarousel', Homelzcarousel).mount('#homelzcarousel')
 
 const homeCategories = createApp({})
 homeCategories.component('homecategories', Homecategories).mount('#homecategories')
-
-
-const accountFunctions = createApp({})
-accountFunctions.component('accountfunctions', Accountfunctions).mount('#accountfunctions')
-
-const accountOrder = createApp({})
-accountOrder.component('accountorder', Accountorder).mount('#accountorder')
-
-
-const cartItems = Vue.createApp({})
-cartItems.use(VueAxios, axios)
-cartItems.component('cartitems', Cartitems).mount('#cartitems')
-
-
-const checkoutAddresses = Vue.createApp({})
-checkoutAddresses.use(VueAxios, axios)
-checkoutAddresses.component('checkoutaddresses', Checkoutaddresses).mount('#checkoutaddresses')
-
-const checkoutPayment = Vue.createApp({})
-checkoutPayment.use(VueAxios, axios)
-checkoutPayment.component('checkoutpayment', Checkoutpayment).mount('#checkoutpayment')
-
-const checkoutReview = Vue.createApp({})
-checkoutReview.component('checkoutreview', Checkoutreview).mount('#checkoutreview')
-
-const checkoutSuccess = Vue.createApp({})
-checkoutSuccess.component('checkoutsuccess', Checkoutsuccess).mount('#checkoutsuccess')
 
 
 const contactMain = Vue.createApp({})
@@ -144,13 +82,6 @@ contactMain.use(VueGoogleMaps, {
 }).mount('#app')
 contactMain.component('contactmain', Contactmain).mount('#contactmain')
 
-
-const products = createApp({})
-products.component('products', Products).mount('#products')
-
-const productPageMain = createApp({})
-productPageMain.use(VueAxios, axios)
-productPageMain.component('productpagemain', Productpagemain).mount('#productpagemain')
 
 
 // ADMIN
@@ -169,9 +100,6 @@ alertMessage.component('alertmessage', Alertmessage).mount('#alertmessage')
 
 const adminLogin = createApp({})
 adminLogin.component('adminlogin', Adminlogin).mount('#adminlogin')
-
-// const adminConfirmEmail = createApp({})
-// adminConfirmEmail.component('adminconfirmemail', Adminconfirmemail).mount('#adminconfirmemail')
 
 
 const adminContactFunctions = createApp({})
@@ -195,29 +123,5 @@ const customerProfileFunctions = createApp({})
 customerProfileFunctions.component('customerprofilefunctions', Customerprofilefunctions).mount('#customerprofilefunctions')
 
 
-const productsCreate = createApp({})
-productsCreate.component('productscreate', Productscreate).mount('#productscreate')
-
-
-const productProfileFunctions = createApp({})
-productProfileFunctions.component('productprofilefunctions', Productprofilefunctions).mount('#productprofilefunctions')
-
-
 const lzHomeCarousel = createApp({})
 lzHomeCarousel.component('lzhomecarousel', Lzhomecarousel).mount('#lzhomecarousel')
-
-
-const categoryCreate = createApp({})
-categoryCreate.component('categorycreate', Categorycreate).mount('#categorycreate')
-
-
-const categoryProfileFunctions = createApp({})
-categoryProfileFunctions.component('categoryprofilefunctions', Categoryprofilefunctions).mount('#categoryprofilefunctions')
-
-
-const variantsCreate = createApp({})
-variantsCreate.component('variantscreate', Variantscreate).mount('#variantscreate')
-
-
-const variantProfileFunctions = createApp({})
-variantProfileFunctions.component('variantprofilefunctions', Variantprofilefunctions).mount('#variantprofilefunctions')

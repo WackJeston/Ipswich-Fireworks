@@ -7,50 +7,8 @@
 				<h2 id="header-title-mini">{{ this.sitetitlemini }}</h2>
 			</a>
 
-			<ul id="header-nav-links">
-				
-				<a href="/cart" class="nav-link hover-background">
-					<li class="nav-link-contents icon-link">
-						<i class="fa-solid fa-cart-shopping"></i>
-					</li>
-				</a>
-
-				<li @click="(userMenuActive = !userMenuActive) && (sublinksActive = false)"
-					class="nav-link hover-background user-button" :class="[this.sessionuser ? 'logged-in' : '']">
-					<div v-if="this.sessionuser" class="nav-link-contents">
-						{{ this.sessionuser.firstName }} {{ this.sessionuser.lastName }} <i class="fa-solid fa-user"></i>
-					</div>
-
-					<div v-else class="nav-link-contents">
-						<i class="fa-regular fa-user icon-link"></i>
-					</div>
-				</li>
-			</ul>
-
 			<i @click='toggleMobileNav' class="fa-solid fa-bars hover-background" id="nav-menu-button"></i>
 		</nav>
-
-		<div id="user-menu-container" :style="[this.userMenuActive ? { display: 'flex' } : { display: 'none' }]">
-			<div v-if="this.sessionuser" id="user-menu"
-				:style="[this.userMenuActive ? { transform: 'translate3d(0, 0, 0)' } : { transform: 'translate3d(0, -100%, 0)' }]">
-				<a v-for="(sublink, i) in this.userlinks" :href="sublink['link']">
-					<span>{{ capFL(sublink['title']) }}</span>
-					<i :class="[sublink['icon']]"></i>
-				</a>
-			</div>
-
-			<div v-else id="user-menu"
-				:style="[this.userMenuActive ? { transform: 'translate3d(0, 0, 0)' } : { transform: 'translate3d(0, -100%, 0)' }]">
-				<a href="/login">
-					<span>Login</span>
-					<i class="fa-solid fa-user-check"></i>
-				</a>
-				<a href="/sign-up">
-					<span>Sign Up</span>
-					<i class="fa-solid fa-user-plus"></i>
-				</a>
-			</div>
-		</div>
 
 		<div class="menu-overlay" @click="toggleOverlay"></div>
 

@@ -118,7 +118,6 @@
         <vuemenu
           sitetitle="{{ env('APP_NAME') }}"
           :publiclinks="{{ json_encode($publicLinks) }}"
-          :userlinks="{{ json_encode($userLinks) }}"
           :sessionuser="{{ $sessionUser }}"
         />
       </div>
@@ -129,7 +128,6 @@
             sitetitle="{{ env('APP_NAME') }}"
             sitetitlemini="{{ env('APP_NAME_MINI') }}"
             :publiclinks="{{ json_encode($publicLinks) }}"
-            :userlinks="{{ json_encode($userLinks) }}"
             :sessionuser="{{ $sessionUser }}"
           />
         </div>

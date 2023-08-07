@@ -1,11 +1,11 @@
 @extends('layout')
 
-@section('title', 'Landing Zones')
+@section('title', 'Home Page')
 
 @section('content')
-  <main class="landing-zones">
+  <main class="home-page">
 
-    <h1 class="dk">Landing Zones</h1>
+    <h1>Home Page</h1>
 
     @if ($errors->any())
       <div id="alerterror" class="lt">
@@ -19,9 +19,10 @@
       </div>
     @endif
 
-    <div id="lzhomecarousel" class="dk">
-      <lzhomecarousel :homepagecarousel="{{ $homepageCarousel }}" homepagecarouselcount="{{ $homepageCarouselCount }}" homepagecarouselshow="{{ $homepageCarouselShow }}" />
-    </div>
+		@php
+			echo $landingZoneBannerForm['html'];
+			echo $landingZoneBannerTable['html'];
+		@endphp
 
   </main>
 @endsection

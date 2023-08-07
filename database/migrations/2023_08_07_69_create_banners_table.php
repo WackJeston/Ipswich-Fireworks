@@ -13,10 +13,15 @@ return new class extends Migration
      */
     public function up()
     {
-        Schema::create('landing_zones', function (Blueprint $table) {
+        Schema::create('banners', function (Blueprint $table) {
             $table->id();
-            $table->string('location', 100)->unique();
-            $table->boolean('show');
+						$table->string('page', 100);
+						$table->string('position', 100);
+						$table->string('title', 100)->nullable();
+						$table->string('description', 1000)->nullable();
+						$table->boolean('active')->default(0);
+						$table->string('name', 255);
+            $table->string('fileName', 255);
             $table->timestamps();
         });
     }
@@ -28,6 +33,6 @@ return new class extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('landing_zones');
+        Schema::dropIfExists('contact');
     }
 };

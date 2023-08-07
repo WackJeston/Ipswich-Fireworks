@@ -9,24 +9,8 @@
 @use 'public/site/footer';
 @use 'public/site/carousels';
 
-//Auth
-@use 'public/auth';
-
 // Homepage
 @use 'public/homepage';
 
-//Cart
-@use 'public/cart';
-
 // Contact
 @use 'public/contact';
-
-// Account
-@use 'public/account';
-
-// Products
-@use 'public/products';
-@use 'public/product-page';
-
-// Checkout
-@use 'public/checkout';

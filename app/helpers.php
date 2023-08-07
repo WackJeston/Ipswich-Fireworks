@@ -2,7 +2,7 @@
 
 use Aws\S3\S3Client;
 
-function storeImages($request, int $id, string $type):array {
+function storeImages($request, $id, string $type):array {
 	$request->validate([
 		'name' => 'max:100',
 		'image' => 'required|mimes:jpg,jpeg,png,svg',
@@ -15,7 +15,7 @@ function storeImages($request, int $id, string $type):array {
 		if ($mimeType == 'svg+xml') { $mimeType = 'svg'; }
 		else if ($mimeType == 'jpeg') { $mimeType = 'jpg'; }
 
-		$fileName = sprintf('%s-%d-%s-%s.%s', 
+		$fileName = sprintf('%s-%s-%s-%s.%s', 
 			$type,
 			$id,
 			$_SERVER['REQUEST_TIME'],

@@ -5,29 +5,6 @@
 		</a>
 
 		<ul>
-			<div v-if="this.sessionuser" class="nav-link">
-				<a class="primary-nav-link" @click="toggleLinks(999, true)">
-					<i class="fa-regular fa-user nav-link-icon"></i>
-					<p>{{ this.sessionuser.firstName + ' ' + this.sessionuser.lastName }}</p>
-					<i class="fa-solid fa-angle-down hover-background" :class="'ladown' + 999"></i>
-					<i class="fa-solid fa-angle-up hover-background" :class="'laup' + 999"></i>
-				</a>
-
-				<ul :class="'sublist' + 999" class="nav-sublinks">
-					<a v-for="(sublink, i) in this.userlinks" :href="sublink['link']" class="nav-sublink">
-						<li>{{ capFL(sublink['title']) }}</li>
-						<i :class="[sublink['icon']]" class="nav-link-icon"></i>
-					</a>
-				</ul>
-			</div>
-
-			<div v-else class="nav-link">
-				<a href="/login" class="primary-nav-link">
-					<i class="fa-regular fa-user nav-link-icon"></i>
-					<p>Login / Sign Up</p>
-				</a>
-			</div>
-
 			<div v-for="(link, i) in this.publiclinks" class="nav-link">
 				<a v-if="!link['sublink']" class="primary-nav-link" :href="link['link']">
 					<i :class="[link['icon']]" class="nav-link-icon"></i>

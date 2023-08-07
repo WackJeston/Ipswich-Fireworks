@@ -5,16 +5,18 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
-class LandingZones extends Model
+class Banners extends Model
 {
   use HasFactory;
 
   protected $fillable = [
-    'location',
-    'show',
+    'page',
+    'position',
+    'title',
+    'description',
+    'active',
+    'name',
+    'fileName',
   ];
 
-  protected $guarded = [
-
-  ];
 }
