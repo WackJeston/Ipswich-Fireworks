@@ -35,7 +35,7 @@ class Authenticate extends Middleware
         }
       }
 
-    } elseif(str_contains(url()->current(), '/admin/')){
+    } elseif(str_contains(url()->current(), '/admin/99')){
       if (!Auth::check() || auth()->user()['admin'] == 0) {
         if ($request->ajax()) {
           return response('Unauthorized.', 401);
