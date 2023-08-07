@@ -7,9 +7,6 @@ use Illuminate\Support\ServiceProvider;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\View;
 use Illuminate\Support\Facades\Validator;
-use App\Models\ProductCategories;
-
-use Laravel\Cashier\Cashier;
 
 class AppServiceProvider extends ServiceProvider
 {
@@ -30,8 +27,6 @@ class AppServiceProvider extends ServiceProvider
      */
     public function boot()
     {
-			Cashier::calculateTaxes();
-
       Validator::extend('unique_custom', function ($attribute, $value, $parameters)
       {
         list($table, $field, $field2, $field2Value) = $parameters;
@@ -53,38 +48,6 @@ class AppServiceProvider extends ServiceProvider
                 "title"=>"users",
                 "link"=>"/admin/users",
                 "icon"=>"fa-solid fa-user-astronaut",
-              ],
-            ],
-          ],
-          $products = [
-            "title"=>"products",
-            "icon"=>"fa-solid fa-dice-d6",
-            "sublink"=>$subLinks = [
-              $allProducts = [
-                "title"=>"all products",
-                "link"=>"/admin/products",
-                "icon"=>"fa-solid fa-cubes",
-              ],
-              $categories = [
-                "title"=>"categories",
-                "link"=>"/admin/categories",
-                "icon"=>"fa-solid fa-layer-group",
-              ],
-              $variants = [
-                "title"=>"variants",
-                "link"=>"/admin/variants",
-                "icon"=>"fa-solid fa-shapes",
-              ],
-            ],
-          ],
-          $orders = [
-            "title"=>"orders",
-            "icon"=>"fa-solid fa-basket-shopping",
-            "sublink"=>$subLinks = [
-              $allOrders = [
-                "title"=>"all orders",
-                "link"=>"/admin/orders",
-                "icon"=>"fa-solid fa-box-archive",
               ],
             ],
           ],
@@ -118,51 +81,12 @@ class AppServiceProvider extends ServiceProvider
 
       else {
         $publicLinks = [
-          $cart = [
-            "title"=>"cart",
-            "link"=>"/cart",
-            "icon"=>"fa-solid fa-cart-shopping",
-          ],
-          $products = [
-            "title"=>"shop",
-            "link"=>"/products/0",
-            "icon"=>"fa-solid fa-couch",
-            "sublink"=>$subLinks = [],
-          ],
           $contact = [
             "title"=>"contact",
             "link"=>"/contact",
             "icon"=>"fa-solid fa-address-card",
           ],
         ];
-
-        $userLinks = [
-          $account = [
-            "title"=>"account",
-            "link"=>"/account",
-            "icon"=>"fa-solid fa-user-gear",
-          ],
-          $logout =[
-            "title"=>"logout",
-            "link"=>"/customerLogout",
-            "icon"=>"fa-solid fa-arrow-right-from-bracket",
-          ],
-        ];
-
-        $categories = DB::select('SELECT
-          c.id,
-          c.title
-          FROM product_categories AS c
-          WHERE c.show=1
-        ');
-
-        foreach ($categories as $i => $category) {
-          $publicLinks[1]['sublink'][$i] = [
-            "title"=>$category->title,
-            "link"=>"/products/" . $category->id,
-            "icon"=>"",
-          ];
-        }
 
 				$contactResult = DB::select('SELECT type, value FROM contact ORDER BY type ASC');
 
