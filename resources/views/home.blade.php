@@ -9,11 +9,11 @@
       </div>
     @endif
 
-    @if ($landingZoneCarouselShow)
+    {{-- @if ($landingZoneCarouselShow)
       <div id="homelzcarousel">
         <homelzcarousel :landingzonecarousel="{{ $landingZoneCarousel }}" />
       </div>
-    @endif
+    @endif --}}
 
     <div class="clear-box dk">
       <h2>Content Section</h2>

@@ -1,14 +1,19 @@
 <template>
 	<header class="dk">
 
-		<nav class="desktop-nav">
-			<a href="/" class="title">
-				<h2 id="header-title">{{ this.sitetitle }}</h2>
-				<h2 id="header-title-mini">{{ this.sitetitlemini }}</h2>
-			</a>
-
-			<i @click='toggleMobileNav' class="fa-solid fa-bars hover-background" id="nav-menu-button"></i>
+		<nav id="header-start">
+			
 		</nav>
+
+		<a href="/">
+			<!-- <h2 id="header-title">{{ this.sitetitle }}</h2>
+			<h2 id="header-title-mini">{{ this.sitetitlemini }}</h2> -->
+			<img :src="this.logo" alt="logo" class="logo">
+		</a>
+
+		<div id="header-end">
+			<i @click='toggleMobileNav' class="fa-solid fa-bars hover-background" id="nav-menu-button"></i>
+		</div>
 
 		<div class="menu-overlay" @click="toggleOverlay"></div>
 
@@ -21,6 +26,7 @@ export default {
 	props: [
 		'sitetitle',
 		'sitetitlemini',
+		'logo',
 		'publiclinks',
 		'userlinks',
 		'sessionuser',

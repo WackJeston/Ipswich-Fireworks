@@ -22,7 +22,7 @@ class AdminHomePageController extends Controller
 		$landingZoneBannerForm->addInput('text', 'name', 'Rename', null, 100, 1);
 		$landingZoneBannerForm = $landingZoneBannerForm->render();
 
-		$landingZoneBannerTable = new DataTable('landingZone');
+		$landingZoneBannerTable = new DataTable('banners');
 		$landingZoneBannerTable->setQuery('SELECT * FROM banners WHERE page = "homepage" AND position = "landingZone"');
 		$landingZoneBannerTable->addColumn('id', '#');
 		$landingZoneBannerTable->addColumn('name', 'Name');

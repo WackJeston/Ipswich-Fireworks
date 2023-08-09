@@ -13,17 +13,17 @@ class HomeController extends Controller
   {
     $sessionUser = auth()->user();
 
-    $landingZoneCarouselPre = LandingZoneCarousels::where('landingZoneId', 1)
-      ->orderBy('primary', 'desc')
-    ->get();
+    // $landingZoneCarouselPre = LandingZoneCarousels::where('landingZoneId', 1)
+    //   ->orderBy('primary', 'desc')
+    // ->get();
 
-    $landingZoneCarousel = $landingZoneCarouselPre->toJson();
-    $landingZoneCarouselShow = LandingZones::where('id', 1)->pluck('show')->first();
+    // $landingZoneCarousel = $landingZoneCarouselPre->toJson();
+    // $landingZoneCarouselShow = LandingZones::where('id', 1)->pluck('show')->first();
 
     return view('home', compact(
       'sessionUser',
-      'landingZoneCarousel',
-      'landingZoneCarouselShow',
+      // 'landingZoneCarousel',
+      // 'landingZoneCarouselShow',
     ));
   }
 }

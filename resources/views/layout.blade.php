@@ -127,6 +127,7 @@
           <vueheader
             sitetitle="{{ env('APP_NAME') }}"
             sitetitlemini="{{ env('APP_NAME_MINI') }}"
+            logo="{{ env('AWS_ASSET_URL') . 'logo.png' }}"
             :publiclinks="{{ json_encode($publicLinks) }}"
             :sessionuser="{{ $sessionUser }}"
           />
