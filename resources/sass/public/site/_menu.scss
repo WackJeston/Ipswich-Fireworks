@@ -17,26 +17,13 @@
 	display: flex;
 	align-items: center;
 	justify-content: center;
-}
-
-.site-menu .title {
-	width: 100%;
-	text-align: center;
-	display: flex;
-	justify-content: center;
-}
-
-.site-menu .title h2 {
-	line-height: 24px;
-	margin: 5px 0 10px 0;
-	padding: 0;
+	padding: 0 10px 10px 10px;
 }
 
 .site-menu img.logo {
 	display: flex;
 	align-self: center;
-	width: 70%;
-	margin-top: 5px;
+	width: 100%;
 }
 
 .site-menu ul {

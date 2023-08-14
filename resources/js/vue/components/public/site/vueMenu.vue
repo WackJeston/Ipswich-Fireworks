@@ -1,9 +1,7 @@
 <template>
 	<nav class="site-menu dk">
 		<a id="menu-home-link" href="/">
-			<!-- <h2 id="header-title">{{ this.sitetitle }}</h2>
-			<h2 id="header-title-mini">{{ this.sitetitlemini }}</h2> -->
-			<img :src="this.logo" alt="logo" class="logo">
+			<img :src="this.asset + 'logo-black.png'" alt="logo" class="logo">
 		</a>
 
 		<ul>
@@ -36,17 +34,11 @@
 export default {
 	props: [
 		'sitetitle',
-		'logo',
+		'asset',
 		'publiclinks',
 		'userlinks',
 		'sessionuser',
 	],
-
-	data() {
-		return {
-			logo: this.logo + 'logo-black.png',
-		}
-	},
 
 	methods: {
 		capFL(string) {

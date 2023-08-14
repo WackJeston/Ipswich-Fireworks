@@ -9,11 +9,12 @@
       </div>
     @endif
 
-    {{-- @if ($landingZoneCarouselShow)
-      <div id="homelzcarousel">
-        <homelzcarousel :landingzonecarousel="{{ $landingZoneCarousel }}" />
-      </div>
-    @endif --}}
+    <div id="banner">
+			<banner 
+				:banners="{{ json_encode($landingZoneBanners) }}"
+				asset="{{ env('AWS_ASSET_URL') }}"
+			/>
+		</div>
 
     <div class="clear-box dk">
       <h2>Content Section</h2>

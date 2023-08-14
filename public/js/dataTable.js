@@ -1,3 +1,5 @@
+const bucketName = 'ipswich-fireworks';
+
 function setTableMargin() {
 	let tables = document.querySelectorAll("table");
 
@@ -64,7 +66,7 @@ function showImage(fileName) {
 	const imageZone = document.querySelector('.image-viewer');
 	const image = document.querySelector('.viewer-image');
 
-	image.src = 'https://hc-main.s3.eu-west-2.amazonaws.com/assets/' + fileName;
+	image.src = 'https://ipswich-fireworks.s3.eu-west-2.amazonaws.com/assets/' + fileName;
 	
 	imageZone.style.display = 'flex';
 };

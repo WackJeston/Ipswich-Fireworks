@@ -25,10 +25,10 @@ class AdminHomePageController extends Controller
 		$landingZoneBannerTable = new DataTable('banners');
 		$landingZoneBannerTable->setQuery('SELECT * FROM banners WHERE page = "homepage" AND position = "landingZone"');
 		$landingZoneBannerTable->addColumn('id', '#');
-		$landingZoneBannerTable->addColumn('name', 'Name');
+		$landingZoneBannerTable->addColumn('name', 'Name', 2);
 		$landingZoneBannerTable->addColumn('active', 'Active', 1, false, 'toggle');
 		$landingZoneBannerTable->addJsButton('showImage', ['record:fileName'], 'fa-solid fa-eye', 'View Image');
-		$landingZoneBannerTable->addJsButton('showDeleteWarning', ['string:Category', 'record:id', 'url:/admin-home-pageDeleteLandingZoneBanner/?'], 'fa-solid fa-trash-can', 'Delete Banner');
+		$landingZoneBannerTable->addJsButton('showDeleteWarning', ['string:Banner', 'record:id', 'url:/admin-home-pageDeleteLandingZoneBanner/?'], 'fa-solid fa-trash-can', 'Delete Banner');
 		$landingZoneBannerTable = $landingZoneBannerTable->render();
 
 
@@ -64,6 +64,6 @@ class AdminHomePageController extends Controller
 
     Banners::find($banner->id)->delete();
 
-    return redirect("/admin/home-page/$id")->with('message', "Banner #$id has been deleted.");
+    return redirect("/admin/home-page")->with('message', "Banner #$id has been deleted.");
   }
 }

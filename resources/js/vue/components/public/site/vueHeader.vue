@@ -1,12 +1,12 @@
 <template>
-	<header class="lt">
+	<header>
 
 		<nav id="header-start">
-			<a href="" class="dk ticket-link"><span>TICKETS</span></a>
+			<a href="" class="header-button"><span>TICKETS</span></a>
 		</nav>
 
 		<a href="/">
-			<img :src="this.logo" alt="logo" class="logo">
+			<img :src="this.asset + 'logo-white.png'" alt="logo" class="logo">
 		</a>
 
 		<div id="header-end">
@@ -24,7 +24,7 @@ export default {
 	props: [
 		'sitetitle',
 		'sitetitlemini',
-		'logo',
+		'asset',
 		'publiclinks',
 		'userlinks',
 		'sessionuser',
@@ -32,7 +32,6 @@ export default {
 
 	data() {
 		return {
-			logo: this.logo + 'logo-yellow.png',
 			mobile: null,
 			siteMenu: false,
 			windowWidth: null,

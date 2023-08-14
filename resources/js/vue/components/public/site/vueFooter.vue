@@ -1,17 +1,21 @@
 <template>
-  <footer class="dk">
+  <footer>
 
-    <nav class="footer-nav">
+    <nav>
       <a href="/" class="title">
         <h2>{{ this.sitetitle }}</h2>
       </a>
 
-      <ul>
+      <ul class="lt">
         <a v-for="(link, i) in this.publiclinks" :href="link.link" class="nav-link">
           <li>{{ capFL(link.title) }}</li>
         </a>
       </ul>
     </nav>
+
+		<a href="/">
+			<img :src="this.asset + 'logo-yellow.png'" alt="logo" class="logo">
+		</a>
 
   </footer>
 </template>
@@ -21,6 +25,7 @@
   export default {
     props: [
       'sitetitle',
+			'asset',
       'publiclinks',
     ],
 

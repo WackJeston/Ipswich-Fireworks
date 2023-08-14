@@ -255,34 +255,6 @@ button.pb-danger:hover {
 	bottom: -9px;
 }
 
-.ticket-link {
-	transition: all 200ms ease;
-	display: flex;
-	align-items: center;
-	justify-content: center;
-	// outline: 2px solid v.$brand-main;
-	// border: 3px solid v.$almost-black;
-	background-color: v.$brand-main;
-	height: 30px;
-	padding: 0 10px;
-	margin-right: 15px;
-	opacity: 0.8;
-	border-radius: 0;
-}
-
-.ticket-link span {
-	color: v.$black;
-	text-align: center;
-	font-size: 0.8rem;
-	font-weight: 700;
-	line-height: 1rem;
-}
-
-.ticket-link:hover {
-	opacity: 1;
-	border-radius: 5px;
-}
-
 // Hover Styles ---------------------------------------
 .lt .hover:hover,
 .hover:hover h2,

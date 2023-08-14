@@ -9,14 +9,14 @@ header {
 	top: 0;
 	right: 0;
 	left: 0;
-	background-color: v.$almost-black;
+	background-color: v.$brand-alt-dark;
 
 	@media (max-width: 640px) {
 		height: v.$header-height-mobile;
 	}
 	@media (min-width: 640px) {
-		padding-left: 20px;
-		padding-right: 20px;
+		padding-left: 10px;
+		padding-right: 10px;
 	}
 }
 
@@ -40,7 +40,7 @@ header #header-end {
 header img.logo {
 	display: flex;
 	height: 100%;
-	padding: 10px 5px 5px 5px;
+	padding: 10px 5px;
 }
 
 header #nav-menu-button {
@@ -53,4 +53,33 @@ header #nav-menu-button {
 header #nav-menu-button:hover {
 	cursor: pointer;
 	opacity: 1;
+}
+
+header .header-button {
+	transition: all 200ms ease;
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	background-color: v.$brand-main;
+	height: 30px;
+	padding: 0 10px;
+	opacity: 0.8;
+	border-radius: 0;
+}
+
+header .header-button:hover {
+	opacity: 1;
+	border-radius: 5px;
+}
+
+header .header-button:not(:first-child) {
+	margin-left: 10px;
+}
+
+header .header-button span {
+	color: v.$brand-alt-dark;
+	text-align: center;
+	font-size: 0.8rem;
+	font-weight: 700;
+	line-height: 1rem;
 }

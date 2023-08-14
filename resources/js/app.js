@@ -17,6 +17,8 @@ import Publicerror from './vue/components/public/site/publicError.vue'
 import Publicmessage from './vue/components/public/site/publicMessage.vue'
 import Publicalert from './vue/components/public/site/publicAlert.vue'
 
+import Banner from './vue/components/public/site/banner.vue'
+
 import Contactmain from './vue/components/public/contactMain.vue'
 
 
@@ -38,7 +40,7 @@ import Customerscreate from './vue/components/admin/customersCreate.vue'
 
 import Customerprofilefunctions from './vue/components/admin/customerProfileFunctions.vue'
 
-import Lzhomecarousel from './vue/components/admin/home-carousel.vue'
+
 
 
 
@@ -61,6 +63,11 @@ publicMessage.component('publicmessage', Publicmessage).mount('#publicmessage')
 
 const publicAlert = createApp({})
 publicAlert.component('publicalert', Publicalert).mount('#publicalert')
+
+
+const banner = createApp({})
+banner.component('banner', Banner).mount('#banner')
+
 
 const contactMain = Vue.createApp({})
 const gmapKey = process.env.MIX_GOOGLE_MAPS_KEY
@@ -110,7 +117,3 @@ customersCreate.component('customerscreate', Customerscreate).mount('#customersc
 
 const customerProfileFunctions = createApp({})
 customerProfileFunctions.component('customerprofilefunctions', Customerprofilefunctions).mount('#customerprofilefunctions')
-
-
-const lzHomeCarousel = createApp({})
-lzHomeCarousel.component('lzhomecarousel', Lzhomecarousel).mount('#lzhomecarousel')
