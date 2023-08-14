@@ -59,17 +59,8 @@
 	border-bottom: 1px solid v.$brand-alt-light;
 }
 
-// .site-menu .nav-link:hover {
-// 	background-color: v.$brand-alt-light;
-// }
-
 .site-menu .nav-link .primary-nav-link:hover {
-	background-color: v.$brand-main;
-}
-
-.site-menu .nav-link .primary-nav-link:hover li,
-.site-menu .nav-link .primary-nav-link:hover i {
-	color: v.$almost-black;
+	background-color: v.$brand-alt-dark;
 }
 
 .site-menu .primary-nav-link,
@@ -90,7 +81,10 @@
 
 .site-menu .primary-nav-link:hover li,
 .site-menu .primary-nav-link:hover p,
-.site-menu .primary-nav-link:hover i,
+.site-menu .primary-nav-link:hover i {
+	color: v.$brand-main;
+}
+
 .site-menu .nav-sublink:hover li,
 .site-menu .nav-sublink:hover p,
 .site-menu .nav-sublink:hover i {
