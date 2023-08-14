@@ -32,6 +32,7 @@ export default {
 
 	data() {
 		return {
+			logo: this.logo + 'logo-yellow.png',
 			mobile: null,
 			siteMenu: false,
 			windowWidth: null,

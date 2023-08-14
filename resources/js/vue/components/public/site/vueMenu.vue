@@ -42,6 +42,12 @@ export default {
 		'sessionuser',
 	],
 
+	data() {
+		return {
+			logo: this.logo + 'logo-black.png',
+		}
+	},
+
 	methods: {
 		capFL(string) {
 			const mySentence = string;

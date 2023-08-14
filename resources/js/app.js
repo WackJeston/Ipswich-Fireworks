@@ -17,9 +17,6 @@ import Publicerror from './vue/components/public/site/publicError.vue'
 import Publicmessage from './vue/components/public/site/publicMessage.vue'
 import Publicalert from './vue/components/public/site/publicAlert.vue'
 
-import Homelzcarousel from './vue/components/public/homepage/landingZoneCarousel.vue'
-import Homecategories from './vue/components/public/homepage/productCategories.vue'
-
 import Contactmain from './vue/components/public/contactMain.vue'
 
 
@@ -64,14 +61,6 @@ publicMessage.component('publicmessage', Publicmessage).mount('#publicmessage')
 
 const publicAlert = createApp({})
 publicAlert.component('publicalert', Publicalert).mount('#publicalert')
-
-
-const homeLzCarousel = createApp({})
-homeLzCarousel.component('homelzcarousel', Homelzcarousel).mount('#homelzcarousel')
-
-const homeCategories = createApp({})
-homeCategories.component('homecategories', Homecategories).mount('#homecategories')
-
 
 const contactMain = Vue.createApp({})
 const gmapKey = process.env.MIX_GOOGLE_MAPS_KEY
