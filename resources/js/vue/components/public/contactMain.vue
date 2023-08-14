@@ -18,7 +18,7 @@
     </ul>
   </div>
 
-  <GMapMap class="map" :center="center" :zoom="8" map-type-id="terrain">
+  <GMapMap class="map" :center="center" :zoom="13" map-type-id="terrain">
     <GMapMarker :position="center" />
   </GMapMap>
 </template>

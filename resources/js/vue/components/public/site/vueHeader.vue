@@ -1,18 +1,16 @@
 <template>
-	<header class="dk">
+	<header class="lt">
 
 		<nav id="header-start">
-			
+			<a href="" class="dk ticket-link"><span>TICKETS</span></a>
 		</nav>
 
 		<a href="/">
-			<!-- <h2 id="header-title">{{ this.sitetitle }}</h2>
-			<h2 id="header-title-mini">{{ this.sitetitlemini }}</h2> -->
 			<img :src="this.logo" alt="logo" class="logo">
 		</a>
 
 		<div id="header-end">
-			<i @click='toggleMobileNav' class="fa-solid fa-bars hover-background" id="nav-menu-button"></i>
+			<i @click='toggleSiteMenu' class="fa-solid fa-bars" id="nav-menu-button"></i>
 		</div>
 
 		<div class="menu-overlay" @click="toggleOverlay"></div>
@@ -35,7 +33,7 @@ export default {
 	data() {
 		return {
 			mobile: null,
-			mobileNav: false,
+			siteMenu: false,
 			windowWidth: null,
 			menuActive: false,
 			mqLarge: null,
@@ -45,9 +43,9 @@ export default {
 	},
 
 	methods: {
-		toggleMobileNav() {
-			this.mobileNav = !this.mobileNav;
-			let menu = document.querySelector(".mobile-nav");
+		toggleSiteMenu() {
+			this.siteMenu = !this.siteMenu;
+			let menu = document.querySelector(".site-menu");
 			let overlay = document.querySelector(".menu-overlay");
 
 			if (this.menuActive == false) {
@@ -71,9 +69,9 @@ export default {
 		},
 
 		toggleOverlay() {
-			this.mobileNav = false;
+			this.siteMenu = false;
 			this.menuActive = false;
-			let menu = document.querySelector(".mobile-nav");
+			let menu = document.querySelector(".site-menu");
 			let overlay = document.querySelector(".menu-overlay");
 
 			menu.classList.remove("menu-active");

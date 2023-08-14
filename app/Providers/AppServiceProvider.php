@@ -86,6 +86,16 @@ class AppServiceProvider extends ServiceProvider
             "link"=>"/contact",
             "icon"=>"fa-solid fa-address-card",
           ],
+					$findUs = [
+            "title"=>"find us",
+            "link"=>"/contact",
+            "icon"=>"fa-solid fa-map-location-dot",
+          ],
+					$sponsors = [
+						"title"=>"sponsors",
+						"link"=>"/sponsors",
+						"icon"=>"fa-solid fa-heart-pulse",
+					],
         ];
 
 				$contactResult = DB::select('SELECT type, value FROM contact ORDER BY type ASC');

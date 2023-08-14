@@ -1,6 +1,6 @@
 @use 'v';
 
-.mobile-nav {
+.site-menu {
 	position: fixed;
 	top: 0;
 	right: -240px;
@@ -13,80 +13,98 @@
 	transition: all 200ms ease;
 }
 
-.mobile-nav .title {
+.site-menu #menu-home-link {
+	display: flex;
+	align-items: center;
+	justify-content: center;
+}
+
+.site-menu .title {
 	width: 100%;
 	text-align: center;
 	display: flex;
 	justify-content: center;
 }
 
-.mobile-nav .title h2 {
+.site-menu .title h2 {
 	line-height: 24px;
 	margin: 5px 0 10px 0;
 	padding: 0;
 }
 
-.mobile-nav ul {
+.site-menu img.logo {
+	display: flex;
+	align-self: center;
+	width: 70%;
+	margin-top: 5px;
+}
+
+.site-menu ul {
 	flex-direction: column;
 	padding: 0;
 	margin: 0;
 }
 
-.mobile-nav .nav-link {
+.site-menu .nav-link {
 	// border: 1px solid v.$clear;
 	transition: border-radius 200ms ease;
 }
 
-.mobile-nav .nav-link,
-.mobile-nav .primary-nav-link {
+.site-menu .nav-link,
+.site-menu .primary-nav-link {
 	cursor: pointer;
 }
 
-.mobile-nav .nav-link:not(:last-child) {
+.site-menu .nav-link:not(:last-child) {
 	border-bottom: 1px solid v.$brand-alt-light;
 }
 
-// .mobile-nav .nav-link:hover {
+// .site-menu .nav-link:hover {
 // 	background-color: v.$brand-alt-light;
 // }
 
-.mobile-nav .nav-link .primary-nav-link:hover {
-	background-color: v.$brand-alt-dark;
+.site-menu .nav-link .primary-nav-link:hover {
+	background-color: v.$brand-main;
 }
 
-.mobile-nav .primary-nav-link,
-.mobile-nav .nav-sublink {
+.site-menu .nav-link .primary-nav-link:hover li,
+.site-menu .nav-link .primary-nav-link:hover i {
+	color: v.$almost-black;
+}
+
+.site-menu .primary-nav-link,
+.site-menu .nav-sublink {
 	display: flex;
 	align-items: center;
 	height: 40px;
 }
 
-.mobile-nav .primary-nav-link li,
-.mobile-nav .primary-nav-link p,
-.mobile-nav .primary-nav-link i,
-.mobile-nav .nav-sublink li,
-.mobile-nav .nav-sublink p,
-.mobile-nav .nav-sublink i {
+.site-menu .primary-nav-link li,
+.site-menu .primary-nav-link p,
+.site-menu .primary-nav-link i,
+.site-menu .nav-sublink li,
+.site-menu .nav-sublink p,
+.site-menu .nav-sublink i {
 	color: v.$black;
 }
 
-.mobile-nav .primary-nav-link:hover li,
-.mobile-nav .primary-nav-link:hover p,
-.mobile-nav .primary-nav-link:hover i,
-.mobile-nav .nav-sublink:hover li,
-.mobile-nav .nav-sublink:hover p,
-.mobile-nav .nav-sublink:hover i {
+.site-menu .primary-nav-link:hover li,
+.site-menu .primary-nav-link:hover p,
+.site-menu .primary-nav-link:hover i,
+.site-menu .nav-sublink:hover li,
+.site-menu .nav-sublink:hover p,
+.site-menu .nav-sublink:hover i {
 	color: v.$white;
 }
 
-.mobile-nav .nav-link-icon {
+.site-menu .nav-link-icon {
 	font-size: 1rem;
 	width: 40px;
 	text-align: center;
 }
 
-.mobile-nav .nav-link .fa-angle-down,
-.mobile-nav .nav-link .fa-angle-up {
+.site-menu .nav-link .fa-angle-down,
+.site-menu .nav-link .fa-angle-up {
 	display: flex;
 	align-items: center;
 	justify-content: center;
@@ -97,41 +115,41 @@
 	padding: 5px;
 }
 
-// .mobile-nav .nav-link .fa-angle-down:hover, .mobile-nav .nav-link .fa-angle-up:hover {
+// .site-menu .nav-link .fa-angle-down:hover, .site-menu .nav-link .fa-angle-up:hover {
 //   background-color: v.$almost-black;
 // }
 
-.mobile-nav .nav-link .fa-angle-up {
+.site-menu .nav-link .fa-angle-up {
 	display: none;
 }
 
-.mobile-nav .nav-sublinks {
+.site-menu .nav-sublinks {
 	max-height: 0px;
 	overflow: hidden;
 	transition: max-height 200ms ease;
 	// border-top: 1px solid v.$brand-alt-dark;
 }
 
-.mobile-nav .nav-sublink {
+.site-menu .nav-sublink {
 	background-color: v.$brand-alt-light;
 	padding-left: 10px;
 	min-height: 40px;
 	max-height: 40px;
 }
 
-.mobile-nav .nav-sublink:first-child {
+.site-menu .nav-sublink:first-child {
 	border-top: 1px solid v.$brand-alt-light;
 }
 
-.mobile-nav .nav-sublink:not(:first-child) {
+.site-menu .nav-sublink:not(:first-child) {
 	border-top: 1px solid v.$white;
 }
 
-.mobile-nav .nav-sublink:hover {
+.site-menu .nav-sublink:hover {
 	background-color: v.$brand-alt-dark;
 }
 
-.mobile-nav .nav-sublink .nav-link-icon {
+.site-menu .nav-sublink .nav-link-icon {
 	margin-left: auto;
 }
 

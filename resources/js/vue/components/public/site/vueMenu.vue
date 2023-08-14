@@ -1,7 +1,9 @@
 <template>
-	<nav class="mobile-nav dk">
-		<a href="/" class="title">
-			<h2>{{ this.sitetitle }}</h2>
+	<nav class="site-menu dk">
+		<a id="menu-home-link" href="/">
+			<!-- <h2 id="header-title">{{ this.sitetitle }}</h2>
+			<h2 id="header-title-mini">{{ this.sitetitlemini }}</h2> -->
+			<img :src="this.logo" alt="logo" class="logo">
 		</a>
 
 		<ul>
@@ -34,40 +36,13 @@
 export default {
 	props: [
 		'sitetitle',
+		'logo',
 		'publiclinks',
 		'userlinks',
 		'sessionuser',
 	],
 
 	methods: {
-		toggleLinks(i, usermenu = false) {
-			let list = document.querySelector(".sublist" + i);
-			let laDown = document.querySelector(".ladown" + i);
-			let laUp = document.querySelector(".laup" + i);
-
-			if (list.style.maxHeight == "") {
-				let height = 0;
-
-				if (usermenu == false) {
-					height = 40 * this.publiclinks[i]['sublink'].length;
-				} else {
-					height = 40 * list.childElementCount;
-				}
-
-				list.style.maxHeight = height + "px";
-				laDown.style.display = "none";
-				laUp.style.display = "flex";
-
-				return;
-			} else {
-				list.style.maxHeight = "";
-				laUp.style.display = "none";
-				laDown.style.display = "flex";
-
-				return;
-			}
-		},
-
 		capFL(string) {
 			const mySentence = string;
 			const words = mySentence.split(" ");
