@@ -21,17 +21,21 @@ body {
 	margin-right: 20px;
 }
 
+main {
+	margin-top: v.$header-height;
+	padding-bottom: 30px;
+
+	@media (max-width: 640px) {
+		margin-top: v.$header-height-mobile;
+	}
+}
+
 .section-width {
 	display: flex;
 	width: 100%;
 	max-width: 800px;
 	margin-right: auto;
 	margin-left: auto;
-}
-
-main {
-	margin-top: v.$header-height;
-	padding-bottom: 30px;
 }
 
 .link-trail {
@@ -215,7 +219,11 @@ button.pb-danger:hover {
 }
 
 .clear-box h2 {
-	margin-bottom: 10px;
+	font-size: 1.8rem;
+}
+
+.clear-box h3 {
+	margin: 0 0 10px 0;
 }
 
 .clear-box p {

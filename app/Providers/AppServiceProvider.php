@@ -119,7 +119,7 @@ class AppServiceProvider extends ServiceProvider
 
         View::share([
           'publicLinks' => $publicLinks,
-					'contact' => $contact,
+					// 'contact' => $contact,
         ]);
       }
     }

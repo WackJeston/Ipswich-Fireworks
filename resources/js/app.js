@@ -17,7 +17,7 @@ import Publicerror from './vue/components/public/site/publicError.vue'
 import Publicmessage from './vue/components/public/site/publicMessage.vue'
 import Publicalert from './vue/components/public/site/publicAlert.vue'
 
-import Banner from './vue/components/public/site/banner.vue'
+import Bannerhometop from './vue/components/public/homepage/bannerHomeTop.vue'
 
 import Contactmain from './vue/components/public/contactMain.vue'
 
@@ -65,8 +65,8 @@ const publicAlert = createApp({})
 publicAlert.component('publicalert', Publicalert).mount('#publicalert')
 
 
-const banner = createApp({})
-banner.component('banner', Banner).mount('#banner')
+const bannerHomeTop = createApp({})
+bannerHomeTop.component('bannerhometop', Bannerhometop).mount('#bannerhometop')
 
 
 const contactMain = Vue.createApp({})

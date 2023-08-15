@@ -2,11 +2,11 @@
 	<header>
 
 		<nav id="header-start">
-			<a href="" class="header-button"><span>TICKETS</span></a>
+			<a href="https://ipswichfireworks.ticketsrv.co.uk/" target="_blank" class="header-button title thick-title"><span>TICKETS</span></a>
 		</nav>
 
 		<a href="/">
-			<img :src="this.asset + 'logo-white.png'" alt="logo" class="logo">
+			<img :src="this.asset + 'logo-yellow.png'" alt="logo" class="logo">
 		</a>
 
 		<div id="header-end">

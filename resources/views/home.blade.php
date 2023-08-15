@@ -9,17 +9,28 @@
       </div>
     @endif
 
-    <div id="banner">
-			<banner 
-				:banners="{{ json_encode($landingZoneBanners) }}"
-				asset="{{ env('AWS_ASSET_URL') }}"
-			/>
-		</div>
+		@if (count($landingZoneBanners) > 0)
+			<div id="bannerhometop">
+				<bannerhometop 
+					:banners="{{ json_encode($landingZoneBanners) }}"
+					asset="{{ env('AWS_ASSET_URL') }}"
+				/>
+			</div>
+		@endif
 
-    <div class="clear-box dk">
-      <h2>Content Section</h2>
-      <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</p>
+		@if ($content1 != null)
+		<div class="clear-box dk">
+			@if ($content1->title != null)
+				<h2>{{ $content1->title }}</h2>
+			@endif
+			@if ($content1->subtitle != null)
+				<h3>{{ $content1->subtitle }}</h3>
+			@endif
+			@if ($content1->description != null)
+				<p>{{ $content1->description }}</p>
+			@endif
     </div>
+		@endif
 
   </main>
 @endsection

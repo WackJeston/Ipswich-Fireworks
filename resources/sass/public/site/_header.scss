@@ -79,7 +79,10 @@ header .header-button:not(:first-child) {
 header .header-button span {
 	color: v.$brand-alt-dark;
 	text-align: center;
-	font-size: 0.8rem;
-	font-weight: 700;
 	line-height: 1rem;
+	font-size: 1rem;
+
+	@media (min-width: 640px) {
+		font-size: 1.2rem;
+	}
 }

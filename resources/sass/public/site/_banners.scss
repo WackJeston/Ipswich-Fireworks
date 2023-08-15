@@ -1,0 +1,91 @@
+@use '../site/v';
+
+#banner-homepage-top .banner-slide {
+  height: calc(v.$landingzone-height - v.$header-height);
+
+	@media (max-width: 640px) {
+		height: calc(v.$landingzone-height - v.$header-height-mobile);
+	}
+}
+
+.banner {
+	position: relative;
+}
+
+.banner .banner-slide {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: flex-start;
+  position: relative;
+  background-position: center;
+  background-size: cover;
+  padding: 20vh 10vw;
+}
+
+.banner .banner-slide h2 {
+	z-index: 2;
+  font-size: 2rem;
+  margin: 10px;
+}
+
+.banner .banner-slide p {
+	z-index: 2;
+  font-size: 1.3rem;
+  margin: 0;
+}
+
+.banner .banner-overlay {
+	background-color: rgba(0, 0, 0, .3);
+  position: absolute;
+  top: 0;
+  right: 0;
+  bottom: 0;
+  left: 0;
+  z-index: 1;
+}
+
+.banner .banner-nav {
+  position: absolute;
+  background-color: v.$trans;
+}
+
+.banner .carousel__icon {
+  transform: scale(1.2);
+  opacity: 0.5;
+}
+
+.banner .carousel__prev {
+  left: 20px;
+}
+
+.banner .carousel__next {
+  right: 20px;
+}
+
+.banner .banner-pagination {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: center;
+  position: absolute;
+  bottom: 20px;
+  width: 100%;
+  padding-left: 0;
+}
+
+.banner .carousel__pagination-button {
+  height: 2px;
+  width: 20px;
+  transform: scale(0.8);
+  border-radius: 3px;
+  background-color: v.$white;
+  margin: 0 3vw;
+  opacity: 0.5;
+}
+
+.banner .carousel__pagination-button--active,
+.banner .carousel__icon:hover,
+.banner .carousel__pagination-button:hover {
+  opacity: 1;
+}

@@ -8,6 +8,7 @@ use Illuminate\Validation\Rule;
 use App\DataTable;
 use App\DataForm;
 use App\Models\Banners;
+use App\Models\Content;
 
 
 class AdminHomePageController extends Controller
@@ -17,13 +18,13 @@ class AdminHomePageController extends Controller
     $sessionUser = auth()->user();
 
 		$landingZoneBannerForm = new DataForm(request(), '/admin-home-pageAddLandingZoneBanner', 'Add Banner');
-		$landingZoneBannerForm->setTitle('Add Landing Zone Banner');
+		$landingZoneBannerForm->setTitle('Landing Zone Banner');
 		$landingZoneBannerForm->addInput('file', 'image', 'Image', null, null, null, true);
 		$landingZoneBannerForm->addInput('text', 'name', 'Rename', null, 100, 1);
 		$landingZoneBannerForm = $landingZoneBannerForm->render();
 
 		$landingZoneBannerTable = new DataTable('banners');
-		$landingZoneBannerTable->setQuery('SELECT * FROM banners WHERE page = "homepage" AND position = "landingZone"');
+		$landingZoneBannerTable->setQuery('SELECT * FROM banners WHERE page = "home" AND position = "landingZone"');
 		$landingZoneBannerTable->addColumn('id', '#');
 		$landingZoneBannerTable->addColumn('name', 'Name', 2);
 		$landingZoneBannerTable->addColumn('active', 'Active', 1, false, 'toggle');
@@ -31,11 +32,34 @@ class AdminHomePageController extends Controller
 		$landingZoneBannerTable->addJsButton('showDeleteWarning', ['string:Banner', 'record:id', 'url:/admin-home-pageDeleteLandingZoneBanner/?'], 'fa-solid fa-trash-can', 'Delete Banner');
 		$landingZoneBannerTable = $landingZoneBannerTable->render();
 
+		$content1 = DB::select('SELECT * FROM content WHERE page = "home" AND position = "1"');
+
+		if (empty($content1)) {
+			Content::create([
+				'page' => 'home',
+				'position' => '1',
+			]);
+
+			$content1 = DB::select('SELECT * FROM content WHERE page = "home" AND position = "1"');
+		}
+
+		$content1 = $content1[0];
+
+		$content1Form = new DataForm(request(), '/admin-home-pageUpdateContent1');
+		$content1Form->setTitle('Primary Info Section');
+		$content1Form->addInput('text', 'title', 'Title', $content1->title, 100);
+		$content1Form->addInput('text', 'subtitle', 'Subtitle', $content1->subtitle, 255);
+		$content1Form->addInput('textarea', 'description', 'Description', $content1->description, 1000);
+		$content1Form->addInput('checkbox', 'active', 'Active', $content1->active);
+		// $content1Form->addInput('file', 'image', 'Image', null, null, null, true);
+		// $content1Form->addInput('text', 'name', 'Rename', null, 100, 1);
+		$content1Form = $content1Form->render();
 
     return view('admin/home-page', compact(
       'sessionUser',
 			'landingZoneBannerForm',
 			'landingZoneBannerTable',
+			'content1Form',
     ));
   }
 
@@ -44,7 +68,7 @@ class AdminHomePageController extends Controller
 
 		foreach ($fileNames as $fileName) {
 			Banners::create([
-				'page' => 'homepage',
+				'page' => 'home',
 				'position' => 'landingZone',
 				'name' => !empty($request->name) ? $request->name : $fileName['old'],
 				'fileName' => $fileName['new'],
@@ -65,5 +89,26 @@ class AdminHomePageController extends Controller
     Banners::find($banner->id)->delete();
 
     return redirect("/admin/home-page")->with('message', "Banner #$id has been deleted.");
+  }
+
+
+	public function updateContent1(Request $request)
+  {
+    $request->validate([
+      'title' => 'max:100',
+			'subtitle' => 'max:255',
+			'description' => 'max:1000',
+    ]);
+
+		$active = isset($request->active) ? 1 : 0;
+
+    Content::where('page', 'home')->where('position', '1')->update([
+			'title' => $request->title,
+			'subtitle' => $request->subtitle,
+			'description' => $request->description,
+			'active' => $active,
+    ]);
+
+    return redirect("/admin/home-page")->with('message', 'Content updated successfully.');
   }
 }

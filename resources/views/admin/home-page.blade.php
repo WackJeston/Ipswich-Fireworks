@@ -22,6 +22,7 @@
 		@php
 			echo $landingZoneBannerForm['html'];
 			echo $landingZoneBannerTable['html'];
+			echo $content1Form['html'];
 		@endphp
 
   </main>

@@ -1,10 +1,17 @@
 <template>
-	<nav class="site-menu dk">
+	<nav class="site-menu lt">
 		<a id="menu-home-link" href="/">
-			<img :src="this.asset + 'logo-black.png'" alt="logo" class="logo">
+			<img :src="this.asset + 'logo-yellow.png'" alt="logo" class="logo">
 		</a>
 
-		<ul>
+		<ul id="menu-items">
+			<div class="nav-link">
+				<a id="menu-ticket-button" href="https://ipswichfireworks.ticketsrv.co.uk/">
+					<i class="fa-solid fa-ticket nav-link-icon"></i>
+					<li class="title thick-title">TICKETS</li>
+				</a>
+			</div>
+
 			<div v-for="(link, i) in this.publiclinks" class="nav-link">
 				<a v-if="!link['sublink']" class="primary-nav-link" :href="link['link']">
 					<i :class="[link['icon']]" class="nav-link-icon"></i>
@@ -25,6 +32,12 @@
 					</a>
 				</ul>
 			</div>
+		</ul>
+
+		<ul id="menu-socials">
+			<a href="https://www.instagram.com/ipswichfireworks50/" target="_blank">
+				<li><i class="fa-brands fa-instagram"></i></li>
+			</a>
 		</ul>
 	</nav>
 </template>

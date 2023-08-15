@@ -89,5 +89,6 @@ Route::group( ['middleware' => 'auth' ], function()
     Route::get('/admin/home-page', 'show');
 		Route::post('/admin-home-pageAddLandingZoneBanner', 'addLandingZoneBanner');
 		Route::get('/admin-home-pageDeleteLandingZoneBanner/{id}', 'deleteLandingZoneBanner');
+		Route::post('/admin-home-pageUpdateContent1', 'updateContent1');
   });
 });

@@ -1,5 +1,36 @@
 @use 'site/v';
 
+#banner-homepage-top #ticket-button-container {
+	position: absolute;
+	bottom: 40%;
+	left: 0;
+	right: 0;
+	display: flex;
+	justify-content: center;
+	align-items: center;
+}
+
+#banner-homepage-top a {
+	background-color: v.$brand-main;
+	color: v.$brand-alt-dark;
+	padding: 10px 30px;
+	z-index: 2;
+	cursor: pointer;
+	transition: transform 200ms ease;
+	border-radius: 0px;
+	opacity: 0.8;
+	font-size: 1.6rem;
+	
+	@media (min-width: 640px) {
+		font-size: 2.2rem;
+	}
+}
+
+#banner-homepage-top a:hover {
+	opacity: 1;
+	border-radius: 5px;
+}
+
 .home-page .home-category-grid {
   display: flex;
   flex-direction: row;
