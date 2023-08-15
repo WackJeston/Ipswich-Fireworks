@@ -19,7 +19,7 @@
 		@endif
 
 		@if ($content1 != null)
-		<div class="clear-box dk">
+		<div class="clear-box limited dk">
 			@if ($content1->title != null)
 				<h2>{{ $content1->title }}</h2>
 			@endif

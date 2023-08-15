@@ -2,7 +2,7 @@
   <section class="banner" id="banner-homepage-top">
 
 		<div id="ticket-button-container">
-			<a href="https://ipswichfireworks.ticketsrv.co.uk/" class="title thick-title">PURCHASE TICKETS</a>
+			<a href="https://ipswichfireworks.ticketsrv.co.uk/" class="title thick-title">BUY TICKETS</a>
 		</div>
 
 		<div v-if="this.banners.length == 1" v-for="banner in this.banners" class="banner-slide single-slide" :style="{ backgroundImage: 'url(' + this.asset + banner.fileName + ')' }">
