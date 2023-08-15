@@ -19,15 +19,15 @@ class HomeController extends Controller
 			AND b.active = 1
 		');
 
-		$content1 = DB::select('SELECT * FROM content WHERE page = "home" AND position = "1"');
-		if (!empty($content1)) {
-			$content1 = $content1[0];
-		}
+		$primaryInfo = DB::select('SELECT * FROM content WHERE active = 1 AND page = "home" AND position = "primaryInfo"')[0];
+
+		$ticketNotice = DB::select('SELECT * FROM content WHERE active = 1 AND page = "home" AND position = "ticketNotice"')[0];
 
     return view('home', compact(
       'sessionUser',
       'landingZoneBanners',
-			'content1',
+			'primaryInfo',
+			'ticketNotice',
     ));
   }
 }

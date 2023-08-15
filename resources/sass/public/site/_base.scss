@@ -23,7 +23,7 @@ body {
 
 main {
 	margin-top: v.$header-height;
-	padding-bottom: 30px;
+	// padding-bottom: 30px;
 
 	@media (max-width: 640px) {
 		margin-top: v.$header-height-mobile;

@@ -32,34 +32,49 @@ class AdminHomePageController extends Controller
 		$landingZoneBannerTable->addJsButton('showDeleteWarning', ['string:Banner', 'record:id', 'url:/admin-home-pageDeleteLandingZoneBanner/?'], 'fa-solid fa-trash-can', 'Delete Banner');
 		$landingZoneBannerTable = $landingZoneBannerTable->render();
 
-		$content1 = DB::select('SELECT * FROM content WHERE page = "home" AND position = "1"');
+		// $primaryInfo = DB::select('SELECT * FROM content WHERE page = "home" AND position = "1"');
 
-		if (empty($content1)) {
-			Content::create([
-				'page' => 'home',
-				'position' => '1',
-			]);
+		// if (empty($primaryInfo)) {
+		// 	Content::create([
+		// 		'page' => 'home',
+		// 		'position' => '1',
+		// 	]);
 
-			$content1 = DB::select('SELECT * FROM content WHERE page = "home" AND position = "1"');
-		}
+		// 	$primaryInfo = DB::select('SELECT * FROM content WHERE page = "home" AND position = "1"');
+		// }
 
-		$content1 = $content1[0];
+		// $primaryInfo = $primaryInfo[0];
 
-		$content1Form = new DataForm(request(), '/admin-home-pageUpdateContent1');
-		$content1Form->setTitle('Primary Info Section');
-		$content1Form->addInput('text', 'title', 'Title', $content1->title, 100);
-		$content1Form->addInput('text', 'subtitle', 'Subtitle', $content1->subtitle, 255);
-		$content1Form->addInput('textarea', 'description', 'Description', $content1->description, 1000);
-		$content1Form->addInput('checkbox', 'active', 'Active', $content1->active);
-		// $content1Form->addInput('file', 'image', 'Image', null, null, null, true);
-		// $content1Form->addInput('text', 'name', 'Rename', null, 100, 1);
-		$content1Form = $content1Form->render();
+		$primaryInfo = Content::firstOrCreate([
+			'page' => 'home',
+			'position' => 'primaryInfo',
+		]);
+
+		$primaryInfoForm = new DataForm(request(), '/admin-home-pageUpdatePrimaryInfo');
+		$primaryInfoForm->setTitle('Primary Info Section');
+		$primaryInfoForm->addInput('text', 'title', 'Title', $primaryInfo->title, 100);
+		$primaryInfoForm->addInput('text', 'subtitle', 'Subtitle', $primaryInfo->subtitle, 255);
+		$primaryInfoForm->addInput('textarea', 'description', 'Paragraph', $primaryInfo->description, 1000);
+		$primaryInfoForm->addInput('checkbox', 'active', 'Active', $primaryInfo->active);
+		$primaryInfoForm = $primaryInfoForm->render();
+
+		$ticketNotice = Content::firstOrCreate([
+			'page' => 'home',
+			'position' => 'ticketNotice',
+		]);
+
+		$ticketNoticeForm = new DataForm(request(), '/admin-home-pageUpdateTicketNotice');
+		$ticketNoticeForm->setTitle('Ticket Notice');
+		$ticketNoticeForm->addInput('textarea', 'description', 'Ticket Notice', $ticketNotice->description, 1000);
+		$ticketNoticeForm->addInput('checkbox', 'active', 'Active', $ticketNotice->active);
+		$ticketNoticeForm = $ticketNoticeForm->render();
 
     return view('admin/home-page', compact(
       'sessionUser',
 			'landingZoneBannerForm',
 			'landingZoneBannerTable',
-			'content1Form',
+			'primaryInfoForm',
+			'ticketNoticeForm',
     ));
   }
 
@@ -92,7 +107,7 @@ class AdminHomePageController extends Controller
   }
 
 
-	public function updateContent1(Request $request)
+	public function updatePrimaryInfo(Request $request)
   {
     $request->validate([
       'title' => 'max:100',
@@ -102,13 +117,28 @@ class AdminHomePageController extends Controller
 
 		$active = isset($request->active) ? 1 : 0;
 
-    Content::where('page', 'home')->where('position', '1')->update([
+    Content::where('page', 'home')->where('position', 'primaryInfo')->update([
 			'title' => $request->title,
 			'subtitle' => $request->subtitle,
 			'description' => $request->description,
 			'active' => $active,
     ]);
 
-    return redirect("/admin/home-page")->with('message', 'Content updated successfully.');
+    return redirect("/admin/home-page")->with('message', 'Primary Info updated successfully.');
   }
+
+
+	public function updateTicketNotice(Request $request)
+	{
+		$request->validate([
+			'description' => 'max:1000',
+		]);
+
+		Content::where('page', 'home')->where('position', 'ticketNotice')->update([
+			'description' => $request->description,
+			'active' => isset($request->active) ? 1 : 0,
+		]);
+
+		return redirect("/admin/home-page")->with('message', 'Ticket Notice updated successfully.');
+	}
 }

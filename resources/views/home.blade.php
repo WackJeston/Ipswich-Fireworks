@@ -1,7 +1,7 @@
 @extends('layout')
 
 @section('content')
-  <main class="lt home-page">
+  <main class="home-page">
 
     @if (session()->has('message'))
       <div id="publicmessage" class="lt floating">
@@ -18,18 +18,24 @@
 			</div>
 		@endif
 
-		@if ($content1 != null)
-		<div class="clear-box limited dk">
-			@if ($content1->title != null)
-				<h2>{{ $content1->title }}</h2>
-			@endif
-			@if ($content1->subtitle != null)
-				<h3>{{ $content1->subtitle }}</h3>
-			@endif
-			@if ($content1->description != null)
-				<p>{{ $content1->description }}</p>
-			@endif
-    </div>
+		@if ($primaryInfo != null)
+			<div class="clear-box limited dk">
+				@if ($primaryInfo->title != null)
+					<h2>{{ $primaryInfo->title }}</h2>
+				@endif
+				@if ($primaryInfo->subtitle != null)
+					<h3>{{ $primaryInfo->subtitle }}</h3>
+				@endif
+				@if ($primaryInfo->description != null)
+					<p>{{ $primaryInfo->description }}</p>
+				@endif
+			</div>
+		@endif
+
+		@if ($ticketNotice != null)
+			<div id="ticket-notice">
+				<h2>{{ $ticketNotice->description }}</h2>
+			</div>
 		@endif
 
   </main>

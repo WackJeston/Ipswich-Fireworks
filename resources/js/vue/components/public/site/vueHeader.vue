@@ -6,7 +6,7 @@
 		</nav>
 
 		<a href="/">
-			<img :src="this.asset + 'logo-yellow.png'" alt="logo" class="logo">
+			<img :src="this.asset + 'logo-white.png'" alt="logo" class="logo">
 		</a>
 
 		<div id="header-end">

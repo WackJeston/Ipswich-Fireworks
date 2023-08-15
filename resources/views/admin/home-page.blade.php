@@ -22,7 +22,8 @@
 		@php
 			echo $landingZoneBannerForm['html'];
 			echo $landingZoneBannerTable['html'];
-			echo $content1Form['html'];
+			echo $primaryInfoForm['html'];
+			echo $ticketNoticeForm['html'];
 		@endphp
 
   </main>
