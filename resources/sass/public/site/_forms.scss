@@ -3,7 +3,6 @@
 form {
 	display: flex;
 	flex-direction: column;
-	width: 100%;
 }
 
 form .input-label-container {
@@ -110,7 +109,7 @@ form .submit {
 	padding: 5px 10px;
 }
 
-form .submit:not(.web-box .submit, .product-page-main .submit) {
+form .submit:not(.web-box .submit, .product-page-main .submit, .contact .submit) {
 	width: 80%;
 	margin: 5px auto 5px auto;
 }

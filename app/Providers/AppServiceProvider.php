@@ -35,6 +35,11 @@ class AppServiceProvider extends ServiceProvider
 
       if (str_contains(url()->current(), '/admin/')) {
         $adminLinks = [
+					$enquiries = [
+						"title"=>"enquiries",
+						"link"=>"/admin/enquiries",
+						"icon"=>"fa-solid fa-envelope",
+					],
           $people = [
             "title"=>"people",
             "icon"=>"fa-solid fa-users",
@@ -88,7 +93,7 @@ class AppServiceProvider extends ServiceProvider
           ],
 					$findUs = [
             "title"=>"find us",
-            "link"=>"/contact",
+            "link"=>"/find-us",
             "icon"=>"fa-solid fa-map-location-dot",
           ],
 					$sponsors = [

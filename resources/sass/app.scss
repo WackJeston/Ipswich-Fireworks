@@ -9,8 +9,7 @@
 @use 'public/site/footer';
 @use 'public/site/banners';
 
-// Homepage
+// Pages
 @use 'public/homepage';
-
-// Contact
 @use 'public/contact';
+@use 'public/find-us';

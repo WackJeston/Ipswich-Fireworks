@@ -223,7 +223,7 @@ button.pb-danger:hover {
 	margin-right: auto;
 
 	@media (min-width: 1000px) {
-		max-width: 80%;
+		max-width: 75%;
 	}
 }
 
@@ -314,6 +314,7 @@ button.pb-danger:hover {
 	border-radius: 5px;
 	color: v.$white;
 	width: 100%;
+	max-width: 800px;
 }
 
 .alert-box li {
@@ -342,11 +343,12 @@ button.pb-danger:hover {
 
 // ToDo: Fix floating alert right margin collasping
 .floating .alert-box {
-	position: absolute;
+	position: fixed;
 	z-index: 4;
 	bottom: 10px;
-	right: 10px;
+	right: 20px;
 	max-width: 400px;
+	width: 80%;
 }
 
 .limited .alert-box {

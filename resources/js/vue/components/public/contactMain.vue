@@ -1,26 +1,43 @@
 <template>
   <div class="content">
-    <ul class="address">
-      <li><h3>Address</h3></li>
-      <li v-if="this.contact['line1']">{{ this.contact['line1'] }}</li>
-      <li v-if="this.contact['line2']">{{ this.contact['line2'] }}</li>
-      <li v-if="this.contact['line3']">{{ this.contact['line3'] }}</li>
-      <li v-if="this.contact['city']">{{ this.contact['city'] }}</li>
-      <li v-if="this.contact['region']">{{ this.contact['region'] }}</li>
-      <li v-if="this.contact['country']">{{ this.contact['country'] }}</li>
-      <li v-if="this.contact['postcode']">{{ this.contact['postcode'] }}</li>
-    </ul>
-
-    <ul v-if="((this.contact['email'].length > 0) || (this.contact['phone'].length > 0))" class="contact-details">
+    <ul v-if="((this.contact['email'].length > 0) || (this.contact['phone'].length > 0) || (this.contact['url'].length > 0))" class="contact-details">
       <li><h3>Contact</h3></li>
       <li v-for="(email, i) in this.contact['email']">{{ email.value }}</li>
       <li v-for="(phone, i) in this.contact['phone']">{{ phone.value }}</li>
+			<div v-for="(url, i) in this.contact['url']">
+				<li><small><strong>{{ url.label }}</strong></small></li>
+				<li><a :href="url.value" target="_blank">{{ url.value }}</a></li>
+			</div>
     </ul>
   </div>
 
-  <GMapMap class="map" :center="center" :zoom="13" map-type-id="terrain">
-    <GMapMarker :position="center" />
-  </GMapMap>
+	<div class="form-width-control">	
+		<div class="form-content">
+			<h2>Enquiry Form</h2>
+			<p>Our organisation is a small team of volunteers and we will do our best to get back to you as soon as possible.</p>
+		</div>
+
+		<form action="/contactCreateEnquiry">
+			<input type="hidden" name="_token" :value="csrf">
+
+			<label for="name">Name<span> *</span></label>
+			<input type="text" name="name" required>
+
+			<label for="email">Email<span> *</span></label>
+			<input type="email" name="email" required>
+
+			<label for="phone">Phone</label>
+			<input type="number" name="phone">
+
+			<label for="subject">Subject</label>
+			<input type="text" name="subject">
+
+			<label for="message">Message<span> *</span></label>
+			<textarea name="message" required></textarea>
+
+			<input type="submit" value="Send" class="submit">
+		</form>
+	</div>
 </template>
 
 
@@ -32,7 +49,7 @@
 
     data() {
       return {
-        center: {lat: this.contact['lat'], lng: this.contact['lng']},
+        csrf: document.querySelector('meta[name="csrf-token"]').getAttribute('content'),
       }
     },
   };

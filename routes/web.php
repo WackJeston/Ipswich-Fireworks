@@ -13,6 +13,7 @@ use App\Http\Controllers\TestController;
 // PUBLIC
 use App\Http\Controllers\HomeController;
 use App\Http\Controllers\ContactController;
+use App\Http\Controllers\FindUsController;
 
 // ADMIN
 use App\Http\Controllers\AdminTestController;
@@ -23,6 +24,8 @@ use App\Http\Controllers\AdminUserProfileController;
 use App\Http\Controllers\AdminCustomersController;
 use App\Http\Controllers\AdminCustomerProfileController;
 use App\Http\Controllers\AdminHomePageController;
+use App\Http\Controllers\AdminEnquiriesController;
+use App\Http\Controllers\AdminEnquiryProfileController;
 
 
 // DataTable -----------------------------------------------------------------------------------
@@ -38,7 +41,13 @@ Route::controller(TestController::class)->group(function () {
 
 // PUBLIC -----------------------------------------------------------------------------------
 Route::get('/', [HomeController::class, 'show']);
-Route::get('/contact', [ContactController::class, 'show']);
+Route::controller(ContactController::class)->group(function () {
+  Route::get('/contact', 'show');
+  Route::get('/contactCreateEnquiry', 'createEnquiry');
+});
+Route::controller(FindUsController::class)->group(function () {
+	Route::get('/find-us', 'show');
+});
 
 // ADMIN -----------------------------------------------------------------------------------
 Route::group( ['middleware' => 'auth' ], function()
@@ -61,6 +70,8 @@ Route::group( ['middleware' => 'auth' ], function()
     Route::get('/contactDeleteEmail/{id}', 'deleteEmail');
     Route::post('/contactCreatePhone', 'createPhone');
     Route::get('/contactDeletePhone/{id}', 'deletePhone');
+    Route::post('/contactCreateUrl', 'createUrl');
+    Route::get('/contactDeleteUrl/{id}', 'deleteUrl');
   });
 
   Route::controller(AdminUsersController::class)->group(function () {
@@ -92,4 +103,12 @@ Route::group( ['middleware' => 'auth' ], function()
 		Route::post('/admin-home-pageUpdatePrimaryInfo', 'updatePrimaryInfo');
 		Route::post('/admin-home-pageUpdateTicketNotice', 'updateTicketNotice');
   });
+
+	Route::controller(AdminEnquiriesController::class)->group(function () {
+		Route::get('/admin/enquiries', 'show');
+	});
+
+	Route::controller(AdminEnquiryProfileController::class)->group(function () {
+		Route::get('/admin/enquiry-profile/{id}', 'show');
+	});
 });

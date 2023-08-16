@@ -28,7 +28,6 @@
       <userprofilefunctions 
 				:user="{{ json_encode($user) }}" 
 				:editform="{{ json_encode($editForm) }}"
-				:orderstable="{{ json_encode($ordersTable) }}"
 			/>
     </div>
 
