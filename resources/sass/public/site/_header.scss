@@ -43,15 +43,38 @@ header img.logo {
 	padding: 10px 5px;
 }
 
+header #header-socials {
+	display: flex;
+	flex-direction: row;
+	justify-content: center;
+	align-items: center;
+	padding: 0;
+	color: v.$brand-main;
+
+	@media (max-width: 500px) {
+		display: none;
+	}
+}
+
+header #header-socials a {
+	margin-right: 10px;
+	opacity: 0.8;
+	cursor: pointer;
+}
+
+header #header-socials a:hover {
+	opacity: 1;
+}
+
 header #nav-menu-button {
 	transition: transform 200ms ease;
 	font-size: 1.8rem;
 	opacity: 0.8;
 	color: v.$brand-main;
+	cursor: pointer;
 }
 
 header #nav-menu-button:hover {
-	cursor: pointer;
 	opacity: 1;
 }
 

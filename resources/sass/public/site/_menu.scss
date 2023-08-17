@@ -4,7 +4,7 @@
 	position: fixed;
 	top: 0;
 	right: -240px;
-	height: 100vh;
+	height: 100%;
 	width: 240px;
 	background-color: v.$brand-alt-dark;
 	padding: 10px 0;
@@ -31,7 +31,7 @@
 .site-menu #menu-items {
 	flex-direction: column;
 	padding: 0;
-	margin: 0;
+	margin: 0 0 20px 0;
 }
 
 .site-menu .nav-link {

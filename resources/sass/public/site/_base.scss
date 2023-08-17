@@ -1,7 +1,14 @@
 @use 'v';
 
+html {
+	height: 100vh;
+	width: 100vw;
+}
+
 body {
-	position: relative;
+	height: 100%;
+	width: 100%;
+	position: fixed;
 	overflow: hidden;
 	transition: all 200ms ease;
 }

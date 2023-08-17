@@ -103,6 +103,29 @@ class AppServiceProvider extends ServiceProvider
 					],
         ];
 
+				$socials = [
+					$instagram = [
+            "title"=>"instagram",
+            "link"=>"https://www.instagram.com/ipswichfireworks50/",
+            "icon"=>"fa-brands fa-instagram",
+          ],
+					$facebook = [
+            "title"=>"facebook",
+            "link"=>"https://www.facebook.com/IpswichFireworks/",
+            "icon"=>"fa-brands fa-facebook",
+          ],
+					$twitter = [
+            "title"=>"twitter",
+            "link"=>"https://twitter.com/parkfireworks/",
+            "icon"=>"fa-brands fa-twitter",
+          ],
+					// $tiktok = [
+          //   "title"=>"tiktok",
+          //   "link"=>"https://www.tiktok.com/ipswichfireworks50/",
+          //   "icon"=>"fa-brands fa-tiktok",
+          // ],
+				];
+
 				$contactResult = DB::select('SELECT type, value FROM contact ORDER BY type ASC');
 
 				$contact = [
@@ -124,7 +147,8 @@ class AppServiceProvider extends ServiceProvider
 
         View::share([
           'publicLinks' => $publicLinks,
-					// 'contact' => $contact,
+					'socials' => $socials,
+					'contact' => $contact,
         ]);
       }
     }

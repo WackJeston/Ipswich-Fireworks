@@ -35,8 +35,8 @@
 		</ul>
 
 		<ul id="menu-socials">
-			<a href="https://www.instagram.com/ipswichfireworks50/" target="_blank">
-				<li><i class="fa-brands fa-instagram"></i></li>
+			<a v-for="(social, i) in this.socials" :href="social.link" target="_blank">
+				<li><i :class="social.icon"></i></li>
 			</a>
 		</ul>
 	</nav>
@@ -49,7 +49,7 @@ export default {
 		'sitetitle',
 		'asset',
 		'publiclinks',
-		'userlinks',
+		'socials',
 		'sessionuser',
 	],
 

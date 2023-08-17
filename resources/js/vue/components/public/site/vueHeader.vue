@@ -10,6 +10,12 @@
 		</a>
 
 		<div id="header-end">
+			<ul id="header-socials">
+				<a v-for="(social, i) in this.socials" :href="social.link" target="_blank">
+					<li><i :class="social.icon"></i></li>
+				</a>
+			</ul>
+
 			<i @click='toggleSiteMenu' class="fa-solid fa-bars" id="nav-menu-button"></i>
 		</div>
 
@@ -26,7 +32,7 @@ export default {
 		'sitetitlemini',
 		'asset',
 		'publiclinks',
-		'userlinks',
+		'socials',
 		'sessionuser',
 	],
 
