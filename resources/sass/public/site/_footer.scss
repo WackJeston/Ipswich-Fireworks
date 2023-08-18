@@ -44,3 +44,26 @@ footer nav ul {
 footer nav .nav-link {
   margin: 5px auto 0 0;
 }
+
+footer nav .nav-link:hover {
+	text-decoration: underline;
+}
+
+footer #footer-socials {
+	display: flex;
+	flex-direction: row;
+	justify-content: flex-start;
+	align-items: center;
+	padding: 0;
+	margin: 15px 0 0 11px;
+	color: v.$white;
+}
+
+footer #footer-socials a {
+	margin-right: 10px;
+	cursor: pointer;
+}
+
+footer #footer-socials a:hover {
+	color: v.$brand-main;
+}

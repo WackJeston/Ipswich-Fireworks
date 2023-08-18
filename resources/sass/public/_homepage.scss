@@ -30,26 +30,3 @@
 	opacity: 1;
 	border-radius: 5px;
 }
-
-.home-page #ticket-notice {
-	display: flex;
-	width: 100%;
-	padding: 40px;
-	background-color: v.$brand-alt-light;
-}
-
-.home-page #ticket-notice h2 {
-	color: v.$brand-alt-dark;
-	font-size: 1.2em;
-	text-align: center;
-	white-space: pre-wrap;
-	margin: 0 auto;
-
-	@media (min-width: 600px) {
-		font-size: 1.8rem;
-	}
-
-	@media (min-width: 1000px) {
-		font-size: 2.4rem;
-	}
-}

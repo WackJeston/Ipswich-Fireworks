@@ -12,20 +12,25 @@ use App\Http\Controllers\TestController;
 
 // PUBLIC
 use App\Http\Controllers\HomeController;
-use App\Http\Controllers\ContactController;
 use App\Http\Controllers\FindUsController;
+use App\Http\Controllers\ItineraryController;
+use App\Http\Controllers\ContactController;
+use App\Http\Controllers\FeedbackController;
 
 // ADMIN
 use App\Http\Controllers\AdminTestController;
 use App\Http\Controllers\AdminDashboardController;
 use App\Http\Controllers\AdminContactController;
+use App\Http\Controllers\AdminItineraryController;
+use App\Http\Controllers\AdminHomePageController;
 use App\Http\Controllers\AdminUsersController;
 use App\Http\Controllers\AdminUserProfileController;
 use App\Http\Controllers\AdminCustomersController;
 use App\Http\Controllers\AdminCustomerProfileController;
-use App\Http\Controllers\AdminHomePageController;
 use App\Http\Controllers\AdminEnquiriesController;
 use App\Http\Controllers\AdminEnquiryProfileController;
+use App\Http\Controllers\AdminFeedbackController;
+use App\Http\Controllers\AdminFeedbackProfileController;
 
 
 // DataTable -----------------------------------------------------------------------------------
@@ -41,12 +46,23 @@ Route::controller(TestController::class)->group(function () {
 
 // PUBLIC -----------------------------------------------------------------------------------
 Route::get('/', [HomeController::class, 'show']);
+
+Route::controller(FindUsController::class)->group(function () {
+	Route::get('/find-us', 'show');
+});
+
+Route::controller(ItineraryController::class)->group(function () {
+	Route::get('/itinerary', 'show');
+});
+
 Route::controller(ContactController::class)->group(function () {
   Route::get('/contact', 'show');
   Route::get('/contactCreateEnquiry', 'createEnquiry');
 });
-Route::controller(FindUsController::class)->group(function () {
-	Route::get('/find-us', 'show');
+
+Route::controller(FeedbackController::class)->group(function () {
+	Route::get('/feedback', 'show');
+	Route::get('/feedbackCreateEnquiry', 'createEnquiry');
 });
 
 // ADMIN -----------------------------------------------------------------------------------
@@ -74,6 +90,22 @@ Route::group( ['middleware' => 'auth' ], function()
     Route::get('/contactDeleteUrl/{id}', 'deleteUrl');
   });
 
+  Route::controller(AdminHomePageController::class)->group(function () {
+    Route::get('/admin/home-page', 'show');
+		Route::post('/admin-home-pageAddLandingZoneBanner', 'addLandingZoneBanner');
+		Route::get('/admin-home-pageDeleteLandingZoneBanner/{id}', 'deleteLandingZoneBanner');
+		Route::post('/admin-home-pageUpdatePrimaryInfo', 'updatePrimaryInfo');
+		Route::post('/admin-home-pageUpdateTicketNotice', 'updateTicketNotice');
+		Route::post('/admin-home-pageUpdateAboutUs', 'updateAboutUs');
+  });
+
+	Route::controller(AdminItineraryController::class)->group(function () {
+		Route::get('/admin/itinerary', 'show');
+		Route::post('/itineraryCreateStandard', 'createStandard');
+		Route::post('/itineraryCreateMusic', 'createMusic');
+		Route::get('/itineraryDelete/{id}', 'delete');
+	});
+
   Route::controller(AdminUsersController::class)->group(function () {
     Route::get('/admin/users', 'show');
     Route::post('/usersCreate', 'create');
@@ -96,19 +128,19 @@ Route::group( ['middleware' => 'auth' ], function()
     Route::get('/customer-profileDelete/{id}', 'delete');
   });
 
-  Route::controller(AdminHomePageController::class)->group(function () {
-    Route::get('/admin/home-page', 'show');
-		Route::post('/admin-home-pageAddLandingZoneBanner', 'addLandingZoneBanner');
-		Route::get('/admin-home-pageDeleteLandingZoneBanner/{id}', 'deleteLandingZoneBanner');
-		Route::post('/admin-home-pageUpdatePrimaryInfo', 'updatePrimaryInfo');
-		Route::post('/admin-home-pageUpdateTicketNotice', 'updateTicketNotice');
-  });
-
 	Route::controller(AdminEnquiriesController::class)->group(function () {
 		Route::get('/admin/enquiries', 'show');
 	});
 
 	Route::controller(AdminEnquiryProfileController::class)->group(function () {
 		Route::get('/admin/enquiry-profile/{id}', 'show');
+	});
+
+	Route::controller(AdminFeedbackController::class)->group(function () {
+		Route::get('/admin/feedback', 'show');
+	});
+
+	Route::controller(AdminFeedbackProfileController::class)->group(function () {
+		Route::get('/admin/feedback-profile/{id}', 'show');
 	});
 });

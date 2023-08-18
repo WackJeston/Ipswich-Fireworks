@@ -1,6 +1,10 @@
 @extends('layout')
 
-@section('title', 'Enquiry Profile')
+@if ($type == 'standard')
+	@section('title', 'Enquiry Profile')
+@elseif ($type == 'feedback')
+	@section('title', 'Feeback Profile')
+@endif
 
 @section('content')
   <main class="enquiry-profile">
@@ -10,7 +14,11 @@
       <a href="/admin/enquiries">Enquiries</a>
     </div>
 
-    <h2 class="dk">Enquiry Profile</h2>
+    @if ($type == 'standard')
+			<h2 class="dk">Enquiry Profile</h2>
+		@elseif ($type == 'feedback')
+			<h2 class="dk">Feeback Profile</h2>
+		@endif
 
     @if ($errors->any())
       <div id="alerterror" class="lt">

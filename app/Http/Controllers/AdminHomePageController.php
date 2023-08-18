@@ -32,19 +32,6 @@ class AdminHomePageController extends Controller
 		$landingZoneBannerTable->addJsButton('showDeleteWarning', ['string:Banner', 'record:id', 'url:/admin-home-pageDeleteLandingZoneBanner/?'], 'fa-solid fa-trash-can', 'Delete Banner');
 		$landingZoneBannerTable = $landingZoneBannerTable->render();
 
-		// $primaryInfo = DB::select('SELECT * FROM content WHERE page = "home" AND position = "1"');
-
-		// if (empty($primaryInfo)) {
-		// 	Content::create([
-		// 		'page' => 'home',
-		// 		'position' => '1',
-		// 	]);
-
-		// 	$primaryInfo = DB::select('SELECT * FROM content WHERE page = "home" AND position = "1"');
-		// }
-
-		// $primaryInfo = $primaryInfo[0];
-
 		$primaryInfo = Content::firstOrCreate([
 			'page' => 'home',
 			'position' => 'primaryInfo',
@@ -69,12 +56,40 @@ class AdminHomePageController extends Controller
 		$ticketNoticeForm->addInput('checkbox', 'active', 'Active', $ticketNotice->active);
 		$ticketNoticeForm = $ticketNoticeForm->render();
 
+		$aboutUs1 = Content::firstOrCreate([
+			'page' => 'home',
+			'position' => 'aboutUs_1',
+		]);
+
+		$aboutUs2 = Content::firstOrCreate([
+			'page' => 'home',
+			'position' => 'aboutUs_2',
+		]);
+
+		$aboutUs3 = Content::firstOrCreate([
+			'page' => 'home',
+			'position' => 'aboutUs_3',
+		]);
+
+		$aboutUsForm = new DataForm(request(), '/admin-home-pageUpdateAboutUs');
+		$aboutUsForm->setTitle('About Us Section');
+		$aboutUsForm->addInput('text', 'title_1', 'Title 1', $aboutUs1->title, 100);
+		$aboutUsForm->addInput('textarea', 'description_1', 'Paragraph 1', $aboutUs1->description, 1000);
+		$aboutUsForm->addInput('text', 'title_2', 'Title 2', $aboutUs2->title, 100);
+		$aboutUsForm->addInput('textarea', 'description_2', 'Paragraph 2', $aboutUs2->description, 1000);
+		$aboutUsForm->addInput('text', 'title_3', 'Title 3', $aboutUs3->title, 100);
+		$aboutUsForm->addInput('textarea', 'description_3', 'Paragraph 3', $aboutUs3->description, 1000);
+		$aboutUsForm->addInput('checkbox', 'active', 'Active', $aboutUs1->active);
+		$aboutUsForm = $aboutUsForm->render();
+
+
     return view('admin/home-page', compact(
       'sessionUser',
 			'landingZoneBannerForm',
 			'landingZoneBannerTable',
 			'primaryInfoForm',
 			'ticketNoticeForm',
+			'aboutUsForm',
     ));
   }
 
@@ -112,7 +127,7 @@ class AdminHomePageController extends Controller
     $request->validate([
       'title' => 'max:100',
 			'subtitle' => 'max:255',
-			'description' => 'max:1000',
+			'description' => 'max:5000',
     ]);
 
 		$active = isset($request->active) ? 1 : 0;
@@ -124,14 +139,14 @@ class AdminHomePageController extends Controller
 			'active' => $active,
     ]);
 
-    return redirect("/admin/home-page")->with('message', 'Primary Info updated successfully.');
+    return redirect("/admin/home-page")->with('message', 'Primary info updated successfully.');
   }
 
 
 	public function updateTicketNotice(Request $request)
 	{
 		$request->validate([
-			'description' => 'max:1000',
+			'description' => 'max:5000',
 		]);
 
 		Content::where('page', 'home')->where('position', 'ticketNotice')->update([
@@ -139,6 +154,39 @@ class AdminHomePageController extends Controller
 			'active' => isset($request->active) ? 1 : 0,
 		]);
 
-		return redirect("/admin/home-page")->with('message', 'Ticket Notice updated successfully.');
+		return redirect("/admin/home-page")->with('message', 'Ticket notice updated successfully.');
+	}
+
+
+	public function updateAboutUs(Request $request)
+	{
+		$request->validate([
+			'title_1' => 'max:100',
+			'description_1' => 'max:5000',
+			'title_2' => 'max:100',
+			'description_2' => 'max:5000',
+			'title_3' => 'max:100',
+			'description_3' => 'max:5000',
+		]);
+
+		Content::where('page', 'home')->where('position', 'aboutUs_1')->update([
+			'title' => $request->title_1,
+			'description' => $request->description_1,
+			'active' => isset($request->active) ? 1 : 0,
+		]);
+
+		Content::where('page', 'home')->where('position', 'aboutUs_2')->update([
+			'title' => $request->title_2,
+			'description' => $request->description_2,
+			'active' => isset($request->active) ? 1 : 0,
+		]);
+
+		Content::where('page', 'home')->where('position', 'aboutUs_3')->update([
+			'title' => $request->title_3,
+			'description' => $request->description_3,
+			'active' => isset($request->active) ? 1 : 0,
+		]);
+
+		return redirect("/admin/home-page")->with('message', 'About us updated successfully.');
 	}
 }

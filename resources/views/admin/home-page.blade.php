@@ -24,6 +24,7 @@
 			echo $landingZoneBannerTable['html'];
 			echo $primaryInfoForm['html'];
 			echo $ticketNoticeForm['html'];
+			echo $aboutUsForm['html'];
 		@endphp
 
   </main>

@@ -11,6 +11,12 @@
           <li>{{ capFL(link.title) }}</li>
         </a>
       </ul>
+
+			<ul id="footer-socials">
+				<a v-for="(social, i) in this.socials" :href="social.link" target="_blank">
+					<li><i :class="social.icon"></i></li>
+				</a>
+			</ul>
     </nav>
 
 		<a href="/">
@@ -27,12 +33,20 @@
       'sitetitle',
 			'asset',
       'publiclinks',
+			'socials',
     ],
 
     methods: {
       capFL(string) {
-        return string.charAt(0).toUpperCase() + string.slice(1);
-      },
+			const mySentence = string;
+			const words = mySentence.split(" ");
+
+			for (let i = 0; i < words.length; i++) {
+				words[i] = words[i][0].toUpperCase() + words[i].substr(1);
+			}
+
+			return words.join(" ");
+		},
     },
   };
 </script>

@@ -27,7 +27,7 @@
 			<input type="email" name="email" required>
 
 			<label for="phone">Phone</label>
-			<input type="number" name="phone">
+			<input type="tel" name="phone">
 
 			<label for="subject">Subject</label>
 			<input type="text" name="subject">

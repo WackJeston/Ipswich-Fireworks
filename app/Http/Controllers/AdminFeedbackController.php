@@ -7,16 +7,16 @@ use App\DataTable;
 use App\Models\Enquiry;
 
 
-class AdminEnquiriesController extends Controller
+class AdminFeedbackController extends Controller
 {
   public function show()
   {
     $sessionUser = auth()->user();
 
-		$type = 'standard';
+		$type = 'feedback';
 
     $enquiriesTable = new DataTable();
-		$enquiriesTable->setQuery('SELECT * FROM enquiry WHERE `type` = "standard" ORDER BY id DESC');
+		$enquiriesTable->setQuery('SELECT * FROM enquiry WHERE `type` = "feedback" ORDER BY id DESC');
 		$enquiriesTable->addColumn('id', '#');
 		$enquiriesTable->addColumn('name', 'Name', 1, true);
 		$enquiriesTable->addColumn('email', 'Email', 2);

@@ -158,6 +158,7 @@
             sitetitle="{{ env('APP_NAME') }}"
 						asset="{{ env('AWS_ASSET_URL') }}"
             :publiclinks="{{ json_encode($publicLinks) }}"
+						:socials="{{ json_encode($socials) }}"
           />
         </div>
       </div>

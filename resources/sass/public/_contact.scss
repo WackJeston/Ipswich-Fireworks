@@ -135,9 +135,11 @@
 	background-color: v.$brand-main-darker;
 }
 
-.contact .map {
-	margin-top: auto;
-	height: 400px;
+.contact .feedback-link {
+	display: flex;
+	align-items: center;
+	justify-content: center;
 	width: 100%;
-	background-color: v.$bg-light;
+	padding: 40px;
+	font-size: 2rem;
 }

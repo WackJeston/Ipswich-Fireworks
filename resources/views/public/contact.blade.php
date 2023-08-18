@@ -22,5 +22,9 @@
 			/>
     </div>
 
+		<a href="/feedback" class="large-message-box">
+			<h2>Leave Feedback</h2>
+		</a>
+
   </main>
 @endsection

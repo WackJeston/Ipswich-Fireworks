@@ -33,10 +33,31 @@
 		@endif
 
 		@if ($ticketNotice != null)
-			<div id="ticket-notice">
+			<div class="large-message-box gray-box limited">
 				<h2>{{ $ticketNotice->description }}</h2>
 			</div>
 		@endif
+
+		<div class="clear-box limited dk">
+			@if ($aboutUs[0]->title != null)
+				<h2>{{ $aboutUs[0]->title }}</h2>
+			@endif
+			@if ($aboutUs[0]->description != null)
+				<p>{{ $aboutUs[0]->description }}</p>
+			@endif
+			@if ($aboutUs[1]->title != null)
+				<h2>{{ $aboutUs[1]->title }}</h2>
+			@endif
+			@if ($aboutUs[1]->description != null)
+				<p>{{ $aboutUs[1]->description }}</p>
+			@endif
+			@if ($aboutUs[2]->title != null)
+				<h2>{{ $aboutUs[2]->title }}</h2>
+			@endif
+			@if ($aboutUs[2]->description != null)
+				<p>{{ $aboutUs[2]->description }}</p>
+			@endif
+		</div>
 
   </main>
 @endsection

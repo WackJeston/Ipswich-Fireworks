@@ -1,0 +1,37 @@
+@use 'site/v';
+
+.itinerary {
+	display: flex;
+	flex-direction: column;
+}
+
+.itinerary h1 {
+	margin-top: 40px;
+	margin-bottom: 40px;
+	margin-left: auto;
+	margin-right: auto;
+}
+
+.itinerary ul {
+	display: flex;
+	flex-direction: column;
+	list-style-type: circle;
+}
+
+.itinerary .clear-box {
+	@media (min-width: 1000px) {
+		padding-left: 0;
+		padding-right: 0;
+	}
+}
+
+.itinerary ul,
+.itinerary h2,
+.itinerary h3,
+.itinerary p {
+	@media (min-width: 1000px) {
+		width: 75%;
+		margin-left: auto;
+		margin-right: auto;
+	}
+}

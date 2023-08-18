@@ -13,16 +13,12 @@ return new class extends Migration
      */
     public function up()
     {
-        Schema::create('content', function (Blueprint $table) {
+        Schema::create('itinerary', function (Blueprint $table) {
             $table->id();
-						$table->string('page', 100);
-						$table->string('position', 100);
-						$table->string('title', 100)->nullable();
-						$table->string('subtitle', 255)->nullable();
-						$table->string('description', 5000)->nullable();
+						$table->string('type', 255)->default('standard');
+						$table->string('label', 255)->nullable();
+						$table->string('value', 1000);
 						$table->boolean('active')->default(0);
-						$table->string('name', 255)->nullable();
-            $table->string('fileName', 255)->nullable();
             $table->timestamps();
         });
     }

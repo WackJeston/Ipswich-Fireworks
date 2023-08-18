@@ -6,13 +6,13 @@ use DB;
 use App\Models\Enquiry;
 
 
-class AdminEnquiryProfileController extends Controller
+class AdminFeedbackProfileController extends Controller
 {
   public function show($id)
   {
     $sessionUser = auth()->user();
 
-		$type = 'standard';
+		$type = 'feedback';
 
     $enquiry = Enquiry::find($id);
 

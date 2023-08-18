@@ -21,6 +21,8 @@ import Bannerhometop from './vue/components/public/homepage/bannerHomeTop.vue'
 
 import Contactmain from './vue/components/public/contactMain.vue'
 
+import Feedbackmain from './vue/components/public/feedbackMain.vue'
+
 import Googlemaps from './vue/components/public/googleMaps.vue'
 
 
@@ -73,6 +75,9 @@ bannerHomeTop.component('bannerhometop', Bannerhometop).mount('#bannerhometop')
 
 const contactMain = Vue.createApp({})
 contactMain.component('contactmain', Contactmain).mount('#contactmain')
+
+const feedbackMain = Vue.createApp({})
+feedbackMain.component('feedbackmain', Feedbackmain).mount('#feedbackmain')
 
 const googleMaps = Vue.createApp({})
 const gmapKey = process.env.MIX_GOOGLE_MAPS_KEY

@@ -5,18 +5,16 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
-class Enquiry extends Model
+class Itinerary extends Model
 {
   use HasFactory;
 
-	protected $table = 'enquiry';
+	protected $table = 'itinerary';
 
   protected $fillable = [
 		'type',
-		'name',
-		'email',
-    'phone',
-    'subject',
-    'message',
+		'label',
+		'value',
+    'active',
   ];
 }

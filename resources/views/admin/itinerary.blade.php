@@ -1,19 +1,11 @@
 @extends('layout')
 
-@if ($type == 'standard')
-	@section('title', 'Enquiries')
-@elseif ($type == 'feedback')
-	@section('title', 'Feedback')
-@endif
+@section('title', 'Itinerary')
 
 @section('content')
-  <main class="enquiries">
+  <main class="itinerary">
 
-		@if ($type == 'standard')
-			<h2 class="dk">Enquiries</h2>
-		@elseif ($type == 'feedback')
-			<h2 class="dk">Feedback</h2>
-		@endif
+    <h2 class="dk">Itinerary</h2>
 
     @if ($errors->any())
       <div id="alerterror" class="lt">
@@ -28,7 +20,10 @@
     @endif
 
 		@php
-			echo $enquiriesTable['html'];
+			echo $standardForm['html'];
+			echo $standardTable['html'];
+			echo $musicForm['html'];
+			echo $musicTable['html'];
 		@endphp
 
   </main>

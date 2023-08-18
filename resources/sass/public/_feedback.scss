@@ -1,0 +1,61 @@
+@use 'site/v';
+
+.feedback .title-section {
+	text-align: center;
+	width: 100%;
+	max-width: 1000px;
+	padding: 20px 40px;
+	margin-left: auto;
+	margin-right: auto;
+
+	@media (min-width: 1000px) {
+		margin-left: auto;
+		margin-right: auto;
+		width: 75%;
+	}
+}
+
+.feedback .form-width-control {
+	display: flex;
+	flex-direction: column;
+	background-color: v.$brand-alt-light;
+	padding: 20px 40px 50px 40px;
+	width: 100%;
+}
+
+.feedback form {
+	display: flex;
+	flex-direction: column;
+	align-items: flex-start;
+	justify-content: flex-start;
+	width: 100%;
+	max-width: 600px;
+	margin: 20px auto 0 auto;
+}
+
+.feedback form input,
+.feedback form textarea,
+.feedback form label {
+	width: 100%;
+}
+
+.feedback form textarea {
+	min-height: 100px;
+}
+
+.feedback form .submit {
+	width: 100%;
+	max-width: 150px;
+	margin-top: 10px;
+}
+
+.feedback form .submit:hover {
+	background-color: v.$brand-main-darker;
+}
+
+.feedback .map {
+	margin-top: auto;
+	height: 400px;
+	width: 100%;
+	background-color: v.$bg-light;
+}

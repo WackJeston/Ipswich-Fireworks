@@ -35,27 +35,43 @@ class AppServiceProvider extends ServiceProvider
 
       if (str_contains(url()->current(), '/admin/')) {
         $adminLinks = [
-					$enquiries = [
-						"title"=>"enquiries",
-						"link"=>"/admin/enquiries",
-						"icon"=>"fa-solid fa-envelope",
-					],
-          $people = [
-            "title"=>"people",
-            "icon"=>"fa-solid fa-users",
+					$messages = [
+            "title"=>"messages",
+            "icon"=>"fa-regular fa-comment",
             "sublink"=>$subLinks = [
-              $customers = [
-                "title"=>"customers",
-                "link"=>"/admin/customers",
-                "icon"=>"fa-solid fa-user",
-              ],
-              $users = [
-                "title"=>"users",
-                "link"=>"/admin/users",
-                "icon"=>"fa-solid fa-user-astronaut",
+              $enquiries = [
+								"title"=>"enquiries",
+								"link"=>"/admin/enquiries",
+								"icon"=>"fa-solid fa-envelope",
+							],
+              $feedback = [
+                "title"=>"feedback",
+                "link"=>"/admin/feedback",
+                "icon"=>"fa-solid fa-comment-medical",
               ],
             ],
           ],
+          // $people = [
+          //   "title"=>"people",
+          //   "icon"=>"fa-solid fa-users",
+          //   "sublink"=>$subLinks = [
+          //     $customers = [
+          //       "title"=>"customers",
+          //       "link"=>"/admin/customers",
+          //       "icon"=>"fa-solid fa-user",
+          //     ],
+          //     $users = [
+          //       "title"=>"users",
+          //       "link"=>"/admin/users",
+          //       "icon"=>"fa-solid fa-user-astronaut",
+          //     ],
+          //   ],
+          // ],
+					$users = [
+						"title"=>"users",
+						"link"=>"/admin/users",
+						"icon"=>"fa-solid fa-user-astronaut",
+					],
           $website = [
             "title"=>"website",
             "icon"=>"fa-solid fa-globe",
@@ -70,13 +86,18 @@ class AppServiceProvider extends ServiceProvider
                 "link"=>"/admin/contact",
                 "icon"=>"fa-solid fa-address-card",
               ],
+              $itinerary = [
+                "title"=>"itinerary",
+                "link"=>"/admin/itinerary",
+                "icon"=>"fa-solid fa-clipboard-list",
+              ],
+              $sponsors = [
+                "title"=>"sponsors",
+                "link"=>"/admin/sponsors",
+                "icon"=>"fa-solid fa-heart-pulse",
+              ],
             ],
           ],
-					// $test = [
-					// 	"title"=>"test",
-					// 	"link"=>"/admin/test",
-					// 	"icon"=>"fa-solid fa-flask-vial",
-					// ],
         ];
 
         View::share([
@@ -86,15 +107,25 @@ class AppServiceProvider extends ServiceProvider
 
       else {
         $publicLinks = [
-          $contact = [
-            "title"=>"contact",
-            "link"=>"/contact",
-            "icon"=>"fa-solid fa-address-card",
-          ],
 					$findUs = [
             "title"=>"find us",
             "link"=>"/find-us",
             "icon"=>"fa-solid fa-map-location-dot",
+          ],
+					$itinerary = [
+            "title"=>"itinerary",
+            "link"=>"/itinerary",
+            "icon"=>"fa-regular fa-rectangle-list",
+          ],
+          $contact = [
+            "title"=>"contact us",
+            "link"=>"/contact",
+            "icon"=>"fa-solid fa-address-card",
+          ],
+					$feedback = [
+            "title"=>"leave feedback",
+            "link"=>"/feedback",
+            "icon"=>"fa-solid fa-message",
           ],
 					$sponsors = [
 						"title"=>"sponsors",
@@ -117,7 +148,7 @@ class AppServiceProvider extends ServiceProvider
 					$twitter = [
             "title"=>"twitter",
             "link"=>"https://twitter.com/parkfireworks/",
-            "icon"=>"fa-brands fa-twitter",
+            "icon"=>"fa-brands fa-x-twitter",
           ],
 					// $tiktok = [
           //   "title"=>"tiktok",

@@ -6,41 +6,14 @@ use Illuminate\Http\Request;
 use App\Models\Enquiry;
 
 
-class ContactController extends Controller
+class FeedbackController extends Controller
 {
   public function show()
   {
     $sessionUser = auth()->user();
 
-    $contact = [];
-
-    $contact['email'] = DB::select('SELECT 
-      c.type, 
-      c.value,
-			c.label
-      FROM contact AS c
-      WHERE c.type = "email"'
-    );
-
-    $contact['phone'] = DB::select('SELECT 
-      c.type, 
-      c.value,
-			c.label
-      FROM contact AS c
-      WHERE c.type = "phone"'
-    );
-
-    $contact['url'] = DB::select('SELECT 
-      c.type, 
-      c.value,
-			c.label
-      FROM contact AS c
-      WHERE c.type = "url"'
-    );
-
-    return view('public/contact', compact(
+    return view('public/feedback', compact(
       'sessionUser',
-      'contact',
     ));
   }
 
@@ -56,6 +29,7 @@ class ContactController extends Controller
     ]);
 
     Enquiry::create([
+			'type' => 'feedback',
       'name' => $request->name,
 			'email' => $request->email,
 			'phone' => $request->phone,
@@ -63,6 +37,6 @@ class ContactController extends Controller
 			'message' => $request->message,
     ]);
 
-    return redirect('/contact')->with('message', 'Enquiry successfully sent.');
+    return redirect('/feedback')->with('message', 'Feedback successfully sent.');
 	}
 }

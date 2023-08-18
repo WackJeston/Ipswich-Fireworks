@@ -15,6 +15,7 @@ return new class extends Migration
     {
         Schema::create('enquiry', function (Blueprint $table) {
             $table->id();
+						$table->string('type', 255)->default('standard');
 						$table->string('name', 255);
 						$table->string('email', 255);
 						$table->string('phone', 20)->nullable();

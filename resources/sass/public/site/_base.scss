@@ -216,8 +216,12 @@ button.pb-danger:hover {
 .clear-box {
 	display: flex;
 	flex-direction: column;
-	padding: 20px 30px 40px 30px;
+	padding: 40px 30px 30px 30px;
 	color: white;
+}
+
+.clear-box.bg-gray {
+	background-color: v.$brand-alt-light;
 }
 
 .clear-box.center {
@@ -235,6 +239,7 @@ button.pb-danger:hover {
 }
 
 .clear-box h2 {
+	margin: 0;
 	font-size: 1.8rem;
 
 	@media (min-width: 1400px) {
@@ -243,7 +248,7 @@ button.pb-danger:hover {
 }
 
 .clear-box h3 {
-	margin: 0 0 10px 0;
+	margin: 0 0 5px 0;
 
 	@media (min-width: 1400px) {
 		font-size: 1.4rem;
@@ -251,6 +256,7 @@ button.pb-danger:hover {
 }
 
 .clear-box p {
+	margin: 0 0 30px 0;
 	font-size: 1.1rem;
 
 	@media (min-width: 1400px) {
@@ -289,6 +295,51 @@ button.pb-danger:hover {
 
 .fa-square .popup-label-container .popup-label {
 	bottom: -9px;
+}
+
+.large-message-box {
+	display: flex;
+	width: 100%;
+	padding: 40px;
+}
+
+a.large-message-box {
+	cursor: pointer;
+}
+
+.large-message-box.gray-box {
+	background-color: v.$brand-alt-light;
+}
+
+.large-message-box.black-box {
+	background-color: v.$brand-alt-dark;
+}
+
+.large-message-box.black-box h2 {
+	color: v.$white;
+}
+
+a.large-message-box:hover h2 {
+	transform: scale(1.05);
+}
+
+.large-message-box h2 {
+	transition: all 100ms ease;
+	color: v.$brand-alt-dark;
+	font-size: 2.4em;
+	text-align: center;
+	white-space: pre-wrap;
+	margin: 0 auto;
+}
+
+.large-message-box.limited h2 {
+	@media (max-width: 600px) {
+		font-size: 1.2rem;
+	}
+
+	@media (min-width: 600px) and (max-width: 1000px) {
+		font-size: 1.8rem;
+	}
 }
 
 // Hover Styles ---------------------------------------
