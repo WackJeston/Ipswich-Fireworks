@@ -37,8 +37,15 @@ header #header-end {
 	justify-content: flex-end;
 }
 
+header .logo-link {
+	max-width: 162px;
+
+	@media (max-width: 640px) {
+		max-width: 120px;
+	}
+}
+
 header img.logo {
-	display: flex;
 	height: 100%;
 	padding: 10px 5px;
 }

@@ -1,28 +1,11 @@
 @use '../site/v';
 
-#bannerhometop {
-	height: calc(100vh - v.$header-height);
+#banner-homepage-top .banner-slide {
+  height: calc(100vh - v.$header-height);
 
 	@media (max-width: 640px) {
 		height: calc(100vh - v.$header-height-mobile);
 	}
-}
-
-#banner-homepage-top {
-  // height: calc(100% - v.$header-height);
-
-	// @media (max-width: 640px) {
-	// 	height: calc(100% - v.$header-height-mobile);
-	// }
-
-	max-height: 100%;
-	min-height: 100%;
-}
-
-#banner-homepage-top .carousel,
-#banner-homepage-top .carousel__viewport,
-#banner-homepage-top .carousel__track {
-	height: 100%;
 }
 
 .banner {
