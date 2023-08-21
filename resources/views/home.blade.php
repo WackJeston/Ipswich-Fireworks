@@ -32,11 +32,9 @@
 			</div>
 		@endif
 
-		@if ($ticketNotice != null)
-			<div class="large-message-box gray-box limited">
-				<h2>{{ $ticketNotice->description }}</h2>
-			</div>
-		@endif
+		<div class="large-message-box gray-box limited">
+			<h2>ONLINE TICKETS ONLY<br>TICKETS NOT AVAILABLE ANYWHERE ELSE<br>NO CASH TAKEN AT GATES</h2>
+		</div>
 
 		<div class="clear-box limited dk">
 			@if ($aboutUs[0]->title != null)

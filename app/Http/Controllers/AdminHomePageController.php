@@ -45,17 +45,6 @@ class AdminHomePageController extends Controller
 		$primaryInfoForm->addInput('checkbox', 'active', 'Active', $primaryInfo->active);
 		$primaryInfoForm = $primaryInfoForm->render();
 
-		$ticketNotice = Content::firstOrCreate([
-			'page' => 'home',
-			'position' => 'ticketNotice',
-		]);
-
-		$ticketNoticeForm = new DataForm(request(), '/admin-home-pageUpdateTicketNotice');
-		$ticketNoticeForm->setTitle('Ticket Notice');
-		$ticketNoticeForm->addInput('textarea', 'description', 'Ticket Notice', $ticketNotice->description, 1000);
-		$ticketNoticeForm->addInput('checkbox', 'active', 'Active', $ticketNotice->active);
-		$ticketNoticeForm = $ticketNoticeForm->render();
-
 		$aboutUs1 = Content::firstOrCreate([
 			'page' => 'home',
 			'position' => 'aboutUs_1',
@@ -88,12 +77,16 @@ class AdminHomePageController extends Controller
 			'landingZoneBannerForm',
 			'landingZoneBannerTable',
 			'primaryInfoForm',
-			'ticketNoticeForm',
 			'aboutUsForm',
     ));
   }
 
 	public function addLandingZoneBanner(Request $request) {
+		$request->validate([
+			'name' => 'max:100',
+			'image' => 'required|image|mimes:jpg,jpeg,png,svg',
+		]);
+
 		$fileNames = storeImages($request, 'homePageLZ', 'carousel');
 
 		foreach ($fileNames as $fileName) {
@@ -141,21 +134,6 @@ class AdminHomePageController extends Controller
 
     return redirect("/admin/home-page")->with('message', 'Primary info updated successfully.');
   }
-
-
-	public function updateTicketNotice(Request $request)
-	{
-		$request->validate([
-			'description' => 'max:5000',
-		]);
-
-		Content::where('page', 'home')->where('position', 'ticketNotice')->update([
-			'description' => $request->description,
-			'active' => isset($request->active) ? 1 : 0,
-		]);
-
-		return redirect("/admin/home-page")->with('message', 'Ticket notice updated successfully.');
-	}
 
 
 	public function updateAboutUs(Request $request)

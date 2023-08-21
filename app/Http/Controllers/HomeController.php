@@ -21,8 +21,6 @@ class HomeController extends Controller
 
 		$primaryInfo = DB::select('SELECT * FROM content WHERE active = 1 AND page = "home" AND position = "primaryInfo"')[0];
 
-		$ticketNotice = DB::select('SELECT * FROM content WHERE active = 1 AND page = "home" AND position = "ticketNotice"')[0];
-
 		$aboutUs = [];
 
 		$aboutUs[0] = DB::select('SELECT * FROM content WHERE active = 1 AND page = "home" AND position = "aboutUs_1"')[0];
@@ -33,7 +31,6 @@ class HomeController extends Controller
       'sessionUser',
       'landingZoneBanners',
 			'primaryInfo',
-			'ticketNotice',
 			'aboutUs',
     ));
   }

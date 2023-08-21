@@ -91,9 +91,9 @@ class AppServiceProvider extends ServiceProvider
                 "link"=>"/admin/itinerary",
                 "icon"=>"fa-solid fa-clipboard-list",
               ],
-              $sponsors = [
-                "title"=>"sponsors",
-                "link"=>"/admin/sponsors",
+              $supporters = [
+                "title"=>"supporters",
+                "link"=>"/admin/supporters",
                 "icon"=>"fa-solid fa-heart-pulse",
               ],
             ],
@@ -127,9 +127,9 @@ class AppServiceProvider extends ServiceProvider
             "link"=>"/feedback",
             "icon"=>"fa-solid fa-message",
           ],
-					$sponsors = [
-						"title"=>"sponsors",
-						"link"=>"/sponsors",
+					$supporters = [
+						"title"=>"our supporters",
+						"link"=>"/supporters",
 						"icon"=>"fa-solid fa-heart-pulse",
 					],
         ];

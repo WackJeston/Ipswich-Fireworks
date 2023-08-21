@@ -1,13 +1,13 @@
 @extends('layout')
 
-@section('title', 'Itinerary')
+@section('title', 'Supporters')
 
 @section('content')
-  <main class="dk itinerary">
+  <main class="dk supporters">
 
-		<h1 class="page-margin">Itinerary</h1>
+		<h1 class="page-margin">Our Supporters</h1>
 
-		<div class="clear-box bg-gray">
+		{{-- <div class="clear-box bg-gray">
 			<h2>What's On?</h2>
 			<p>So much more than just East Anglia's Premier Musical Fireworks Display! Check out our line-up!</p>
 
@@ -38,7 +38,7 @@
 					</li>
 				@endforeach
 			</ul>
-		</div>
+		</div> --}}
 
   </main>
 @endsection

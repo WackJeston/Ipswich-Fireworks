@@ -14,6 +14,7 @@ use App\Http\Controllers\TestController;
 use App\Http\Controllers\HomeController;
 use App\Http\Controllers\FindUsController;
 use App\Http\Controllers\ItineraryController;
+use App\Http\Controllers\SupportersController;
 use App\Http\Controllers\ContactController;
 use App\Http\Controllers\FeedbackController;
 
@@ -22,6 +23,7 @@ use App\Http\Controllers\AdminTestController;
 use App\Http\Controllers\AdminDashboardController;
 use App\Http\Controllers\AdminContactController;
 use App\Http\Controllers\AdminItineraryController;
+use App\Http\Controllers\AdminSupportersController;
 use App\Http\Controllers\AdminHomePageController;
 use App\Http\Controllers\AdminUsersController;
 use App\Http\Controllers\AdminUserProfileController;
@@ -31,6 +33,7 @@ use App\Http\Controllers\AdminEnquiriesController;
 use App\Http\Controllers\AdminEnquiryProfileController;
 use App\Http\Controllers\AdminFeedbackController;
 use App\Http\Controllers\AdminFeedbackProfileController;
+
 
 
 // DataTable -----------------------------------------------------------------------------------
@@ -53,6 +56,10 @@ Route::controller(FindUsController::class)->group(function () {
 
 Route::controller(ItineraryController::class)->group(function () {
 	Route::get('/itinerary', 'show');
+});
+
+Route::controller(SupportersController::class)->group(function () {
+	Route::get('/supporters', 'show');
 });
 
 Route::controller(ContactController::class)->group(function () {
@@ -104,6 +111,12 @@ Route::group( ['middleware' => 'auth' ], function()
 		Route::post('/itineraryCreateStandard', 'createStandard');
 		Route::post('/itineraryCreateMusic', 'createMusic');
 		Route::get('/itineraryDelete/{id}', 'delete');
+	});
+
+	Route::controller(AdminSupportersController::class)->group(function () {
+		Route::get('/admin/supporters', 'show');
+		Route::post('/supportersCreate', 'create');
+		Route::get('/supportersDelete/{id}', 'delete');
 	});
 
   Route::controller(AdminUsersController::class)->group(function () {

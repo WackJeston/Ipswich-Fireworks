@@ -1,11 +1,11 @@
 @extends('layout')
 
-@section('title', 'Home Page')
+@section('title', 'Supporters')
 
 @section('content')
-  <main class="home-page">
+  <main class="supporters">
 
-    <h1>Home Page</h1>
+    <h2 class="dk">Supporters</h2>
 
     @if ($errors->any())
       <div id="alerterror" class="lt">
@@ -20,10 +20,8 @@
     @endif
 
 		@php
-			echo $landingZoneBannerForm['html'];
-			echo $landingZoneBannerTable['html'];
-			echo $primaryInfoForm['html'];
-			echo $aboutUsForm['html'];
+			echo $form['html'];
+			echo $table['html'];
 		@endphp
 
   </main>
