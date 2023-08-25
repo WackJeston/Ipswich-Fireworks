@@ -2,11 +2,11 @@
 	<header>
 
 		<nav id="header-start">
-			<a href="https://ipswichfireworks.ticketsrv.co.uk/" target="_blank" class="header-button title thick-title"><span>TICKETS</span></a>
+			<a async href="https://ipswichfireworks.ticketsrv.co.uk/" target="_blank" class="header-button title thick-title"><span>TICKETS</span></a>
 		</nav>
 
 		<a class="logo-link" href="/">
-			<img :src="this.asset + 'logo-white.png'" alt="logo" class="logo">
+			<img async :src="this.asset + 'logo-white.png'" alt="logo" class="logo">
 		</a>
 
 		<div id="header-end">

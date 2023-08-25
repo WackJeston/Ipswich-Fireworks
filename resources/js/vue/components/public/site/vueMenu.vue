@@ -1,7 +1,7 @@
 <template>
 	<nav class="site-menu lt">
 		<a id="menu-home-link" href="/">
-			<img :src="this.asset + 'logo-white.png'" alt="logo" class="logo">
+			<img defer :src="this.asset + 'logo-white.png'" alt="logo" class="logo">
 		</a>
 
 		<ul id="menu-items">

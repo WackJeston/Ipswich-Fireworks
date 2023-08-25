@@ -20,7 +20,7 @@
     </nav>
 
 		<a href="/">
-			<img :src="this.asset + 'logo-white.png'" alt="logo" class="logo">
+			<img defer :src="this.asset + 'logo-white.png'" alt="logo" class="logo">
 		</a>
 
   </footer>

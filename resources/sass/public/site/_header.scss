@@ -46,8 +46,12 @@ header .logo-link {
 }
 
 header img.logo {
-	height: 100%;
+	height: v.$header-height;
 	padding: 10px 5px;
+
+	@media (max-width: 640px) {
+		height: v.$header-height-mobile;
+	}
 }
 
 header #header-socials {

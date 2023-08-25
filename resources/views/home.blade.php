@@ -10,7 +10,7 @@
     @endif
 
 		@if (count($landingZoneBanners) > 0)
-			<div id="bannerhometop">
+			<div async id="bannerhometop">
 				<bannerhometop 
 					:banners="{{ json_encode($landingZoneBanners) }}"
 					asset="{{ env('AWS_ASSET_URL') }}"
