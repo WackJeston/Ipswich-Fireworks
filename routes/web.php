@@ -13,7 +13,7 @@ use App\Http\Controllers\TestController;
 // PUBLIC
 use App\Http\Controllers\HomeController;
 use App\Http\Controllers\FindUsController;
-use App\Http\Controllers\ItineraryController;
+use App\Http\Controllers\ProgrammeController;
 use App\Http\Controllers\SupportersController;
 use App\Http\Controllers\ContactController;
 use App\Http\Controllers\FeedbackController;
@@ -22,7 +22,7 @@ use App\Http\Controllers\FeedbackController;
 use App\Http\Controllers\AdminTestController;
 use App\Http\Controllers\AdminDashboardController;
 use App\Http\Controllers\AdminContactController;
-use App\Http\Controllers\AdminItineraryController;
+use App\Http\Controllers\AdminProgrammeController;
 use App\Http\Controllers\AdminSupportersController;
 use App\Http\Controllers\AdminHomePageController;
 use App\Http\Controllers\AdminUsersController;
@@ -54,8 +54,8 @@ Route::controller(FindUsController::class)->group(function () {
 	Route::get('/find-us', 'show');
 });
 
-Route::controller(ItineraryController::class)->group(function () {
-	Route::get('/itinerary', 'show');
+Route::controller(ProgrammeController::class)->group(function () {
+	Route::get('/programme', 'show');
 });
 
 Route::controller(SupportersController::class)->group(function () {
@@ -102,15 +102,14 @@ Route::group( ['middleware' => 'auth' ], function()
 		Route::post('/admin-home-pageAddLandingZoneBanner', 'addLandingZoneBanner');
 		Route::get('/admin-home-pageDeleteLandingZoneBanner/{id}', 'deleteLandingZoneBanner');
 		Route::post('/admin-home-pageUpdatePrimaryInfo', 'updatePrimaryInfo');
-		Route::post('/admin-home-pageUpdateTicketNotice', 'updateTicketNotice');
 		Route::post('/admin-home-pageUpdateAboutUs', 'updateAboutUs');
   });
 
-	Route::controller(AdminItineraryController::class)->group(function () {
-		Route::get('/admin/itinerary', 'show');
-		Route::post('/itineraryCreateStandard', 'createStandard');
-		Route::post('/itineraryCreateMusic', 'createMusic');
-		Route::get('/itineraryDelete/{id}', 'delete');
+	Route::controller(AdminProgrammeController::class)->group(function () {
+		Route::get('/admin/programme', 'show');
+		Route::post('/programmeCreateStandard', 'createStandard');
+		Route::post('/programmeCreateMusic', 'createMusic');
+		Route::get('/programmeDelete/{id}', 'delete');
 	});
 
 	Route::controller(AdminSupportersController::class)->group(function () {

@@ -5,11 +5,11 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
-class Itinerary extends Model
+class Programme extends Model
 {
   use HasFactory;
 
-	protected $table = 'itinerary';
+	protected $table = 'programme';
 
   protected $fillable = [
 		'type',

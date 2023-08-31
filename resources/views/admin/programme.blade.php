@@ -1,11 +1,11 @@
 @extends('layout')
 
-@section('title', 'Itinerary')
+@section('title', 'Programme')
 
 @section('content')
-  <main class="itinerary">
+  <main class="programme">
 
-    <h2 class="dk">Itinerary</h2>
+    <h2 class="dk">Programme</h2>
 
     @if ($errors->any())
       <div id="alerterror" class="lt">

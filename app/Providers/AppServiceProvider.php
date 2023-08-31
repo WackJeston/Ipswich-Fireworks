@@ -86,9 +86,9 @@ class AppServiceProvider extends ServiceProvider
                 "link"=>"/admin/contact",
                 "icon"=>"fa-solid fa-address-card",
               ],
-              $itinerary = [
-                "title"=>"itinerary",
-                "link"=>"/admin/itinerary",
+              $programme = [
+                "title"=>"programme",
+                "link"=>"/admin/programme",
                 "icon"=>"fa-solid fa-clipboard-list",
               ],
               $supporters = [
@@ -112,9 +112,9 @@ class AppServiceProvider extends ServiceProvider
             "link"=>"/find-us",
             "icon"=>"fa-solid fa-map-location-dot",
           ],
-					$itinerary = [
-            "title"=>"itinerary",
-            "link"=>"/itinerary",
+					$programme = [
+            "title"=>"programme",
+            "link"=>"/programme",
             "icon"=>"fa-regular fa-rectangle-list",
           ],
           $contact = [

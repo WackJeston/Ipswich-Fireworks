@@ -33,7 +33,7 @@
 		@endif
 
 		<div class="large-message-box gray-box limited">
-			<h2>ONLINE TICKETS ONLY<br>TICKETS NOT AVAILABLE ANYWHERE ELSE<br>NO CASH TAKEN AT GATES</h2>
+			<h2>ONLINE TICKETS ONLY<br>TICKETS NOT AVAILABLE ANYWHERE ELSE<br>NO PAYMENT TAKEN AT GATES</h2>
 		</div>
 
 		<div class="clear-box limited dk">

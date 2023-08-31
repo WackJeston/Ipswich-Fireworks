@@ -13,7 +13,6 @@
 			<ul>
 				<li><strong>Soane Street</strong> - Very near to Ipswich town centre.</li>
 				<li><strong>Fonnereau Road</strong> - The closest gate to Ipswich town centre and Ipswich bus station.</li>
-				<li><strong>Bolton Lane</strong> - Not open for 2023 event.</li>
 				<li><strong>Park Road</strong> - Walking distance from Henley Road/Valley Road traffic lights.</li>
 				<li><strong>Westerfield Road</strong> - Easy access from Valley Road roundabout.</li>
 			</ul>
@@ -50,5 +49,8 @@
 			/>
     </div>
 
+		<div class="page-margin content">
+			<h4>Please note there is no public car parking at this event. Please use public transport or town centre car parks. Limited disabled vehicle parking is available on site and can be booked when purchasing your entrance ticket online only</h4>
+		</div>
   </main>
 @endsection

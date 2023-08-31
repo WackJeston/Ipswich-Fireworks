@@ -13,7 +13,7 @@ return new class extends Migration
      */
     public function up()
     {
-        Schema::create('itinerary', function (Blueprint $table) {
+        Schema::create('programme', function (Blueprint $table) {
             $table->id();
 						$table->string('type', 255)->default('standard');
 						$table->string('label', 255)->nullable();
