@@ -2,7 +2,7 @@
 
 @section('title', '11th Ipswich Scout Group')
 
-@section('scouts')
+@section('content')
   <main class="dk scouts">
 
 		<div class="title-section">

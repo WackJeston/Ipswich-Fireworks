@@ -7,38 +7,20 @@
 
 		<h1 class="page-margin">Our Supporters</h1>
 
-		{{-- <div class="clear-box bg-gray">
-			<h2>What's On?</h2>
-			<p>So much more than just East Anglia's Premier Musical Fireworks Display! Check out our line-up!</p>
+		<div class="clear-box bg-gray">
+			<h3>Thank you to all of our supporters who have helped us to make this event possible.</h3>
 
 			<ul>
-				@foreach ($standard as $item)
+				@foreach ($records as $record)
 					<li>
-						@if ($item->label)
-							<strong>{{ $item->label }}:</strong>
-						@endif
-						
-						{{ $item->value }}
+						<a :href="$record->link">
+							{{ $record->name }}
+						</a>
 					</li>
 				@endforeach
 			</ul>
+			
 		</div>
-
-		<div class="clear-box">
-			<h3>This year's musical line-up:</h3>
-
-			<ul>
-				@foreach ($music as $item)
-					<li>
-						@if ($item->label)
-							<strong>{{ $item->label }}</strong>
-						@endif
-		
-						{{ $item->value }}
-					</li>
-				@endforeach
-			</ul>
-		</div> --}}
 
   </main>
 @endsection

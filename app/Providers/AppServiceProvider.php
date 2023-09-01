@@ -118,7 +118,7 @@ class AppServiceProvider extends ServiceProvider
             "icon"=>"fa-regular fa-rectangle-list",
           ],
 					$scouts = [
-            "title"=>"scouts",
+            "title"=>"11th Ipswich Scout Group",
             "link"=>"/scouts",
             "icon"=>"fa-solid fa-people-group",
           ],

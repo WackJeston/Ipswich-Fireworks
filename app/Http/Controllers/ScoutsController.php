@@ -17,7 +17,7 @@ class ScoutsController extends Controller
 		$aboutUs[1] = DB::select('SELECT * FROM content WHERE active = 1 AND page = "scouts" AND position = "aboutUs_2"')[0];
 		$aboutUs[2] = DB::select('SELECT * FROM content WHERE active = 1 AND page = "scouts" AND position = "aboutUs_3"')[0];
 
-    return view('scouts', compact(
+    return view('public/scouts', compact(
       'sessionUser',
 			'aboutUs',
     ));
