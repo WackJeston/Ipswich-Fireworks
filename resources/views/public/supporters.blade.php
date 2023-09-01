@@ -5,15 +5,16 @@
 @section('content')
   <main class="dk supporters">
 
-		<h1 class="page-margin">Our Supporters</h1>
+		<h1>Our Supporters</h1>
 
-		<div class="clear-box bg-gray">
-			<h3>Thank you to all of our supporters who have helped us to make this event possible.</h3>
+		<div class="clear-box limited dk">
+			<h2>Thank you to all of our supporters who have helped us to make this event possible</h2>
 
 			<ul>
 				@foreach ($records as $record)
 					<li>
-						<a :href="$record->link">
+						<a href="{{ $record->link }}" target="_blank">
+							<img src="{{ $record->fileName }}" alt="{{ $record->name }}" />
 							{{ $record->name }}
 						</a>
 					</li>

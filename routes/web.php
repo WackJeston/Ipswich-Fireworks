@@ -24,6 +24,7 @@ use App\Http\Controllers\AdminTestController;
 use App\Http\Controllers\AdminDashboardController;
 use App\Http\Controllers\AdminContactController;
 use App\Http\Controllers\AdminProgrammeController;
+use App\Http\Controllers\AdminScoutsController;
 use App\Http\Controllers\AdminSupportersController;
 use App\Http\Controllers\AdminHomePageController;
 use App\Http\Controllers\AdminUsersController;
@@ -107,7 +108,6 @@ Route::group( ['middleware' => 'auth' ], function()
 		Route::post('/admin-home-pageAddLandingZoneBanner', 'addLandingZoneBanner');
 		Route::get('/admin-home-pageDeleteLandingZoneBanner/{id}', 'deleteLandingZoneBanner');
 		Route::post('/admin-home-pageUpdatePrimaryInfo', 'updatePrimaryInfo');
-		Route::post('/admin-home-pageUpdateAboutUs', 'updateAboutUs');
   });
 
 	Route::controller(AdminProgrammeController::class)->group(function () {
@@ -116,6 +116,11 @@ Route::group( ['middleware' => 'auth' ], function()
 		Route::post('/programmeCreateMusic', 'createMusic');
 		Route::get('/programmeDelete/{id}', 'delete');
 	});
+
+  Route::controller(AdminScoutsController::class)->group(function () {
+    Route::get('/admin/scouts', 'show');
+		Route::post('/admin-scoutsUpdateAboutUs', 'updateAboutUs');
+  });
 
 	Route::controller(AdminSupportersController::class)->group(function () {
 		Route::get('/admin/supporters', 'show');

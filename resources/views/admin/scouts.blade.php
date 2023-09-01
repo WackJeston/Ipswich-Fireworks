@@ -1,11 +1,11 @@
 @extends('layout')
 
-@section('title', 'Home Page')
+@section('title', '11th Ipswich Scout Group')
 
 @section('content')
-  <main class="home-page">
+  <main class="scouts">
 
-    <h1>Home Page</h1>
+    <h1>11th Ipswich Scout Group</h1>
 
     @if ($errors->any())
       <div id="alerterror" class="lt">
@@ -20,9 +20,7 @@
     @endif
 
 		@php
-			echo $landingZoneBannerForm['html'];
-			echo $landingZoneBannerTable['html'];
-			echo $primaryInfoForm['html'];
+			echo $aboutUsForm['html'];
 		@endphp
 
   </main>

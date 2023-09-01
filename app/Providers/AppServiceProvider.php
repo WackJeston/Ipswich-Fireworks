@@ -91,6 +91,11 @@ class AppServiceProvider extends ServiceProvider
                 "link"=>"/admin/programme",
                 "icon"=>"fa-solid fa-clipboard-list",
               ],
+              $scouts = [
+                "title"=>"Scout Group",
+                "link"=>"/admin/scouts",
+                "icon"=>"fa-solid fa-people-group",
+              ],
               $supporters = [
                 "title"=>"supporters",
                 "link"=>"/admin/supporters",
