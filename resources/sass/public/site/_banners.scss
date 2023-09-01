@@ -82,6 +82,11 @@
   background-color: v.$white;
   margin: 0 10px;
   opacity: 0.5;
+
+	@media (max-width: 640px) {
+		transform: scale(0.5);
+		margin: 0 5px;
+	}
 }
 
 .banner .carousel__pagination-button--active,

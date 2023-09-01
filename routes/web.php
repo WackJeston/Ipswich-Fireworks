@@ -14,6 +14,7 @@ use App\Http\Controllers\TestController;
 use App\Http\Controllers\HomeController;
 use App\Http\Controllers\FindUsController;
 use App\Http\Controllers\ProgrammeController;
+use App\Http\Controllers\ScoutsController;
 use App\Http\Controllers\SupportersController;
 use App\Http\Controllers\ContactController;
 use App\Http\Controllers\FeedbackController;
@@ -56,6 +57,10 @@ Route::controller(FindUsController::class)->group(function () {
 
 Route::controller(ProgrammeController::class)->group(function () {
 	Route::get('/programme', 'show');
+});
+
+Route::controller(ScoutsController::class)->group(function () {
+	Route::get('/scouts', 'show');
 });
 
 Route::controller(SupportersController::class)->group(function () {
