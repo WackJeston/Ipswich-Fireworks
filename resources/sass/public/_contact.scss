@@ -6,19 +6,6 @@
 	margin: 0;
 }
 
-.contact .title-section {
-	text-align: center;
-	width: 100%;
-	max-width: 1000px;
-	padding: 40px 40px 0 40px;
-	margin-left: auto;
-	margin-right: auto;
-
-	@media (min-width: 1000px) {
-		width: 75%;
-	}
-}
-
 .contact .content {
 	display: flex;
 	flex-direction: row;

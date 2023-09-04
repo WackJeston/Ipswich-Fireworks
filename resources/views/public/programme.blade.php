@@ -25,7 +25,7 @@
 		</div>
 
 		<div class="clear-box">
-			<h3>This year's musical line-up:</h3>
+			<h2>This year's musical line-up:</h2>
 
 			<ul>
 				@foreach ($music as $item)
