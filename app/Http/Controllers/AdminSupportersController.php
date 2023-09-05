@@ -43,7 +43,7 @@ class AdminSupportersController extends Controller
     $request->validate([
 			'name' => 'required|max:255',
 			'link' => 'max:255',
-			'fileName' => 'required|image|mimes:jpg,jpeg,png,svg',
+			'fileName' => 'required|image|mimes:jpg,jpeg,png,svg,webp',
     ]);
 
 		$fileNames = storeImages($request, 'homePageLZ', 'carousel');

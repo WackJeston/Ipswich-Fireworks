@@ -8,19 +8,31 @@
 .supporters .supporters-main {
 	display: flex;
 	flex-direction: row;
+	justify-content: center;
 	flex-wrap: wrap;
 	width: 100%;
+
+	@media (min-width: 1100px) {
+		padding-left: 12.5%;
+		padding-right: 12.5%;
+	}
 }
 
-.supporters .supporters-main a {
+.supporters .supporters-main a,
+.supporters .supporters-main div.supporter-non-link {
 	max-width: 240px;
+	margin-bottom: 30px;
 }
 
-.supporters .supporters-main a:not(:first-child) {
-	margin-left: 1rem;
+.supporters .supporters-main a,
+.supporters .supporters-main div.supporter-non-link {
+	@media (min-width: 500px) {
+		margin-right: 30px;
+	}
 }
 
-.supporters .supporters-main a img {
+.supporters .supporters-main a img,
+.supporters .supporters-main div.supporter-non-link img {
 	display: flex;
 	max-width: 100%;
 	max-height: 100%;

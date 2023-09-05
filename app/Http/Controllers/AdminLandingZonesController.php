@@ -50,7 +50,7 @@ class AdminLandingZonesController extends Controller
     $this->validate($request, [
       'title' => 'max:100',
       'subtitle' => 'max:100',
-      'image' => 'required|mimes:jpg,jpeg,png,svg',
+      'image' => 'required|mimes:jpg,jpeg,png,svg,webp',
     ]);
 
     $mimeType = str_replace('image/', '', $request->file('image')->getClientMimeType());

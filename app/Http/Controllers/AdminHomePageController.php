@@ -56,7 +56,7 @@ class AdminHomePageController extends Controller
 	public function addLandingZoneBanner(Request $request) {
 		$request->validate([
 			'name' => 'max:100',
-			'image' => 'required|image|mimes:jpg,jpeg,png,svg,webp',
+			'image' => 'required|image|mimes:jpg,jpeg,png,svg,webp,webp',
 		]);
 
 		$fileNames = storeImages($request, 'homePageLZ', 'carousel');
