@@ -10,6 +10,7 @@ class Supporters extends Model
   use HasFactory;
 
   protected $fillable = [
+		'type',
 		'name',
 		'link',
 		'fileName',

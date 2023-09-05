@@ -15,6 +15,7 @@ return new class extends Migration
     {
         Schema::create('supporters', function (Blueprint $table) {
             $table->id();
+						$table->string('type', 255)->default('supporter');
 						$table->string('name', 255);
 						$table->string('link', 255)->nullable();
 						$table->string('fileName', 255);
