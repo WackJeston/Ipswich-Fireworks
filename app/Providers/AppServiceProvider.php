@@ -101,6 +101,11 @@ class AppServiceProvider extends ServiceProvider
                 "link"=>"/admin/supporters",
                 "icon"=>"fa-solid fa-heart-pulse",
               ],
+              $sponsors = [
+                "title"=>"sponsors",
+                "link"=>"/admin/sponsors",
+                "icon"=>"fa-solid fa-handshake-angle",
+              ],
             ],
           ],
         ];

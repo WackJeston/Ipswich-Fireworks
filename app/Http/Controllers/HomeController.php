@@ -21,10 +21,19 @@ class HomeController extends Controller
 
 		$primaryInfo = DB::select('SELECT * FROM content WHERE active = 1 AND page = "home" AND position = "primaryInfo"')[0];
 
+    $bottomBanners = DB::select('SELECT
+			b.*
+			FROM banners AS b
+			WHERE b.page = "home"
+			AND b.position = "bottom"
+			AND b.active = 1
+		');
+
     return view('home', compact(
       'sessionUser',
       'landingZoneBanners',
 			'primaryInfo',
+      'bottomBanners',
     ));
   }
 }

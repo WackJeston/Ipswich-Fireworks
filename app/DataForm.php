@@ -199,7 +199,7 @@ class DataForm
 						$html .= sprintf('
 						<label for="%1$s">%2$s%6$s</label>
 						<label class="file-input-label" for="%1$s">
-							<input class="file-input" type="file" id="%1$s" name="%1$s" value="%3$s" min="1" accept="image/jpg/png/svg" placeholder="%4$s" %5$s>
+							<input class="file-input" type="file" id="%1$s" name="%1$s" value="%3$s" min="1" accept="image/jpg/png/svg/webp" placeholder="%4$s" %5$s>
 							<div>No file selected</div>
 						</label>',
 							$input['name'],
@@ -225,8 +225,6 @@ class DataForm
 							$input['required'] ? 'required' : '',
 							$input['required'] ? '<span> *</span>' : ''
 						);
-
-							// dd($input['options']);
 
 							foreach ($input['options'] as $i2 => $option) {
 								if (is_numeric($i2)) {

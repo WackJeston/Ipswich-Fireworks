@@ -19,11 +19,11 @@ class AdminHomePageController extends Controller
 
 		$landingZoneBannerForm = new DataForm(request(), '/admin-home-pageAddLandingZoneBanner', 'Add Banner');
 		$landingZoneBannerForm->setTitle('Landing Zone Banner');
-		$landingZoneBannerForm->addInput('file', 'image', 'Image', null, null, null, true);
+		$landingZoneBannerForm->addInput('file', 'image-1', 'Image', null, null, null, true);
 		$landingZoneBannerForm->addInput('text', 'name', 'Rename', null, 100, 1);
 		$landingZoneBannerForm = $landingZoneBannerForm->render();
 
-		$landingZoneBannerTable = new DataTable('banners');
+		$landingZoneBannerTable = new DataTable('banners_REF_1');
 		$landingZoneBannerTable->setQuery('SELECT * FROM banners WHERE page = "home" AND position = "landingZone"');
 		$landingZoneBannerTable->addColumn('id', '#');
 		$landingZoneBannerTable->addColumn('name', 'Name', 2);
@@ -45,18 +45,35 @@ class AdminHomePageController extends Controller
 		$primaryInfoForm->addInput('checkbox', 'active', 'Active', $primaryInfo->active);
 		$primaryInfoForm = $primaryInfoForm->render();
 
+		$bottomBannerForm = new DataForm(request(), '/admin-home-pageAddBottomBanner', 'Add Banner');
+		$bottomBannerForm->setTitle('Bottom Banner');
+		$bottomBannerForm->addInput('file', 'image-2', 'Image', null, null, null, true);
+		$bottomBannerForm->addInput('text', 'name', 'Rename', null, 100, 1);
+		$bottomBannerForm = $bottomBannerForm->render();
+
+		$bottomBannerTable = new DataTable('banners_REF_2');
+		$bottomBannerTable->setQuery('SELECT * FROM banners WHERE page = "home" AND position = "bottom"');
+		$bottomBannerTable->addColumn('id', '#');
+		$bottomBannerTable->addColumn('name', 'Name', 2);
+		$bottomBannerTable->addColumn('active', 'Active', 1, false, 'toggle');
+		$bottomBannerTable->addJsButton('showImage', ['record:fileName'], 'fa-solid fa-eye', 'View Image');
+		$bottomBannerTable->addJsButton('showDeleteWarning', ['string:Banner', 'record:id', 'url:/admin-home-pageDeleteLandingZoneBanner/?'], 'fa-solid fa-trash-can', 'Delete Banner');
+		$bottomBannerTable = $bottomBannerTable->render();
+
     return view('admin/home-page', compact(
       'sessionUser',
 			'landingZoneBannerForm',
 			'landingZoneBannerTable',
 			'primaryInfoForm',
+			'bottomBannerForm',
+			'bottomBannerTable',
     ));
   }
 
 	public function addLandingZoneBanner(Request $request) {
 		$request->validate([
 			'name' => 'max:100',
-			'image' => 'required|image|mimes:jpg,jpeg,png,svg,webp,webp',
+			'image-1' => 'required|image|mimes:jpg,jpeg,png,svg,webp,webp',
 		]);
 
 		$fileNames = storeImages($request, 'homePageLZ', 'carousel');
@@ -105,5 +122,38 @@ class AdminHomePageController extends Controller
     ]);
 
     return redirect("/admin/home-page")->with('message', 'Primary info updated successfully.');
+  }
+
+	public function addBottomBanner(Request $request) {
+		$request->validate([
+			'name' => 'max:100',
+			'image-2' => 'required|image|mimes:jpg,jpeg,png,svg,webp,webp',
+		]);
+
+		$fileNames = storeImages($request, 'homePageLZ', 'carousel');
+
+		foreach ($fileNames as $fileName) {
+			Banners::create([
+				'page' => 'home',
+				'position' => 'bottom',
+				'name' => !empty($request->name) ? $request->name : $fileName['old'],
+				'fileName' => $fileName['new'],
+				'primary' => 0,
+			]);
+		}
+
+    return redirect("/admin/home-page")->with('message', 'Banner uploaded successfully.');
+	}
+
+
+  public function deleteBottomBanner($id)
+  {
+    $banner = Banners::where('id', $id)->first();
+    
+    deleteS3($banner->fileName);
+
+    Banners::find($banner->id)->delete();
+
+    return redirect("/admin/home-page")->with('message', "Banner #$id has been deleted.");
   }
 }

@@ -26,6 +26,7 @@ use App\Http\Controllers\AdminContactController;
 use App\Http\Controllers\AdminProgrammeController;
 use App\Http\Controllers\AdminScoutsController;
 use App\Http\Controllers\AdminSupportersController;
+use App\Http\Controllers\AdminSponsorsController;
 use App\Http\Controllers\AdminHomePageController;
 use App\Http\Controllers\AdminUsersController;
 use App\Http\Controllers\AdminUserProfileController;
@@ -108,6 +109,8 @@ Route::group( ['middleware' => 'auth' ], function()
 		Route::post('/admin-home-pageAddLandingZoneBanner', 'addLandingZoneBanner');
 		Route::get('/admin-home-pageDeleteLandingZoneBanner/{id}', 'deleteLandingZoneBanner');
 		Route::post('/admin-home-pageUpdatePrimaryInfo', 'updatePrimaryInfo');
+		Route::post('/admin-home-pageAddBottomBanner', 'addBottomBanner');
+		Route::get('/admin-home-pageDeleteBottomBanner/{id}', 'deleteBottomBanner');
   });
 
 	Route::controller(AdminProgrammeController::class)->group(function () {
@@ -126,6 +129,12 @@ Route::group( ['middleware' => 'auth' ], function()
 		Route::get('/admin/supporters', 'show');
 		Route::post('/supportersCreate', 'create');
 		Route::get('/supportersDelete/{id}', 'delete');
+	});
+
+	Route::controller(AdminSponsorsController::class)->group(function () {
+		Route::get('/admin/sponsors', 'show');
+		Route::post('/sponsorsCreate', 'create');
+		Route::get('/sponsorsDelete/{id}', 'delete');
 	});
 
   Route::controller(AdminUsersController::class)->group(function () {
