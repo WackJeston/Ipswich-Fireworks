@@ -1,13 +1,5 @@
 @use '../site/v';
 
-#banner-homepage-top .banner-slide {
-  height: calc(100dvh - v.$header-height);
-
-	@media (max-width: 640px) {
-		height: calc(100dvh - v.$header-height-mobile);
-	}
-}
-
 .banner {
 	position: relative;
 }

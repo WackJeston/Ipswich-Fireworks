@@ -124,6 +124,7 @@
           :publiclinks="{{ json_encode($publicLinks) }}"
 					:socials="{{ json_encode($socials) }}"
           :sessionuser="{{ $sessionUser }}"
+					tickets="{{ $ticketsActive }}"
         />
       </div>
 
@@ -136,6 +137,7 @@
             :publiclinks="{{ json_encode($publicLinks) }}"
 						:socials="{{ json_encode($socials) }}"
             :sessionuser="{{ $sessionUser }}"
+						tickets="{{ $ticketsActive }}"
           />
         </div>
 
@@ -155,6 +157,7 @@
 						asset="{{ env('AWS_ASSET_URL') }}"
             :publiclinks="{{ json_encode($publicLinks) }}"
 						:socials="{{ json_encode($socials) }}"
+						tickets="{{ $ticketsActive }}"
           />
         </div>
       </div>

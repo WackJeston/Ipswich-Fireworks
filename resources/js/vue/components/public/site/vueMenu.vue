@@ -5,10 +5,17 @@
 		</a>
 
 		<ul id="menu-items">
-			<div class="nav-link">
+			<div v-if="this.tickets" class="nav-link">
 				<a id="menu-ticket-button" href="https://ipswichfireworks.ticketsrv.co.uk/">
 					<i class="fa-solid fa-ticket nav-link-icon"></i>
 					<li class="title thick-title">TICKETS</li>
+				</a>
+			</div>
+
+			<div v-else class="nav-link">
+				<a id="menu-ticket-button" href="/">
+					<i class="fa-solid fa-house-chimney nav-link-icon"></i>
+					<li class="title thick-title">Home</li>
 				</a>
 			</div>
 
@@ -51,6 +58,7 @@ export default {
 		'publiclinks',
 		'socials',
 		'sessionuser',
+		'tickets',
 	],
 
 	methods: {

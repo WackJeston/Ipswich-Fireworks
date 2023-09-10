@@ -9,6 +9,7 @@ use App\DataTable;
 use App\DataForm;
 use App\Models\Banners;
 use App\Models\Content;
+use App\Models\Settings;
 
 
 class AdminHomePageController extends Controller

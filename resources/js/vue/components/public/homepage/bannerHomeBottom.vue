@@ -1,5 +1,5 @@
 <template>
-  <section class="banner" id="banner-homepage-top">
+  <section class="banner" id="banner-homepage-bottom">
 
 		<div v-if="this.banners.length == 1" v-for="banner in this.banners" class="banner-slide single-slide">
 			<img rel="preload" :src="this.asset + banner.fileName" :alt="banner.fileName">

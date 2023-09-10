@@ -14,6 +14,7 @@
 				<bannerhometop 
 					:banners="{{ json_encode($landingZoneBanners) }}"
 					asset="{{ env('AWS_ASSET_URL') }}"
+					tickets="{{ $ticketsActive }}"
 				/>
 			</div>
 		@endif
@@ -32,6 +33,10 @@
 			</div>
 		@endif
 
+		<div class="large-message-box gray-box limited">
+			<h2>ONLINE TICKETS ONLY<br>TICKETS NOT AVAILABLE ANYWHERE ELSE<br>NO PAYMENT TAKEN AT GATES</h2>
+		</div>
+
 		@if (count($bottomBanners) > 0)
 			<div async id="bannerhomebottom">
 				<bannerhomebottom 
@@ -40,9 +45,5 @@
 				/>
 			</div>
 		@endif
-
-		<div class="large-message-box gray-box limited">
-			<h2>ONLINE TICKETS ONLY<br>TICKETS NOT AVAILABLE ANYWHERE ELSE<br>NO PAYMENT TAKEN AT GATES</h2>
-		</div>
   </main>
 @endsection

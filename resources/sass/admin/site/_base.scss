@@ -242,24 +242,30 @@ button.button-active:hover {
 }
 
 button.pb-success,
-button.pb-danger {
+a.pb-success,
+button.pb-danger,
+a.pb-success {
 	margin: 0 5px 10px 0;
 	color: v.$white;
 }
 
-button.pb-success {
+button.pb-success,
+a.pb-success {
 	background-color: v.$pale-green;
 }
 
-button.pb-success:hover {
+button.pb-success:hover,
+a.pb-success:hover {
 	background-color: v.$pale-green-darker;
 }
 
-button.pb-danger {
+button.pb-danger,
+a.pb-danger {
 	background-color: v.$pale-red;
 }
 
-button.pb-danger:hover {
+button.pb-danger:hover,
+a.pb-danger:hover {
 	background-color: v.$pale-red-darker;
 }
 

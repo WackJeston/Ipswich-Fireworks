@@ -1,5 +1,13 @@
 @use 'site/v';
 
+.home-page #banner-homepage-top .banner-slide {
+  height: calc(100dvh - v.$header-height);
+
+	@media (max-width: 640px) {
+		height: calc(100dvh - v.$header-height-mobile);
+	}
+}
+
 .home-page #banner-homepage-top #ticket-button-container {
 	position: absolute;
 	bottom: 40%;
@@ -26,7 +34,31 @@
 	}
 }
 
+.home-page #banner-homepage-top span {
+	background-color: v.$brand-main;
+	color: v.$brand-alt-dark;
+	padding: 25px 30px 30px 30px;
+	z-index: 2;
+	border-radius: 0px;
+	opacity: 0.8;
+	font-size: 1.6rem;
+	text-align: center;
+	line-height: 20px;
+	
+	@media (min-width: 640px) {
+		font-size: 2.2rem;
+	}
+}
+
+.home-page #banner-homepage-top span h5 {
+	margin: 0;
+}
+
 .home-page #banner-homepage-top a:hover {
 	opacity: 1;
 	border-radius: 5px;
+}
+
+.home-page #banner-homepage-bottom .banner-slide {
+	height: 80vh;
 }

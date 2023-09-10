@@ -2,7 +2,7 @@
 	<header>
 
 		<nav id="header-start">
-			<a async href="https://ipswichfireworks.ticketsrv.co.uk/" target="_blank" class="header-button title thick-title"><span>TICKETS</span></a>
+			<a v-if="this.tickets" async href="https://ipswichfireworks.ticketsrv.co.uk/" target="_blank" class="header-button title thick-title"><span>TICKETS</span></a>
 		</nav>
 
 		<a class="logo-link" href="/">
@@ -34,6 +34,7 @@ export default {
 		'publiclinks',
 		'socials',
 		'sessionuser',
+		'tickets',
 	],
 
 	data() {
