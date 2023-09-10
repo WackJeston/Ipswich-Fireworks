@@ -1,9 +1,12 @@
 <template>
 	<div class="form-content-container">
 		<div class="form-width-control">
-			<h2>Become a sponsor</h2>
+			<div class="form-content">
+				<h2>Become a sponsor</h2>
+				<h3>If you would like to sponsor us, please fill out the form below and we will get back to you as soon as possible</h3>
+			</div>
 
-			<form action="/feedbackCreateEnquiry">
+			<form action="/sponsorsCreateEnquiry">
 				<input type="hidden" name="_token" :value="csrf">
 
 				<label for="name">Name<span> *</span></label>
@@ -15,8 +18,8 @@
 				<label for="phone">Phone</label>
 				<input type="tel" name="phone">
 
-				<label for="message">Message<span> *</span></label>
-				<textarea name="message" required></textarea>
+				<label for="message">Message</label>
+				<textarea name="message"></textarea>
 
 				<input type="submit" value="Submit" class="submit">
 			</form>

@@ -1,23 +1,37 @@
 @extends('layout')
 
 @if ($type == 'standard')
-	@section('title', 'Enquiry Profile')
+	@section('title', 'Enquiry')
 @elseif ($type == 'feedback')
-	@section('title', 'Feeback Profile')
+	@section('title', 'Feeback Enquiry')
+@elseif ($type == 'sponsor')
+	@section('title', 'New Sponsor Enquiry')
 @endif
 
 @section('content')
   <main class="enquiry-profile">
 
-		<div class="link-trail">
-      <i class="fa-solid fa-arrow-left"></i>
-      <a href="/admin/enquiries">Enquiries</a>
-    </div>
-
     @if ($type == 'standard')
-			<h2 class="dk">Enquiry Profile</h2>
+			<div class="link-trail">
+				<i class="fa-solid fa-arrow-left"></i>
+				<a href="/admin/enquiries">Enquiries</a>
+			</div>
+
+			<h2 class="dk">Enquiry</h2>
 		@elseif ($type == 'feedback')
-			<h2 class="dk">Feeback Profile</h2>
+			<div class="link-trail">
+				<i class="fa-solid fa-arrow-left"></i>
+				<a href="/admin/feedback">Feedback</a>
+			</div>
+
+			<h2 class="dk">Feeback Enquiry</h2>
+		@elseif ($type == 'sponsor')
+			<div class="link-trail">
+				<i class="fa-solid fa-arrow-left"></i>
+				<a href="/admin/new-sponsors">Sponsor Enquiries</a>
+			</div>
+
+			<h2 class="dk">New Sponsor Enquiry</h2>
 		@endif
 
     @if ($errors->any())
@@ -36,7 +50,9 @@
 			<li><strong>Name:</strong> {{ $enquiry->name }}</li>
 			<li><strong>Email:</strong> {{ $enquiry->email }}</li>
 			<li><strong>Phone:</strong> {{ $enquiry->phone }}</li>
-			<li><strong>Subject:</strong> {{ $enquiry->subject }}</li>
+			@if ($type != 'sponsor')
+				<li><strong>Subject:</strong> {{ $enquiry->subject }}</li>
+			@endif
 			<li><strong>Message:</strong></li>
 			<li class="text-box">{{ $enquiry->message }}</li>
 		</ul>

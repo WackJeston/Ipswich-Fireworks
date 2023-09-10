@@ -24,6 +24,18 @@
 			@endforeach
 		</div>
 
+		@if ($errors->any())
+      <div id="alerterror" class="lt page-margin">
+        <alerterror :errormessages="{{ str_replace(array('[', ']'), '', $errors) }}" errorcount="{{ count($errors) }}" />
+      </div>
+    @endif
+
+    @if (session()->has('message'))
+      <div id="publicmessage" class="lt floating">
+        <publicmessage successmessage="{{ session()->get('message') }}" />
+      </div>
+    @endif
+
     <div id="sponsorform">
       <sponsorform />
     </div>

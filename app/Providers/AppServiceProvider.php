@@ -49,6 +49,11 @@ class AppServiceProvider extends ServiceProvider
                 "link"=>"/admin/feedback",
                 "icon"=>"fa-solid fa-comment-medical",
               ],
+              $feedback = [
+                "title"=>"Sponsor Enquiries",
+                "link"=>"/admin/new-sponsors",
+                "icon"=>"fa-solid fa-person-circle-plus",
+              ],
             ],
           ],
           // $people = [

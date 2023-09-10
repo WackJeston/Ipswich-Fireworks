@@ -37,6 +37,8 @@ use App\Http\Controllers\AdminEnquiriesController;
 use App\Http\Controllers\AdminEnquiryProfileController;
 use App\Http\Controllers\AdminFeedbackController;
 use App\Http\Controllers\AdminFeedbackProfileController;
+use App\Http\Controllers\AdminNewSponsorsController;
+use App\Http\Controllers\AdminNewSponsorProfileController;
 
 
 
@@ -72,6 +74,7 @@ Route::controller(SupportersController::class)->group(function () {
 
 Route::controller(SponsorsController::class)->group(function () {
 	Route::get('/sponsors', 'show');
+	Route::get('/sponsorsCreateEnquiry', 'createEnquiry');
 });
 
 Route::controller(ContactController::class)->group(function () {
@@ -178,5 +181,13 @@ Route::group( ['middleware' => 'auth' ], function()
 
 	Route::controller(AdminFeedbackProfileController::class)->group(function () {
 		Route::get('/admin/feedback-profile/{id}', 'show');
+	});
+
+	Route::controller(AdminNewSponsorsController::class)->group(function () {
+		Route::get('/admin/new-sponsors', 'show');
+	});
+
+	Route::controller(AdminNewSponsorProfileController::class)->group(function () {
+		Route::get('/admin/new-sponsor-profile/{id}', 'show');
 	});
 });

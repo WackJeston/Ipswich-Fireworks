@@ -46,7 +46,7 @@
 .sponsors .form-width-control {
 	display: flex;
 	flex-direction: column;
-	padding: 20px 40px 50px 40px;
+	padding: 30px 40px 50px 40px;
 	width: 100%;
 
 	@media (min-width: 1100px) {
@@ -54,8 +54,22 @@
 		justify-content: space-between;
 		margin-left: auto;
 		margin-right: auto;
-		max-width: 800px;
+		max-width: 1000px;
 	}
+}
+
+.sponsors .form-content {
+	margin-left: auto;
+	margin-right: auto;
+	max-width: 600px;
+
+	@media (min-width: 1100px) {
+		margin-top: 16px;
+	}
+}
+
+.sponsors .form-content h2 {
+	margin-bottom: 0;
 }
 
 .sponsors form {
@@ -66,6 +80,10 @@
 	width: 100%;
 	max-width: 600px;
 	margin: 20px auto 0 auto;
+
+	@media (min-width: 1100px) {
+		margin: 20px 40px 0 0;
+	}
 }
 
 .sponsors form input,
