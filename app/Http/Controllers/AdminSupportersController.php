@@ -25,7 +25,7 @@ class AdminSupportersController extends Controller
 		$table->setQuery('SELECT * FROM supporters WHERE type = "supporter"');
 		$table->addColumn('id', '#');
 		$table->addColumn('name', 'Name', 2);
-		$table->addColumn('link', 'Link', 2);
+		$table->addColumn('link', 'Link', 2, true);
 		$table->addColumn('active', 'Active', 1, false, 'toggle');
 		$table->addJsButton('showImage', ['record:fileName'], 'fa-solid fa-eye', 'View Image');
 		$table->addJsButton('showDeleteWarning', ['string:Supporter', 'record:id', 'url:/supportersDelete/?'], 'fa-solid fa-trash-can', 'Delete Supporter');

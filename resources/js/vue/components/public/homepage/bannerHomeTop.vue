@@ -3,7 +3,7 @@
 
 		<div id="ticket-button-container">
 			<a v-if="this.tickets" href="https://ipswichfireworks.ticketsrv.co.uk/" class="title thick-title">BUY TICKETS</a>
-			<span v-else class="title thick-title"><h5>TICKETS AVAILABLE</h5><br>First Of October</span>
+			<span v-else class="title thick-title"><h5>TICKETS AVAILABLE FROM</h5><br>FIRST OF OCTOBER</span>
 		</div>
 
 		<div v-if="this.banners.length == 1" v-for="banner in this.banners" class="banner-slide single-slide">

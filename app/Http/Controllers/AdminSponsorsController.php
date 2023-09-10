@@ -21,11 +21,11 @@ class AdminSponsorsController extends Controller
 		$form->addInput('file', 'fileName', 'Logo', null, null, null, true);
 		$form = $form->render();
 
-		$table = new DataTable('sponsors');
+		$table = new DataTable('supporters');
 		$table->setQuery('SELECT * FROM supporters WHERE type = "sponsor"');
 		$table->addColumn('id', '#');
 		$table->addColumn('name', 'Name', 2);
-		$table->addColumn('link', 'Link', 2);
+		$table->addColumn('link', 'Link', 2, true);
 		$table->addColumn('active', 'Active', 1, false, 'toggle');
 		$table->addJsButton('showImage', ['record:fileName'], 'fa-solid fa-eye', 'View Image');
 		$table->addJsButton('showDeleteWarning', ['string:Sponsors', 'record:id', 'url:/sponsorsDelete/?'], 'fa-solid fa-trash-can', 'Delete Sponsors');

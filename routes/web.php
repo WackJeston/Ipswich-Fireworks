@@ -16,6 +16,7 @@ use App\Http\Controllers\FindUsController;
 use App\Http\Controllers\ProgrammeController;
 use App\Http\Controllers\ScoutsController;
 use App\Http\Controllers\SupportersController;
+use App\Http\Controllers\SponsorsController;
 use App\Http\Controllers\ContactController;
 use App\Http\Controllers\FeedbackController;
 
@@ -67,6 +68,10 @@ Route::controller(ScoutsController::class)->group(function () {
 
 Route::controller(SupportersController::class)->group(function () {
 	Route::get('/supporters', 'show');
+});
+
+Route::controller(SponsorsController::class)->group(function () {
+	Route::get('/sponsors', 'show');
 });
 
 Route::controller(ContactController::class)->group(function () {

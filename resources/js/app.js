@@ -24,6 +24,8 @@ import Contactmain from './vue/components/public/contactMain.vue'
 
 import Feedbackmain from './vue/components/public/feedbackMain.vue'
 
+import Sponsorform from './vue/components/public/sponsorForm.vue'
+
 import Googlemaps from './vue/components/public/googleMaps.vue'
 
 
@@ -82,6 +84,9 @@ contactMain.component('contactmain', Contactmain).mount('#contactmain')
 
 const feedbackMain = Vue.createApp({})
 feedbackMain.component('feedbackmain', Feedbackmain).mount('#feedbackmain')
+
+const sponsorForm = Vue.createApp({})
+sponsorForm.component('sponsorform', Sponsorform).mount('#sponsorform')
 
 const googleMaps = Vue.createApp({})
 const gmapKey = process.env.MIX_GOOGLE_MAPS_KEY
