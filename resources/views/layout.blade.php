@@ -26,9 +26,10 @@
 
     {{-- Favicon --}}
     @if(str_contains(url()->current(), '/admin'))
-      <link async rel="shortcut icon" type="image/png" sizes="16x16" href="{{ asset('/favicons/admin-favicon-16.png') }}">
-      <link async rel="shortcut icon" type="image/png" sizes="32x32" href="{{ asset('/favicons/admin-favicon-32.png') }}">
-      <link async rel="shortcut icon" type="image/png" sizes="96x96" href="{{ asset('/favicons/admin-favicon-96.png') }}">
+			<link async rel="apple-touch-icon" sizes="180x180" href="/favicons/admin-apple-touch-icon.png">
+			<link async rel="icon" type="image/png" sizes="32x32" href="/favicons/admin-favicon-32x32.png">
+			<link async rel="icon" type="image/png" sizes="16x16" href="/favicons/admin-favicon-16x16.png">
+			<link async rel="manifest" href="/favicons/admin-site.webmanifest">
     @else
 			<link async rel="apple-touch-icon" sizes="180x180" href="/favicons/apple-touch-icon.png">
 			<link async rel="icon" type="image/png" sizes="32x32" href="/favicons/favicon-32x32.png">

@@ -3,7 +3,7 @@
 
 		<div id="ticket-button-container">
 			<a v-if="this.tickets" href="https://ipswichfireworks.ticketsrv.co.uk/" class="title thick-title">BUY TICKETS</a>
-			<span v-else class="title thick-title"><h5>TICKETS AVAILABLE FROM</h5><br>FIRST OF OCTOBER</span>
+			<span v-else class="title thick-title"><h5>TICKETS AVAILABLE FROM</h5><br>2ND OF OCTOBER</span>
 		</div>
 
 		<div v-if="this.banners.length == 1" v-for="banner in this.banners" class="banner-slide single-slide">
@@ -12,7 +12,7 @@
 		</div>
 
     <carousel v-else :items-to-show="1" :wrapAround="true" :autoplay="7000">
-      <slide v-for="(banner, i) in banners" :key="slide" class="banner-slide">
+      <slide v-for="(banner, i) in banners" :key="slide" class="banner-slide" :style="'justify-content: ' + banner.framing">
 				<img v-if="i == 1" rel="preload" :src="this.asset + banner.fileName" :alt="banner.fileName">
 				<img v-else defer :src="this.asset + banner.fileName" :alt="banner.fileName">
         <div class="banner-overlay"></div>

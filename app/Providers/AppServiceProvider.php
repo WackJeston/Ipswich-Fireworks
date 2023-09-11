@@ -204,8 +204,8 @@ class AppServiceProvider extends ServiceProvider
 				$date = date('Y-m-d');
 				$year = date('Y');
 
-				$ticketDateBegin = date('Y-m-d', strtotime($year . "/10/01"));
-				$ticketDateEnd = date('Y-m-d', strtotime($year . "/11/03"));
+				$ticketDateBegin = date('Y-m-d', strtotime($year . "/10/02"));
+				$ticketDateEnd = date('Y-m-d', strtotime($year . "/11/04"));
 						
 				if (($date >= $ticketDateBegin) && ($date <= $ticketDateEnd)){
 					$ticketsActive = true;

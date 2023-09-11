@@ -43,12 +43,21 @@ class DataForm
 		foreach ($this->form['inputs'] as $i => $input) {
 			if ($input['name'] == $ref && $input['type'] == 'select') {
 				foreach ($options as $i2 => $option) {
-					$this->form['inputs'][$i]['optionspre'][] = [
-						'value' => $option->value,
-						'label' => $option->label,
-						'parent' => $option->parent ?? null,
-						'active' => $option->active ?? 0,
-					];
+					if (is_array($option)) {
+						$this->form['inputs'][$i]['optionspre'][] = [
+							'value' => $option['value'],
+							'label' => $option['label'],
+							'parent' => $option['parent'] ?? null,
+							'active' => $option['active'] ?? 0,
+						];
+					} else {
+						$this->form['inputs'][$i]['optionspre'][] = [
+							'value' => $option->value,
+							'label' => $option->label,
+							'parent' => $option->parent ?? null,
+							'active' => $option->active ?? 0,
+						];
+					}
 				}
 			}
 		}

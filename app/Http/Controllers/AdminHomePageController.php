@@ -18,10 +18,18 @@ class AdminHomePageController extends Controller
   {
     $sessionUser = auth()->user();
 
+		$framingOptions = [];
+
+		$framingOptions[] = ['value' => 'top', 'label' => 'Top'];
+		$framingOptions[] = ['value' => 'bottom', 'label' => 'Bottom'];
+		
+
 		$landingZoneBannerForm = new DataForm(request(), '/admin-home-pageAddLandingZoneBanner', 'Add Banner');
 		$landingZoneBannerForm->setTitle('Landing Zone Banner');
 		$landingZoneBannerForm->addInput('file', 'image-1', 'Image', null, null, null, true);
 		$landingZoneBannerForm->addInput('text', 'name', 'Rename', null, 100, 1);
+		$landingZoneBannerForm->addInput('select', 'framing', 'Framing');
+		$landingZoneBannerForm->populateOptions('framing', $framingOptions);
 		$landingZoneBannerForm = $landingZoneBannerForm->render();
 
 		$landingZoneBannerTable = new DataTable('banners_REF_1');
@@ -29,6 +37,7 @@ class AdminHomePageController extends Controller
 		$landingZoneBannerTable->addColumn('id', '#');
 		$landingZoneBannerTable->addColumn('name', 'Name', 2);
 		$landingZoneBannerTable->addColumn('active', 'Active', 1, false, 'toggle');
+		$landingZoneBannerTable->addColumn('framing', 'Framing', 1, true);
 		$landingZoneBannerTable->addJsButton('showImage', ['record:fileName'], 'fa-solid fa-eye', 'View Image');
 		$landingZoneBannerTable->addJsButton('showDeleteWarning', ['string:Banner', 'record:id', 'url:/admin-home-pageDeleteLandingZoneBanner/?'], 'fa-solid fa-trash-can', 'Delete Banner');
 		$landingZoneBannerTable = $landingZoneBannerTable->render();
@@ -83,6 +92,7 @@ class AdminHomePageController extends Controller
 			Banners::create([
 				'page' => 'home',
 				'position' => 'landingZone',
+				'framing' => $request->framing,
 				'name' => !empty($request->name) ? $request->name : $fileName['old'],
 				'fileName' => $fileName['new'],
 				'primary' => 0,
