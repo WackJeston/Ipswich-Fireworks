@@ -20,7 +20,7 @@ return new class extends Migration
 						$table->string('email', 255);
 						$table->string('phone', 20)->nullable();
 						$table->string('subject', 255)->nullable();
-						$table->string('message', 1000);
+						$table->string('message', 1000)->nullable();
             $table->timestamps();
         });
     }

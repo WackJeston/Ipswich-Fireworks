@@ -1,5 +1,6 @@
 <?php
 use Illuminate\Support\Facades\Route;
+use Illuminate\Support\Facades\Redirect;
 use Illuminate\Foundation\Auth\EmailVerificationRequest;
 
 use App\Http\Controllers\AuthController;
@@ -48,6 +49,10 @@ Route::get('/dataTable-setPrimary/{table}/{column}/{primaryColumn}/{primaryValue
 
 
 // SYSTEM -----------------------------------------------------------------------------------
+Route::get("sitemap-xml" , function () {
+	return Illuminate\Support\Facades\Redirect::to('https://ipswich-fireworks.s3.eu-west-2.amazonaws.com/public-assets/sitemap.xml');
+});
+
 Route::controller(TestController::class)->group(function () {
   Route::get('/test', 'show');
 });
