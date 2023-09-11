@@ -30,6 +30,7 @@ class AdminHomePageController extends Controller
 		$landingZoneBannerForm->addInput('text', 'name', 'Rename', null, 100, 1);
 		$landingZoneBannerForm->addInput('select', 'framing', 'Framing');
 		$landingZoneBannerForm->populateOptions('framing', $framingOptions);
+		$landingZoneBannerForm->addInput('text', 'title', 'Title', null, 100);
 		$landingZoneBannerForm = $landingZoneBannerForm->render();
 
 		$landingZoneBannerTable = new DataTable('banners_REF_1');
@@ -38,6 +39,7 @@ class AdminHomePageController extends Controller
 		$landingZoneBannerTable->addColumn('name', 'Name', 2);
 		$landingZoneBannerTable->addColumn('active', 'Active', 1, false, 'toggle');
 		$landingZoneBannerTable->addColumn('framing', 'Framing', 1, true);
+		$landingZoneBannerTable->addColumn('title', 'Title', 2, true);
 		$landingZoneBannerTable->addJsButton('showImage', ['record:fileName'], 'fa-solid fa-eye', 'View Image');
 		$landingZoneBannerTable->addJsButton('showDeleteWarning', ['string:Banner', 'record:id', 'url:/admin-home-pageDeleteLandingZoneBanner/?'], 'fa-solid fa-trash-can', 'Delete Banner');
 		$landingZoneBannerTable = $landingZoneBannerTable->render();
@@ -84,6 +86,7 @@ class AdminHomePageController extends Controller
 		$request->validate([
 			'name' => 'max:100',
 			'image-1' => 'required|image|mimes:jpg,jpeg,png,svg,webp,webp',
+			'title' => 'max:100',
 		]);
 
 		$fileNames = storeImages($request, 'homePageLZ', 'carousel');
@@ -93,6 +96,7 @@ class AdminHomePageController extends Controller
 				'page' => 'home',
 				'position' => 'landingZone',
 				'framing' => $request->framing,
+				'title' => $request->title,
 				'name' => !empty($request->name) ? $request->name : $fileName['old'],
 				'fileName' => $fileName['new'],
 				'primary' => 0,

@@ -10,6 +10,7 @@ header {
 	right: 0;
 	left: 0;
 	background-color: v.$brand-alt-dark;
+	z-index: 3;
 
 	@media (max-width: 640px) {
 		height: v.$header-height-mobile;

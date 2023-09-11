@@ -2,6 +2,7 @@
 
 .home-page #banner-homepage-top .banner-slide {
   height: calc(100dvh - v.$header-height);
+	min-height: 400px;
 
 	@media (max-width: 640px) {
 		height: calc(100dvh - v.$header-height-mobile);
@@ -10,7 +11,7 @@
 
 .home-page #banner-homepage-top #ticket-button-container {
 	position: absolute;
-	bottom: 40%;
+	bottom: 140px;
 	left: 0;
 	right: 0;
 	display: flex;

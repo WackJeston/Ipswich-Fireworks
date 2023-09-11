@@ -17,6 +17,25 @@
 	height: 100%;
 }
 
+.banner .banner-slide h3 {
+	position: absolute;
+	bottom: 160px;
+	z-index: 2;
+  font-size: 6rem;
+	color: v.$brand-alt-light;
+	opacity: 0.9;
+
+	@media (max-width: 900px) {
+		bottom: 200px;
+		font-size: 4rem;
+	}
+
+	@media (max-width: 500px) {
+		bottom: 210px;
+		font-size: 3rem;
+	}
+}
+
 .banner .banner-slide h2 {
 	z-index: 2;
   font-size: 2rem;
