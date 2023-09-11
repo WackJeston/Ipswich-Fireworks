@@ -14,10 +14,26 @@
 	}
 }
 
+.find-us .white-box {
+	background-color: v.$white;
+}
+
+.find-us .content {
+	padding: 20px 0 50px 0;
+}
+
 .find-us .content ul {
 	display: flex;
 	flex-direction: column;
 	margin-bottom: 40px;
+}
+
+.find-us h3.what-3-words {
+	margin-bottom: 0;
+}
+
+.find-us a.page-link {
+	margin-left: 40px;
 }
 
 .find-us #googlemaps {

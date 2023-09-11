@@ -32,6 +32,15 @@
   cursor: default;
 }
 
+.login h2.app-name {
+	width: 100%;
+	text-align: center;
+
+	@media (max-width:800px) {
+		font-size: 1rem;
+	}
+}
+
 .login .alert-container {
   display: flex;
   justify-content: center;

@@ -7,7 +7,7 @@
 
 		<div class="title-section">
 			<h1>11th Ipswich Scout Group</h1>
-			<a href="https://www.11thipswichscouts.co.uk/" target="_blank">www.11thipswichscouts.co.uk</a>
+			<a href="https://www.11thipswichscouts.co.uk/" target="_blank" class="page-link">www.11thipswichscouts.co.uk</a>
 		</div>
 
     @if (session()->has('message'))

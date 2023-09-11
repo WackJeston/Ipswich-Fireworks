@@ -20,7 +20,7 @@ class AdminFeedbackController extends Controller
 		$enquiriesTable->addColumn('id', '#');
 		$enquiriesTable->addColumn('name', 'Name', 1, true);
 		$enquiriesTable->addColumn('email', 'Email', 2);
-		$enquiriesTable->addColumn('subject', 'Subject', 2);
+		$enquiriesTable->addColumn('subject', 'Subject', 2, true);
 		$enquiriesTable->addColumn('created_at', 'Date', 2);
 		$enquiriesTable->addLinkButton('feedback-profile/?', 'fa-solid fa-folder-open', 'Open Record');
 		$enquiriesTable = $enquiriesTable->render();

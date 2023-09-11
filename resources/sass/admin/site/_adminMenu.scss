@@ -13,12 +13,12 @@
   transition: transform 300ms ease;
 }
 
-.admin-menu .title {
-  position: relative;
-  top: -8px;
-  margin: 0;
-  font-size: 1.8rem;
-  line-height: 30px;
+.admin-menu h2.title {
+	display: flex;
+  padding: 0 0 20px 8px;
+	margin: 0;
+  font-size: 1.6rem;
+  line-height: 20px;
 }
 
 .admin-menu ul {

@@ -12,6 +12,7 @@ class Banners extends Model
   protected $fillable = [
     'page',
     'position',
+    'framing',
     'title',
     'description',
     'active',

@@ -23,7 +23,7 @@
       <adminlogin />
     </div>
 
-    <h2 class="dk">{{ strtoupper(env('APP_NAME')) }}</h2>
+    <h2 class="dk app-name">{{ strtoupper(env('APP_NAME')) }}</h2>
 
   </main>
 @endsection

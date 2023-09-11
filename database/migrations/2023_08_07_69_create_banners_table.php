@@ -17,6 +17,7 @@ return new class extends Migration
             $table->id();
 						$table->string('page', 100);
 						$table->string('position', 100);
+						$table->string('framing', 100);
 						$table->string('title', 100)->nullable();
 						$table->string('description', 1000)->nullable();
 						$table->boolean('active')->default(0);
