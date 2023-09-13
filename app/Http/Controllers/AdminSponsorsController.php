@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use DB;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Storage;
 use App\DataTable;
 use App\DataForm;
 use App\Models\Supporters;
@@ -62,6 +63,8 @@ class AdminSponsorsController extends Controller
 
   public function delete($id)
   {
+		$sponsor = Supporters::where('id', $id)->first();
+    Storage::delete($sponsor->fileName);
     Supporters::find($id)->delete();
 
 		return redirect("/admin/sponsors")->with('message', "Sponsor #$id deleted successfully.");

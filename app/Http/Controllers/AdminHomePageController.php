@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use DB;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Storage;
 use Illuminate\Validation\Rule;
 use App\DataTable;
 use App\DataForm;
@@ -111,7 +112,7 @@ class AdminHomePageController extends Controller
   {
     $banner = Banners::where('id', $id)->first();
     
-    deleteS3($banner->fileName);
+    Storage::delete($banner->fileName);
 
     Banners::find($banner->id)->delete();
 
@@ -165,7 +166,7 @@ class AdminHomePageController extends Controller
   {
     $banner = Banners::where('id', $id)->first();
     
-    deleteS3($banner->fileName);
+    Storage::delete($banner->fileName);
 
     Banners::find($banner->id)->delete();
 

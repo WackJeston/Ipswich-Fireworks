@@ -1,5 +1,7 @@
 <?php
 
+use Illuminate\Support\Facades\Storage;
+use Intervention\Image\ImageManager;
 use Aws\S3\S3Client;
 
 function storeImages($request, $id, string $type):array {
@@ -10,19 +12,22 @@ function storeImages($request, $id, string $type):array {
 		if ($mimeType == 'svg+xml') { $mimeType = 'svg'; }
 		else if ($mimeType == 'jpeg') { $mimeType = 'jpg'; }
 
-		$fileName = sprintf('%s-%s-%s-%s.%s', 
+		$fileName = sprintf('%s-%s-%s-%s.webp', 
 			$type,
 			$id,
 			$_SERVER['REQUEST_TIME'],
-			rtrim(explode('.', str_replace([' ', '(', ')'], '-', $file->getClientOriginalName()))[0], '-'),
-			$mimeType
+			rtrim(explode('.', str_replace([' ', '(', ')'], '-', $file->getClientOriginalName()))[0], '-')
 		);
 
 		$fileName = str_replace(['----', '---', '--'], '-', $fileName);
 
-		$file->move('assets', $fileName);
-		uploadS3($fileName);
+		if ($mimeType != 'webp') {
+			$manager = new ImageManager(['driver' => 'imagick']);
+			$data = $manager->make(file_get_contents($file))->encode('webp');
+		}
 
+		Storage::put($fileName, $data);
+		
 		$fileNames[] = [
 			'new' => $fileName,
 			'old' => $file->getClientOriginalName()
@@ -30,41 +35,5 @@ function storeImages($request, $id, string $type):array {
 	}
 
 	return $fileNames;
-}
-
-// AWS S3
-function connectS3() {
-  $connection = new S3Client([
-    'version' => 'latest',
-    'region' => $_ENV['AWS_DEFAULT_REGION'],
-    'profile' => 'default',
-  ]);
-
-  return $connection;
-}
-
-function uploadS3(string $fileName, string $body = '') {
-  $aws = connectS3();
-
-  if ($body != '') {
-		Storage::disk('local')->put($fileName, $body);
-  }
-
-	$aws->putObject([
-		'Bucket' => $_ENV['AWS_BUCKET'],
-		'Key' => 'assets/' . $fileName,
-		'SourceFile' => 'assets/' . $fileName,
-	]);
-
-	File::delete(public_path() . "/assets/" . $fileName);
-}
-
-function deleteS3(string $fileName) {
-  $aws = connectS3();
-
-  $aws->deleteObject([
-    'Bucket' => $_ENV['AWS_BUCKET'],
-    'Key' => 'assets/' . $fileName,
-  ]);
 }
 
