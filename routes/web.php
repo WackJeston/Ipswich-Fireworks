@@ -8,9 +8,6 @@ use App\Http\Controllers\AuthController;
 //DataTable
 use App\Http\Controllers\DataTableController;
 
-// SYSTEM
-use App\Http\Controllers\TestController;
-
 // PUBLIC
 use App\Http\Controllers\HomeController;
 use App\Http\Controllers\FindUsController;
@@ -22,7 +19,6 @@ use App\Http\Controllers\ContactController;
 use App\Http\Controllers\FeedbackController;
 
 // ADMIN
-use App\Http\Controllers\AdminTestController;
 use App\Http\Controllers\AdminDashboardController;
 use App\Http\Controllers\AdminContactController;
 use App\Http\Controllers\AdminProgrammeController;
@@ -30,10 +26,9 @@ use App\Http\Controllers\AdminScoutsController;
 use App\Http\Controllers\AdminSupportersController;
 use App\Http\Controllers\AdminSponsorsController;
 use App\Http\Controllers\AdminHomePageController;
+use App\Http\Controllers\AdminFindUsController;
 use App\Http\Controllers\AdminUsersController;
 use App\Http\Controllers\AdminUserProfileController;
-use App\Http\Controllers\AdminCustomersController;
-use App\Http\Controllers\AdminCustomerProfileController;
 use App\Http\Controllers\AdminEnquiriesController;
 use App\Http\Controllers\AdminEnquiryProfileController;
 use App\Http\Controllers\AdminFeedbackController;
@@ -51,10 +46,6 @@ Route::get('/dataTable-setPrimary/{table}/{column}/{primaryColumn}/{primaryValue
 // SYSTEM -----------------------------------------------------------------------------------
 Route::get("sitemap-xml" , function () {
 	return Illuminate\Support\Facades\Redirect::to('https://ipswich-fireworks.s3.eu-west-2.amazonaws.com/public-assets/sitemap.xml');
-});
-
-Route::controller(TestController::class)->group(function () {
-  Route::get('/test', 'show');
 });
 
 
@@ -101,8 +92,6 @@ Route::group( ['middleware' => 'auth' ], function()
     Route::get('/adminLogout', 'logoutAdmin');
   });
 
-	Route::get('/admin/test', [AdminTestController::class, 'show']);
-
   Route::get('/admin/dashboard', [AdminDashboardController::class, 'show']);
 
   Route::controller(AdminContactController::class)->group(function () {
@@ -124,6 +113,12 @@ Route::group( ['middleware' => 'auth' ], function()
 		Route::post('/admin-home-pageUpdatePrimaryInfo', 'updatePrimaryInfo');
 		Route::post('/admin-home-pageAddBottomBanner', 'addBottomBanner');
 		Route::get('/admin-home-pageDeleteBottomBanner/{id}', 'deleteBottomBanner');
+  });
+
+  Route::controller(AdminFindUsController::class)->group(function () {
+    Route::get('/admin/find-us', 'show');
+		Route::post('/admin-find-usAddGate', 'addGate');
+		Route::get('/admin-find-usDeleteGate/{id}', 'deleteGate');
   });
 
 	Route::controller(AdminProgrammeController::class)->group(function () {
@@ -159,17 +154,6 @@ Route::group( ['middleware' => 'auth' ], function()
     Route::get('/admin/user-profile/{id}', 'show');
     Route::post('/user-profileUpdate/{id}', 'update');
     Route::get('/user-profileDelete/{id}', 'delete');
-  });
-
-  Route::controller(AdminCustomersController::class)->group(function () {
-    Route::get('/admin/customers', 'show');
-    Route::post('/customersCreate', 'create');
-  });
-
-  Route::controller(AdminCustomerProfileController::class)->group(function () {
-    Route::get('/admin/customer-profile/{id}', 'show');
-    Route::post('/customer-profileUpdate/{id}', 'update');
-    Route::get('/customer-profileDelete/{id}', 'delete');
   });
 
 	Route::controller(AdminEnquiriesController::class)->group(function () {

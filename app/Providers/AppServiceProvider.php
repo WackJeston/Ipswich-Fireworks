@@ -49,29 +49,13 @@ class AppServiceProvider extends ServiceProvider
                 "link"=>"/admin/feedback",
                 "icon"=>"fa-solid fa-comment-medical",
               ],
-              $feedback = [
+              $newSponsors = [
                 "title"=>"Sponsor Enquiries",
                 "link"=>"/admin/new-sponsors",
                 "icon"=>"fa-solid fa-person-circle-plus",
               ],
             ],
           ],
-          // $people = [
-          //   "title"=>"people",
-          //   "icon"=>"fa-solid fa-users",
-          //   "sublink"=>$subLinks = [
-          //     $customers = [
-          //       "title"=>"customers",
-          //       "link"=>"/admin/customers",
-          //       "icon"=>"fa-solid fa-user",
-          //     ],
-          //     $users = [
-          //       "title"=>"users",
-          //       "link"=>"/admin/users",
-          //       "icon"=>"fa-solid fa-user-astronaut",
-          //     ],
-          //   ],
-          // ],
 					$users = [
 						"title"=>"users",
 						"link"=>"/admin/users",
@@ -85,6 +69,11 @@ class AppServiceProvider extends ServiceProvider
                 "title"=>"home page",
                 "link"=>"/admin/home-page",
                 "icon"=>"fa-solid fa-house-chimney",
+              ],
+							$findUs = [
+                "title"=>"find us",
+                "link"=>"/admin/find-us",
+                "icon"=>"fa-solid fa-map-location-dot",
               ],
               $contact = [
                 "title"=>"contact",

@@ -49,10 +49,13 @@ class FindUsController extends Controller
 			$coordinates['lng'] = (float) $coordinatesPre[1]->value;
 		}
 
+		$gates = DB::select('SELECT * FROM content WHERE `page` = "find-us" AND `position` = "gate"');
+
     return view('public/find-us', compact(
       'sessionUser',
 			'contact',
 			'coordinates',
+			'gates'
     ));
   }
 }

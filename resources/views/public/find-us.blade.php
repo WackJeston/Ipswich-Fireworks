@@ -12,13 +12,20 @@
 				<h2>Ipswich's historic Christchurch Park can be found just a short walk from the town centre. Postcode: IP4 2BX</h2>
 				<h3>The following gates will be open from 6pm...</h3>
 				<ul>
-					<li><strong>Soane Street</strong> - Very near to Ipswich town centre.</li>
-					<li><strong>Fonnereau Road</strong> - The closest gate to Ipswich town centre and Ipswich bus station.</li>
-					<li><strong>Park Road</strong> - Walking distance from Henley Road/Valley Road traffic lights.</li>
-					<li><strong>Westerfield Road</strong> - Easy access from Valley Road roundabout.</li>
+					@foreach ($gates as $gate)
+						<li><strong>{{ $gate->title }}</strong> - {{ $gate->description }}</li>
+						<li class="gate-second-row">
+							@if ($gate->active)
+								<span class="gate-open">OPEN</span>
+							@else
+								<span class="gate-closed">CLOSED</span>
+							@endif
+							<a href="https://what3words.com/{{ $gate->subtitle }}" class="page-link">what3words</a>
+						</li>
+					@endforeach
 				</ul>
 	
-				<h3>Address</h3>
+				<h2>Event Address</h2>
 				<ul class="address">
 					@if (isset($contact['line1']))
 						<li>{{ $contact['line1'] }}</li>
@@ -42,9 +49,6 @@
 						<li>{{ $contact['postcode'] }}</li>
 					@endif
 				</ul>
-	
-				<h3 class="what-3-words">What 3 Words</h3>
-				<a href="https://w3w.co/soccer.stole.rice" target="_blank" class="page-link">soccer.stole.rice</a>
 			</div>
 		</div>
 

@@ -19,21 +19,49 @@
 }
 
 .find-us .content {
-	padding: 20px 0 50px 0;
+	padding: 20px 0 0 0;
+}
+
+.find-us .content h3 {
+	margin-top: 40px;
 }
 
 .find-us .content ul {
 	display: flex;
 	flex-direction: column;
 	margin-bottom: 40px;
+
+	@media (max-width: 700px) {
+		padding-left: 0;
+	}
 }
 
-.find-us h3.what-3-words {
-	margin-bottom: 0;
+.find-us .content li:not(.gate-second-row) {
+	margin-bottom: 5px;
 }
 
-.find-us a.page-link {
-	margin-left: 40px;
+.find-us .content li.gate-second-row {
+	margin-bottom: 30px;
+}
+
+.find-us .content ul span {
+	color: white;
+	margin-right: 10px;
+	padding: 5px 10px;
+	border-radius: 5px;
+	float: left;
+
+	// @media (max-width: 700px) {
+	// 	float: right;
+	// }
+}
+
+.find-us .content ul .gate-open {
+	background-color: v.$pale-green;
+}
+
+.find-us .content ul .gate-closed {
+	background-color: v.$pale-red;
 }
 
 .find-us #googlemaps {
