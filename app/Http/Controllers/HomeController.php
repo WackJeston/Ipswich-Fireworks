@@ -4,12 +4,15 @@ namespace App\Http\Controllers;
 
 use DB;
 use Illuminate\Http\Request;
+use App\Models\Settings;
 
 class HomeController extends Controller
 {
   public function show()
   {
     $sessionUser = auth()->user();
+
+		$ticketDate = date("D jS F", strtotime(Settings::select('date')->where('id', 1)->first()->date));
 
     $landingZoneBanners = DB::select('SELECT
 			b.*
@@ -34,6 +37,7 @@ class HomeController extends Controller
       'landingZoneBanners',
 			'primaryInfo',
       'bottomBanners',
+			'ticketDate',
     ));
   }
 }

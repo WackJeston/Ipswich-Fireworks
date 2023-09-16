@@ -110,6 +110,10 @@ form.web-box label.file-input-label:hover {
 	border: 2px solid v.$black;
 }
 
+form input.date-input {
+	max-width: 300px;
+}
+
 form textarea {
 	resize: vertical;
 	min-height: 100px;

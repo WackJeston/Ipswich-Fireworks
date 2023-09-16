@@ -148,6 +148,7 @@ Route::group( ['middleware' => 'auth' ], function()
 
   Route::controller(AdminSettingsController::class)->group(function () {
     Route::get('/admin/settings', 'show');
+    Route::post('/settingsUpdate', 'update');
   });
 
   Route::controller(AdminUsersController::class)->group(function () {

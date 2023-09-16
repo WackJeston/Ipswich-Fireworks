@@ -15,6 +15,7 @@
 					:banners="{{ json_encode($landingZoneBanners) }}"
 					asset="{{ env('AWS_ASSET_URL') }}"
 					tickets="{{ $ticketsActive }}"
+					ticketdate="{{ $ticketDate }}"
 				/>
 			</div>
 		@endif

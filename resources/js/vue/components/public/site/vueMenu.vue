@@ -6,7 +6,7 @@
 
 		<ul id="menu-items">
 			<div v-if="this.tickets" class="nav-link">
-				<a id="menu-ticket-button" href="https://ipswichfireworks.ticketsrv.co.uk/">
+				<a id="menu-ticket-button" href="https://ipswichfireworks.ticketsrv.co.uk/" target="_blank">
 					<i class="fa-solid fa-ticket nav-link-icon"></i>
 					<li class="title thick-title">TICKETS</li>
 				</a>

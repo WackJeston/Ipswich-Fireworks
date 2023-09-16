@@ -2,7 +2,7 @@
 namespace App\Http\Controllers;
 
 Use DB;
-
+use App\Models\Settings;
 
 class FindUsController extends Controller
 {
@@ -51,11 +51,16 @@ class FindUsController extends Controller
 
 		$gates = DB::select('SELECT * FROM content WHERE `page` = "find-us" AND `position` = "gate"');
 
+		$start = Settings::select('datetime')->where('id', 3)->first()->datetime;
+		$end = Settings::select('datetime')->where('id', 4)->first()->datetime;
+
     return view('public/find-us', compact(
       'sessionUser',
 			'contact',
 			'coordinates',
-			'gates'
+			'gates',
+			'start',
+			'end',
     ));
   }
 }

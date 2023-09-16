@@ -2,8 +2,8 @@
   <section class="banner" id="banner-homepage-top">
 
 		<div id="ticket-button-container">
-			<a v-if="this.tickets" href="https://ipswichfireworks.ticketsrv.co.uk/" class="title thick-title">BUY TICKETS</a>
-			<span v-else class="title thick-title"><h5>TICKETS AVAILABLE FROM</h5><br>2ND OF OCTOBER</span>
+			<a v-if="this.tickets" href="https://ipswichfireworks.ticketsrv.co.uk/" target="_blank" class="title thick-title">BUY TICKETS</a>
+			<span v-else class="title thick-title"><h5>TICKETS AVAILABLE FROM</h5><br>{{ this.ticketdate }}</span>
 		</div>
 
 		<div v-if="this.banners.length == 1" v-for="banner in this.banners" class="banner-slide single-slide">
@@ -38,6 +38,7 @@
       'banners',
 			'asset',
 			'tickets',
+			'ticketdate',
     ],
 
     components: {

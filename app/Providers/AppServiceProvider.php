@@ -195,13 +195,11 @@ class AppServiceProvider extends ServiceProvider
 					}
 				}
 
-				$date = date('Y-m-d');
-				$year = date('Y');
-
-				$ticketDateBegin = date('Y-m-d', strtotime($year . "/10/02"));
-				$ticketDateEnd = date('Y-m-d', strtotime($year . "/11/04"));
+				$date = date('Y-m-d H:i:s');
+				$start = DB::select('SELECT date FROM settings WHERE id = 1')[0]->date;
+				$end = DB::select('SELECT datetime FROM settings WHERE id = 4')[0]->datetime;
 						
-				if (($date >= $ticketDateBegin) && ($date <= $ticketDateEnd)){
+				if (($date >= $start) && ($date <= $end)){
 					$ticketsActive = true;
 				} else {
 					$ticketsActive = false; 
