@@ -10,6 +10,10 @@
         <a v-for="(link, i) in this.publiclinks" :href="link.link" class="nav-link">
           <li>{{ capFL(link.title) }}</li>
         </a>
+
+				<a href="/site-map" class="nav-link">
+          <li>Site Map</li>
+        </a>
       </ul>
 
 			<ul id="footer-socials">

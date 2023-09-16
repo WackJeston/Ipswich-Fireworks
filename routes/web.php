@@ -17,6 +17,7 @@ use App\Http\Controllers\SupportersController;
 use App\Http\Controllers\SponsorsController;
 use App\Http\Controllers\ContactController;
 use App\Http\Controllers\FeedbackController;
+use App\Http\Controllers\SitemapController;
 
 // ADMIN
 use App\Http\Controllers\AdminDashboardController;
@@ -82,6 +83,10 @@ Route::controller(ContactController::class)->group(function () {
 Route::controller(FeedbackController::class)->group(function () {
 	Route::get('/feedback', 'show');
 	Route::get('/feedbackCreateEnquiry', 'createEnquiry');
+});
+
+Route::controller(SitemapController::class)->group(function () {
+	Route::get('/site-map', 'show');
 });
 
 // ADMIN -----------------------------------------------------------------------------------

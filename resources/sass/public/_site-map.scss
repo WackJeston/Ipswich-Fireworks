@@ -1,0 +1,22 @@
+@use 'site/v';
+
+.site-map ul,
+.site-map h2 {
+	display: flex;
+	flex-direction: column;
+	padding-left: 0;
+
+	@media (min-width: 600px) {
+		width: 60%;
+		margin-left: auto;
+		margin-right: auto;
+	}
+}
+
+.site-map li {
+	margin-bottom: 10px;
+}
+
+.site-map li i {
+	margin-right: 10px;
+}

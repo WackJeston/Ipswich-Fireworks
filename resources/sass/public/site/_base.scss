@@ -361,10 +361,14 @@ a.large-message-box:hover h2 {
 
 a.page-link {
 	color: v.$almost-black;
+}
+
+a.page-link:not(.no-underline) {
 	text-decoration: underline;
 }
 
-a.page-link:hover {
+a.page-link:hover,
+a.page-link:hover i {
 	color: v.$brand-main-darker;
 }
 
