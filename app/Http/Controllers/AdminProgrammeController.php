@@ -34,14 +34,22 @@ class AdminProgrammeController extends Controller
 		$musicForm->setTitle('Add Music Item');
 		$musicForm->addInput('text', 'value', 'Value', null, 1000, 1, true);
 		$musicForm->addInput('text', 'label', 'Label', null, 255, 0);
+		$musicForm->addInput('text', 'stage', 'Stage', null, 255, 0);
+		$musicForm->addInput('time', 'time', 'Time', null, null, null);
+		$musicForm->addInput('url', 'link',  'Link', null, 255, 1);
+		$musicForm->addInput('file', 'fileName', 'Image', null, null, null);
 		$musicForm = $musicForm->render();
 
 		$musicTable = new DataTable('programme_REF_2');
 		$musicTable->setQuery('SELECT * FROM programme WHERE type = "music"');
 		$musicTable->addColumn('id', '#');
-		$musicTable->addColumn('value', 'Value', 2);
-		$musicTable->addColumn('label', 'Label', true);
+		$musicTable->addColumn('value', 'Value', 4);
+		$musicTable->addColumn('label', 'Label', 2, true);
+		$musicTable->addColumn('stage', 'Stage', 2);
+		$musicTable->addColumn('time', 'Time', 2);
+		$musicTable->addColumn('link', 'Link' , 3, true);
 		$musicTable->addColumn('active', 'Active', 1, false, 'toggle');
+		$musicTable->addJsButton('showImage', ['record:fileName'], 'fa-solid fa-eye', 'View Image');
 		$musicTable->addJsButton('showDeleteWarning', ['string:Programme', 'record:id', 'url:/programmeDelete/?'], 'fa-solid fa-trash-can', 'Delete Item');
 		$musicTable = $musicTable->render();
 
@@ -74,12 +82,22 @@ class AdminProgrammeController extends Controller
     $request->validate([
 			'value' => 'required|string|max:1000',
       'label' => 'max:255',
+			'stage' => 'max:255',
+			'time' => 'max:255',
+			'link' => 'url|max:255',
+			'fileName' => 'image|mimes:jpg,jpeg,png,svg,webp',
     ]);
+
+		$fileNames = storeImages($request, 'music', 'programme');
 
     Programme::create([
 			'type' => 'music',
 			'value' => $request['value'],
 			'label' => $request['label'],
+			'stage' => $request['stage'],
+			'time' => $request['time'],
+			'link' => $request['link'],
+			'fileName' => $fileNames[0]['new'],
 		]);
 
 		return redirect("/admin/programme")->with('message', 'Music item created successfully.');

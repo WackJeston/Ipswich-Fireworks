@@ -121,19 +121,47 @@ class DataForm
 						break;
 
 					case 'date':
-					case 'datetime':
 						$html .= sprintf('
 						<label for="%1$s">%2$s%8$s</label>
-						<input class="date-input" type="%9$s" id="%1$s" name="%1$s" value="%3$s" minlength="%4$s" maxlength="%5$s" placeholder="%6$s" %7$s />',
+						<input class="date-input" type="date" id="%1$s" name="%1$s" value="%3$s" minlength="%4$s" maxlength="%5$s" placeholder="%6$s" %7$s />',
 							$input['name'],
 							$input['label'],
-							$input['type'] == 'datetime' ? date('Y-m-d H:i:s', strtotime($input['value'])) : date('Y-m-d', strtotime($input['value'])),
+							date('Y-m-d', strtotime($input['value'])),
 							$input['min'],
 							$input['max'],
 							$input['placeholder'],
 							$input['required'] ? 'required' : '',
 							$input['required'] ? '<span> *</span>' : '',
-							$input['type'] == 'datetime' ? 'datetime-local' : 'date',
+						);
+						break;
+
+					case 'datetime':
+						$html .= sprintf('
+						<label for="%1$s">%2$s%8$s</label>
+						<input class="date-input" type="datetime-local" id="%1$s" name="%1$s" value="%3$s" minlength="%4$s" maxlength="%5$s" placeholder="%6$s" %7$s />',
+							$input['name'],
+							$input['label'],
+							date('Y-m-d H:i:s', strtotime($input['value'])),
+							$input['min'],
+							$input['max'],
+							$input['placeholder'],
+							$input['required'] ? 'required' : '',
+							$input['required'] ? '<span> *</span>' : '',
+						);
+						break;
+					
+					case 'time':
+						$html .= sprintf('
+						<label for="%1$s">%2$s%8$s</label>
+						<input class="date-input" type="time" id="%1$s" name="%1$s" value="%3$s" minlength="%4$s" maxlength="%5$s" placeholder="%6$s" %7$s />',
+							$input['name'],
+							$input['label'],
+							date('H:i:s', strtotime($input['value'])),
+							$input['min'],
+							$input['max'],
+							$input['placeholder'],
+							$input['required'] ? 'required' : '',
+							$input['required'] ? '<span> *</span>' : '',
 						);
 						break;
 

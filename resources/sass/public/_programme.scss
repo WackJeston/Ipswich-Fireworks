@@ -22,6 +22,19 @@
 	}
 }
 
+.programme ul li {
+	margin-bottom: 10px;
+}
+
+.programme ul span {
+	font-size: 1.2rem;
+}
+
+.programme ul i {
+	font-size: 1rem;
+	margin-left: 10px;
+}
+
 .programme .clear-box {
 	@media (min-width: 1000px) {
 		padding-left: 0;

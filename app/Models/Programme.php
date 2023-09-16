@@ -15,6 +15,10 @@ class Programme extends Model
 		'type',
 		'label',
 		'value',
+		'stage',
+		'time',
+		'link',
     'active',
+		'fileName'
   ];
 }

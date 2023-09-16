@@ -24,21 +24,41 @@
 			</ul>
 		</div>
 
-		<div class="clear-box">
-			<h2>This year's musical line-up:</h2>
+		@if (count($music) > 0)
+			<div class="clear-box">
+				<h2>This year's musical line-up:</h2>
 
-			<ul>
-				@foreach ($music as $item)
-					<li>
-						@if ($item->label)
-							<strong>{{ $item->label }}</strong>
-						@endif
-		
-						{{ $item->value }}
-					</li>
-				@endforeach
-			</ul>
-		</div>
+				<ul>
+					@foreach ($music as $item)
+						<li>
+							<span>
+								@if ($item->label)
+									<strong class="first-strong">{{ $item->label }}</strong>
+								@endif
+				
+								{{ $item->value }}
 
+								@if ($item->stage || $item->time)
+									<br>
+								@endif
+							</span>
+
+							@if ($item->stage)
+								<strong>Stage: </strong>{{ $item->stage }}
+							@endif
+
+							@if ($item->time)
+								<strong><i class="fa-regular fa-clock"></i> </strong>{{ $item->time }}
+							@endif
+
+							@if ($item->link)
+								<br>
+								<a href="{{ $item->link }}" class="page-link" target="_blank">{{ $item->link }}</a>
+							@endif
+						</li>
+						@endforeach
+				</ul>
+			</div>
+		@endif
   </main>
 @endsection

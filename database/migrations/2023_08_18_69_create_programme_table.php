@@ -18,6 +18,10 @@ return new class extends Migration
 						$table->string('type', 255)->default('standard');
 						$table->string('label', 255)->nullable();
 						$table->string('value', 1000);
+						$table->string('stage', 255)->nullable();
+						$table->time('time')->nullable();
+						$table->string('link', 255)->nullable();
+						$table->string('fileName', 255)->nullable();
 						$table->boolean('active')->default(0);
             $table->timestamps();
         });
