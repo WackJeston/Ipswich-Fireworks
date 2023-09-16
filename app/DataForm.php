@@ -104,7 +104,6 @@ class DataForm
 				switch ($input['type']) {
 					case 'text':
 					case 'email':
-					case 'tel':
 					case 'url':
 						$html .= sprintf('
 						<label for="%1$s">%2$s%8$s</label>

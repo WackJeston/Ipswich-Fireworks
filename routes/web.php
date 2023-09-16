@@ -27,6 +27,7 @@ use App\Http\Controllers\AdminSupportersController;
 use App\Http\Controllers\AdminSponsorsController;
 use App\Http\Controllers\AdminHomePageController;
 use App\Http\Controllers\AdminFindUsController;
+use App\Http\Controllers\AdminSettingsController;
 use App\Http\Controllers\AdminUsersController;
 use App\Http\Controllers\AdminUserProfileController;
 use App\Http\Controllers\AdminEnquiriesController;
@@ -144,6 +145,10 @@ Route::group( ['middleware' => 'auth' ], function()
 		Route::post('/sponsorsCreate', 'create');
 		Route::get('/sponsorsDelete/{id}', 'delete');
 	});
+
+  Route::controller(AdminSettingsController::class)->group(function () {
+    Route::get('/admin/settings', 'show');
+  });
 
   Route::controller(AdminUsersController::class)->group(function () {
     Route::get('/admin/users', 'show');

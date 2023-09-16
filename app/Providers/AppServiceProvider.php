@@ -56,6 +56,11 @@ class AppServiceProvider extends ServiceProvider
               ],
             ],
           ],
+					$settings = [
+						"title"=>"settings",
+						"link"=>"/admin/settings",
+						"icon"=>"fa-solid fa-gear",
+					],
 					$users = [
 						"title"=>"users",
 						"link"=>"/admin/users",

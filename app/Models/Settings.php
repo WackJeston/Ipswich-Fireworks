@@ -11,6 +11,11 @@ class Settings extends Model
 
   protected $fillable = [
 		'name',
+		'value',
+		'int',
+		'float',
+		'date',
+		'datetime',
 		'active',
   ];
 }

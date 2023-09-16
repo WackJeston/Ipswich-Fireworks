@@ -15,7 +15,12 @@ return new class extends Migration
     {
         Schema::create('settings', function (Blueprint $table) {
             $table->id();
-						$table->string('name', 255);
+						$table->string('name', 255)->nullable()->default(null);
+						$table->string('text', 255)->nullable()->default(null);
+						$table->integer('int')->nullable()->default(null);
+						$table->float('float')->nullable()->default(null);
+						$table->date('date')->nullable()->default(null);
+						$table->dateTime('datetime')->nullable()->default(null);
 						$table->boolean('active')->default(0);
             $table->timestamps();
         });
