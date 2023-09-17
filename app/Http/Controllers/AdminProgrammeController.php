@@ -17,14 +17,14 @@ class AdminProgrammeController extends Controller
 
     $standardForm = new DataForm(request(), '/programmeCreateStandard', 'Add');
 		$standardForm->setTitle('Add Standard Item');
-		$standardForm->addInput('text', 'value', 'Value', null, 1000, 1, true);
+		$standardForm->addInput('text', 'value', 'Name', null, 1000, 1, true);
 		$standardForm->addInput('text', 'label', 'Label', null, 255, 0);
 		$standardForm = $standardForm->render();
 
 		$standardTable = new DataTable('programme_REF_1');
 		$standardTable->setQuery('SELECT * FROM programme WHERE type = "standard"');
 		$standardTable->addColumn('id', '#');
-		$standardTable->addColumn('value', 'Value', 2);
+		$standardTable->addColumn('value', 'Name', 2);
 		$standardTable->addColumn('label', 'Label', true);
 		$standardTable->addColumn('active', 'Active', 1, false, 'toggle');
 		$standardTable->addJsButton('showDeleteWarning', ['string:Programme', 'record:id', 'url:/programmeDelete/?'], 'fa-solid fa-trash-can', 'Delete Item');
@@ -32,7 +32,7 @@ class AdminProgrammeController extends Controller
 
 		$musicForm = new DataForm(request(), '/programmeCreateMusic', 'Add');
 		$musicForm->setTitle('Add Music Item');
-		$musicForm->addInput('text', 'value', 'Value', null, 1000, 1, true);
+		$musicForm->addInput('text', 'value', 'Name', null, 1000, 1, true);
 		$musicForm->addInput('text', 'label', 'Label', null, 255, 0);
 		$musicForm->addInput('text', 'stage', 'Stage', null, 255, 0);
 		$musicForm->addInput('time', 'time', 'Time', null, null, null);
@@ -43,12 +43,12 @@ class AdminProgrammeController extends Controller
 		$musicTable = new DataTable('programme_REF_2');
 		$musicTable->setQuery('SELECT * FROM programme WHERE type = "music"');
 		$musicTable->addColumn('id', '#');
-		$musicTable->addColumn('value', 'Value', 4);
+		$musicTable->addColumn('value', 'Name', 3);
 		$musicTable->addColumn('label', 'Label', 2, true);
 		$musicTable->addColumn('stage', 'Stage', 2);
-		$musicTable->addColumn('time', 'Time', 2);
+		$musicTable->addColumn('time', 'Time', 2, true);
 		$musicTable->addColumn('link', 'Link' , 3, true);
-		$musicTable->addColumn('active', 'Active', 1, false, 'toggle');
+		$musicTable->addColumn('active', 'Active', 2, false, 'toggle');
 		$musicTable->addJsButton('showImage', ['record:fileName'], 'fa-solid fa-eye', 'View Image');
 		$musicTable->addJsButton('showDeleteWarning', ['string:Programme', 'record:id', 'url:/programmeDelete/?'], 'fa-solid fa-trash-can', 'Delete Item');
 		$musicTable = $musicTable->render();
