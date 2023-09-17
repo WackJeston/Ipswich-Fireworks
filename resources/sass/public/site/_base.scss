@@ -3,6 +3,7 @@
 html {
 	height: 100dvh;
 	width: 100vw;
+	padding-bottom: env(safe-area-inset-bottom);
 }
 
 body {
