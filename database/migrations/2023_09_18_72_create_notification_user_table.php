@@ -13,15 +13,11 @@ return new class extends Migration
      */
     public function up()
     {
-        Schema::create('settings', function (Blueprint $table) {
+        Schema::create('notification_user', function (Blueprint $table) {
             $table->id();
-						$table->string('name', 255)->nullable();
-						$table->string('text', 255)->nullable();
-						$table->integer('int')->nullable();
-						$table->float('float')->nullable();
-						$table->date('date')->nullable();
-						$table->dateTime('datetime')->nullable();
-						$table->boolean('active')->default(0);
+						$table->foreignId('notificationId')->constrained('notification')->onUpdate('cascade')->onDelete('cascade');
+						$table->foreignId('userId')->constrained('users')->onUpdate('cascade')->onDelete('cascade');
+						$table->string('type', 255)->default('email');
             $table->timestamps();
         });
     }

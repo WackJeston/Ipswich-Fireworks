@@ -1,6 +1,6 @@
 @extends('email')
 
-@section('title', 'Feedback')
+@section('title', 'New Enquiry')
 
 @section('content')
 

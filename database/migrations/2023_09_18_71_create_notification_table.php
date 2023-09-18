@@ -13,15 +13,9 @@ return new class extends Migration
      */
     public function up()
     {
-        Schema::create('settings', function (Blueprint $table) {
+        Schema::create('notification', function (Blueprint $table) {
             $table->id();
-						$table->string('name', 255)->nullable();
-						$table->string('text', 255)->nullable();
-						$table->integer('int')->nullable();
-						$table->float('float')->nullable();
-						$table->date('date')->nullable();
-						$table->dateTime('datetime')->nullable();
-						$table->boolean('active')->default(0);
+						$table->string('name', 255);
             $table->timestamps();
         });
     }

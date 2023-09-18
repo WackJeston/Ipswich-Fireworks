@@ -12,7 +12,7 @@ use Illuminate\Queue\SerializesModels;
 
 use App\Models\Enquiry;
 
-class EnquiryStandard extends Mailable
+class NewEnquiry extends Mailable
 {
   use Queueable, SerializesModels;
 
@@ -21,9 +21,9 @@ class EnquiryStandard extends Mailable
    *
    * @return void
    */
-  public function __construct()
+  public function __construct($id)
   {
-    //
+    $enquiry = Enquiry::find($id);
   }
 
   /**
@@ -33,8 +33,6 @@ class EnquiryStandard extends Mailable
    */
   public function envelope()
   {
-		// $enquiry = Enquiry::find($id);
-
     return new Envelope(
       from: new Address($_ENV['MAIL_FROM_ADDRESS'], $_ENV['APP_NAME']),
       subject: 'New Enquiry (Standard)',
@@ -49,7 +47,7 @@ class EnquiryStandard extends Mailable
   public function content()
   {
     return new Content(
-      view: 'email.enquiry-standard',
+      view: 'email.notification.new-enquiry',
     );
   }
 
