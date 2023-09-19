@@ -24,6 +24,8 @@ function storeImages($request, $id, string $type):array {
 		if ($mimeType != 'webp') {
 			$manager = new ImageManager(['driver' => 'imagick']);
 			$data = $manager->make(file_get_contents($file))->encode('webp');
+		} else {
+			$data = file_get_contents($file);
 		}
 
 		Storage::put($fileName, $data);

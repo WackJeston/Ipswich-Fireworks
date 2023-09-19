@@ -25,12 +25,35 @@ form .input-label-container {
 	width: 20%;
 }
 
+form input,
+// form label,
+form select,
+form option,
+form textarea,
+form .file-input-label {
+	@media (max-width: 800px) {
+		font-size: 0.9rem;
+	}
+}
+
 form.data-form input,
 form.data-form label,
 form.data-form select,
 form.data-form option,
 form.data-form .checkbox-container {
-	max-width: 600px;
+	max-width: 550px;
+
+	@media (max-width: 750px) {
+		max-width: 800px;
+	}
+}
+
+form.data-form .file-input-label {
+	max-width: 300px;
+
+	@media (max-width: 500px) {
+		max-width: 550px;
+	}
 }
 
 form.data-form .submit {

@@ -26,9 +26,9 @@ class AdminFindUsController extends Controller
 		$gateTable = new DataTable('content');
 		$gateTable->setQuery('SELECT * FROM content WHERE page = "find-us" AND position = "gate"');
 		$gateTable->addColumn('id', '#');
-		$gateTable->addColumn('title', 'Street', 2);
+		$gateTable->addColumn('title', 'Street', 3);
 		$gateTable->addColumn('description', 'Description', 4);
-		$gateTable->addColumn('active', 'Open', 1, false, 'toggle');
+		// $gateTable->addColumn('active', 'Open', 1, false, 'toggle');
 		$gateTable->addColumn('subtitle', 'What 3 Words', 2, true);
 		$gateTable->addJsButton('showDeleteWarning', ['string:Gate', 'record:id', 'url:/admin-find-usDeleteGate/?'], 'fa-solid fa-trash-can', 'Delete Gate');
 		$gateTable = $gateTable->render();

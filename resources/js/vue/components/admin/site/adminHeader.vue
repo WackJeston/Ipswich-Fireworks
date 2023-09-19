@@ -15,7 +15,7 @@
       <i @click='menuActive = !menuActive' class="fa-solid fa-bars hover-background nav-button" id="menu-button"></i>
     </nav>
 
-    <div id="user-menu" :style="[this.userMenuActive ? { transform: 'translate3d(0, 100%, 0)' } : { transform: 'translate3d(0, 0, 0)' }]">
+    <div id="user-menu" :style="[this.userMenuActive ? { transform: 'translate3d(0, 100%, 0)', minWidth: this.userMenuWidth + 'px' } : { transform: 'translate3d(0, 0, 0)', minWidth: this.userMenuWidth + 'px' }]">
       <a :href="'/admin/user-profile/' + this.sessionuser.id">My Profile</a>
       <a href="/adminLogout">Log Out</a>
     </div>
@@ -66,10 +66,22 @@
       return {
         menuActive: false,
         userMenuActive: false,
+				userMenuWidth: 0,
       };
     },
 
+		mounted() {
+			setTimeout(() => {
+				this.setUserMenuWidth();
+			}, 2000);
+		},
+
     methods: {
+			setUserMenuWidth() {
+				let userButton = document.querySelector("#user-header-container");
+				this.userMenuWidth = userButton.offsetWidth;
+			},
+
       toggleLinks(i, open) {
         if(open == false) {
           let list = document.querySelector(".sublist" + i);

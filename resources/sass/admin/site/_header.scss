@@ -66,11 +66,11 @@ header #user-menu {
   display: flex;
   flex-direction: column;
   background-color: v.$bg-semi-dark;
+  // background-color: v.$bg-semi-dark;
   position: absolute;
   bottom: 0;
   right: v.$header-height;
   z-index: 4;
-  min-width: 200px;
   border-radius: 0 0 5px 5px;
 }
 

@@ -15,13 +15,13 @@
 					@foreach ($gates as $gate)
 						<li><strong>{{ $gate->title }}</strong> - {{ $gate->description }}</li>
 						<li class="gate-second-row">
-							@if ((date('Y-m-d H:i:s') >= $start) && (date('Y-m-d H:i:s') <= $end))
+							{{-- @if ((date('Y-m-d H:i:s') >= $start) && (date('Y-m-d H:i:s') <= $end))
 								@if ($gate->active)
 									<span class="gate-open">OPEN</span>
 								@else
 									<span class="gate-closed">CLOSED</span>
 								@endif
-							@endif
+							@endif --}}
 							<a href="https://what3words.com/{{ $gate->subtitle }}" class="page-link">what3words</a>
 						</li>
 					@endforeach

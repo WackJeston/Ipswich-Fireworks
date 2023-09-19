@@ -11,12 +11,20 @@
 
 .home-page #banner-homepage-top #ticket-button-container {
 	position: absolute;
-	bottom: 140px;
+	bottom: 130px;
 	left: 0;
 	right: 0;
 	display: flex;
 	justify-content: center;
 	align-items: center;
+
+	@media (max-width: 900px) {
+		bottom: 120px;
+	}
+
+	@media (max-width: 500px) {
+		bottom: 100px;
+	}
 }
 
 .home-page #banner-homepage-top a {
@@ -48,6 +56,21 @@
 	
 	@media (min-width: 640px) {
 		font-size: 2.2rem;
+	}
+}
+
+.home-page #banner-homepage-top .banner-title {
+	bottom: 180px;
+	font-size: 4rem;
+
+	@media (max-width: 900px) {
+		bottom: 200px;
+		font-size: 3rem;
+	}
+
+	@media (max-width: 500px) {
+		bottom: 210px;
+		font-size: 2rem;
 	}
 }
 

@@ -18,10 +18,10 @@ class AdminEnquiriesController extends Controller
     $enquiriesTable = new DataTable();
 		$enquiriesTable->setQuery('SELECT * FROM enquiry WHERE `type` = "standard" ORDER BY id DESC');
 		$enquiriesTable->addColumn('id', '#');
-		$enquiriesTable->addColumn('name', 'Name', 1, true);
-		$enquiriesTable->addColumn('email', 'Email', 2);
-		$enquiriesTable->addColumn('subject', 'Subject', 2, true);
-		$enquiriesTable->addColumn('created_at', 'Date', 2);
+		$enquiriesTable->addColumn('name', 'Name', 2, true);
+		$enquiriesTable->addColumn('email', 'Email', 3);
+		$enquiriesTable->addColumn('subject', 'Subject', 2);
+		$enquiriesTable->addColumn('created_at', 'Date', 2, true);
 		$enquiriesTable->addLinkButton('enquiry-profile/?', 'fa-solid fa-folder-open', 'Open Record');
 		$enquiriesTable = $enquiriesTable->render();
 

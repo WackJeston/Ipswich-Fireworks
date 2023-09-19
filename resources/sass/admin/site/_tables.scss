@@ -38,6 +38,10 @@ tr th, tr td {
   padding-left: 7px;
   text-align: left;
 	min-width: 30px;
+
+	@media (max-width: 800px) {
+		font-size: 0.9rem;
+	}
 }
 
 tr th:last-child, tr td:last-child {

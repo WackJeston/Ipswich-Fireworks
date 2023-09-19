@@ -5,7 +5,7 @@ namespace App\Http\Controllers;
 use DB;
 use Illuminate\Support\Facades\Mail;
 // use App\Mail\EnquiryStandard;
-// use App\Models\Enquiry;
+use App\Models\Enquiry;
 
 
 class AdminEnquiryProfileController extends Controller
