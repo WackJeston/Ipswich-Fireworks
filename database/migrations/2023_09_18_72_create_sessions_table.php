@@ -13,12 +13,14 @@ return new class extends Migration
      */
     public function up()
     {
-        Schema::create('notification', function (Blueprint $table) {
-            $table->id();
-						$table->string('group', 255)->nullable();
-						$table->string('name', 255);
-            $table->timestamps();
-        });
+			Schema::create('sessions', function ($table) {
+				$table->string('id')->primary();
+				$table->foreignId('user_id')->nullable()->index();
+				$table->string('ip_address', 45)->nullable();
+				$table->text('user_agent')->nullable();
+				$table->text('payload');
+				$table->integer('last_activity')->index();
+			});
     }
 
     /**

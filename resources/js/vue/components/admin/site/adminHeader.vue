@@ -5,8 +5,14 @@
       <a v-show="this.showhome == 'false'" href="/admin/dashboard" class="nav-button home-button"><i class="fa-solid fa-house-chimney"></i></a>
       <i v-show="this.showhome == 'true'" class="fa-solid fa-house-chimney nav-button home-button" id="non-active"></i>
 
+			<div id="notification-header-container">
+        <div @click="this.navMenuActive = (this.navMenuActive == 'notification' ? null : 'notification')" class="nav-button" id="notification-button">
+          <i class="fa-solid fa-bell"></i>
+        </div>
+      </div>
+
       <div id="user-header-container">
-        <div @click="userMenuActive = !userMenuActive" class="header-button" id="user-button">
+        <div @click="this.navMenuActive = (this.navMenuActive == 'user' ? null : 'user')" class="header-button" id="user-button">
           <p>{{ this.sessionuser.firstName }} {{ this.sessionuser.lastName }}</p>
           <i class="fa-solid fa-user"></i>
         </div>
@@ -15,7 +21,19 @@
       <i @click='menuActive = !menuActive' class="fa-solid fa-bars hover-background nav-button" id="menu-button"></i>
     </nav>
 
-    <div id="user-menu" :style="[this.userMenuActive ? { transform: 'translate3d(0, 100%, 0)', minWidth: this.userMenuWidth + 'px' } : { transform: 'translate3d(0, 0, 0)', minWidth: this.userMenuWidth + 'px' }]">
+		<div id="notification-menu" :style="[this.navMenuActive == 'notification' ? { transform: 'translate3d(0, 100%, 0)', minWidth: this.notificationMenuWidth + 'px' } : { transform: 'translate3d(0, 0, 0)', minWidth: this.notificationMenuWidth + 'px' }]">
+      <div v-for="(group, groupName) in this.notifications">
+				<h3>{{ groupName }}</h3>
+				<div>
+					<button v-for="(notification, i) in group">
+						<i v-if="notification.email" class="fa-solid fa-square-check"></i>
+						<i v-else class="fa-solid fa-square-xmark"></i>
+					</button>
+				</div>
+			</div>
+    </div>
+
+    <div id="user-menu" :style="[this.navMenuActive == 'user' ? { transform: 'translate3d(0, 100%, 0)', minWidth: this.userMenuWidth + 'px' } : { transform: 'translate3d(0, 0, 0)', minWidth: this.userMenuWidth + 'px' }]">
       <a :href="'/admin/user-profile/' + this.sessionuser.id">My Profile</a>
       <a href="/adminLogout">Log Out</a>
     </div>
@@ -60,26 +78,36 @@
       'adminlinks',
       'showhome',
       'sessionuser',
+			'notifications',
     ],
 
     data() {
       return {
         menuActive: false,
-        userMenuActive: false,
+        navMenuActive: false,
 				userMenuWidth: 0,
+				notificationMenuWidth: 0,
       };
     },
 
 		mounted() {
-			setTimeout(() => {
-				this.setUserMenuWidth();
-			}, 2000);
+			this.setUserMenuWidth();
 		},
 
     methods: {
-			setUserMenuWidth() {
+			setUserMenuWidth(start = true) {
 				let userButton = document.querySelector("#user-header-container");
 				this.userMenuWidth = userButton.offsetWidth;
+
+				if (start) {
+					setTimeout(() => {
+						this.setUserMenuWidth(false);
+					}, 500);
+					
+					setTimeout(() => {
+						this.setUserMenuWidth(false);
+					}, 10000);
+				}
 			},
 
       toggleLinks(i, open) {

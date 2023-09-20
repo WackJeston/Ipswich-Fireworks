@@ -41,18 +41,30 @@ header .desktop-nav {
   cursor: pointer;
 }
 
+.desktop-nav #menu-button {
+	background-color: v.$bg-semi-light;
+}
+
 .desktop-nav .home-button {
   margin-right: auto;
 }
 
-.desktop-nav #user-header-container {
+.desktop-nav #user-header-container,
+.desktop-nav #notification-header-container {
   position: relative;
   height: 100%;
 }
 
 .desktop-nav #user-button {
-  position: relative;
+	position: relative;
   background-color: v.$bg-semi-dark;
+  padding: 0 15px;
+  z-index: 7;
+}
+
+.desktop-nav #notification-button {
+  position: relative;
+  background-color: v.$bg-semi-light;
   padding: 0 15px;
   z-index: 7;
 }
@@ -61,17 +73,32 @@ header .desktop-nav {
   margin-right: 10px;
 }
 
+header #notification-menu {
+	transition: transform 100ms ease;
+  display: flex;
+  flex-direction: column;
+  background-color: v.$alt-main;
+  position: absolute;
+  bottom: 0;
+  right: 300px;
+  z-index: 4;
+  border-radius: 0 0 5px 5px;
+	overflow: hidden;
+	width: 200px;
+	height: 400px;
+}
+
 header #user-menu {
   transition: transform 100ms ease;
   display: flex;
   flex-direction: column;
-  background-color: v.$bg-semi-dark;
-  // background-color: v.$bg-semi-dark;
+  background-color: v.$alt-main;
   position: absolute;
   bottom: 0;
   right: v.$header-height;
   z-index: 4;
   border-radius: 0 0 5px 5px;
+	overflow: hidden;
 }
 
 header #user-menu a {

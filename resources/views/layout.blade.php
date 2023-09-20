@@ -60,6 +60,7 @@
               :adminlinks="{{ json_encode($adminLinks) }}"
               showHome="{{ json_encode(true) }}"
               :sessionuser="{{ $sessionUser }}"
+							:notifications="{{ json_encode($notifications) }}"
             />
           @else
             <Adminheader
@@ -67,6 +68,7 @@
               :adminlinks="{{ json_encode($adminLinks) }}"
               showHome="{{ json_encode(false) }}"
               :sessionuser="{{ $sessionUser }}"
+							:notifications="{{ json_encode($notifications) }}"
             />
           @endif
         </div>

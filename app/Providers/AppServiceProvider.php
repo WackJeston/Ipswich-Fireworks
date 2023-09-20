@@ -109,8 +109,27 @@ class AppServiceProvider extends ServiceProvider
           ],
         ];
 
+				// $notificationsPre = DB::select('SELECT
+				// 	n.id,
+				// 	n.group,
+				// 	n.name,
+				// 	nu.standard,
+				// 	nu.email,
+				// 	nu.phone
+				// 	FROM notification AS n
+				// 	LEFT JOIN notification_user AS nu ON nu.notificationId=n.id AND nu.userId = ?', 
+				// 	[Auth::user()->id]
+				// );
+
+				$notifications = [];
+
+				// foreach ($notificationsPre as $i => $notification) {
+				// 	$notifications[$notification->group][] = $notification;
+				// }
+
         View::share([
           'adminLinks' => $adminLinks,
+					'notifications' => $notifications,
         ]);
       }
 
