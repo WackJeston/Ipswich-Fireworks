@@ -10,8 +10,6 @@ class ContactController extends Controller
 {
   public function show()
   {
-    $sessionUser = auth()->user();
-
     $contact = [];
 
     $contact['email'] = DB::select('SELECT 
@@ -39,7 +37,6 @@ class ContactController extends Controller
     );
 
     return view('public/contact', compact(
-      'sessionUser',
       'contact',
     ));
   }

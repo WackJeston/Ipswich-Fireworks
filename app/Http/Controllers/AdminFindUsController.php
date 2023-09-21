@@ -14,8 +14,6 @@ class AdminFindUsController extends Controller
 {
   public function show()
   {
-    $sessionUser = auth()->user();
-		
 		$gateForm = new DataForm(request(), '/admin-find-usAddGate');
 		$gateForm->setTitle('Add Gate');
 		$gateForm->addInput('text', 'street', 'Street', null, 100, 1);
@@ -34,7 +32,6 @@ class AdminFindUsController extends Controller
 		$gateTable = $gateTable->render();
 
     return view('admin/find-us', compact(
-      'sessionUser',
 			'gateForm',
 			'gateTable',
     ));

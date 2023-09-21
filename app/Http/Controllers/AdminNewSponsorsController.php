@@ -11,8 +11,6 @@ class AdminNewSponsorsController extends Controller
 {
   public function show()
   {
-    $sessionUser = auth()->user();
-
 		$type = 'sponsors';
 
     $enquiriesTable = new DataTable();
@@ -25,7 +23,6 @@ class AdminNewSponsorsController extends Controller
 		$enquiriesTable = $enquiriesTable->render();
 
     return view('admin/enquiries', compact(
-      'sessionUser',
 			'type',
       'enquiriesTable',
     ));

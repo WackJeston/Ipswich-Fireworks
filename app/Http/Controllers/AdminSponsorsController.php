@@ -13,8 +13,6 @@ class AdminSponsorsController extends Controller
 {
   public function show()
   {
-    $sessionUser = auth()->user();
-
 		$form = new DataForm(request(), '/sponsorsCreate', 'Add');
 		$form->setTitle('Add Sponsor');
 		$form->addInput('text', 'name', 'Name', null, 255, 1, true);
@@ -33,7 +31,6 @@ class AdminSponsorsController extends Controller
 		$table = $table->render();
 		
     return view('admin/sponsors', compact(
-      'sessionUser',
 			'form',
 			'table',
     ));

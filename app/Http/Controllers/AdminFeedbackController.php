@@ -11,8 +11,6 @@ class AdminFeedbackController extends Controller
 {
   public function show()
   {
-    $sessionUser = auth()->user();
-
 		$type = 'feedback';
 
     $enquiriesTable = new DataTable();
@@ -26,7 +24,6 @@ class AdminFeedbackController extends Controller
 		$enquiriesTable = $enquiriesTable->render();
 
     return view('admin/enquiries', compact(
-      'sessionUser',
 			'type',
       'enquiriesTable',
     ));

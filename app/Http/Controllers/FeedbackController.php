@@ -10,11 +10,7 @@ class FeedbackController extends Controller
 {
   public function show()
   {
-    $sessionUser = auth()->user();
-
-    return view('public/feedback', compact(
-      'sessionUser',
-    ));
+    return view('public/feedback');
   }
 
 

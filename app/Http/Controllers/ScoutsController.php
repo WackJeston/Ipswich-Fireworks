@@ -9,8 +9,6 @@ class ScoutsController extends Controller
 {
   public function show()
   {
-    $sessionUser = auth()->user();
-
 		$aboutUs = [];
 
 		$aboutUs[0] = DB::select('SELECT * FROM content WHERE active = 1 AND page = "scouts" AND position = "aboutUs_1"')[0];
@@ -18,7 +16,6 @@ class ScoutsController extends Controller
 		$aboutUs[2] = DB::select('SELECT * FROM content WHERE active = 1 AND page = "scouts" AND position = "aboutUs_3"')[0];
 
     return view('public/scouts', compact(
-      'sessionUser',
 			'aboutUs',
     ));
   }

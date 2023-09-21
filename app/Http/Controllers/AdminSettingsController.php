@@ -13,8 +13,6 @@ class AdminSettingsController extends Controller
 {
   public function show()
   {
-    $sessionUser = auth()->user();
-
 		$settings = Settings::all();
 
 		$form = new DataForm(request(), '/settingsUpdate');
@@ -38,7 +36,6 @@ class AdminSettingsController extends Controller
 		$form = $form->render();
 		
     return view('admin/settings', compact(
-      'sessionUser',
 			'form',
     ));
   }

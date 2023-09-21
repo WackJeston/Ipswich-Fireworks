@@ -51,7 +51,31 @@
   </head>
 
   <body>
+		@php
+			$sessionUser = auth()->user();
+		@endphp
+
     @if(str_contains(url()->current(), '/admin/'))
+			@php
+				$notificationsPre = DB::select('SELECT
+					n.id,
+					n.group,
+					n.name,
+					nu.standard,
+					nu.email,
+					nu.phone
+					FROM notification AS n
+					LEFT JOIN notification_user AS nu ON nu.notificationId=n.id AND nu.userId = ?', 
+					[auth()->user()['id']]
+				);
+
+				$notifications = [];
+
+				foreach ($notificationsPre as $i => $notification) {
+					$notifications[$notification->group][] = $notification;
+				}
+			@endphp
+
       <div class="admin-container">
         <div id="adminheader">
           @if(str_contains(url()->current(), '/dashboard'))

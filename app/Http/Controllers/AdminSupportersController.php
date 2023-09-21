@@ -13,8 +13,6 @@ class AdminSupportersController extends Controller
 {
   public function show()
   {
-    $sessionUser = auth()->user();
-
 		$form = new DataForm(request(), '/supportersCreate', 'Add');
 		$form->setTitle('Add Supporter');
 		$form->addInput('text', 'name', 'Name', null, 255, 1, true);
@@ -33,7 +31,6 @@ class AdminSupportersController extends Controller
 		$table = $table->render();
 		
     return view('admin/supporters', compact(
-      'sessionUser',
 			'form',
 			'table',
     ));

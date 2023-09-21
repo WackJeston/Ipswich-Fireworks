@@ -9,10 +9,6 @@ class SitemapController extends Controller
 {
   public function show()
   {
-    $sessionUser = auth()->user();
-
-    return view('public/site-map', compact(
-      'sessionUser',
-    ));
+    return view('public/site-map');
   }
 }

@@ -10,8 +10,6 @@ class HomeController extends Controller
 {
   public function show()
   {
-    $sessionUser = auth()->user();
-
 		$ticketDate = date("D jS F", strtotime(Settings::select('date')->where('id', 1)->first()->date));
 
     $landingZoneBanners = DB::select('SELECT
@@ -33,7 +31,6 @@ class HomeController extends Controller
 		');
 
     return view('home', compact(
-      'sessionUser',
       'landingZoneBanners',
 			'primaryInfo',
       'bottomBanners',

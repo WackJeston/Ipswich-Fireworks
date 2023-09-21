@@ -14,8 +14,6 @@ class AdminScoutsController extends Controller
 {
   public function show()
   {
-    $sessionUser = auth()->user();
-
 		$aboutUs1 = Content::firstOrCreate([
 			'page' => 'scouts',
 			'position' => 'aboutUs_1',
@@ -44,7 +42,6 @@ class AdminScoutsController extends Controller
 
 
     return view('admin/scouts', compact(
-      'sessionUser',
 			'aboutUsForm',
     ));
   }

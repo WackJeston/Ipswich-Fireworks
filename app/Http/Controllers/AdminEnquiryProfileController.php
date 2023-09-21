@@ -12,8 +12,6 @@ class AdminEnquiryProfileController extends Controller
 {
   public function show($id)
   {
-    $sessionUser = auth()->user();
-
 		$type = 'standard';
 
     $enquiry = Enquiry::find($id);
@@ -21,7 +19,6 @@ class AdminEnquiryProfileController extends Controller
 		// Mail::to('33kcaj33@gmail.com')->send(new EnquiryStandard());
 
     return view('admin/enquiry-profile', compact(
-      'sessionUser',
       'enquiry',
 			'type',
     ));

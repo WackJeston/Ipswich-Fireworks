@@ -8,8 +8,6 @@ class FindUsController extends Controller
 {
   public function show()
   {
-    $sessionUser = auth()->user();
-
 		$contactPre = DB::select('SELECT 
       c.type, 
       c.value
@@ -55,7 +53,6 @@ class FindUsController extends Controller
 		$end = Settings::select('datetime')->where('id', 4)->first()->datetime;
 
     return view('public/find-us', compact(
-      'sessionUser',
 			'contact',
 			'coordinates',
 			'gates',

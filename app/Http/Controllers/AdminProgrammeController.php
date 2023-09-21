@@ -13,8 +13,6 @@ class AdminProgrammeController extends Controller
 {
   public function show()
   {
-    $sessionUser = auth()->user();
-
     $standardForm = new DataForm(request(), '/programmeCreateStandard', 'Add');
 		$standardForm->setTitle('Add Standard Item');
 		$standardForm->addInput('text', 'value', 'Name', null, 1000, 1, true);
@@ -54,7 +52,6 @@ class AdminProgrammeController extends Controller
 		$musicTable = $musicTable->render();
 
     return view('admin/programme', compact(
-      'sessionUser',
 			'standardForm',
 			'standardTable',
 			'musicForm',

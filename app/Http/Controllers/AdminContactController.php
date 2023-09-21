@@ -13,8 +13,6 @@ class AdminContactController extends Controller
 {
   public function show()
   {
-    $sessionUser = auth()->user();
-
     $contactRecords = Contact::select('id', 'type', 'value', 'label')->get();
 
     $contact = [];
@@ -83,7 +81,6 @@ class AdminContactController extends Controller
 		$urlsTable = $urlsTable->render();
 
     return view('admin/contact', compact(
-      'sessionUser',
       'contact',
 			'editForm',
 			'emailForm',

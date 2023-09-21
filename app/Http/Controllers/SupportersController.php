@@ -7,12 +7,9 @@ class SupportersController extends Controller
 {
   public function show()
   {
-    $sessionUser = auth()->user();
-
 		$records = DB::select('SELECT * FROM supporters WHERE type = "supporter" AND active = 1');
 
     return view('public/supporters', compact(
-      'sessionUser',
 			'records',
     ));
   }

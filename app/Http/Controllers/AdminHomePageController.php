@@ -16,13 +16,10 @@ class AdminHomePageController extends Controller
 {
   public function show()
   {
-    $sessionUser = auth()->user();
-
 		$framingOptions = [];
 
 		$framingOptions[] = ['value' => 'top', 'label' => 'Top'];
 		$framingOptions[] = ['value' => 'bottom', 'label' => 'Bottom'];
-		
 
 		$landingZoneBannerForm = new DataForm(request(), '/admin-home-pageAddLandingZoneBanner', 'Add Banner');
 		$landingZoneBannerForm->setTitle('Landing Zone Banner');
@@ -73,7 +70,6 @@ class AdminHomePageController extends Controller
 		$bottomBannerTable = $bottomBannerTable->render();
 
     return view('admin/home-page', compact(
-      'sessionUser',
 			'landingZoneBannerForm',
 			'landingZoneBannerTable',
 			'primaryInfoForm',
