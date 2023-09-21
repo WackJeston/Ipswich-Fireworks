@@ -22,13 +22,12 @@
     </nav>
 
 		<div id="notification-menu" :style="[this.navMenuActive == 'notification' ? { transform: 'translate3d(0, 100%, 0)', minWidth: this.notificationMenuWidth + 'px' } : { transform: 'translate3d(0, 0, 0)', minWidth: this.notificationMenuWidth + 'px' }]">
-      <div v-for="(group, groupName) in this.notifications">
+      <div class="notification-group" v-for="(group, groupName) in this.notifications">
 				<h3>{{ groupName }}</h3>
-				<div>
-					<button v-for="(notification, i) in group">
-						<i v-if="notification.email" class="fa-solid fa-square-check"></i>
-						<i v-else class="fa-solid fa-square-xmark"></i>
-					</button>
+				<div v-for="(notification, i) in group">
+					<i v-if="notification.email" class="fa-solid fa-square-check"></i>
+					<i v-else class="fa-solid fa-square-xmark"></i>
+					<span>{{ notification.name }}</span>
 				</div>
 			</div>
     </div>
