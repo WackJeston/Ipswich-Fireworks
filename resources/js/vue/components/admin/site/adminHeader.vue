@@ -91,6 +91,7 @@
 
 		mounted() {
 			this.setUserMenuWidth();
+			this.setNotificationMenuPosition();
 		},
 
     methods: {
@@ -105,6 +106,26 @@
 					
 					setTimeout(() => {
 						this.setUserMenuWidth(false);
+					}, 10000);
+				}
+			},
+
+			setNotificationMenuPosition(start = true) {
+				let button = document.querySelector("#notification-button");
+				let menu = document.querySelector("#notification-menu");
+
+				let buttonPosition = button.getBoundingClientRect();
+				console.log(buttonPosition.right);
+
+				menu.style.left = buttonPosition.left + "px";
+
+				if (start) {
+					setTimeout(() => {
+						this.setNotificationMenuPosition(false);
+					}, 500);
+					
+					setTimeout(() => {
+						this.setNotificationMenuPosition(false);
 					}, 10000);
 				}
 			},
