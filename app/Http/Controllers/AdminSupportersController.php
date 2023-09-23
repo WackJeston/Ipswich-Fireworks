@@ -14,14 +14,14 @@ class AdminSupportersController extends Controller
   public function show()
   {
 		$form = new DataForm(request(), '/supportersCreate', 'Add');
-		$form->setTitle('Add Supporter');
+		$form->setTitle('Add Supporter / Sponsor');
 		$form->addInput('text', 'name', 'Name', null, 255, 1, true);
 		$form->addInput('text', 'link', 'Link', null, 255, 0);
 		$form->addInput('file', 'fileName', 'Logo', null, null, null, true);
 		$form = $form->render();
 
 		$table = new DataTable('supporters');
-		$table->setQuery('SELECT * FROM supporters WHERE type = "supporter"');
+		$table->setQuery('SELECT * FROM supporters');
 		$table->addColumn('id', '#');
 		$table->addColumn('name', 'Name', 2);
 		$table->addColumn('link', 'Link', 2, true);

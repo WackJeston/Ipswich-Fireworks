@@ -14,7 +14,6 @@ use App\Http\Controllers\FindUsController;
 use App\Http\Controllers\ProgrammeController;
 use App\Http\Controllers\ScoutsController;
 use App\Http\Controllers\SupportersController;
-use App\Http\Controllers\SponsorsController;
 use App\Http\Controllers\ContactController;
 use App\Http\Controllers\FeedbackController;
 use App\Http\Controllers\SitemapController;
@@ -25,7 +24,6 @@ use App\Http\Controllers\AdminContactController;
 use App\Http\Controllers\AdminProgrammeController;
 use App\Http\Controllers\AdminScoutsController;
 use App\Http\Controllers\AdminSupportersController;
-use App\Http\Controllers\AdminSponsorsController;
 use App\Http\Controllers\AdminHomePageController;
 use App\Http\Controllers\AdminFindUsController;
 use App\Http\Controllers\AdminSettingsController;
@@ -68,11 +66,7 @@ Route::controller(ScoutsController::class)->group(function () {
 
 Route::controller(SupportersController::class)->group(function () {
 	Route::get('/supporters', 'show');
-});
-
-Route::controller(SponsorsController::class)->group(function () {
-	Route::get('/sponsors', 'show');
-	Route::get('/sponsorsCreateEnquiry', 'createEnquiry');
+	Route::get('/supportersCreateEnquiry', 'createEnquiry');
 });
 
 Route::controller(ContactController::class)->group(function () {
@@ -143,12 +137,6 @@ Route::group( ['middleware' => 'auth' ], function()
 		Route::get('/admin/supporters', 'show');
 		Route::post('/supportersCreate', 'create');
 		Route::get('/supportersDelete/{id}', 'delete');
-	});
-
-	Route::controller(AdminSponsorsController::class)->group(function () {
-		Route::get('/admin/sponsors', 'show');
-		Route::post('/sponsorsCreate', 'create');
-		Route::get('/sponsorsDelete/{id}', 'delete');
 	});
 
   Route::controller(AdminSettingsController::class)->group(function () {

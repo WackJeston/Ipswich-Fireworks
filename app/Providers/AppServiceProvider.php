@@ -100,11 +100,6 @@ class AppServiceProvider extends ServiceProvider
                 "link"=>"/admin/supporters",
                 "icon"=>"fa-solid fa-heart-pulse",
               ],
-              $sponsors = [
-                "title"=>"sponsors",
-                "link"=>"/admin/sponsors",
-                "icon"=>"fa-solid fa-handshake-angle",
-              ],
             ],
           ],
         ];
@@ -141,15 +136,10 @@ class AppServiceProvider extends ServiceProvider
             "link"=>"/feedback",
             "icon"=>"fa-solid fa-message",
           ],
-					$supporters = [
-						"title"=>"our supporters",
+					$sponsors = [
+						"title"=>"supporters & sponsors",
 						"link"=>"/supporters",
 						"icon"=>"fa-solid fa-heart-pulse",
-					],
-					$sponsors = [
-						"title"=>"our sponsors",
-						"link"=>"/sponsors",
-						"icon"=>"fa-solid fa-handshake-angle",
 					],
         ];
 
