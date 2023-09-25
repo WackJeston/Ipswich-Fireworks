@@ -80,12 +80,11 @@ header #notification-menu {
   background-color: v.$bg-dark;
   position: absolute;
   bottom: 0;
-  // right: 300px;
   z-index: 4;
   border-radius: 0 0 5px 5px;
 	overflow: hidden;
-	width: 200px;
-	height: 400px;
+	width: 180px;
+	padding: 6px 0 15px 0;
 
 	@media (max-width: 410px) {
 		left: 0;
@@ -100,23 +99,33 @@ header #notification-menu .notification-group {
 
 header #notification-menu .notification-group h3 {
 	margin: 0;
-	padding: 5px 0 0 10px;
+	padding: 0 13px 0 13px;
 }
 
 header #notification-menu .notification-group div {
 	display: flex;
 	flex-direction: row;
 	align-items: center;
-	padding-left: 13px;
+	padding-left: 15px;
+	padding-right: 15px;
 }
 
 header #notification-menu .notification-group i {
 	cursor: pointer;
-	font-size: 1.2rem;
+	font-size: 1.1rem;
+	background-color: v.$bg-dark;
 }
 
 header #notification-menu .notification-group i:hover {
 	color: v.$bg-main;
+}
+
+header #notification-menu .notification-group i.fa-square-xmark {
+	color: v.$pale-red;
+}
+
+header #notification-menu .notification-group i.fa-square-check {
+	color: v.$pale-green;
 }
 
 header #notification-menu .notification-group span {

@@ -19,6 +19,8 @@ use App\Http\Controllers\FeedbackController;
 use App\Http\Controllers\SitemapController;
 
 // ADMIN
+use App\Http\Controllers\AdminHeaderController;
+
 use App\Http\Controllers\AdminDashboardController;
 use App\Http\Controllers\AdminContactController;
 use App\Http\Controllers\AdminProgrammeController;
@@ -84,6 +86,8 @@ Route::controller(SitemapController::class)->group(function () {
 });
 
 // ADMIN -----------------------------------------------------------------------------------
+Route::get('/header-toggleNotification/{id}/{type}', [AdminHeaderController::class, 'toggleNotification']);
+
 Route::group( ['middleware' => 'auth' ], function()
 {
 	Route::view('/admin', 'admin/auth/login');

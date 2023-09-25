@@ -25,8 +25,8 @@
       <div class="notification-group" v-for="(group, groupName) in this.notifications">
 				<h3>{{ groupName }}</h3>
 				<div v-for="(notification, i) in group">
-					<i v-if="notification.email" class="fa-solid fa-square-check"></i>
-					<i v-else class="fa-solid fa-square-xmark"></i>
+					<i v-if="notification.email" class="fa-solid fa-square-check" @click="this.toggleNotification(notification.id, 'email')"></i>
+					<i v-else class="fa-solid fa-square-xmark" @click="this.toggleNotification(notification.id, 'email')"></i>
 					<span>{{ notification.name }}</span>
 				</div>
 			</div>
@@ -157,6 +157,18 @@
           words[i] = words[i][0].toUpperCase() + words[i].substr(1);
         }
         return words.join(" ");
+      },
+
+			// AJAX
+			async toggleNotification(id, type) {
+        try {
+          this.result = await this.$http.post("/header-toggleNotification/" + id + "/" + type);
+        } catch (err) {
+          console.log(err);
+        } finally {
+          console.log('SUCCESS');
+					console.log(this.result);
+        }
       },
     },
   };
