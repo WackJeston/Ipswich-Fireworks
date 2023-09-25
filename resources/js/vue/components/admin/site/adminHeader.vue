@@ -2,8 +2,8 @@
   <header class="lt">
     <nav class="desktop-nav">
       <!-- <a href="/admin/dashboard" class="title"><h2 class="hover">{{ this.sitetitle }}</h2></a> -->
-      <a v-show="this.showhome == 'false'" href="/admin/dashboard" class="nav-button home-button"><i class="fa-solid fa-house-chimney"></i></a>
-      <i v-show="this.showhome == 'true'" class="fa-solid fa-house-chimney nav-button home-button" id="non-active"></i>
+      <a v-show="this.showhome == 'false'" href="/admin/dashboard" class="nav-button home-button header-button"><i class="fa-solid fa-house-chimney"></i></a>
+      <i v-show="this.showhome == 'true'" class="fa-solid fa-house-chimney nav-button home-button header-button" id="non-active"></i>
 
 			<div id="notification-header-container">
         <div @click="this.navMenuActive = (this.navMenuActive == 'notification' ? null : 'notification')" class="nav-button" id="notification-button">
@@ -111,13 +111,11 @@
 			},
 
 			setNotificationMenuPosition(start = true) {
-				let button = document.querySelector("#notification-button");
 				let menu = document.querySelector("#notification-menu");
-
+				let button = document.querySelector("#notification-button");
 				let buttonPosition = button.getBoundingClientRect();
-				console.log(buttonPosition.right);
 
-				menu.style.left = buttonPosition.left + "px";
+				menu.style.right = (window.innerWidth - buttonPosition.left - button.offsetWidth) + "px";
 
 				if (start) {
 					setTimeout(() => {
