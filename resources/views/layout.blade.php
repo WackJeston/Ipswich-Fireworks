@@ -61,6 +61,7 @@
 					n.id,
 					n.group,
 					n.name,
+					nu.id AS notificationUserId,
 					nu.standard,
 					nu.email,
 					nu.phone

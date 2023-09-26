@@ -6,33 +6,30 @@ use DB;
 use App\Models\NotificationUser;
 
 
-class AdminDashboardController extends Controller
+class AdminHeaderController extends Controller
 {
-  public function toggleNotification(int $id, string $type)
+  public function toggleNotification(int $id, int $notificationUserId, string $type)
   {
-    if ($record = NotificationUser::find($id)) {
+    if ($record = NotificationUser::find($notificationUserId)) {
 			$record->delete();
-
-			return 0;
+			return false;
 		
 		} else {
 			$record = new NotificationUser;
 			$record->notificationId = $id;
 			$record->userId = auth()->user()->id;
 
-			if ($type = 'email') {
+			if ($type == 'email') {
 				$record->email = 1;
-			} elseif ($type = 'phone') {
+			} elseif ($type == 'phone') {
 				$record->phone = 1;
 			} else {
 				$record->standard = 1;
 			}
 
 			$record->save();
-			
-			return 1;
-		}
+			return true;
 
-		return false;
+		}
   }
 }

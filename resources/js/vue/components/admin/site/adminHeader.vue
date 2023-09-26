@@ -22,11 +22,11 @@
     </nav>
 
 		<div id="notification-menu" :style="[this.navMenuActive == 'notification' ? { transform: 'translate3d(0, 100%, 0)', minWidth: this.notificationMenuWidth + 'px' } : { transform: 'translate3d(0, 0, 0)', minWidth: this.notificationMenuWidth + 'px' }]">
-      <div class="notification-group" v-for="(group, groupName) in this.notifications">
+      <div class="notification-group" v-for="(group, groupName) in this.notificationsData">
 				<h3>{{ groupName }}</h3>
 				<div v-for="(notification, i) in group">
-					<i v-if="notification.email" class="fa-solid fa-square-check" @click="this.toggleNotification(notification.id, 'email')"></i>
-					<i v-else class="fa-solid fa-square-xmark" @click="this.toggleNotification(notification.id, 'email')"></i>
+					<i v-if="notification.email" :id="'notification-' + notification.id" class="fa-solid fa-square-check" @click="this.toggleNotification(notification.notificationUserId, 'email', notification.id)"></i>
+					<i v-else :id="'notification-' + notification.id" class="fa-solid fa-square-xmark" @click="this.toggleNotification(0, 'email', notification.id)"></i>
 					<span>{{ notification.name }}</span>
 				</div>
 			</div>
@@ -86,6 +86,7 @@
         navMenuActive: false,
 				userMenuWidth: 0,
 				notificationMenuWidth: 0,
+				notificationsData: this.notifications,
       };
     },
 
@@ -160,14 +161,24 @@
       },
 
 			// AJAX
-			async toggleNotification(id, type) {
+			async toggleNotification(notificationUserId, type, id) {
         try {
-          this.result = await this.$http.post("/header-toggleNotification/" + id + "/" + type);
+          this.result = await this.$http.get("/header-toggleNotification/" + id + "/" + notificationUserId + "/" + type);
         } catch (err) {
           console.log(err);
         } finally {
-          console.log('SUCCESS');
-					console.log(this.result);
+					console.log(this.result.data);
+          let button = document.querySelector("#notification-" + id);
+
+					console.log(button);
+
+					if (this.result) {
+						button.classList.remove("fa-square-xmark");
+						button.classList.add("fa-square-check");
+					} else {
+						button.classList.remove("fa-square-check");
+						button.classList.add("fa-square-xmark");
+					}
         }
       },
     },

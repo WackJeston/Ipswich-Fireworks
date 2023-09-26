@@ -86,7 +86,7 @@ Route::controller(SitemapController::class)->group(function () {
 });
 
 // ADMIN -----------------------------------------------------------------------------------
-Route::get('/header-toggleNotification/{id}/{type}', [AdminHeaderController::class, 'toggleNotification']);
+Route::get('/header-toggleNotification/{id}/{notificationUserId}/{type}', [AdminHeaderController::class, 'toggleNotification']);
 
 Route::group( ['middleware' => 'auth' ], function()
 {
