@@ -26,7 +26,7 @@ class SupportersController extends Controller
     ]);
 
     Enquiry::create([
-			'type' => 'sponsor',
+			'type' => 'new sponsor',
       'name' => $request->name,
 			'email' => $request->email,
 			'phone' => $request->phone,

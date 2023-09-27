@@ -107,6 +107,10 @@
 					
 					setTimeout(() => {
 						this.setUserMenuWidth(false);
+					}, 5000);
+					
+					setTimeout(() => {
+						this.setUserMenuWidth(false);
 					}, 10000);
 				}
 			},
@@ -122,6 +126,10 @@
 					setTimeout(() => {
 						this.setNotificationMenuPosition(false);
 					}, 500);
+					
+					setTimeout(() => {
+						this.setNotificationMenuPosition(false);
+					}, 5000);
 					
 					setTimeout(() => {
 						this.setNotificationMenuPosition(false);
@@ -167,17 +175,37 @@
         } catch (err) {
           console.log(err);
         } finally {
-					console.log(this.result.data);
-          let button = document.querySelector("#notification-" + id);
+          // let button = document.querySelector("#notification-" + id);
 
-					console.log(button);
+					if (this.result.data[0]) {
+						this.notificationsData[this.result.data[1]].forEach(notificationItem => {
+							if (notificationItem.name == this.result.data[2]) {
+								notificationItem.notificationUserId = this.result.data[3];
 
-					if (this.result) {
-						button.classList.remove("fa-square-xmark");
-						button.classList.add("fa-square-check");
+								if (type == "email") {
+									notificationItem.email = 1
+								} else if (type == "phone") {
+									notificationItem.phone = 1
+								} else {
+									notificationItem.standard = 1
+								}
+							}
+						});
+
 					} else {
-						button.classList.remove("fa-square-check");
-						button.classList.add("fa-square-xmark");
+						this.notificationsData[this.result.data[1]].forEach(notificationItem => {
+							if (notificationItem.name == this.result.data[2]) {
+								notificationItem.notificationUserId = undefined;
+
+								if (type == "email") {
+									notificationItem.email = 0
+								} else if (type == "phone") {
+									notificationItem.phone = 0
+								} else {
+									notificationItem.standard = 0
+								}
+							}
+						});
 					}
         }
       },

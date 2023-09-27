@@ -16,6 +16,8 @@ class NewEnquiry extends Mailable
 {
   use Queueable, SerializesModels;
 
+	public $record;
+
   /**
    * Create a new message instance.
    *
@@ -23,7 +25,7 @@ class NewEnquiry extends Mailable
    */
   public function __construct($id)
   {
-    $enquiry = Enquiry::find($id);
+    $this->record = Enquiry::find($id);
   }
 
   /**
@@ -33,9 +35,9 @@ class NewEnquiry extends Mailable
    */
   public function envelope()
   {
-    return new Envelope(
-      from: new Address($_ENV['MAIL_FROM_ADDRESS'], $_ENV['APP_NAME']),
-      subject: 'New Enquiry (Standard)',
+		return new Envelope(
+      from: new Address($_ENV['MAIL_NOTIFICATION_ADDRESS'], $_ENV['APP_NAME']),
+      subject: sprintf('New Enquiry (%s)', $this->record->type),
     );
   }
 

@@ -62,9 +62,7 @@
 					n.group,
 					n.name,
 					nu.id AS notificationUserId,
-					nu.standard,
-					nu.email,
-					nu.phone
+					IF(nu.email, 1, 0) AS email
 					FROM notification AS n
 					LEFT JOIN notification_user AS nu ON nu.notificationId=n.id AND nu.userId = ?', 
 					[auth()->user()['id']]

@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use DB;
+use App\Models\Notification;
 use App\Models\NotificationUser;
 
 
@@ -10,9 +11,12 @@ class AdminHeaderController extends Controller
 {
   public function toggleNotification(int $id, int $notificationUserId, string $type)
   {
+		$group = Notification::select('group', 'name')->where('id', $id)->get()[0];
+
     if ($record = NotificationUser::find($notificationUserId)) {
 			$record->delete();
-			return false;
+
+			return json_encode([0, $group->group, $group->name]);
 		
 		} else {
 			$record = new NotificationUser;
@@ -28,8 +32,8 @@ class AdminHeaderController extends Controller
 			}
 
 			$record->save();
-			return true;
 
+			return json_encode([1, $group->group, $group->name, $record->id]);
 		}
   }
 }

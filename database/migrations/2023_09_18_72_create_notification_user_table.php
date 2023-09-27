@@ -17,7 +17,9 @@ return new class extends Migration
             $table->id();
 						$table->foreignId('notificationId')->constrained('notification')->onUpdate('cascade')->onDelete('cascade');
 						$table->foreignId('userId')->constrained('users')->onUpdate('cascade')->onDelete('cascade');
-						$table->string('type', 255)->default('email');
+						$table->boolean('standard')->default(0);
+						$table->boolean('email')->default(0);
+						$table->boolean('phone')->default(0);
             $table->timestamps();
         });
     }
