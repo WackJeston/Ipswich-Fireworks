@@ -7,12 +7,12 @@ use Illuminate\Database\Eloquent\Model;
 
 class Notification extends Model
 {
-    use HasFactory;
+	use HasFactory;
 
-    protected $table = 'notification';
+	protected $table = 'notification';
 
-    protected $fillable = [
-      'group',
-      'name',
-    ];
+	protected $fillable = [
+		'group',
+		'name',
+	];
 }

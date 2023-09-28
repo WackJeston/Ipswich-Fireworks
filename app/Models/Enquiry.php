@@ -23,21 +23,19 @@ class Enquiry extends Model
     'message',
   ];
 
-	public static function boot()
-	{
-		parent::boot();
-
-		self::created(function($model){
+	protected static function booted() {
+		static::created(function ($self) {
 			$emails = DB::select('SELECT
 				u.email
 				FROM users AS u
 				INNER JOIN notification_user AS nu ON nu.userId = u.id AND nu.email = 1
-				INNER JOIN notification AS n ON n.id = nu.notificationId AND n.name = ?
-			', [$model->type]);
+				INNER JOIN notification AS n ON n.id = nu.notificationId AND n.name = ?', 
+				[$self->type]
+			);
 
 			foreach ($emails as $i => $email) {
-				Mail::to($email)->send(new NewEnquiry($model->id));
+				Mail::to($email)->send(new NewEnquiry($self->id));
 			}
-		});
+    });
 	}
 }

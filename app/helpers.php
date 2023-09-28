@@ -2,7 +2,7 @@
 
 use Illuminate\Support\Facades\Storage;
 use Intervention\Image\ImageManager;
-use Aws\S3\S3Client;
+use Aws\Ses\SesClient; 
 
 function storeImages($request, $id, string $type):array {
 	$fileNames = [];
@@ -37,5 +37,16 @@ function storeImages($request, $id, string $type):array {
 	}
 
 	return $fileNames;
+}
+
+// AWS S3
+function connectSes() {
+  $connection = new SesClient([
+    'version' => 'latest',
+    'region' => $_ENV['AWS_DEFAULT_REGION'],
+    'profile' => 'default',
+  ]);
+
+  return $connection;
 }
 
