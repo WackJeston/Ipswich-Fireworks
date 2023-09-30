@@ -14,8 +14,9 @@ class AdminDashboardController extends Controller
 		$enquiriesTable->setQuery('SELECT * FROM enquiry ORDER BY created_at DESC');
 		$enquiriesTable->setTitle('New Enquiries');
 		$enquiriesTable->addColumn('id', '#');
-		$enquiriesTable->addColumn('email', 'Email', 3);
-		$enquiriesTable->addColumn('subject', 'Subject', 2);
+		$enquiriesTable->addColumn('type', 'Type', 2);
+		$enquiriesTable->addColumn('subject', 'Subject', 3);
+		$enquiriesTable->addColumn('email', 'Email', 4);
 		$enquiriesTable->addLinkButton('enquiry-profile/?', 'fa-solid fa-folder-open', 'Open Record');
 		$enquiriesTable = $enquiriesTable->render();
 

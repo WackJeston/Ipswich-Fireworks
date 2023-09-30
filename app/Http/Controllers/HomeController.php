@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use DB;
+use Illuminate\Support\Facades\Storage;
 use Illuminate\Http\Request;
 use App\Models\Settings;
 
@@ -20,6 +21,12 @@ class HomeController extends Controller
 			AND b.active = 1
 		');
 
+		foreach ($landingZoneBanners as $i => $banner) {
+			$banner->fileName = Storage::disk('s3')->temporaryUrl(
+				$banner->fileName, now()->addMinutes(10)
+			);
+		}
+
 		$primaryInfo = DB::select('SELECT * FROM content WHERE active = 1 AND page = "home" AND position = "primaryInfo"')[0];
 
     $bottomBanners = DB::select('SELECT
@@ -29,6 +36,12 @@ class HomeController extends Controller
 			AND b.position = "bottom"
 			AND b.active = 1
 		');
+
+		foreach ($bottomBanners as $i => $banner) {
+			$banner->fileName = Storage::disk('s3')->temporaryUrl(
+				$banner->fileName, now()->addMinutes(10)
+			);
+		}
 
     return view('home', compact(
       'landingZoneBanners',

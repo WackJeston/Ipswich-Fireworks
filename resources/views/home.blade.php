@@ -13,7 +13,6 @@
 			<div async id="bannerhometop">
 				<bannerhometop 
 					:banners="{{ json_encode($landingZoneBanners) }}"
-					asset="{{ env('AWS_ASSET_URL') }}"
 					tickets="{{ $ticketsActive }}"
 					ticketdate="{{ $ticketDate }}"
 				/>
@@ -42,7 +41,6 @@
 			<div async id="bannerhomebottom">
 				<bannerhomebottom 
 					:banners="{{ json_encode($bottomBanners) }}"
-					asset="{{ env('AWS_ASSET_URL') }}"
 				/>
 			</div>
 		@endif
