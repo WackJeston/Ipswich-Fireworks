@@ -43,15 +43,11 @@ class AdminSettingsController extends Controller
 	public function update(Request $request)
 	{
 		$settings = Settings::all();
-		$column = null;
+		$updated = false;
 
 		foreach ($settings as $i => $setting) {
-			// if ($i == 1) {
-			// 	dd(
-			// 		$setting->text
-			// 	);
-			// }
-
+			$column = null;
+			
 			if ($setting->text != null) {
 				if ($setting->text != $request->all()[str_replace(' ', '_', $setting->name)]) {
 					$column = 'text';
@@ -69,7 +65,7 @@ class AdminSettingsController extends Controller
 					$column = 'date';
 				}
 			} elseif ($setting->datetime != null) {
-				if ($setting->datetime != date('Y-m-d H:i:s', strtotime($request->all()[str_replace(' ', '_', $setting->name)]))) {
+				if (strtotime($setting->datetime) != strtotime($request->all()[str_replace(' ', '_', $setting->name)])) {
 					$column = 'datetime';
 				}
 			} else {
@@ -92,13 +88,15 @@ class AdminSettingsController extends Controller
 				Settings::where('id', $setting->id)->update([
 					$column => $request->all()[str_replace(' ', '_', $setting->name)],
 				]);
+
+				$updated = true;
 			}
 		}
 
-		if ($column == null) {
+		if ($updated == false) {
 			return redirect("/admin/settings")->withErrors(['error' => 'Noting to update.']);
+		} else {
+			return redirect("/admin/settings")->with('message', 'Settings updated successfully.');
 		}
-
-		return redirect("/admin/settings")->with('message', 'Settings updated successfully.');
 	}
 }

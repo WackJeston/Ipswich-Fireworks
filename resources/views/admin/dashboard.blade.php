@@ -19,5 +19,16 @@
       </div>
     @endif
 
+		<div class="page-column-container columns-2">
+			<div class="page-column">
+				@php
+					echo $enquiriesTable['html'];
+				@endphp
+			</div>
+			<div class="page-column">
+				
+			</div>
+		</div>
+
   </main>
 @endsection

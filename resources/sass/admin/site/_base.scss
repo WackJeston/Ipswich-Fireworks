@@ -42,6 +42,36 @@ main h2 {
 	text-decoration: underline;
 }
 
+.page-column-container {
+	display: flex;
+	flex-direction: row;
+	width: 100%;
+	justify-content: space-between;
+
+	@media (max-width: 800px) {
+		flex-direction: column;
+	}
+}
+
+@media (min-width: 800px) {
+	.page-column-container.columns-2 .page-column {
+		width: calc(50% - 10px);
+	}
+	
+	.page-column-container.columns-3 .page-column {
+		width: calc(33.33% - 10px);
+	}
+
+	.page-column-container.columns-4 .page-column {
+		width: calc(25% - 10px);
+	}
+}
+
+.page-column-container .page-column {
+	display: flex;
+	flex-direction: column;
+}
+
 .web-box {
 	background-color: v.$white;
 	border-radius: 5px;
