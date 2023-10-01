@@ -14,11 +14,11 @@
 			@foreach ($records as $record)
 				@if ($record->link)
 					<a href="https://{{ $record->link }}" target="_blank">
-						<img src="{{ env('AWS_ASSET_URL') . $record->fileName }}" alt="{{ $record->name }}" />
+						<img src="{{ $record->fileName }}" alt="{{ $record->name }}" />
 					</a>
 				@else
 					<div href="https://{{ $record->link }}" target="_blank" class="supporter-non-link">
-						<img src="{{ env('AWS_ASSET_URL') . $record->fileName }}" alt="{{ $record->name }}" />
+						<img src="{{ $record->fileName }}" alt="{{ $record->name }}" />
 					</div>
 				@endif
 			@endforeach

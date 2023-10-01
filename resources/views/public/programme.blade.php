@@ -59,6 +59,12 @@
 						@endforeach
 				</ul>
 			</div>
+
+			<div class="image-grid">
+				@foreach ($images as $image)
+					<img src="{{ $image->fileName }}" alt="{{ $image->value }}">
+				@endforeach
+			</div>
 		@endif
   </main>
 @endsection

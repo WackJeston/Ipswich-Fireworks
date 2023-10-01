@@ -2,6 +2,7 @@
 namespace App\Http\Controllers;
 
 Use DB;
+use Illuminate\Support\Facades\Storage;
 use Illuminate\Http\Request;
 use App\Models\Enquiry;
 
@@ -10,6 +11,12 @@ class SupportersController extends Controller
   public function show()
   {
 		$records = DB::select('SELECT * FROM supporters WHERE active = 1');
+
+		foreach ($records as $i => $record) {
+			$record->fileName = Storage::disk('s3')->temporaryUrl(
+				$record->fileName, now()->addMinutes(10)
+			);
+		}
 
     return view('public/supporters', compact(
 			'records',

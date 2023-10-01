@@ -373,6 +373,37 @@ a.page-link:hover i {
 	color: v.$brand-main-darker;
 }
 
+.image-grid {
+	display: flex;
+	flex-direction: row;
+	flex-wrap: wrap;
+	justify-content: center;
+	padding: 0 20px 10px 20px;
+
+	@media (min-width: 750px) {
+		padding: 40px 20px;
+	}
+}
+
+.image-grid img {
+	display: flex;
+	margin-bottom: 20px;
+
+	@media (max-width: 750px) {
+		width: 100%;
+	}
+
+	@media (min-width: 750px) {
+		height: 300px;
+	}
+}
+
+.image-grid img:not(:last-child) {
+	@media (min-width: 750px) {
+		margin-right: 20px;
+	}
+}
+
 // Hover Styles ---------------------------------------
 .lt .hover:hover,
 .hover:hover h2,
