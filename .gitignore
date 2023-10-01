@@ -12,5 +12,5 @@ npm-debug.log
 yarn-error.log
 composer.lock
 .env
-/.vscode/sftp.json
+.vscode/sftp.json
 /.idea
