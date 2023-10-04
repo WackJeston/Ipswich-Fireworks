@@ -33,7 +33,8 @@ class AdminProgrammeController extends Controller
 		$musicForm->addInput('text', 'value', 'Name', null, 1000, 1, true);
 		$musicForm->addInput('text', 'label', 'Label', null, 255, 0);
 		$musicForm->addInput('text', 'stage', 'Stage', null, 255, 0);
-		$musicForm->addInput('time', 'time', 'Time', null, null, null);
+		$musicForm->addInput('checkbox', 'timeToggle', 'Time', null, null, null);
+		$musicForm->addInput('time', 'time', '', null, null, null);
 		$musicForm->addInput('url', 'link',  'Link', null, 255, 1);
 		$musicForm->addInput('file', 'fileName', 'Image', null, null, null);
 		$musicForm = $musicForm->render();
@@ -81,18 +82,24 @@ class AdminProgrammeController extends Controller
       'label' => 'max:255',
 			'stage' => 'max:255',
 			'time' => 'max:255',
-			'link' => 'url|max:255',
+			'link' => 'max:255',
 			'fileName' => 'image|mimes:jpg,jpeg,png,svg,webp',
     ]);
 
 		$fileNames = storeImages($request, 'music', 'programme');
+
+		$time = null;
+
+		if ($request['timeToggle'] == 'on') {
+			$time = $request['time'];
+		}
 
     Programme::create([
 			'type' => 'music',
 			'value' => $request['value'],
 			'label' => $request['label'],
 			'stage' => $request['stage'],
-			'time' => $request['time'],
+			'time' => $time,
 			'link' => $request['link'],
 			'fileName' => $fileNames[0]['new'],
 		]);
