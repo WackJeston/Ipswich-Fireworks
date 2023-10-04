@@ -166,34 +166,34 @@ class AppServiceProvider extends ServiceProvider
           // ],
 				];
 
-				$contactResult = DB::select('SELECT type, value FROM contact ORDER BY type ASC');
+				// $contactResult = DB::select('SELECT type, value FROM contact ORDER BY type ASC');
 
-				$contact = [
-					'email' => [],
-					'phone' => [],
-					'line2' => '',
-					'line3' => '',
-				];
+				// $contact = [
+				// 	'email' => [],
+				// 	'phone' => [],
+				// 	'line2' => '',
+				// 	'line3' => '',
+				// ];
 
-				foreach ($contactResult as $i => $row) {
-					if ($row->type == 'email') {
-						$contact['email'][] = $row->value;
-					} elseif ($row->type == 'phone') {
-						$contact['phone'][] = $row->value;
-					}	else {
-						$contact[$row->type] = $row->value;
-					}
-				}
+				// foreach ($contactResult as $i => $row) {
+				// 	if ($row->type == 'email') {
+				// 		$contact['email'][] = $row->value;
+				// 	} elseif ($row->type == 'phone') {
+				// 		$contact['phone'][] = $row->value;
+				// 	}	else {
+				// 		$contact[$row->type] = $row->value;
+				// 	}
+				// }
 
-				$date = date('Y-m-d H:i:s');
-				$start = DB::select('SELECT date FROM settings WHERE id = 1')[0]->date;
-				$end = DB::select('SELECT datetime FROM settings WHERE id = 4')[0]->datetime;
+				// $date = date('Y-m-d H:i:s');
+				// $start = DB::select('SELECT date FROM settings WHERE id = 1')[0]->date;
+				// $end = DB::select('SELECT datetime FROM settings WHERE id = 4')[0]->datetime;
 						
-				if (($date >= $start) && ($date <= $end)){
-					$ticketsActive = true;
-				} else {
-					$ticketsActive = false; 
-				}
+				// if (($date >= $start) && ($date <= $end)){
+				// 	$ticketsActive = true;
+				// } else {
+				// 	$ticketsActive = false; 
+				// }
 
         View::share([
           'publicLinks' => $publicLinks,
