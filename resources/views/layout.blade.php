@@ -58,6 +58,7 @@
 
   <body>
 		@php
+			dd(env('AWS_ASSET_URL'));
 			$sessionUser = auth()->user();
 		@endphp
 
