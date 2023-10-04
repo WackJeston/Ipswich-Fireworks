@@ -197,9 +197,9 @@ class AppServiceProvider extends ServiceProvider
 
         View::share([
           'publicLinks' => $publicLinks,
-					'socials' => $socials,
-					'contact' => $contact,
-					'ticketsActive' => $ticketsActive,
+					// 'socials' => $socials,
+					// 'contact' => $contact,
+					// 'ticketsActive' => $ticketsActive,
         ]);
       }
     }
