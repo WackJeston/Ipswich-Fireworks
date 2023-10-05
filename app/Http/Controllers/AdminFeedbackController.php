@@ -14,7 +14,7 @@ class AdminFeedbackController extends Controller
 		$type = 'feedback';
 
     $enquiriesTable = new DataTable();
-		$enquiriesTable->setQuery('SELECT * FROM enquiry WHERE `type` = "feedback" ORDER BY id DESC');
+		$enquiriesTable->setQuery('SELECT * FROM enquiry WHERE `type` = "feedback"', [], 'id', 'DESC');
 		$enquiriesTable->addColumn('id', '#');
 		$enquiriesTable->addColumn('name', 'Name', 1, true);
 		$enquiriesTable->addColumn('email', 'Email', 2);

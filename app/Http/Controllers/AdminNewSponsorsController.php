@@ -14,7 +14,7 @@ class AdminNewSponsorsController extends Controller
 		$type = 'sponsors';
 
     $enquiriesTable = new DataTable();
-		$enquiriesTable->setQuery('SELECT * FROM enquiry WHERE `type` = "sponsor" ORDER BY id DESC');
+		$enquiriesTable->setQuery('SELECT * FROM enquiry WHERE `type` = "sponsor"', [], 'id', 'DESC');
 		$enquiriesTable->addColumn('id', '#');
 		$enquiriesTable->addColumn('name', 'Name', 1, true);
 		$enquiriesTable->addColumn('email', 'Email', 2);

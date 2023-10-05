@@ -28,7 +28,7 @@ class AdminContactController extends Controller
       }
     }
 
-		$editForm = new dataForm(request(), '/contactUpdateAddress', 'Save', 'updateAddressMap()');
+		$editForm = new DataForm(request(), '/contactUpdateAddress', 'Save', 'updateAddressMap()');
 		$editForm->addInput('text', 'line1', 'Line 1', $contact['line1'] ?? null, 200, 1);
 		$editForm->addInput('text', 'line2', 'Line 2', $contact['line2'] ?? null, 200, 0);
 		$editForm->addInput('text', 'line3', 'Line 3', $contact['line3'] ?? null, 200, 0);

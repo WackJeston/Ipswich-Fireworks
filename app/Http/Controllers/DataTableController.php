@@ -2,6 +2,7 @@
 namespace App\Http\Controllers;
 
 use DB;
+use Illuminate\Support\Facades\Session;
 
 class DataTableController extends Controller
 {
@@ -39,6 +40,16 @@ class DataTableController extends Controller
 		}
 
 		DB::table($table)->where($primaryColumn, $primaryValue)->update([$column => $value]);
+
+		return true;
+	}
+
+	//Footer
+	public function changeLimit(string $limit, string $query) {
+		$table = session()->get($query);
+		$table['limit'] = $limit;
+		session()->put($query, $table);
+		session()->save();
 
 		return true;
 	}

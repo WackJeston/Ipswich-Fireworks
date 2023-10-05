@@ -11,7 +11,7 @@ class AdminDashboardController extends Controller
   public function show()
   {
 		$enquiriesTable = new DataTable();
-		$enquiriesTable->setQuery('SELECT * FROM enquiry ORDER BY created_at DESC');
+		$enquiriesTable->setQuery('SELECT * FROM enquiry', [], 'created_at', 'DESC');
 		$enquiriesTable->setTitle('New Enquiries');
 		$enquiriesTable->addColumn('id', '#');
 		$enquiriesTable->addColumn('type', 'Type', 2);

@@ -3,17 +3,23 @@
 namespace App;
 
 Use DB;
+use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Session;
 
 class DataTable
 {
-	protected $table;
+	public $table;
 
-  public function __construct(string $ref = 'default', string $primary = 'id')
+  public function __construct(string $ref = 'default', string $primary = 'id', int $limit = 10, int $offset = 0)
 	{
 		$this->table = [
 			'ref' => $ref,
 			'tableName' => explode('_REF_', $ref)[0],
 			'primary' => $primary,
+			'limit' => $limit,
+			'offset' => $offset,
+			'orderColumn' => 'id',
+			'orderDirection' => 'ASC',
 			'count' => 0,
 			'columns' => [],
 			'records' => [],
@@ -21,13 +27,37 @@ class DataTable
 		];
 	}
 
-	public function setQuery(string $query, array $params = []) {
+	public function setQuery(string $query, array $params = [], string $column = null, string $direction = null) {
+		$this->table['query'] = str_replace('"', '', $query);
+
+		// session()->forget($this->table['query']);
+
+		// dd(session()->get($this->table['query']));
+
+		if (session()->has($this->table['query'])) {
+			$this->table = session()->get($this->table['query']);
+			$this->table['count'] = [];
+			$this->table['columns'] = [];
+			$this->table['records'] = [];
+			$this->table['buttons'] = [];
+		}
+
+		if ($column != null) {
+			$this->table['orderColumn'] = $column;
+		}
+
+		if ($direction != null) {
+			$this->table['orderDirection'] = $direction;
+		}
+
 		$query = str_replace('?', '%s', $query);
 		$query = vsprintf($query, $params);
 
-		$this->table['records'] = DB::select($query);
+		$this->table['count'] = count(DB::select($query));
 
-		$this->table['count'] = count($this->table['records']);
+		$query = sprintf('%s ORDER BY %s %s LIMIT %s OFFSET %s', $query, $this->table['orderColumn'], $this->table['orderDirection'], $this->table['limit'], $this->table['offset']);
+
+		$this->table['records'] = DB::select($query);
 	}
 
 	public function setTitle(string $title) {
@@ -143,10 +173,14 @@ class DataTable
 		if (!empty($this->table['title'])) {
 			$this->table['title'] = str_replace('?', $this->table['count'], $this->table['title']);
 		}
+
+		session()->put($this->table['query'], $this->table);
+		session()->save();
 	}
 
 	public function render() {
 		self::calculate();
+		
 		$html = '';
 
 		if (!empty($this->table['title'])) {
@@ -321,6 +355,52 @@ class DataTable
 					<td><h3>No Records</h3></td>
 				</tr>';
 			}
+
+			$html .= '
+			<tfoot>
+				<tr>';
+
+					$html .= sprintf('
+					<td>
+						<i class="fa-solid fa-rectangle-list"></i> Records <strong>%s</strong> to <strong>%s</strong>, Total: <strong>%s</strong>
+					</td>', 
+						$this->table['offset'] + 1, 
+						$this->table['offset'] + $this->table['limit'] > $this->table['count'] ? $this->table['count'] : $this->table['offset'] + $this->table['limit'],
+						$this->table['count']
+					);
+
+					$html .= sprintf('
+					<td>
+						<i class="fa-solid fa-layer-group"></i> Limit: <select onclick="changeLimit(event, \'%s\', \'%s\');">
+							<option value="10" %s>10</option>
+							<option value="25" %s>25</option>
+							<option value="50" %s>50</option>
+							<option value="100" %s>100</option>
+							<option value="0" %s>All</option>
+						</select>
+					</td>',
+						$this->table['query'],
+						$this->table['limit'],
+						$this->table['limit'] == 10 ? 'selected' : '',
+						$this->table['limit'] == 25 ? 'selected' : '',
+						$this->table['limit'] == 50 ? 'selected' : '',
+						$this->table['limit'] == 100 ? 'selected' : '',
+						$this->table['limit'] == 0 ? 'selected' : '',
+					);
+					
+					// $html .= '
+					// 	<td>
+					// 		<button>button</button>
+					// 	</td>';
+
+					$html .= '
+					<td>
+						
+					</td>';
+
+				$html .= '
+				</tr>
+			</tfoot>';
 				
 		$html .= '
 		</table>';

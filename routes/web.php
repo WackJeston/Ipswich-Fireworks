@@ -45,6 +45,8 @@ Route::get('/dataTable-toggleButton/{table}/{column}/{primaryColumn}/{primaryVal
 Route::get('/dataTable-setPrimary/{table}/{column}/{primaryColumn}/{primaryValue}/{parent}/{parentId}', [DataTableController::class, 'setPrimary']);
 Route::get('/dataTable-selectDropdown/{table}/{column}/{primaryColumn}/{primaryValue}/{value}', [DataTableController::class, 'selectDropdown']);
 
+Route::get('/dataTable-changeLimit/{limit}/{query}', [DataTableController::class, 'changeLimit']);
+
 
 // SYSTEM -----------------------------------------------------------------------------------
 Route::get("sitemap-xml" , function () {

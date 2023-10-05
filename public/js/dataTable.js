@@ -9,7 +9,7 @@ function setTableMargin() {
 	
 			if (buttons != null) {
 				let width = buttons.offsetWidth;
-				let rows = table.querySelectorAll("#" + table.id + " tr");
+				let rows = table.querySelectorAll("#" + table.id + " tr:not(tfoot tr)");
 	
 				if (width == 0) {
 					let buttonCount = table.querySelector("#" + table.id + " .tr-buttons").childElementCount;
@@ -143,4 +143,19 @@ function selectDropdown(e, table, column, primaryTable, primaryValue) {
 		url: "/dataTable-selectDropdown/" + table + "/" + column + "/" + primaryTable + "/" + primaryValue + "/" + value,
 		type: "GET",
 	});
+};
+
+// AJAX - footer
+function changeLimit(e, query, oldLimit) {
+	let limit = e.target.value;
+
+	if (oldLimit != limit) {
+		$.ajax({
+			url: "/dataTable-changeLimit/" + limit + "/" + query,
+			type: "GET",
+			success: function(result) {
+				location.reload();
+			}
+		});
+	}	
 };

@@ -27,6 +27,9 @@ thead tr {
 
 tbody tr {
   height: 30px;
+}
+
+tbody tr:not(:last-child) {
 	border-bottom: 1px solid v.$bg-main;
 }
 
@@ -66,7 +69,7 @@ tr .tr-buttons {
 	background-color: v.$white;
 }
 
-tr i:not(.primary, .non-primary, .fa-xmark) {
+tr i:not(.primary, .non-primary, .fa-xmark, tfoot i) {
   position: relative;
   font-size: 1.1rem;
   text-align: right;
@@ -75,15 +78,15 @@ tr i:not(.primary, .non-primary, .fa-xmark) {
   margin-top: 3px;
 }
 
-tr i:not(tr:first-child, .primary, .non-primary) {
+tr i:not(tr:first-child, .primary, .non-primary, tfoot i) {
   padding-left: 7px;
 }
 
-tr i:hover:not(.primary, .non-primary) {
+tr i:hover:not(.primary, .non-primary, tfoot i) {
   color: v.$alt-semi-dark
 }
 
-tr i:hover .button-label:not(tr .button-label:hover) {
+tr i:hover .button-label:not(tr .button-label:hover, tfoot i) {
   display: block;
 }
 
@@ -144,17 +147,6 @@ table .non-primary {
   color: v.$pale-red;
 }
 
-table nav {
-	display: flex;
-	width: 100%;
-}
-
-table .pagination-controls {
-	display: flex;
-	flex-direction: row;
-	margin-left: auto;
-}
-
 table .fa-xmark {
 	display: flex;
 	align-items: center;
@@ -195,8 +187,8 @@ table .hide-mobile {
 	display: none;
 }
 
-table input,
-table select {
+table input:not(tfoot input),
+table select:not(tfoot select) {
 	-webkit-appearance: none;
   -moz-appearance: none;
 	background-color: v.$trans;
@@ -207,13 +199,51 @@ table select {
 	margin: 2px;
 }
 
-table input:hover,
-table input:focus,
-table select:hover,
-table select:focus {
+table input:not(tfoot input):hover,
+table input:not(tfoot input):focus,
+table select:not(tfoot select):hover,
+table select:not(tfoot select):focus {
 	-webkit-appearance: menulist;
   -moz-appearance: menulist;
 	background-color: white;
 	outline: 2px solid v.$black;
 	cursor: pointer;
 }
+
+tfoot tr {
+	display: flex;
+	height: 30px;
+	border-top: 1px solid v.$gray-1;
+	font-size: 0.9rem;
+}
+
+tfoot tr td:not(:first-child) {
+	padding-left: 15px;
+}
+
+tfoot tr td i {
+	font-size: 1rem;
+}
+
+tfoot tr td:last-child {
+	margin-left: auto;
+	height: 100%;
+}
+
+tfoot input,
+tfoot select {
+	background-color: white;
+	outline: 2px solid v.$gray-1;
+	border-radius: 3px;
+	max-width: 100%;
+	padding: 2px;
+	margin: 2px;
+	cursor: pointer;
+}
+
+// tfoot input:hover,
+// tfoot input:focus,
+// tfoot select:hover,
+// tfoot select:focus {
+// 	width: 100%;
+// }

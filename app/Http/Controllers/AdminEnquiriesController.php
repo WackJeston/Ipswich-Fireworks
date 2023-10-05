@@ -14,7 +14,7 @@ class AdminEnquiriesController extends Controller
 		$type = 'standard';
 
     $enquiriesTable = new DataTable();
-		$enquiriesTable->setQuery('SELECT * FROM enquiry WHERE `type` = "standard" ORDER BY id DESC');
+		$enquiriesTable->setQuery('SELECT * FROM enquiry WHERE `type` = "standard"', [], 'id', 'DESC');
 		$enquiriesTable->addColumn('id', '#');
 		$enquiriesTable->addColumn('name', 'Name', 2, true);
 		$enquiriesTable->addColumn('email', 'Email', 3);
