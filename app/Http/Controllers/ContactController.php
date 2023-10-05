@@ -53,6 +53,7 @@ class ContactController extends Controller
     ]);
 
     Enquiry::create([
+			'type' => 'standard',
       'name' => $request->name,
 			'email' => $request->email,
 			'phone' => $request->phone,

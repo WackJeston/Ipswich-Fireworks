@@ -62,6 +62,7 @@
 		@endphp
 
     @if(str_contains(url()->current(), '/admin/'))
+			{{-- ADMIN --}}
 			@php
 				$notificationsPre = DB::select('SELECT
 					n.id,
@@ -130,11 +131,13 @@
       </div>
 
     @elseif (str_contains(url()->current(), '/admin') || str_contains(url()->current(), '/admin-registration'))
+			{{-- ADMIN REGISTRATION --}}
       <div class="admin-container">
         @yield('content')
       </div>
 
 		@elseif (str_contains(url()->current(), '/checkout'))
+			{{-- CHECKOUT --}}
 			<div class="page-container">
 				<header id="checkout-header" class="lt">
 					<nav class="desktop-nav">
@@ -149,6 +152,7 @@
 			</div>
 
     @else
+			{{-- PUBLIC --}}
       <div id="vuemenu">
         <vuemenu
           sitetitle="{{ env('APP_NAME') }}"

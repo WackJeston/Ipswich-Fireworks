@@ -266,25 +266,25 @@ class DataForm
 					
 					case 'select':
 						$html .= sprintf('
-						<label for="%1$s">%2$s%8$s</label>
-						<select id="%1$s" name="%1$s" value="%3$s" placeholder="%6$s" %7$s>
+						<label for="%1$s">%2$s%5$s</label>
+						<select id="%1$s" name="%1$s" placeholder="%3$s" %4$s>
 							<option></option>',
 							$input['name'],
 							$input['label'],
-							$input['value'],
-							$input['min'],
-							$input['max'],
 							$input['placeholder'],
 							$input['required'] ? 'required' : '',
 							$input['required'] ? '<span> *</span>' : ''
 						);
 
 							foreach ($input['options'] as $i2 => $option) {
+								$selected = $option['value'] == $input['value'] ? 'selected' : '';
+
 								if (is_numeric($i2)) {
 									$html .= sprintf('
-									<option value="%1$s">%2$s (#%1$s)</option>',
+									<option value="%1$s" %3$s>%2$s (#%1$s)</option>',
 										$option['value'],
 										$option['label'],
+										$selected,
 									);
 								} else {
 									$html .= sprintf('
@@ -293,9 +293,10 @@ class DataForm
 
 										foreach ($option as $i3 => $option2) {
 											$html .= sprintf('
-											<option value="%1$s">%2$s (#%1$s)</option>',
+											<option value="%1$s" %3$s>%2$s (#%1$s)</option>',
 												$option2['value'],
 												$option2['label'],
+												$selected,
 											);
 										}
 
