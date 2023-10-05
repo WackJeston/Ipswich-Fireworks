@@ -131,3 +131,16 @@ function setPrimary(table, ref, column, primaryTable, primaryValue, parent, pare
 		}
 	});
 };
+
+function selectDropdown(e, table, column, primaryTable, primaryValue) {
+	let value = e.target.value;
+	
+	if (value == null || value == "") {
+		value = "null";
+	}
+
+	$.ajax({
+		url: "/dataTable-selectDropdown/" + table + "/" + column + "/" + primaryTable + "/" + primaryValue + "/" + value,
+		type: "GET",
+	});
+};

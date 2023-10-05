@@ -32,4 +32,14 @@ class DataTableController extends Controller
 
 		return true;
 	}
+
+	public function selectDropdown(string $table, string $column, string $primaryColumn, $primaryValue, $value = null) {
+		if ($value == 'null') {
+			$value = null;
+		}
+
+		DB::table($table)->where($primaryColumn, $primaryValue)->update([$column => $value]);
+
+		return true;
+	}
 }

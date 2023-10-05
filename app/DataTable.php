@@ -34,7 +34,7 @@ class DataTable
 		$this->table['title'] = $title;
 	}
 
-	public function addColumn(string $name, string $title = null, int $width = 1, bool $hideMobile = false, string $type = 'default') {
+	public function addColumn(string $name, string $title = null, int $width = 1, bool $hideMobile = false, string $type = 'default', array $typeData = []) {
 		if ($title == null) {
 			$title = $name;
 		}
@@ -53,6 +53,7 @@ class DataTable
 			'mobileMaxWidth' => $width,
 			'hideMobile' => $hideMobile,
 			'type' => $type,
+			'typeData' => $typeData,
 			'parent' => $parent,
 			'parentId' => $parentId,
 		];
@@ -234,6 +235,26 @@ class DataTable
 											$column['parentId'],
 										);
 									}
+									break;
+								case 'select':
+									$tempResult = sprintf('<select onclick="selectDropdown(event, \'%1$s\', \'%2$s\', \'%3$s\', \'%4$s\')">',
+										$this->table['tableName'],
+										$column['name'], 
+										$this->table['primary'], 
+										$record->{$this->table['primary']},
+									);
+
+									foreach ($column['typeData'] as $i3 => $option) {
+										$selected = $option['value'] == $record->{$column['name']} ? 'selected' : '';
+
+										$tempResult .= sprintf('<option value="%1$s" %3$s>%2$s</option>', 
+											$option['value'], 
+											$option['label'],
+											$selected,
+										);
+									}
+									$tempResult .= '</select>';
+
 									break;
 							}
 

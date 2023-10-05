@@ -63,6 +63,7 @@ tr .tr-buttons {
   margin-left: auto;
   text-align: right;
   white-space: nowrap;
+	background-color: v.$white;
 }
 
 tr i:not(.primary, .non-primary, .fa-xmark) {
@@ -192,4 +193,27 @@ table td .toggle-false:hover {
 
 table .hide-mobile {
 	display: none;
+}
+
+table input,
+table select {
+	-webkit-appearance: none;
+  -moz-appearance: none;
+	background-color: v.$trans;
+	border-radius: 3px;
+	outline: none;
+	max-width: 100%;
+	padding: 3px 2px;
+	margin: 2px;
+}
+
+table input:hover,
+table input:focus,
+table select:hover,
+table select:focus {
+	-webkit-appearance: menulist;
+  -moz-appearance: menulist;
+	background-color: white;
+	outline: 2px solid v.$black;
+	cursor: pointer;
 }

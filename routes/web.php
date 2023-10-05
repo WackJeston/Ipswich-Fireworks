@@ -43,6 +43,7 @@ use App\Http\Controllers\AdminNewSponsorProfileController;
 // DataTable -----------------------------------------------------------------------------------
 Route::get('/dataTable-toggleButton/{table}/{column}/{primaryColumn}/{primaryValue}', [DataTableController::class, 'toggleButton']);
 Route::get('/dataTable-setPrimary/{table}/{column}/{primaryColumn}/{primaryValue}/{parent}/{parentId}', [DataTableController::class, 'setPrimary']);
+Route::get('/dataTable-selectDropdown/{table}/{column}/{primaryColumn}/{primaryValue}/{value}', [DataTableController::class, 'selectDropdown']);
 
 
 // SYSTEM -----------------------------------------------------------------------------------
