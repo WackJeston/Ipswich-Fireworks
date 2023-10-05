@@ -236,14 +236,7 @@ tfoot select {
 	outline: 2px solid v.$gray-1;
 	border-radius: 3px;
 	max-width: 100%;
-	padding: 2px;
+	padding: 1px 2px 0 0;
 	margin: 2px;
 	cursor: pointer;
 }
-
-// tfoot input:hover,
-// tfoot input:focus,
-// tfoot select:hover,
-// tfoot select:focus {
-// 	width: 100%;
-// }

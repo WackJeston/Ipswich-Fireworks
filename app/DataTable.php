@@ -362,7 +362,7 @@ class DataTable
 
 					$html .= sprintf('
 					<td>
-						<i class="fa-solid fa-rectangle-list"></i> Records <strong>%s</strong> to <strong>%s</strong>, Total: <strong>%s</strong>
+						<i class="fa-solid fa-rectangle-list"></i> <span class="hide-mobile-marker">Records</span> <strong>%s</strong> to <strong>%s</strong>, Total: <strong>%s</strong>
 					</td>', 
 						$this->table['offset'] + 1, 
 						$this->table['offset'] + $this->table['limit'] > $this->table['count'] ? $this->table['count'] : $this->table['offset'] + $this->table['limit'],
@@ -371,7 +371,7 @@ class DataTable
 
 					$html .= sprintf('
 					<td>
-						<i class="fa-solid fa-layer-group"></i> Limit: <select onclick="changeLimit(event, \'%s\', \'%s\');">
+						<i class="fa-solid fa-layer-group"></i> Limit: <select onchange="changeLimit(event, \'%s\', \'%s\');">
 							<option value="10" %s>10</option>
 							<option value="25" %s>25</option>
 							<option value="50" %s>50</option>
