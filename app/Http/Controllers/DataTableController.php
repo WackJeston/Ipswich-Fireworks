@@ -53,4 +53,13 @@ class DataTableController extends Controller
 
 		return true;
 	}
+
+	public function changePage(int $offset, string $query) {
+		$table = session()->get($query);
+		$table['offset'] = $offset;
+		session()->put($query, $table);
+		session()->save();
+
+		return true;
+	}
 }

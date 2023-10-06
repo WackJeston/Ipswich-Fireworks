@@ -46,6 +46,7 @@ Route::get('/dataTable-setPrimary/{table}/{column}/{primaryColumn}/{primaryValue
 Route::get('/dataTable-selectDropdown/{table}/{column}/{primaryColumn}/{primaryValue}/{value}', [DataTableController::class, 'selectDropdown']);
 
 Route::get('/dataTable-changeLimit/{limit}/{query}', [DataTableController::class, 'changeLimit']);
+Route::get('/dataTable-changePage/{offset}/{query}', [DataTableController::class, 'changePage']);
 
 
 // SYSTEM -----------------------------------------------------------------------------------

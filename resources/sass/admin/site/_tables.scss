@@ -23,6 +23,10 @@ tr {
 thead tr {
   height: 35px;
 	border-bottom: 1px solid v.$gray-1;
+
+	@media (max-width: 800px) {
+		height: 30px;
+	}
 }
 
 tbody tr {
@@ -177,9 +181,14 @@ table select:not(tfoot select):focus {
 
 tfoot tr {
 	display: flex;
+	flex-direction: row;
+	align-items: center;
+	justify-content: flex-start;
 	height: 30px;
+	color: v.$black;
 	border-top: 1px solid v.$gray-1;
 	font-size: 0.8rem;
+	// line-height: 10px;
 }
 
 tfoot tr td:not(:first-child) {
@@ -192,7 +201,11 @@ tfoot tr td i {
 
 tfoot tr td:last-child {
 	margin-left: auto;
-	height: 100%;
+	padding-right: 4px;
+}
+
+.page-column tfoot .hide-mobile-marker {
+	display: none;
 }
 
 tfoot input,
@@ -204,4 +217,21 @@ tfoot select {
 	padding: 1px 2px 0 0;
 	margin: 2px;
 	cursor: pointer;
+}
+
+tfoot button {
+	background-color: v.$alt-main;
+	color: v.$white;
+	margin: 2px;
+	padding: 2px 8px;
+}
+
+tfoot button:hover {
+	background-color: v.$alt-semi-dark;
+}
+
+tfoot button.button-off {
+	background-color: v.$gray-1;
+	cursor: default;
+	// color: v.$gray-1;
 }

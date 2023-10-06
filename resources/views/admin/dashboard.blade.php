@@ -19,7 +19,11 @@
       </div>
     @endif
 
-		<div class="page-column-container columns-2">
+		@php
+			echo $enquiriesTable['html'];
+		@endphp
+
+		{{-- <div class="page-column-container columns-2">
 			<div class="page-column">
 				@php
 					echo $enquiriesTable['html'];
@@ -28,7 +32,7 @@
 			<div class="page-column">
 				
 			</div>
-		</div>
+		</div> --}}
 
   </main>
 @endsection

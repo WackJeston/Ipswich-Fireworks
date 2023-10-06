@@ -205,19 +205,23 @@
 		<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
 
 		{{-- Custom JS --}}
-		<script src="/js/header.js"></script>
+		{{-- <script src="/js/header.js"></script> --}}
 		<script src="/js/dataTable.js"></script>
 		<script src="/js/dataForm.js"></script>
 		<script src="/js/functions.js"></script>
 
 		<script>
 			// DataTable
+			setIdWidth();
 			setTableMargin();
 			hideTableColumnsLoop();
 
 			// DataForm
 			setPasswordToggles();
 			setFileInputs();
+
+			// Functions
+			jumpToElement();
 		</script>
   </body>
 </html>

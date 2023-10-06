@@ -1,13 +1,10 @@
 const bucketName = 'ipswich-fireworks';
 
-
-
-function setTableMargin(repeat = true) {
+function setIdWidth(repeat = true) {
 	let tables = document.querySelectorAll("table");
 
 	if (tables != null) {
 		tables.forEach(table => {
-			let buttons = table.querySelector("#" + table.id + " .tr-buttons");
 			let rows = table.querySelectorAll("#" + table.id + " tr:not(tfoot tr)");
 
 			idColumnWidth = 0;
@@ -22,7 +19,50 @@ function setTableMargin(repeat = true) {
 				}
 			});
 
-			idColumnWidth = idColumnWidth + 14;
+			idColumnWidth = idColumnWidth + 20;
+	
+			rows.forEach(row => {
+				let idColumn = row.firstElementChild;
+
+				if (idColumn.id == "column-id") {
+					idColumn.style.width = idColumnWidth + "px";
+					idColumn.style.minWidth = idColumnWidth + "px";
+				}
+			});
+		});
+	}
+
+	if (repeat) {
+		setTimeout(() => {
+			setIdWidth(false);
+		}, 500);
+
+		setTimeout(() => {
+			setIdWidth(false);
+		}, 2000);
+
+		let toggle = window.innerWidth < 800 ? true : false;
+
+		window.addEventListener('resize', function() {
+			if (toggle == true && window.innerWidth > 800) {
+				toggle = false;
+				setIdWidth();
+
+			} else if (toggle == false && window.innerWidth < 800) {
+				toggle = true;
+				setIdWidth();
+			}
+		});
+	}
+}
+
+function setTableMargin(repeat = true) {
+	let tables = document.querySelectorAll("table");
+
+	if (tables != null) {
+		tables.forEach(table => {
+			let buttons = table.querySelector("#" + table.id + " .tr-buttons");
+			let rows = table.querySelectorAll("#" + table.id + " tr:not(tfoot tr)");
 	
 			if (buttons != null) {
 				let width = buttons.offsetWidth;
@@ -35,13 +75,6 @@ function setTableMargin(repeat = true) {
 				let input = width + "px";
 	
 				rows.forEach(row => {
-					let idColumn = row.firstElementChild;
-
-					if (idColumn.id == "column-id") {
-						idColumn.style.width = idColumnWidth + "px";
-						idColumn.style.minWidth = idColumnWidth + "px";
-					}
-
 					row.style.paddingRight = input;
 				});
 			}
@@ -56,19 +89,6 @@ function setTableMargin(repeat = true) {
 		setTimeout(() => {
 			setTableMargin(false);
 		}, 2000);
-
-		let toggle = window.innerWidth < 800 ? true : false;
-
-		window.addEventListener('resize', function() {
-			if (toggle == true && window.innerWidth > 800) {
-				toggle = false;
-				setTableMargin();
-
-			} else if (toggle == false && window.innerWidth < 800) {
-				toggle = true;
-				setTableMargin();
-			}
-		});
 	}
 };
 
@@ -191,8 +211,15 @@ function selectDropdown(e, table, column, primaryTable, primaryValue) {
 	});
 };
 
+function redirect(ref) {
+	let url = location.href.split('#')[0];
+	
+	location.href = url + '#table-' + ref;
+	location.reload();
+};
+
 // AJAX - footer
-function changeLimit(e, query, oldLimit) {
+function changeLimit(e, query, oldLimit, ref) {
 	let limit = e.target.value;
 
 	if (oldLimit != limit) {
@@ -200,8 +227,24 @@ function changeLimit(e, query, oldLimit) {
 			url: "/dataTable-changeLimit/" + limit + "/" + query,
 			type: "GET",
 			success: function(result) {
-				location.reload();
+				redirect(ref);
 			}
 		});
 	}	
+};
+
+function changePage(query, oldOffset, limit, direction, ref) {
+	let offset = direction ? parseInt(oldOffset) + parseInt(limit) : parseInt(oldOffset) - parseInt(limit);
+
+	if (offset < 0) {
+		offset = 0;
+	}
+
+	$.ajax({
+		url: "/dataTable-changePage/" + offset + "/" + query,
+		type: "GET",
+		success: function(result) {
+			redirect(ref);
+		}
+	});
 };

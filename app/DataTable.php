@@ -55,7 +55,17 @@ class DataTable
 
 		$this->table['count'] = count(DB::select($query));
 
-		$query = sprintf('%s ORDER BY %s %s LIMIT %s OFFSET %s', $query, $this->table['orderColumn'], $this->table['orderDirection'], $this->table['limit'], $this->table['offset']);
+		if ($this->table['limit'] == 0 && $this->table['offset'] != 0) {
+			$this->table['offset'] = 0;
+		}
+
+		$query = sprintf('%s ORDER BY %s %s%s%s', 
+			$query, 
+			$this->table['orderColumn'], 
+			$this->table['orderDirection'], 
+			$this->table['limit'] == 0 ? ' LIMIT 500' : ' LIMIT ' . $this->table['limit'],
+			$this->table['offset'] == 0 ? '' : ' OFFSET ' . $this->table['offset']
+		);
 
 		$this->table['records'] = DB::select($query);
 	}
@@ -370,18 +380,25 @@ class DataTable
 			<tfoot>
 				<tr>';
 
+					if (($this->table['offset'] + $this->table['limit']) >= $this->table['count'] || $this->table['limit'] == 0) {
+						$offset = $this->table['count'];
+
+					} else {
+						$offset = $this->table['offset'] + $this->table['limit'];
+					}
+
 					$html .= sprintf('
 					<td>
 						<i class="fa-solid fa-rectangle-list"></i> <span class="hide-mobile-marker">Records</span> <strong>%s</strong> to <strong>%s</strong>, Total: <strong>%s</strong>
 					</td>', 
 						$this->table['offset'] + 1, 
-						$this->table['offset'] + $this->table['limit'] > $this->table['count'] ? $this->table['count'] : $this->table['offset'] + $this->table['limit'],
+						$offset,
 						$this->table['count']
 					);
 
 					$html .= sprintf('
 					<td>
-						<i class="fa-solid fa-layer-group"></i> Limit: <select onchange="changeLimit(event, \'%s\', \'%s\');">
+						<i class="fa-solid fa-layer-group"></i> Limit: <select onchange="changeLimit(event, \'%s\', \'%s\', \'%s\');">
 							<option value="10" %s>10</option>
 							<option value="25" %s>25</option>
 							<option value="50" %s>50</option>
@@ -391,21 +408,54 @@ class DataTable
 					</td>',
 						$this->table['query'],
 						$this->table['limit'],
+						$this->table['ref'],
 						$this->table['limit'] == 10 ? 'selected' : '',
 						$this->table['limit'] == 25 ? 'selected' : '',
 						$this->table['limit'] == 50 ? 'selected' : '',
 						$this->table['limit'] == 100 ? 'selected' : '',
 						$this->table['limit'] == 0 ? 'selected' : '',
 					);
-					
-					// $html .= '
-					// 	<td>
-					// 		<button>button</button>
-					// 	</td>';
 
 					$html .= '
-					<td>
+					<td>';
+					
+						if ($this->table['offset'] > 0 && $this->table['limit'] != 0) {
+							$html .= sprintf('
+							<button onclick="changePage(\'%1$s\', \'%2$d\', \'%3$d\', false, \'%4$s\')"><i class="fa-solid fa-caret-left"></i></button>',
+								$this->table['query'],
+								$this->table['offset'],
+								$this->table['limit'],
+								$this->table['ref']
+							);
 						
+						} else {
+							$html .= sprintf('
+							<button class="button-off"><i class="fa-solid fa-caret-left"></i></button>',
+								$this->table['query'],
+								$this->table['offset'],
+								$this->table['limit'],
+							);
+						}
+
+						if ($this->table['count'] > ($this->table['offset'] + $this->table['limit']) && $this->table['limit'] != 0) {
+							$html .= sprintf('
+							<button onclick="changePage(\'%1$s\', \'%2$d\', \'%3$d\', true, \'%4$s\')"><i class="fa-solid fa-caret-right"></i></button>',
+								$this->table['query'],
+								$this->table['offset'],
+								$this->table['limit'],
+								$this->table['ref']
+							);
+						
+						} else {
+							$html .= sprintf('
+							<button class="button-off"><i class="fa-solid fa-caret-right"></i></button>',
+								$this->table['query'],
+								$this->table['offset'],
+								$this->table['limit'],
+							);
+						}
+
+					$html .= '
 					</td>';
 
 				$html .= '
