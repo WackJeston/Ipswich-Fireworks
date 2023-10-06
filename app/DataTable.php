@@ -197,10 +197,15 @@ class DataTable
 					$style = $column['name'] == 'id' ? '50px' : $column['maxWidth'] . '%';
 					$mobileStyle = $column['name'] == 'id' ? '50px' : $column['mobileMaxWidth'] . '%';
 
-					if ($column['hideMobile'] == true) {
-						$html .= sprintf('<th class="hide-mobile-marker" style="width:%s;">%s</th>', $style, $column['title']);
+					if ($column['name'] == 'id') {
+						$html .= sprintf('<th id="column-%s" style="width:%s;">%s</th>', $column['name'], $style, $column['title']);
+					
 					} else {
-						$html .= sprintf('<th class="show-mobile-marker" data-width="%s" data-mobile-width="%s">%s</th>', $style, $mobileStyle, $column['title']);
+						if ($column['hideMobile'] == true) {
+							$html .= sprintf('<th class="hide-mobile-marker" style="width:%s;">%s</th>', $style, $column['title']);
+						} else {
+							$html .= sprintf('<th class="show-mobile-marker" data-width="%s" data-mobile-width="%s">%s</th>', $style, $mobileStyle, $column['title']);
+						}
 					}
 				}
 
@@ -213,8 +218,8 @@ class DataTable
 				<tbody>';
 
 					foreach ($this->table['records'] as $i => $record) {
-						$html .= '
-						<tr>';
+						$html .= sprintf('
+						<tr id="row-index-%d">', $i);
 						
 						foreach ($this->table['columns'] as $i2 => $column) {
 							$style = $column['name'] == 'id' ? '50px' : $column['maxWidth'] . '%';
@@ -292,10 +297,15 @@ class DataTable
 									break;
 							}
 
-							if ($column['hideMobile'] == true) {
-								$html .= sprintf('<td id="column-%s" class="hide-mobile-marker" style="width:%s;">%s</tds>', $column['name'], $style, $tempResult);
+							if ($column['name'] == 'id') {
+								$html .= sprintf('<td id="column-%1$s" class="column-%1$s" style="width:%2$s;"><span>%3$s<span></td>', $column['name'], $style, $tempResult);
+							
 							} else {
-								$html .= sprintf('<td id="column-%s" class="show-mobile-marker" data-width="%s" data-mobile-width="%s">%s</tds>', $column['name'], $style, $mobileStyle, $tempResult);
+								if ($column['hideMobile'] == true) {
+									$html .= sprintf('<td id="column-%1$s" class="column-%1$s hide-mobile-marker" style="width:%2$s;">%3$s</td>', $column['name'], $style, $tempResult);
+								} else {
+									$html .= sprintf('<td id="column-%1$s" class="column-%1$s show-mobile-marker" data-width="%2$s" data-mobile-width="%3$s">%4$s</td>', $column['name'], $style, $mobileStyle, $tempResult);
+								}
 							}
 						}
 	

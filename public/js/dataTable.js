@@ -1,15 +1,31 @@
 const bucketName = 'ipswich-fireworks';
 
-function setTableMargin() {
+
+
+function setTableMargin(repeat = true) {
 	let tables = document.querySelectorAll("table");
 
 	if (tables != null) {
 		tables.forEach(table => {
 			let buttons = table.querySelector("#" + table.id + " .tr-buttons");
+			let rows = table.querySelectorAll("#" + table.id + " tr:not(tfoot tr)");
+
+			idColumnWidth = 0;
+
+			rows.forEach(row => {
+				let idColumn = row.querySelector(".column-id span");
+
+				if (idColumn != null) {
+					if (idColumn.offsetWidth > idColumnWidth) {
+						idColumnWidth = idColumn.offsetWidth;
+					}
+				}
+			});
+
+			idColumnWidth = idColumnWidth + 14;
 	
 			if (buttons != null) {
 				let width = buttons.offsetWidth;
-				let rows = table.querySelectorAll("#" + table.id + " tr:not(tfoot tr)");
 	
 				if (width == 0) {
 					let buttonCount = table.querySelector("#" + table.id + " .tr-buttons").childElementCount;
@@ -19,8 +35,38 @@ function setTableMargin() {
 				let input = width + "px";
 	
 				rows.forEach(row => {
+					let idColumn = row.firstElementChild;
+
+					if (idColumn.id == "column-id") {
+						idColumn.style.width = idColumnWidth + "px";
+						idColumn.style.minWidth = idColumnWidth + "px";
+					}
+
 					row.style.paddingRight = input;
 				});
+			}
+		});
+	}
+
+	if (repeat) {
+		setTimeout(() => {
+			setTableMargin(false);
+		}, 500);
+
+		setTimeout(() => {
+			setTableMargin(false);
+		}, 2000);
+
+		let toggle = window.innerWidth < 800 ? true : false;
+
+		window.addEventListener('resize', function() {
+			if (toggle == true && window.innerWidth > 800) {
+				toggle = false;
+				setTableMargin();
+
+			} else if (toggle == false && window.innerWidth < 800) {
+				toggle = true;
+				setTableMargin();
 			}
 		});
 	}

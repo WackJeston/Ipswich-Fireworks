@@ -31,8 +31,10 @@ form select,
 form option,
 form textarea,
 form .file-input-label {
+	font-size: 0.9rem;
+
 	@media (max-width: 800px) {
-		font-size: 0.9rem;
+		font-size: 0.8rem;
 	}
 }
 
@@ -149,7 +151,7 @@ form .submit {
 	color: v.$white;
 	cursor: pointer;
 	border-radius: 5px;
-	font-size: 1rem;
+	font-size: 0.9rem;
 	height: 33px;
 	padding: 5px 10px;
 }
@@ -191,7 +193,7 @@ text-align: center;
 }
 
 form i {
-	font-size: 1rem;
+	font-size: 0.9rem;
 	position: absolute;
 	top: 10px;
 	right: 7px;
