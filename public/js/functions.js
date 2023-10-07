@@ -1,8 +1,6 @@
 function jumpToElement() {
 	let id = location.href.split('#')[1];
 
-	console.log(id);
-
 	if (id != null) {
 		let element = document.getElementById(id);
 		element.scrollIntoView();

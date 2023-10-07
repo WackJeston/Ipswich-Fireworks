@@ -45,6 +45,9 @@ Route::get('/dataTable-toggleButton/{table}/{column}/{primaryColumn}/{primaryVal
 Route::get('/dataTable-setPrimary/{table}/{column}/{primaryColumn}/{primaryValue}/{parent}/{parentId}', [DataTableController::class, 'setPrimary']);
 Route::get('/dataTable-selectDropdown/{table}/{column}/{primaryColumn}/{primaryValue}/{value}', [DataTableController::class, 'selectDropdown']);
 
+Route::get('/dataTable-setOrderColumn/{name}/{query}', [DataTableController::class, 'setOrderColumn']);
+Route::get('/dataTable-setOrderDirection/{direction}/{query}', [DataTableController::class, 'setOrderDirection']);
+
 Route::get('/dataTable-changeLimit/{limit}/{query}', [DataTableController::class, 'changeLimit']);
 Route::get('/dataTable-changePage/{offset}/{query}', [DataTableController::class, 'changePage']);
 

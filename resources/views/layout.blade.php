@@ -211,6 +211,9 @@
 		<script src="/js/functions.js"></script>
 
 		<script>
+			// Functions
+			jumpToElement();
+
 			// DataTable
 			setIdWidth();
 			setTableMargin();
@@ -219,9 +222,6 @@
 			// DataForm
 			setPasswordToggles();
 			setFileInputs();
-
-			// Functions
-			jumpToElement();
 		</script>
   </body>
 </html>

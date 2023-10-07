@@ -40,14 +40,15 @@ class DataTable
 			$this->table['columns'] = [];
 			$this->table['records'] = [];
 			$this->table['buttons'] = [];
-		}
-
-		if ($column != null) {
-			$this->table['orderColumn'] = $column;
-		}
-
-		if ($direction != null) {
-			$this->table['orderDirection'] = $direction;
+		
+		} else {
+			if ($column != null) {
+				$this->table['orderColumn'] = $column;
+			}
+	
+			if ($direction != null) {
+				$this->table['orderDirection'] = $direction;
+			}
 		}
 
 		$query = str_replace('?', '%s', $query);
@@ -207,14 +208,36 @@ class DataTable
 					$style = $column['name'] == 'id' ? '50px' : $column['maxWidth'] . '%';
 					$mobileStyle = $column['name'] == 'id' ? '50px' : $column['mobileMaxWidth'] . '%';
 
+					$click = sprintf('onclick="setOrderDirection(\'%1$s\', \'%2$s\', \'%3$s\')"',
+						$this->table['orderDirection'] == 'DESC' ? 'ASC' : 'DESC', 
+						$this->table['query'], 
+						$this->table['ref']
+					);
+
+					$orderDirection = $this->table['orderDirection'] == 'DESC' ? sprintf(' <i class="fa-solid fa-angle-up" %s></i>', $click) : sprintf(' <i class="fa-solid fa-angle-down" %s></i>', $click);
+					$orderColumn = $this->table['orderColumn'] == $column['name'] ? $orderDirection : '';
+
+					$click = sprintf('onclick="setOrderColumn(event, \'%1$s\', \'%2$s\', \'%3$s\', \'%4$s\')"',
+						$column['name'],
+						$this->table['orderColumn'], 
+						$this->table['query'], 
+						$this->table['ref']
+					);
+
 					if ($column['name'] == 'id') {
-						$html .= sprintf('<th id="column-%s" style="width:%s;">%s</th>', $column['name'], $style, $column['title']);
+						$html .= sprintf('<th id="column-%1$s" class="column-%1$s" style="width:%2$s;" %5$s><span>%3$s%4$s</span></th>',
+							$column['name'],
+							$style,
+							$column['title'],
+							$orderColumn,
+							$click
+						);
 					
 					} else {
 						if ($column['hideMobile'] == true) {
-							$html .= sprintf('<th class="hide-mobile-marker" style="width:%s;">%s</th>', $style, $column['title']);
+							$html .= sprintf('<th class="hide-mobile-marker" style="width:%s;" %s>%s%s</th>', $style, $click, $column['title'], $orderColumn);
 						} else {
-							$html .= sprintf('<th class="show-mobile-marker" data-width="%s" data-mobile-width="%s">%s</th>', $style, $mobileStyle, $column['title']);
+							$html .= sprintf('<th class="show-mobile-marker" data-width="%s" data-mobile-width="%s" %s>%s%s</th>', $style, $mobileStyle, $click, $column['title'], $orderColumn);
 						}
 					}
 				}
@@ -398,7 +421,7 @@ class DataTable
 
 					$html .= sprintf('
 					<td>
-						<i class="fa-solid fa-layer-group"></i> Limit: <select onchange="changeLimit(event, \'%s\', \'%s\', \'%s\');">
+						<i class="fa-solid fa-layer-group"></i> Limit: <select onchange="changeTableLimit(event, \'%s\', \'%s\', \'%s\');">
 							<option value="10" %s>10</option>
 							<option value="25" %s>25</option>
 							<option value="50" %s>50</option>
@@ -421,7 +444,7 @@ class DataTable
 					
 						if ($this->table['offset'] > 0 && $this->table['limit'] != 0) {
 							$html .= sprintf('
-							<button onclick="changePage(\'%1$s\', \'%2$d\', \'%3$d\', false, \'%4$s\')"><i class="fa-solid fa-caret-left"></i></button>',
+							<button onclick="changeTablePage(\'%1$s\', \'%2$d\', \'%3$d\', false, \'%4$s\')"><i class="fa-solid fa-caret-left"></i></button>',
 								$this->table['query'],
 								$this->table['offset'],
 								$this->table['limit'],
@@ -439,7 +462,7 @@ class DataTable
 
 						if ($this->table['count'] > ($this->table['offset'] + $this->table['limit']) && $this->table['limit'] != 0) {
 							$html .= sprintf('
-							<button onclick="changePage(\'%1$s\', \'%2$d\', \'%3$d\', true, \'%4$s\')"><i class="fa-solid fa-caret-right"></i></button>',
+							<button onclick="changeTablePage(\'%1$s\', \'%2$d\', \'%3$d\', true, \'%4$s\')"><i class="fa-solid fa-caret-right"></i></button>',
 								$this->table['query'],
 								$this->table['offset'],
 								$this->table['limit'],

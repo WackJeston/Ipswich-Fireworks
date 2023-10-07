@@ -39,6 +39,16 @@ tbody tr:not(:last-child) {
 
 tr th {
   white-space: nowrap;
+	cursor: pointer;
+}
+
+tr th .fa-angle-down,
+tr th .fa-angle-up {
+	font-size: 0.9rem;
+
+	@media (max-width: 800px) {
+		font-size: 0.8rem;
+	}
 }
 
 tr th, tr td {
@@ -188,7 +198,6 @@ tfoot tr {
 	color: v.$black;
 	border-top: 1px solid v.$gray-1;
 	font-size: 0.8rem;
-	// line-height: 10px;
 }
 
 tfoot tr td:not(:first-child) {
@@ -200,6 +209,9 @@ tfoot tr td i {
 }
 
 tfoot tr td:last-child {
+	display: flex;
+	flex-direction: row;
+	align-items: center;
 	margin-left: auto;
 	padding-right: 4px;
 }
@@ -214,16 +226,19 @@ tfoot select {
 	outline: 2px solid v.$gray-1;
 	border-radius: 3px;
 	max-width: 100%;
-	padding: 1px 2px 0 0;
+	padding: 1px 2px 0 1px;
 	margin: 2px;
 	cursor: pointer;
 }
 
 tfoot button {
+	display: flex;
+	align-items: center;
+	justify-content: center;
 	background-color: v.$alt-main;
 	color: v.$white;
 	margin: 2px;
-	padding: 2px 8px;
+	padding: 4px 8px;
 }
 
 tfoot button:hover {
@@ -233,5 +248,9 @@ tfoot button:hover {
 tfoot button.button-off {
 	background-color: v.$gray-1;
 	cursor: default;
-	// color: v.$gray-1;
+}
+
+tfoot button i {
+	padding: 0;
+	margin: 0;
 }

@@ -19,7 +19,7 @@ function setIdWidth(repeat = true) {
 				}
 			});
 
-			idColumnWidth = idColumnWidth + 20;
+			idColumnWidth = idColumnWidth + 18;
 	
 			rows.forEach(row => {
 				let idColumn = row.firstElementChild;
@@ -211,29 +211,52 @@ function selectDropdown(e, table, column, primaryTable, primaryValue) {
 	});
 };
 
-function redirect(ref) {
+function tableRedirect(ref) {
 	let url = location.href.split('#')[0];
-	
+
 	location.href = url + '#table-' + ref;
 	location.reload();
 };
 
+//AJAX - header
+function setOrderColumn(e, name, oldName, query, ref) {
+	if (oldName != name && e.target.tagName == "TH") {
+		$.ajax({
+			url: "/dataTable-setOrderColumn/" + name + "/" + query,
+			type: "GET",
+			success: function() {
+				tableRedirect(ref);
+			}
+		});
+	}	
+};
+
+function setOrderDirection(direction, query, ref) {
+	$.ajax({
+		url: "/dataTable-setOrderDirection/" + direction + "/" + query,
+		type: "GET",
+		success: function() {
+			tableRedirect(ref);
+		}
+	});
+};
+
 // AJAX - footer
-function changeLimit(e, query, oldLimit, ref) {
+function changeTableLimit(e, query, oldLimit, ref) {
 	let limit = e.target.value;
 
 	if (oldLimit != limit) {
 		$.ajax({
 			url: "/dataTable-changeLimit/" + limit + "/" + query,
 			type: "GET",
-			success: function(result) {
-				redirect(ref);
+			success: function() {
+				tableRedirect(ref);
 			}
 		});
 	}	
 };
 
-function changePage(query, oldOffset, limit, direction, ref) {
+function changeTablePage(query, oldOffset, limit, direction, ref) {
 	let offset = direction ? parseInt(oldOffset) + parseInt(limit) : parseInt(oldOffset) - parseInt(limit);
 
 	if (offset < 0) {
@@ -243,8 +266,8 @@ function changePage(query, oldOffset, limit, direction, ref) {
 	$.ajax({
 		url: "/dataTable-changePage/" + offset + "/" + query,
 		type: "GET",
-		success: function(result) {
-			redirect(ref);
+		success: function() {
+			tableRedirect(ref);
 		}
 	});
 };

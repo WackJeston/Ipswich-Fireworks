@@ -44,6 +44,25 @@ class DataTableController extends Controller
 		return true;
 	}
 
+	//Header
+	public function setOrderColumn(string $name, string $query) {
+		$table = session()->get($query);
+		$table['orderColumn'] = $name;
+		session()->put($query, $table);
+		session()->save();
+
+		return true;
+	}
+
+	public function setOrderDirection(string $direction, string $query) {
+		$table = session()->get($query);
+		$table['orderDirection'] = $direction;
+		session()->put($query, $table);
+		session()->save();
+
+		return true;
+	}
+
 	//Footer
 	public function changeLimit(string $limit, string $query) {
 		$table = session()->get($query);
