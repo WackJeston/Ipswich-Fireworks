@@ -5,6 +5,7 @@ namespace App;
 Use DB;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Session;
+use Illuminate\Support\Facades\Storage;
 
 class DataTable
 {
@@ -138,6 +139,10 @@ class DataTable
 						break;
 					
 					case 'record':
+						if ($value[1] == 'fileName' && $record->{$value[1]} != null) {
+							$record->{$value[1]} = Storage::disk('s3')->url($record->{$value[1]});
+						}
+
 						$tempValue = $record->{$value[1]};
 						break;
 					
@@ -182,8 +187,6 @@ class DataTable
 		}
 
 		$query = str_replace('&quot;', '"', $this->table['query']);
-
-		// dd($query);
 
 		session()->put($query, $this->table);
 		session()->save();

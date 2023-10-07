@@ -12,11 +12,7 @@ class SupportersController extends Controller
   {
 		$records = DB::select('SELECT * FROM supporters WHERE active = 1');
 
-		foreach ($records as $i => $record) {
-			$record->fileName = Storage::disk('s3')->temporaryUrl(
-				$record->fileName, now()->addMinutes(10)
-			);
-		}
+		$records = getS3Url($records);
 
     return view('public/supporters', compact(
 			'records',

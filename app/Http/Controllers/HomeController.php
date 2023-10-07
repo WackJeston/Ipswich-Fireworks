@@ -21,11 +21,7 @@ class HomeController extends Controller
 			AND b.active = 1
 		');
 
-		foreach ($landingZoneBanners as $i => $banner) {
-			$banner->fileName = Storage::disk('s3')->temporaryUrl(
-				$banner->fileName, now()->addMinutes(10)
-			);
-		}
+		$landingZoneBanners = getS3Url($landingZoneBanners);
 
 		$primaryInfo = DB::select('SELECT * FROM content WHERE active = 1 AND page = "home" AND position = "primaryInfo"')[0];
 
@@ -37,11 +33,7 @@ class HomeController extends Controller
 			AND b.active = 1
 		');
 
-		foreach ($bottomBanners as $i => $banner) {
-			$banner->fileName = Storage::disk('s3')->temporaryUrl(
-				$banner->fileName, now()->addMinutes(10)
-			);
-		}
+		$bottomBanners = getS3Url($bottomBanners);
 
     return view('home', compact(
       'landingZoneBanners',

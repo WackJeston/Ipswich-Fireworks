@@ -84,6 +84,10 @@ header #nav-menu-button {
 	opacity: 0.8;
 	color: v.$brand-main;
 	cursor: pointer;
+
+	@media (min-width: 500px) {
+		padding-bottom: 4px;
+	}
 }
 
 header #nav-menu-button:hover {

@@ -128,11 +128,11 @@ function hideTableColumns() {
 	}
 };
 
-function showImage(fileName) {
+function showImage(url) {
 	const imageZone = document.querySelector('.image-viewer');
 	const image = document.querySelector('.viewer-image');
 
-	image.src = 'https://ipswich-fireworks.s3.eu-west-2.amazonaws.com/assets/' + fileName;
+	image.src = url;
 	
 	imageZone.style.display = 'flex';
 };
@@ -220,7 +220,9 @@ function tableRedirect(ref) {
 
 //AJAX - header
 function setOrderColumn(e, name, oldName, query, ref) {
-	if (oldName != name && e.target.tagName == "TH") {
+	const elements = ["TH", "SPAN"];
+
+	if (oldName != name && elements.includes(e.target.tagName)) {
 		$.ajax({
 			url: "/dataTable-setOrderColumn/" + name + "/" + query,
 			type: "GET",

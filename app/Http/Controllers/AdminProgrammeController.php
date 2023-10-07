@@ -101,7 +101,7 @@ class AdminProgrammeController extends Controller
 			'stage' => $request['stage'],
 			'time' => $time,
 			'link' => $request['link'],
-			'fileName' => $fileNames[0]['new'],
+			'fileName' => $fileNames[0]['new'] ?? null,
 		]);
 
 		return redirect("/admin/programme")->with('message', 'Music item created successfully.');

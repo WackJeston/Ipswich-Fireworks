@@ -3,7 +3,7 @@ function jumpToElement() {
 
 	if (id != null) {
 		let element = document.getElementById(id);
-		element.scrollIntoView();
+		element.scrollIntoView(false);
 	}
 };
 

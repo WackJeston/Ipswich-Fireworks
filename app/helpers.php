@@ -50,3 +50,13 @@ function connectSes() {
   return $connection;
 }
 
+function getS3Url(array $records):array {
+	foreach ($records as $i => $record) {
+		if (property_exists($record, 'fileName')) {
+			$record->fileName = Storage::disk('s3')->url($record->fileName);
+		}
+	}
+
+	return $records;
+}
+
