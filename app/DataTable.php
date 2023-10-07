@@ -28,14 +28,10 @@ class DataTable
 	}
 
 	public function setQuery(string $query, array $params = [], string $column = null, string $direction = null) {
-		$this->table['query'] = str_replace('"', '', $query);
+		$this->table['query'] = str_replace('"', '&quot;', $query);
 
-		// session()->forget($this->table['query']);
-
-		// dd(session()->get($this->table['query']));
-
-		if (session()->has($this->table['query'])) {
-			$this->table = session()->get($this->table['query']);
+		if (session()->has($query)) {
+			$this->table = session()->get($query);
 			$this->table['count'] = [];
 			$this->table['columns'] = [];
 			$this->table['records'] = [];
@@ -185,7 +181,11 @@ class DataTable
 			$this->table['title'] = str_replace('?', $this->table['count'], $this->table['title']);
 		}
 
-		session()->put($this->table['query'], $this->table);
+		$query = str_replace('&quot;', '"', $this->table['query']);
+
+		// dd($query);
+
+		session()->put($query, $this->table);
 		session()->save();
 	}
 
