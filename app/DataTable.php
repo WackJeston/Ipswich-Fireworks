@@ -19,7 +19,7 @@ class DataTable
 			'limit' => $limit,
 			'offset' => $offset,
 			'orderColumn' => 'id',
-			'orderDirection' => 'ASC',
+			'orderDirection' => 'DESC',
 			'count' => 0,
 			'columns' => [],
 			'records' => [],
