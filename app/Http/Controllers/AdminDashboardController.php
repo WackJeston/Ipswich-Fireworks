@@ -22,7 +22,7 @@ class AdminDashboardController extends Controller
 		// $enquiriesTable = $enquiriesTable->render();
 
 		$enquiriesTable = new DataTable();
-		$enquiriesTable->setQuery('SELECT * FROM enquiry');
+		$enquiriesTable->setQuery('SELECT * FROM enquiry', [], 'id', 'DESC');
 		$enquiriesTable->setTitle('New Enquiries');
 		$enquiriesTable->addColumn('id', '#');
 		$enquiriesTable->addColumn('type', 'Type', 2);
