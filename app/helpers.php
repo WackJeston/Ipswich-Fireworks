@@ -4,6 +4,23 @@ use Illuminate\Support\Facades\Storage;
 use Intervention\Image\ImageManager;
 use Aws\Ses\SesClient; 
 
+function preloadImage(string $url) {
+	if (session()->has('preloaded-images')) {
+		$records = session()->get('preloaded-images');
+
+		if (!in_array($url, $records)) {
+			$records[] = $url;
+			session()->put('preloaded-images', $records);
+			session()->save();
+		}
+
+	} else {
+		$records = [$url];
+		session()->put('preloaded-images', $records);
+		session()->save();
+	}
+}
+
 function storeImages($request, $id, string $type):array {
 	$fileNames = [];
 

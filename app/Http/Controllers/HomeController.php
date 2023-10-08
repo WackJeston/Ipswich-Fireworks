@@ -22,6 +22,7 @@ class HomeController extends Controller
 		');
 
 		$landingZoneBanners = getS3Url($landingZoneBanners);
+		preloadImage($landingZoneBanners[0]->fileName);
 
 		$primaryInfo = DB::select('SELECT * FROM content WHERE active = 1 AND page = "home" AND position = "primaryInfo"')[0];
 
