@@ -48,7 +48,9 @@ class User extends Authenticatable implements MustVerifyEmail
 
 	protected static function booted() {
 		static::created(function ($self) {
-			self::verifyEmail($self->email);
+			if ($self->admin) {
+				self::verifyEmail($self->email);
+			}
     });
 	}
 

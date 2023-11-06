@@ -104,9 +104,7 @@ class AuthController extends Controller
 
   public function veiwSignup()
   {
-    return view('public/auth/signup', compact(
-      'sessionUser',
-    ));
+    return view('public/auth/signup');
   }
 
   public function signupCustomer(Request $request)
