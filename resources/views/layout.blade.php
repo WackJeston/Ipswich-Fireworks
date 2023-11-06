@@ -34,7 +34,8 @@
 		@endif
 
     {{-- Font Awesome --}}
-    <script src="https://kit.fontawesome.com/10278247f6.js" crossorigin="anonymous"></script>
+		<link href="/fontawesome/css/fontawesome.min.css" rel="stylesheet">
+		<link href="/fontawesome/css/all.min.css" rel="stylesheet">
 
     {{-- Favicon --}}
     @if(str_contains(url()->current(), '/admin'))
