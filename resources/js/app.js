@@ -129,11 +129,3 @@ usersCreate.component('userscreate', Userscreate).mount('#userscreate')
 
 const userProfileFunctions = createApp({})
 userProfileFunctions.component('userprofilefunctions', Userprofilefunctions).mount('#userprofilefunctions')
-
-
-const customersCreate = createApp({})
-customersCreate.component('customerscreate', Customerscreate).mount('#customerscreate')
-
-
-const customerProfileFunctions = createApp({})
-customerProfileFunctions.component('customerprofilefunctions', Customerprofilefunctions).mount('#customerprofilefunctions')
