@@ -43,10 +43,6 @@ import Userscreate from './vue/components/admin/usersCreate.vue'
 
 import Userprofilefunctions from './vue/components/admin/userProfileFunctions.vue'
 
-import Customerscreate from './vue/components/admin/customersCreate.vue'
-
-import Customerprofilefunctions from './vue/components/admin/customerProfileFunctions.vue'
-
 
 
 
