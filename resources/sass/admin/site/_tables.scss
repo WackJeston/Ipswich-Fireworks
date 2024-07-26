@@ -30,11 +30,15 @@ thead tr {
 }
 
 tbody tr {
-  height: 30px;
+  min-height: 30px;
 }
 
 tbody tr:not(:last-child) {
 	border-bottom: 1px solid v.$bg-main;
+}
+
+tr.highlight {
+	background-color: v.$off-white;
 }
 
 tr th {
@@ -61,12 +65,16 @@ tr th, tr td {
 	}
 }
 
+tr td.paragraph {
+	white-space: normal;
+}
+
 tr th:last-child, tr td:last-child {
   padding-right: 8px;
 }
 
 tr th:not(.tr-buttons),
-tr td:not(.tr-buttons) {
+tr td:not(.tr-buttons, .paragraph) {
 	overflow: hidden;
 	white-space: nowrap;
 	text-overflow: ellipsis;
@@ -91,14 +99,19 @@ tr .tr-buttons {
 
 tr .tr-buttons i {
 	position: relative;
+	color: v.$black;
 }
 
 tr .tr-buttons i:hover {
-  color: v.$alt-semi-dark
+	@media (min-width: 640px) {
+		color: v.$alt-dark;
+	}
 }
 
 tr .tr-buttons i:hover .button-label:not(.button-label:hover) {
-  display: block;
+	@media (min-width: 640px) {
+	  display: block;
+	}
 }
 
 tr .tr-buttons .button-label {
@@ -147,19 +160,23 @@ table .empty-table h3 {
 }
 
 table td .toggle-true {
-	color: v.$pale-green;
+	color: v.$green;
 }
 
 table td .toggle-true:hover {
-	color: v.$pale-green-darker;
+	@media (min-width: 640px) {
+		color: v.$green-darker;
+	}
 }
 
 table td .toggle-false {
-	color: v.$pale-red;
+	color: v.$red;
 }
 
 table td .toggle-false:hover {
-	color: v.$pale-red-darker;
+	@media (min-width: 640px) {
+		color: v.$red-darker;
+	}
 }
 
 table .hide-mobile {
@@ -182,11 +199,13 @@ table input:not(tfoot input):hover,
 table input:not(tfoot input):focus,
 table select:not(tfoot select):hover,
 table select:not(tfoot select):focus {
-	-webkit-appearance: menulist;
-  -moz-appearance: menulist;
-	background-color: white;
-	outline: 2px solid v.$black;
-	cursor: pointer;
+	@media (min-width: 640px) {
+		-webkit-appearance: menulist;
+		-moz-appearance: menulist;
+		background-color: white;
+		outline: 2px solid v.$black;
+		cursor: pointer;
+	}
 }
 
 tfoot tr {
@@ -200,7 +219,7 @@ tfoot tr {
 	font-size: 0.8rem;
 }
 
-tfoot tr td:not(:first-child) {
+.data-table tfoot tr td:not(:first-child) {
 	padding-left: 15px;
 }
 
@@ -208,7 +227,11 @@ tfoot tr td i {
 	font-size: 0.8rem;
 }
 
-tfoot tr td:last-child {
+// tfoot tr td i:not(button i) {
+// 	color: v.$black;
+// }
+
+.data-table tfoot tr td:last-child {
 	display: flex;
 	flex-direction: row;
 	align-items: center;
@@ -218,6 +241,12 @@ tfoot tr td:last-child {
 
 .page-column tfoot .hide-mobile-marker {
 	display: none;
+}
+
+tfoot .hide-mobile-xs-marker {
+	@media (max-width: 440px) {
+		display: none;
+	}
 }
 
 tfoot input,
@@ -242,7 +271,9 @@ tfoot button {
 }
 
 tfoot button:hover {
-	background-color: v.$alt-semi-dark;
+	@media (min-width: 640px) {
+		background-color: v.$alt-semi-dark;
+	}
 }
 
 tfoot button.button-off {
@@ -253,4 +284,31 @@ tfoot button.button-off {
 tfoot button i {
 	padding: 0;
 	margin: 0;
+	color: v.$white !important;
+}
+
+tfoot .icon-container {
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	border-radius: 3px;
+	padding: 1px 6px;
+	font-size: 0.9rem;
+	background-color: v.$black;
+	color: v.$white;
+	cursor: pointer;
+
+	@media (max-width: 440px) {
+		font-size: 0.8rem;
+	}
+}
+
+tfoot .icon-container i {
+	color: v.$white;
+	font-size: 0.8rem;
+	margin-right: 5px;
+}
+
+tfoot .icon-container span {
+	margin-left: 5px;
 }

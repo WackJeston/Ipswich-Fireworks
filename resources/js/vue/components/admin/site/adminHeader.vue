@@ -1,18 +1,24 @@
 <template>
   <header class="lt">
     <nav class="desktop-nav">
-      <!-- <a href="/admin/dashboard" class="title"><h2 class="hover">{{ this.sitetitle }}</h2></a> -->
       <a v-show="this.showhome == 'false'" href="/admin/dashboard" class="nav-button home-button header-button"><i class="fa-solid fa-house-chimney"></i></a>
       <i v-show="this.showhome == 'true'" class="fa-solid fa-house-chimney nav-button home-button header-button" id="non-active"></i>
 
 			<div id="notification-header-container">
-        <div @click="this.navMenuActive = (this.navMenuActive == 'notification' ? null : 'notification')" class="nav-button" id="notification-button">
+        <div @click="this.navMenuActive = (this.navMenuActive == 'notification' ? null : 'notification'), this.newNotifications = false" class="nav-button" :class="{ 'selected' : this.navMenuActive == 'notification' },{ 'new-notifications' : this.newNotifications }" id="notification-button">
           <i class="fa-solid fa-bell"></i>
+					<span v-if="this.notificationCount > 0" class="notification-count">{{ this.notificationCount }}</span>
+        </div>
+      </div>
+
+			<div id="settings-header-container">
+        <div @click="this.navMenuActive = (this.navMenuActive == 'settings' ? null : 'settings')" class="nav-button" :class="{ 'selected' : this.navMenuActive == 'settings' }" id="settings-button">
+          <i class="fa-solid fa-gear"></i>
         </div>
       </div>
 
       <div id="user-header-container">
-        <div @click="this.navMenuActive = (this.navMenuActive == 'user' ? null : 'user')" class="header-button" id="user-button">
+        <div @click="this.navMenuActive = (this.navMenuActive == 'user' ? null : 'user')" class="header-button" :class="{ 'selected' : this.navMenuActive == 'user' }" id="user-button">
           <p>{{ this.sessionuser.firstName }} {{ this.sessionuser.lastName }}</p>
           <i class="fa-solid fa-user"></i>
         </div>
@@ -22,12 +28,32 @@
     </nav>
 
 		<div id="notification-menu" :style="[this.navMenuActive == 'notification' ? { transform: 'translate3d(0, 100%, 0)', minWidth: this.notificationMenuWidth + 'px' } : { transform: 'translate3d(0, 0, 0)', minWidth: this.notificationMenuWidth + 'px' }]">
-      <div class="notification-group" v-for="(group, groupName) in this.notificationsData">
-				<h3>{{ groupName }}</h3>
-				<div v-for="(notification, i) in group">
-					<i v-if="notification.email" :id="'notification-' + notification.id" class="fa-solid fa-square-check" @click="this.toggleNotification(notification.notificationUserId, 'email', notification.id)"></i>
-					<i v-else :id="'notification-' + notification.id" class="fa-solid fa-square-xmark" @click="this.toggleNotification(0, 'email', notification.id)"></i>
-					<span>{{ notification.name }}</span>
+			<div id="notificationNav">
+				<h3>Alerts</h3>
+				<button class="page-button" @click="this.deleteAllNotifications()">Empty</button>
+			</div>
+
+			<div id="notificationsEmpty" class="notification" v-if="this.notificationsData.length == 0">
+				<h4>No Records</h4>
+			</div>
+
+			<div class="notification" v-else v-for="(notification, i) in this.notificationsData">
+				<h4><a :href="`/admin/${notification.link}`">{{ notification.group }}: {{ notification.name }}</a> <i class="fa-solid fa-square-xmark pb-danger" @click="this.deleteNotification(notification.id)"></i></h4>
+				<p>{{ notification.message }}</p>
+			</div>
+    </div>
+
+		<div id="settings-menu" :style="[this.navMenuActive == 'settings' ? { transform: 'translate3d(0, 100%, 0)', minWidth: this.settingsMenuWidth + 'px' } : { transform: 'translate3d(0, 0, 0)', minWidth: this.settingsMenuWidth + 'px' }]">
+      <div class="settings-group" v-for="(group, groupName) in this.settingsData">
+				<h4>{{ groupName }}</h4>
+				<div v-for="(settings, i) in group">
+					<span>{{ settings.name }}</span>
+
+					<i v-if="settings.email" :id="'settings-' + settings.id" class="fa-solid fa-envelope active" @click="this.toggleSettings(settings.id, settings.notificationUserId, 'email')"></i>
+					<i v-else :id="'settings-' + settings.id" class="fa-solid fa-envelope" @click="this.toggleSettings(settings.id, settings.notificationUserId, 'email')"></i>
+
+					<i v-if="settings.standard" :id="'settings-' + settings.id" class="fa-solid fa-circle-check active" @click="this.toggleSettings(settings.id, settings.notificationUserId, 'standard')"></i>
+					<i v-else :id="'settings-' + settings.id" class="fa-solid fa-circle-xmark" @click="this.toggleSettings(settings.id, settings.notificationUserId, 'standard')"></i>
 				</div>
 			</div>
     </div>
@@ -42,7 +68,7 @@
 
   <nav class="admin-menu lt"
   :class="{ 'menu-active': menuActive, 'menu-non-active': !menuActive }">
-    <h2 class="title">Admin Console</h2>
+    <h2 class="title">Navigation</h2>
 
     <ul>
       <div v-for="(link, i) in this.adminlinks" class="nav-link">
@@ -77,7 +103,7 @@
       'adminlinks',
       'showhome',
       'sessionuser',
-			'notifications',
+			'settings',
     ],
 
     data() {
@@ -85,14 +111,20 @@
         menuActive: false,
         navMenuActive: false,
 				userMenuWidth: 0,
+				settingsMenuWidth: 0,
+				settingsData: this.settings,
 				notificationMenuWidth: 0,
-				notificationsData: this.notifications,
+				notificationsData: [],
+				notificationCount: 0,
+				newNotifications: false,
       };
     },
 
 		mounted() {
 			this.setUserMenuWidth();
 			this.setNotificationMenuPosition();
+			this.setSettingsMenuPosition();			
+			this.reloadNotifications(true);
 		},
 
     methods: {
@@ -137,6 +169,29 @@
 				}
 			},
 
+			setSettingsMenuPosition(start = true) {
+				let menu = document.querySelector("#settings-menu");
+				let button = document.querySelector("#settings-button");
+
+				let buttonPosition = button.getBoundingClientRect();
+
+				menu.style.right = (window.innerWidth - buttonPosition.left - button.offsetWidth) + "px";
+
+				if (start) {
+					setTimeout(() => {
+						this.setSettingsMenuPosition(false);
+					}, 500);
+					
+					setTimeout(() => {
+						this.setSettingsMenuPosition(false);
+					}, 5000);
+					
+					setTimeout(() => {
+						this.setSettingsMenuPosition(false);
+					}, 10000);
+				}
+			},
+
       toggleLinks(i, open) {
         if(open == false) {
           let list = document.querySelector(".sublist" + i);
@@ -169,46 +224,76 @@
       },
 
 			// AJAX
-			async toggleNotification(notificationUserId, type, id) {
-        try {
-          this.result = await this.$http.get("/header-toggleNotification/" + id + "/" + notificationUserId + "/" + type);
-        } catch (err) {
-          console.log(err);
-        } finally {
-          // let button = document.querySelector("#notification-" + id);
+			async toggleSettings(id, notificationUserId, type) {
+				try {
+					this.response = await fetch("/header-toggleNotification/" + id + "/" + notificationUserId + "/" + type);
+					this.result = await this.response.json();
+					
+				} catch (err) {
+					console.log('----ERROR----');
+					console.log(err);
 
-					if (this.result.data[0]) {
-						this.notificationsData[this.result.data[1]].forEach(notificationItem => {
-							if (notificationItem.name == this.result.data[2]) {
-								notificationItem.notificationUserId = this.result.data[3];
-
-								if (type == "email") {
-									notificationItem.email = 1
-								} else if (type == "phone") {
-									notificationItem.phone = 1
-								} else {
-									notificationItem.standard = 1
-								}
-							}
-						});
-
-					} else {
-						this.notificationsData[this.result.data[1]].forEach(notificationItem => {
-							if (notificationItem.name == this.result.data[2]) {
-								notificationItem.notificationUserId = undefined;
-
-								if (type == "email") {
-									notificationItem.email = 0
-								} else if (type == "phone") {
-									notificationItem.phone = 0
-								} else {
-									notificationItem.standard = 0
-								}
-							}
-						});
-					}
-        }
+				} finally {
+					this.settingsData = this.result;
+				}
       },
+
+			async reloadNotifications(repeat = false) {
+				try {
+					this.response = await fetch("/header-reloadNotifications");
+					this.result = await this.response.json();
+					
+				} catch (err) {
+					console.log('----ERROR----');
+					console.log(err);
+
+				} finally {
+					if (this.notificationCount < this.result.length) {
+						this.newNotifications = true;
+					}
+
+					this.notificationCount = this.result.length;
+					this.notificationsData = [];
+
+					this.result.forEach(notification => {
+						this.notificationsData.push(notification);
+					});
+				}
+
+				if (repeat) {
+					setTimeout(() => {
+						this.reloadNotifications(true);
+					}, 10000);
+				}
+			},
+
+			async deleteNotification(id) {
+				try {
+					this.response = await fetch("/header-deleteNotification/" + id);
+					this.result = await this.response.json();
+					
+				} catch (err) {
+					console.log('----ERROR----');
+					console.log(err);
+
+				} finally {
+					this.reloadNotifications();
+				}
+			},
+
+			async deleteAllNotifications() {
+				try {
+					this.response = await fetch("/header-deleteAllNotifications");
+					this.result = await this.response.json();
+					
+				} catch (err) {
+					console.log('----ERROR----');
+					console.log(err);
+
+				} finally {
+					this.reloadNotifications();
+				}
+			},
     },
   };
 </script>

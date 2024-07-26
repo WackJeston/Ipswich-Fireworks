@@ -1,4 +1,4 @@
-@extends('layout')
+@extends('body-admin')
 
 @section('title', 'User Profile')
 
@@ -10,7 +10,7 @@
       <a href="/admin/users">Users</a>
     </div>
 
-    <h2 class="dk">User Profile (#{{ $user->id }})</h2>
+    <h1 class="dk">User Profile (#{{ $user->id }})</h1>
 
     @if ($errors->any())
       <div id="alerterror" class="lt">
@@ -25,20 +25,53 @@
     @endif
 
     <div id="userprofilefunctions" class="dk">
-      <userprofilefunctions 
+      <userprofilefunctions
+				pageshowmarker="{{ session()->get('pageShowMarker') }}"
 				:user="{{ json_encode($user) }}" 
 				:editform="{{ json_encode($editForm) }}"
+				:orderstable="{{ json_encode($ordersTable) }}"
 			/>
     </div>
 
-    <div class="web-box profile-main">
-			<div class="wb-row">
-				<ul>
+		<div class="page-column-container columns-2">
+			<div class="page-column">
+				<ul class="web-box profile-details">
+					<li>Summary</li>
 					<li><strong>Name: </strong>{{ $user->firstName }} {{ $user->lastName }}</li>
 					<li><strong>Email: </strong>{{ $user->email }}</li>
+					@if (!is_null($user->klaviyoId))
+						<li><strong>Klaviyo ID: </strong>{{ $user->klaviyoId }}</li>
+					@endif
 				</ul>
 			</div>
-		</div>
 
+			<div class="page-column grid">
+				@if (!empty($billingAddress))
+					<div class="web-box shrink">
+						<strong>Billing Address:</strong>
+						<ul>
+							<li>{{ $billingAddress->firstName }} {{ $billingAddress->lastName }}</li>
+							<li>{{ $billingAddress->line1 }}</li>
+							@if ($billingAddress->line2)
+								<li>{{ $billingAddress->line2 }}</li>
+							@endif
+							@if ($billingAddress->line3)
+								<li>{{ $billingAddress->line3 }}</li>
+							@endif
+							<li>{{ $billingAddress->city }}</li>
+							<li>{{ $billingAddress->region }}, {{ $billingAddress->country }}</li>
+							<li>{{ $billingAddress->postCode }}</li>
+							
+							@if ($billingAddress->phone)
+								<li>{{ $billingAddress->phone }}</li>
+							@endif
+							@if ($billingAddress->email)
+								<li>{{ $billingAddress->email }}</li>
+							@endif
+						</ul>
+					</div>
+				@endif
+			</div>
+		</div>
   </main>
 @endsection

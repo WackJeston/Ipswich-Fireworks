@@ -1,4 +1,4 @@
-@extends('layout')
+@extends('body-admin')
 
 @if ($type == 'standard')
 	@section('title', 'Enquiries')
@@ -11,13 +11,7 @@
 @section('content')
   <main class="enquiries">
 
-		@if ($type == 'standard')
-			<h2 class="dk">Enquiries</h2>
-		@elseif ($type == 'feedback')
-			<h2 class="dk">Feedback</h2>
-		@elseif ($type == 'sponsors')
-			<h2 class="dk">Sponsor Enquiries</h2>
-		@endif
+		<h1 class="dk">Enquiries Search</h1>
 
     @if ($errors->any())
       <div id="alerterror" class="lt">
@@ -30,6 +24,10 @@
         <alertmessage successmessage="{{ session()->get('message') }}" />
       </div>
     @endif
+
+		@php
+			echo $searchForm['html'];
+		@endphp
 
 		@php
 			echo $enquiriesTable['html'];

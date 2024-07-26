@@ -1,4 +1,4 @@
-@extends('layout')
+@extends('body-admin')
 
 @section('title', 'Dashboard')
 
@@ -19,20 +19,22 @@
       </div>
     @endif
 
-		@php
+		{{-- @php
 			echo $enquiriesTable['html'];
-		@endphp
+		@endphp --}}
 
-		{{-- <div class="page-column-container columns-2">
+		<div class="page-column-container columns-2">
+			<div class="page-column">
+				@php
+					echo $ordersTable['html'];
+				@endphp
+			</div>
 			<div class="page-column">
 				@php
 					echo $enquiriesTable['html'];
 				@endphp
 			</div>
-			<div class="page-column">
-				
-			</div>
-		</div> --}}
+		</div>
 
   </main>
 @endsection
