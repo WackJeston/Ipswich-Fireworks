@@ -12,8 +12,8 @@ return new class extends Migration
      */
     public function up(): void
     {
-			DB::statement('ALTER TABLE `notification`
-				ADD COLUMN url VARCHAR(225) DEFAULT NULL AFTER `name`;'
+			DB::statement('ALTER TABLE users
+				ADD COLUMN klaviyoId varchar(255) DEFAULT NULL AFTER `password`;'
 			);
     }
 
@@ -22,7 +22,7 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::table('orders', function (Blueprint $table) {
+        Schema::table('users', function (Blueprint $table) {
             //
         });
     }

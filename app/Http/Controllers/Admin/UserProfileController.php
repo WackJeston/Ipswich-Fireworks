@@ -37,20 +37,10 @@ class UserProfileController extends AdminController
 		$editForm->addInput('password', 'password', 'Password', null, 255, 6, false, 'New Password');
 		$editForm = $editForm->render();
 
-		$ordersTable = new DataTable('orders');
-		$ordersTable->setQuery(sprintf('SELECT o.* FROM orders AS o WHERE o.userId = %d', $id));
-		$ordersTable->addColumn('id', '#');
-		$ordersTable->addColumn('status', 'Status');
-		$ordersTable->addColumn('total', 'Total');
-		$ordersTable->addColumn('created_at', 'Created', 1, true);
-		$ordersTable->addLinkButton('order-profile/?', 'fa-solid fa-folder-open', 'Open Record');
-		$ordersTable = $ordersTable->render();
-
     return view('admin/user-profile', compact(
       'user',
 			'billingAddress',
 			'editForm',
-			'ordersTable',
     ));
   }
 

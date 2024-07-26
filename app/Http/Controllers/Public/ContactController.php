@@ -1,5 +1,5 @@
 <?php
-namespace App\Http\Controllers;
+namespace App\Http\Controllers\Public;
 
 Use DB;
 use Illuminate\Http\Request;

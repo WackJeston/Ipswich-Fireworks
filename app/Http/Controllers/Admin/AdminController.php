@@ -12,81 +12,52 @@ class AdminController extends Controller
 		$adminLinks = [
 			$enquiries = [
 				"title"=>"enquiries",
+				"link"=>"/admin/enquiries",
 				"icon"=>"fa-regular fa-comment",
-				"sublink"=>$subLinks = [
-					$search = [
-						"title"=>"search",
-						"link"=>"/admin/enquiries",
-						"icon"=>"fa-solid fa-magnifying-glass",
-					],
-				],
-			],
-			$orders = [
-				"title"=>"orders",
-				"icon"=>"fa-solid fa-basket-shopping",
-				"sublink"=>$subLinks = [
-					$allOrders = [
-						"title"=>"search",
-						"link"=>"/admin/orders",
-						"icon"=>"fa-solid fa-magnifying-glass",
-					],
-				],
-			],
-			$people = [
-				"title"=>"people",
-				"icon"=>"fa-solid fa-users",
-				"sublink"=>$subLinks = [
-					$customers = [
-						"title"=>"customers",
-						"link"=>"/admin/customers",
-						"icon"=>"fa-solid fa-user",
-					],
-					$users = [
-						"title"=>"users",
-						"link"=>"/admin/users",
-						"icon"=>"fa-solid fa-user-astronaut",
-					],
-				],
-			],
-			$products = [
-				"title"=>"products",
-				"icon"=>"fa-solid fa-dice-d6",
-				"sublink"=>$subLinks = [
-					$allProducts = [
-						"title"=>"search",
-						"link"=>"/admin/products",
-						"icon"=>"fa-solid fa-magnifying-glass",
-					],
-					$categories = [
-						"title"=>"categories",
-						"link"=>"/admin/categories",
-						"icon"=>"fa-solid fa-layer-group",
-					],
-					$variants = [
-						"title"=>"variants",
-						"link"=>"/admin/variants",
-						"icon"=>"fa-solid fa-shapes",
-					],
-				],
 			],
 			$settings = [
 				"title"=>"settings",
 				"link"=>"/admin/settings",
 				"icon"=>"fa-solid fa-gear",
 			],
+			$users = [
+				"title"=>"users",
+				"link"=>"/admin/users",
+				"icon"=>"fa-solid fa-user-astronaut",
+			],
 			$website = [
 				"title"=>"website",
 				"icon"=>"fa-solid fa-globe",
 				"sublink"=>$subLinks = [
-					$banners = [
-						"title"=>"banners",
-						"link"=>"/admin/banners",
-						"icon"=>"fa-solid fa-sign-hanging",
+					$homePage = [
+						"title"=>"home page",
+						"link"=>"/admin/home-page",
+						"icon"=>"fa-solid fa-house-chimney",
+					],
+					$findUs = [
+						"title"=>"find us",
+						"link"=>"/admin/find-us",
+						"icon"=>"fa-solid fa-map-location-dot",
 					],
 					$contact = [
 						"title"=>"contact",
 						"link"=>"/admin/contact",
 						"icon"=>"fa-solid fa-address-card",
+					],
+					$programme = [
+						"title"=>"programme",
+						"link"=>"/admin/programme",
+						"icon"=>"fa-solid fa-clipboard-list",
+					],
+					$scouts = [
+						"title"=>"Scout Group",
+						"link"=>"/admin/scouts",
+						"icon"=>"fa-solid fa-people-group",
+					],
+					$supporters = [
+						"title"=>"supporters",
+						"link"=>"/admin/supporters",
+						"icon"=>"fa-solid fa-heart-pulse",
 					],
 				],
 			],

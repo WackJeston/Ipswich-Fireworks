@@ -10,52 +10,59 @@ class PublicController extends Controller
   public function __construct()
 	{
 		$publicLinks = [
-			$shop = [
-				"title"=>"shop",
-				"link"=>"/shop",
-				"icon"=>"fa-solid fa-tags",
+			$findUs = [
+				"title"=>"find us",
+				"link"=>"/find-us",
+				"icon"=>"fa-solid fa-map-location-dot",
 			],
-			$basket = [
-				"title"=>"basket",
-				"link"=>"/basket",
-				"icon"=>"fa-solid fa-basket-shopping",
+			$programme = [
+				"title"=>"programme",
+				"link"=>"/programme",
+				"icon"=>"fa-regular fa-rectangle-list",
+			],
+			$scouts = [
+				"title"=>"11th Ipswich Scout Group",
+				"link"=>"/scouts",
+				"icon"=>"fa-solid fa-people-group",
 			],
 			$contact = [
-				"title"=>"contact",
+				"title"=>"contact us",
 				"link"=>"/contact",
-				"icon"=>"fa-regular fa-address-card",
+				"icon"=>"fa-solid fa-address-card",
 			],
-		];
-
-		$userLinks = [
-			$account = [
-				"title"=>"account",
-				"link"=>"/account",
-				"icon"=>"fa-solid fa-user-gear",
+			$feedback = [
+				"title"=>"leave feedback",
+				"link"=>"/feedback",
+				"icon"=>"fa-solid fa-message",
 			],
-			$logout =[
-				"title"=>"logout",
-				"link"=>"/customerLogout",
-				"icon"=>"fa-solid fa-arrow-right-from-bracket",
+			$sponsors = [
+				"title"=>"supporters & sponsors",
+				"link"=>"/supporters",
+				"icon"=>"fa-solid fa-heart-pulse",
 			],
 		];
 
 		$socials = [
 			$instagram = [
 				"title"=>"instagram",
-				"link"=>"https://www.instagram.com/harpercharlescompany/",
+				"link"=>"https://www.instagram.com/ipswichfireworks50/",
 				"icon"=>"fa-brands fa-instagram",
 			],
 			$facebook = [
 				"title"=>"facebook",
-				"link"=>"https://www.facebook.com/p/Harper-Charles-Bespoke-Interiors-100033144487745/",
+				"link"=>"https://www.facebook.com/IpswichFireworks/",
 				"icon"=>"fa-brands fa-facebook",
 			],
-			$youtube = [
-				"title"=>"youtube",
-				"link"=>"https://www.youtube.com/channel/UCr4e-CcIQWgoMBT_XpPC0HQ/",
-				"icon"=>"fa-brands fa-youtube",
+			$twitter = [
+				"title"=>"twitter",
+				"link"=>"https://twitter.com/parkfireworks/",
+				"icon"=>"fa-brands fa-x-twitter",
 			],
+			// $tiktok = [
+			//   "title"=>"tiktok",
+			//   "link"=>"https://www.tiktok.com/ipswichfireworks50/",
+			//   "icon"=>"fa-brands fa-tiktok",
+			// ],
 		];
 
 		$contactResult = DB::select('SELECT type, value FROM contact ORDER BY type ASC');
@@ -79,7 +86,6 @@ class PublicController extends Controller
 
 		View::share([
 			'publicLinks' => $publicLinks,
-			'userLinks' => $userLinks,
 			'socials' => $socials,
 			'contact' => $contact,
 		]);

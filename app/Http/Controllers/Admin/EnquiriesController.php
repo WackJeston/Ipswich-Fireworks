@@ -39,12 +39,12 @@ class EnquiriesController extends AdminController
 				'label' => 'Standard',
 			],
 			[
-				'value' => 'complaints',
-				'label' => 'Compaints',
-			],
-			[
 				'value' => 'feedback',
 				'label' => 'Feedback',
+			],
+			[
+				'value' => 'sponsor',
+				'label' => 'Sponsor',
 			],
 		], false);
 		$searchForm = $searchForm->render();
@@ -55,6 +55,7 @@ class EnquiriesController extends AdminController
 		$enquiriesTable->addColumn('name', 'Name', 2, true);
 		$enquiriesTable->addColumn('email', 'Email', 3);
 		$enquiriesTable->addColumn('subject', 'Subject', 2);
+		$enquiriesTable->addColumn('type', 'Type', 2, true);
 		$enquiriesTable->addColumn('date', 'Date', 3, true);
 		$enquiriesTable->addLinkButton('enquiry-profile/?', 'fa-solid fa-folder-open', 'Open Record');
 		$enquiriesTable = $enquiriesTable->render();

@@ -1,13 +1,13 @@
 <?php
 
-namespace App\Http\Controllers;
+namespace App\Http\Controllers\Admin;
 
 use DB;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Storage;
 use Illuminate\Validation\Rule;
-use App\DataTable;
-use App\DataForm;
+use App\DataClasses\DataTable;
+use App\DataClasses\DataForm;
 use App\Models\Banners;
 use App\Models\Content;
 
