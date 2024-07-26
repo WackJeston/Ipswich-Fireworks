@@ -1,8 +1,6 @@
 /node_modules
 /public/hot
 /public/storage
-/public/css
-/public/js
 /storage/*.key
 /vendor
 .phpunit.result.cache
@@ -11,4 +9,5 @@ Homestead.yaml
 npm-debug.log
 yarn-error.log
 composer.lock
+package-lock.json
 /.idea
