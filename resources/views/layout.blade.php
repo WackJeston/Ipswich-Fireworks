@@ -16,9 +16,9 @@
       <title>{{ env('APP_NAME') }}</title>
     @endif
 
-		<link rel="preload" href="{{ env('ASSET_PATH') . 'website-logo.svg' }}" as="image">
-		<link rel="preload" href="{{ env('ASSET_PATH') . 'website-logo-white.svg' }}" as="image">
-		<link rel="preload" href="{{ env('ASSET_PATH') . 'website-title.svg' }}" as="image">
+		<link rel="preload" href="{{ env('ASSET_PATH') . 'logo-black.png' }}" as="image">
+		<link rel="preload" href="{{ env('ASSET_PATH') . 'logo-white.png' }}" as="image">
+		<link rel="preload" href="{{ env('ASSET_PATH') . 'logo-yellow.png' }}" as="image">
 
 		@if (session()->has('preloaded-images'))
 			@foreach (session()->get('preloaded-images') as $url)
