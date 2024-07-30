@@ -40,7 +40,13 @@ class ProgrammeController extends AdminController
 		$musicForm = $musicForm->render();
 
 		$musicTable = new DataTable('programme_REF_2');
-		$musicTable->setQuery('SELECT * FROM programme WHERE type = "music"');
+		$musicTable->setQuery('SELECT 
+			p.*,
+			a.fileName
+			FROM programme AS p 
+			LEFT JOIN asset AS a ON a.id = p.assetId
+			WHERE p.type = "music"'
+		);
 		$musicTable->addColumn('id', '#');
 		$musicTable->addColumn('value', 'Name', 3);
 		$musicTable->addColumn('label', 'Label', 2, true);
