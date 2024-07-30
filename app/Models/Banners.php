@@ -10,14 +10,21 @@ class Banners extends Model
   use HasFactory;
 
   protected $fillable = [
+		'parentId',
     'page',
     'position',
     'framing',
     'title',
     'description',
     'active',
-    'name',
-    'fileName',
+		'sequence',
+    'assetId'
   ];
 
+	protected static function booted() {
+		static::created(function ($self) {
+			$self->sequence = $self->id;
+			$self->save();
+    });
+	}
 }
