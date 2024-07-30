@@ -21,7 +21,12 @@ class SupportersController extends AdminController
 		$form = $form->render();
 
 		$table = new DataTable('supporters');
-		$table->setQuery('SELECT * FROM supporters');
+		$table->setQuery('SELECT 
+			s.*,
+			a.fileName
+			FROM supporters AS s
+			LEFT JOIN asset AS a ON a.id = s.assetId'
+		);
 		$table->addColumn('id', '#');
 		$table->addColumn('name', 'Name', 2);
 		$table->addColumn('link', 'Link', 2, true);

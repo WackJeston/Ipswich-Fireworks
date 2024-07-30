@@ -13,7 +13,7 @@ class Supporters extends Model
 		'type',
 		'name',
 		'link',
-		'fileName',
+		'assetId',
     'active',
   ];
 }
