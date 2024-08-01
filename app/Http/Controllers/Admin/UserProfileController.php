@@ -30,7 +30,7 @@ class UserProfileController extends AdminController
 
 		$billingAddress = Address::where('userId', $id)->where('defaultBilling', true)->first();
 
-		$editForm = new dataForm(request(), sprintf('/user-profileUpdate/%d', $id), 'Update');
+		$editForm = new DataForm(request(), sprintf('/user-profileUpdate/%d', $id), 'Update');
 		$editForm->addInput('text', 'firstname', 'First Name', $user->firstName, 255, 1, true);
 		$editForm->addInput('text', 'lastname', 'Last Name', $user->lastName, 255, 1, true);
 		$editForm->addInput('email', 'email', 'Email', $user->email, 255, 1, true);
