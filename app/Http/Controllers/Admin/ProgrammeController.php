@@ -36,7 +36,7 @@ class ProgrammeController extends AdminController
 		$musicForm->addInput('checkbox', 'timeToggle', 'Time', null, null, null);
 		$musicForm->addInput('time', 'time', '', null, null, null);
 		$musicForm->addInput('url', 'link',  'Link', null, 255, 1);
-		$musicForm->addInput('file', 'fileName', 'Image', null, null, null);
+		$musicForm->addInput('file', 'image', 'Image', null, null, null);
 		$musicForm = $musicForm->render();
 
 		$musicTable = new DataTable('programme_REF_2');
@@ -107,7 +107,7 @@ class ProgrammeController extends AdminController
 			'stage' => $request['stage'],
 			'time' => $time,
 			'link' => $request['link'],
-			'fileName' => $fileNames[0]['new'] ?? null,
+			'assetId' => $fileNames[0]['id'] ?? null,
 		]);
 
 		return redirect("/admin/programme")->with('message', 'Music item created successfully.');

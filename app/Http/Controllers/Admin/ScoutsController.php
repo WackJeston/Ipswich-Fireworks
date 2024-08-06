@@ -13,26 +13,22 @@ class ScoutsController extends AdminController
 {
   public function show()
   {		
-		// $aboutUs1 = Content::firstOrCreate([
-		// 	'page' => 'scouts',
-		// 	'position' => 'aboutUs_1',
-		// ]);
+		$aboutUs1 = Content::firstOrCreate([
+			'page' => 'scouts',
+			'position' => 'aboutUs_1',
+		]);
 
-		// $aboutUs2 = Content::firstOrCreate([
-		// 	'page' => 'scouts',
-		// 	'position' => 'aboutUs_2',
-		// ]);
+		$aboutUs2 = Content::firstOrCreate([
+			'page' => 'scouts',
+			'position' => 'aboutUs_2',
+		]);
 
-		// $aboutUs3 = Content::firstOrCreate([
-		// 	'page' => 'scouts',
-		// 	'position' => 'aboutUs_3',
-		// ]);
+		$aboutUs3 = Content::firstOrCreate([
+			'page' => 'scouts',
+			'position' => 'aboutUs_3',
+		]);
 
-		$aboutUs1 = Content::where('page', 'scouts')->where('position', 'aboutUs_1')->first();
-		$aboutUs2 = Content::where('page', 'scouts')->where('position', 'aboutUs_2')->first();
-		$aboutUs3 = Content::where('page', 'scouts')->where('position', 'aboutUs_3')->first();
-
-		$aboutUsForm = new DataForm(request(), '/admin-scoutsUpdateAboutUs', 'Save');
+		$aboutUsForm = new DataForm(request(), '/admin-scoutsUpdateAboutUs/');
 		$aboutUsForm->setTitle('About Us Section');
 		$aboutUsForm->addInput('text', 'title1', 'Title 1', $aboutUs1->title, 100);
 		$aboutUsForm->addInput('textarea', 'description1', 'Paragraph 1', $aboutUs1->description, 1000);
@@ -50,8 +46,6 @@ class ScoutsController extends AdminController
 
 	public function updateAboutUs(Request $request)
 	{
-		dd($request->title1);
-
 		$request->validate([
 			'title1' => 'max:100',
 			'description1' => 'max:5000',
