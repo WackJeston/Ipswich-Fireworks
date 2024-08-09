@@ -14,7 +14,7 @@ class FindUsController extends AdminController
 {
   public function show()
   {
-		$gateForm = new DataForm(request(), '/admin-find-usAddGate');
+		$gateForm = new DataForm(request(), '/admin-find-usAddGate/');
 		$gateForm->setTitle('Add Gate');
 		$gateForm->addInput('text', 'street', 'Street', null, 100, 1);
 		$gateForm->addInput('text', 'description', 'Description', null, 255, 1);

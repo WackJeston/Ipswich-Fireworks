@@ -98,7 +98,7 @@ class HomePageController extends AdminController
 	public function addLandingZoneBanner(Request $request)
 	{
 		$request->validate([
-			'image' => 'required|image|mimes:jpg,jpeg,png,svg,webp,webp',
+			'image-1' => 'required|image|mimes:jpg,jpeg,png,svg,webp,webp',
 			'title' => 'max:100',
 		]);
 
@@ -149,7 +149,7 @@ class HomePageController extends AdminController
 
 	public function addBottomBanner(Request $request) {
 		$request->validate([
-			'image' => 'required|image|mimes:jpg,jpeg,png,svg,webp,webp',
+			'image-2' => 'required|image|mimes:jpg,jpeg,png,svg,webp,webp',
 		]);
 
 		$fileNames = storeImages($request, 'homePageLZ', 'carousel');

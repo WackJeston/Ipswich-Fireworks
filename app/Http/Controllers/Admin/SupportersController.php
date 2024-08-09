@@ -13,11 +13,11 @@ class SupportersController extends AdminController
 {
   public function show()
   {
-		$form = new DataForm(request(), '/supportersCreate', 'Add');
+		$form = new DataForm(request(), '/supportersCreate/', 'Add');
 		$form->setTitle('Add Supporter / Sponsor');
 		$form->addInput('text', 'name', 'Name', null, 255, 1, true);
 		$form->addInput('text', 'link', 'Link', null, 255, 0);
-		$form->addInput('file', 'fileName', 'Logo', null, null, null, true);
+		$form->addInput('file', 'image', 'Logo', null, null, null, true);
 		$form = $form->render();
 
 		$table = new DataTable('supporters');
@@ -46,7 +46,7 @@ class SupportersController extends AdminController
     $request->validate([
 			'name' => 'required|max:255',
 			'link' => 'max:255',
-			'fileName' => 'required|image|mimes:jpg,jpeg,png,svg,webp',
+			'image' => 'required|image|mimes:jpg,jpeg,png,svg,webp',
     ]);
 
 		$fileNames = storeImages($request, 'homePageLZ', 'carousel');
@@ -55,7 +55,7 @@ class SupportersController extends AdminController
 			Supporters::create([
 				'name' => $request['name'],
 				'link' => $request['link'],
-				'fileName' => $fileName['new'],
+				'assetId' => $fileName['id'],
 			]);
 		}
 
@@ -64,8 +64,6 @@ class SupportersController extends AdminController
 
   public function delete($id)
   {
-		$supporter = Supporters::where('id', $id)->first();
-    Storage::delete($supporter->fileName);
     Supporters::find($id)->delete();
 
 		return redirect("/admin/supporters")->with('message', "Supporter #$id deleted successfully.");
