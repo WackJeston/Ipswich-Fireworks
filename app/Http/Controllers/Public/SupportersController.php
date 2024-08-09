@@ -10,9 +10,15 @@ class SupportersController extends PublicController
 {
   public function show()
   {
-		$records = DB::select('SELECT * FROM supporters WHERE active = 1');
+		$records = DB::select('SELECT 
+			s.*,
+			a.fileName
+			FROM supporters AS s
+			INNER JOIN asset AS a ON a.id = s.assetId
+			WHERE s.active = 1
+		');
 
-		$records = getS3Url($records);
+		$records = cacheImages($records, 800, 800);
 
     return view('public/supporters', compact(
 			'records',

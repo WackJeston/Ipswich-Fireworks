@@ -84,10 +84,21 @@ class PublicController extends Controller
 			}
 		}
 
+		$date = date('Y-m-d H:i:s');
+		$start = DB::select('SELECT date FROM settings WHERE id = 1')[0]->date;
+		$end = DB::select('SELECT datetime FROM settings WHERE id = 4')[0]->datetime;
+				
+		if (($date >= $start) && ($date <= $end)){
+			$ticketsActive = true;
+		} else {
+			$ticketsActive = false; 
+		}
+
 		View::share([
 			'publicLinks' => $publicLinks,
 			'socials' => $socials,
 			'contact' => $contact,
+			'ticketsActive' => $ticketsActive,
 		]);
 	}
 }

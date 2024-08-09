@@ -1,41 +1,31 @@
 @use 'v';
 
 html {
+	background-color: v.$white;
 	height: 100dvh;
-	width: 100vw;
 	padding-bottom: env(safe-area-inset-bottom);
 }
 
 body {
 	height: 100%;
-	width: 100%;
-	position: fixed;
+	position: relative;
 	overflow: hidden;
 	transition: all 200ms ease;
 }
 
-.page-container {
+#page-container {
 	display: flex;
 	flex-direction: column;
-	height: 100vh;
-	background-color: v.$background;
-	overflow-y: auto;
+	height: 100%;
+	background-color: v.$white;
+	overflow-y: scroll;
 	overflow-x: hidden;
-	position: relative;
+	// position: relative;
 }
 
 .page-margin {
 	margin-left: 20px;
 	margin-right: 20px;
-}
-
-main {
-	margin-top: v.$header-height;
-	// padding-bottom: 30px;
-
-	@media (max-width: 640px) {
-		margin-top: v.$header-height-mobile;
-	}
 }
 
 .section-width {
@@ -59,10 +49,20 @@ main {
 	}
 }
 
-.link-trail {
+main {
 	position: relative;
+	margin-top: v.$header-height;
+	// padding-bottom: 30px;
+
+	@media (max-width: 640px) {
+		margin-top: v.$header-height-mobile;
+	}
+}
+
+.link-trail {
+	position: absolute;
 	top: 2px;
-	left: -10px;
+	left: 10px;
 }
 
 .link-trail i {
@@ -71,19 +71,47 @@ main {
 }
 
 .link-trail a:hover {
-	color: v.$brand-alt-dark;
-	text-decoration: underline;
+	@media (min-width: 640px) {
+		color: v.$brand-alt-dark;
+		text-decoration: underline;
+	}
 }
 
 ul {
 	display: flex;
+	flex-direction: column;
 	list-style: none;
+}
+
+.page-column-container {
+	display: flex;
+	flex-direction: column;
+
+	@media (min-width: 640px) {
+		flex-direction: row;
+	}
+}
+
+.page-column-container .page-column {
+	flex-grow: 1;
+	min-width: 200px;
+}
+
+.page-column-container .page-column:not(:first-child) {
+	@media (min-width: 640px) {
+		margin-left: 40px;
+	}
 }
 
 .page-button-row {
 	width: 100%;
 	display: flex;
 	flex-direction: row;
+	flex-wrap: wrap;
+}
+
+.page-button-row .page-button span {
+	margin-left: 5px;
 }
 
 button {
@@ -93,30 +121,55 @@ button {
 }
 
 button.page-button,
-a.page-button {
+a.page-button,
+input.page-button {
 	display: flex;
 	align-items: center;
-	margin-top: 10px;
-	margin-bottom: 10px;
-	background-color: v.$almost-black;
+	justify-content: center;
+	// background-color: v.$brand-main;
+	background-color: v.$black;
 	color: v.$white;
-	border-radius: 5px;
+	border-radius: 3px;
+	font-size: 1rem;
 	cursor: pointer;
+
+	@media (max-width: 640px) {
+		font-size: 0.8rem;
+	}
 }
 
 .page-button.padding {
 	padding: 5px 10px;
+
+	@media (max-width: 640px) {
+		padding: 3px 8px;
+	}
 }
 
-button.page-button:not(:last-child),
-a.page-button:not(:last-child) {
-	margin-right: 10px;
+.page-button.padding-large {
+	padding: 8px 16px;
+
+	@media (max-width: 640px) {
+		padding: 6px 12px;
+	}
 }
 
-button.page-button:hover,
-a.page-button:hover {
-	background-color: v.$brand-alt-light;
-	color: v.$black;
+button.page-button:not(.submit, .warning-overlay .page-button, .no-margin),
+a.page-button:not(.submit, .warning-overlay .page-button, .no-margin) {
+	margin-top: 10px;
+	margin-bottom: 10px;
+}
+
+button.page-button:not(:first-child, .submit, .warning-overlay .page-button, .no-margin),
+a.page-button:not(:first-child, .submit, .warning-overlay .page-button, .no-margin, .empty-basket a) {
+	margin-left: 10px;
+}
+
+button.page-button:hover:not(.pb-success, .pb-danger, .pb-dark),
+a.page-button:hover:not(.pb-success, .pb-danger, .pb-dark) {
+	@media (min-width: 640px) {
+		background-color: v.$brand-main-darker;
+	}
 }
 
 button.page-button i,
@@ -124,50 +177,64 @@ a.page-button i {
 	font-size: 1.1rem;
 	color: v.$white;
 	margin-left: 5px;
+
+	@media (max-width: 640px) {
+		font-size: 0.8rem;
+	}
 }
+
+// button.page-button i:first-child,
+// a.page-button i {
+// 	margin: 0 5px 0 0;
+// }
+
+// button.page-button i:last-child,
+// a.page-button i:last-child {
+// 	margin: 0 0 0 5px;
+// }
 
 .page-button .fa-angles-left {
 	margin-left: 0;
 	margin-right: 5px;
 }
 
-button.page-button:hover i,
-a.page-button:hover i {
-	color: v.$black;
-}
+// button.page-button:hover i,
+// a.page-button:hover i {
+// 	@media (min-width: 640px) {
+// 		color: v.$black;
+// 	}
+// }
 
 button.button-active {
 	background-color: v.$brand-alt-dark
 }
 
-button.pb-success,
-button.pb-danger {
-	margin: 0 5px 10px 0;
-	color: v.$white;
+.page-button.pb-success {
+	background-color: v.$green;
 }
 
-button.pb-success {
-	background-color: v.$pale-green;
+.page-button.pb-success:hover {
+	@media (min-width: 640px) {
+		background-color: v.$green-darker;
+	}
 }
 
-button.pb-success:hover {
-	background-color: v.$pale-green-darker;
+.page-button.pb-danger {
+	background-color: v.$red;
 }
 
-button.pb-danger {
-	background-color: v.$pale-red;
-}
-
-button.pb-danger:hover {
-	background-color: v.$pale-red-darker;
+.page-button.pb-danger:hover {
+	@media (min-width: 640px) {
+		background-color: v.$red-darker;
+	}
 }
 
 .fa-toggle-off {
-	color: v.$pale-red;
+	color: v.$red;
 }
 
 .fa-toggle-on {
-	color: v.$pale-green;
+	color: v.$green;
 }
 
 .wb-container-row {
@@ -198,6 +265,7 @@ button.pb-danger:hover {
 .web-box:not(.product-page-main) {
 	background-color: v.$white;
 	box-shadow: v.$box-shadow;
+	// border: 1px solid v.$brand-main;
 	padding: 15px;
 }
 
@@ -222,7 +290,7 @@ button.pb-danger:hover {
 }
 
 .web-box .wb-row:not(form .wb-row) {
-	@media (max-width: 700px) {
+	@media (max-width: 640px) {
 		flex-direction: column;
 	}
 }
@@ -230,56 +298,57 @@ button.pb-danger:hover {
 .clear-box {
 	display: flex;
 	flex-direction: column;
-	padding: 40px 30px 30px 30px;
+	padding: 20px 40px 40px 40px;
 	color: white;
-}
 
-.clear-box.bg-gray {
-	background-color: v.$brand-alt-light;
-}
-
-.clear-box.bg-white {
-	background-color: v.$white;
+	@media (max-width: 640px) {
+		padding: 20px 20px 40px 20px;
+	}
 }
 
 .clear-box.center {
 	align-items: center;
 	text-align: center;
-}
-
-.clear-box.limited {
 	margin-left: auto;
 	margin-right: auto;
+}
 
-	@media (min-width: 1000px) {
-		max-width: 75%;
+.clear-box.center-mobile {
+	@media (max-width: 640px) {
+		align-items: center;
+		text-align: center;
+		margin-left: auto;
+		margin-right: auto;
 	}
+}
+
+.clear-box.center-desktop {
+	@media (min-width: 640px) {
+		align-items: center;
+		text-align: center;
+		margin-left: auto;
+		margin-right: auto;
+	}
+}
+
+.clear-box.small {
+	max-width: 600px;
+}
+
+.clear-box.medium {
+	max-width: 900px;
+}
+
+.clear-box.large {
+	max-width: 1200px;
 }
 
 .clear-box h2 {
-	margin: 0;
-	font-size: 1.8rem;
-
-	@media (min-width: 1400px) {
-		font-size: 2rem;
-	}
-}
-
-.clear-box h3 {
-	margin: 0 0 5px 0;
-
-	@media (min-width: 1400px) {
-		font-size: 1.4rem;
-	}
+	margin-bottom: 10px;
 }
 
 .clear-box p {
-	margin: 0 0 30px 0;
 	font-size: 1.1rem;
-
-	@media (min-width: 1400px) {
-		font-size: 1.2rem;
-	}
 }
 
 .popup-label-container {
@@ -288,7 +357,9 @@ button.pb-danger:hover {
 }
 
 .popup-label-button:hover .popup-label {
-	display: flex;
+	@media (min-width: 640px) {
+		display: flex;
+	}
 }
 
 .popup-label {
@@ -313,6 +384,113 @@ button.pb-danger:hover {
 
 .fa-square .popup-label-container .popup-label {
 	bottom: -9px;
+}
+
+.hide-mobile {
+	@media (max-width: 640px) {
+		display: none;
+	}
+}
+
+.hide-desktop {
+	@media (min-width: 640px) {
+		display: none;
+	}
+}
+
+// Image Viewer
+.image-viewer {
+	position: absolute;
+	top: 0px;
+	right: 0px;
+	bottom: 0px;
+	left: 0px;
+	max-width: 100%;
+	max-height: 100%;
+	background-color: v.$trans-dark;
+	z-index: 6;
+	padding: 10px;
+
+	@media (min-width: 640px) {
+		padding: 20px;
+	}
+}
+
+.viewer-image {
+	margin-left: auto;
+	margin-right: auto;
+	object-fit: contain;
+	max-width: calc(100vw - 20px);
+	max-height: calc(100vh - 20px);
+
+	@media (min-width: 640px) {
+		max-width: calc(100vw - 40px);
+		max-height: calc(100vh - 40px);
+	}
+}
+
+.image-viewer .fa-xmark {
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	position: absolute;
+	top: 10px;
+	right: 10px;
+	z-index: 3;
+	color: v.$white;
+	cursor: pointer;
+	border-radius: 3px;
+	font-size: 1.1rem;
+	width: 18px;
+	height: 18px;
+	text-align: center;
+}
+
+.image-viewer .fa-xmark:hover {
+	@media (min-width: 640px) {
+		color: v.$black;
+		background-color: v.$white;
+	}
+}
+
+#loading-screen {
+	position: absolute;
+	top: 0;
+	right: 0;
+	bottom: 0;
+	left: 0;
+	background-color: v.$white;
+	z-index: 5;
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	transition: all 1500ms ease-out;
+}
+
+#loading-screen.transition1 img {
+	transform: scale(0.9);
+}
+
+#loading-screen.transition2 {
+	transition: all 800ms ease-in;
+	opacity: 0;
+}
+
+#loading-screen.remove {
+	display: none;
+}
+
+#loading-screen img {
+	transition: all 2300ms ease-out;
+	height: 20%;
+	position: relative;
+	top: 0%;
+}
+
+#loading-screen img.remove {
+	transition: all 600ms ease-in;
+	opacity: 0;
+	top: 2%;
 }
 
 .large-message-box {
@@ -360,19 +538,6 @@ a.large-message-box:hover h2 {
 	}
 }
 
-a.page-link {
-	color: v.$almost-black;
-}
-
-a.page-link:not(.no-underline) {
-	text-decoration: underline;
-}
-
-a.page-link:hover,
-a.page-link:hover i {
-	color: v.$brand-main-darker;
-}
-
 .image-grid {
 	display: flex;
 	flex-direction: row;
@@ -409,18 +574,24 @@ a.page-link:hover i {
 .hover:hover h2,
 .hover:hover li,
 .hover:hover i {
-	cursor: pointer;
-	color: v.$hv-main;
+	@media (min-width: 640px) {
+		cursor: pointer;
+		color: v.$hv-main;
+	}
 }
 
 .hover-background:hover {
-	background-color: v.$brand-alt-dark;
-	color: v.$white;
-	cursor: pointer;
+	@media (min-width: 640px) {
+		background-color: v.$brand-alt-dark;
+		color: v.$white;
+		cursor: pointer;
+	}
 }
 
 .hover-background:hover i {
-	color: v.$white;
+	@media (min-width: 640px) {
+		color: v.$white;
+	}
 }
 
 
@@ -430,11 +601,14 @@ a.page-link:hover i {
 	flex-direction: column;
 	position: relative;
 	margin: 0 0 10px 0;
-	padding: 10px 30px 10px 15px;
+	padding: 10px 40px 10px 15px;
 	border-radius: 5px;
 	color: v.$white;
 	width: 100%;
-	max-width: 800px;
+
+	@media (max-width: 640px) {
+		font-size: 0.8rem;
+	}
 }
 
 .alert-box li {
@@ -450,25 +624,37 @@ a.page-link:hover i {
 // }
 
 .alert-box.error {
-	background-color: v.$pale-red;
+	background-color: v.$red;
 }
 
 .alert-box.success {
-	background-color: v.$pale-green-darker;
+	background-color: v.$green-darker;
 }
 
 .alert-box.info {
-	background-color: v.$baby-blue-darker;
+	background-color: v.$baby-blue-dark;
 }
 
 // ToDo: Fix floating alert right margin collasping
 .floating .alert-box {
 	position: fixed;
 	z-index: 4;
-	bottom: 10px;
-	right: 20px;
+	bottom: 0;
+	right: 0;
 	max-width: 400px;
-	width: 80%;
+
+	@media (pointer: coarse)  {
+		/* mobile device */
+		margin-right: 10px;
+		width: calc(100% - 20px)
+	}
+	
+	@media (pointer: fine), (pointer: none), (pointer: fine) and (any-pointer: coarse) {
+		/* desktop */
+		/* touch desktop */
+		width: calc(100% - 37px);
+		margin-right: 27px;
+	}
 }
 
 .limited .alert-box {
@@ -492,26 +678,37 @@ a.page-link:hover i {
 	border-radius: 5px;
 	color: v.$white;
 	cursor: pointer;
+
+	@media (max-width: 640px) {
+		font-size: 0.8rem;
+	}
 }
 
 .alert-box i:hover {
-	background-color: v.$white;
+	@media (min-width: 640px) {
+		background-color: v.$white;
+	}
 }
 
 .alert-box.error i:hover {
-	color: v.$pale-red;
+	@media (min-width: 640px) {
+		color: v.$red;
+	}
 }
 
 .alert-box.success i:hover {
-	color: v.$pale-green-darker;
+	@media (min-width: 640px) {
+		color: v.$green-darker;
+	}
 }
 
 .alert-box.info i:hover {
-	color: v.$baby-blue-darker;
+	@media (min-width: 640px) {
+		color: v.$baby-blue-dark;
+	}
 }
 
 .warning-overlay {
-	display: none;
 	align-items: center;
 	justify-content: center;
 	position: absolute;
@@ -520,15 +717,22 @@ a.page-link:hover i {
 	right: 0;
 	left: 0;
 	background-color: v.$trans-semi;
+	z-index: 6;
 }
 
 .warning-box {
 	width: 90%;
+	max-width: 800px;
 	padding: 10px 15px;
 }
 
-.warning-box p,
 .warning-box h3 {
+	font-weight: 600;
+	margin: 0;
+	padding: 0;
+}
+
+.warning-box p {
 	margin: 0;
 	padding: 0;
 }
@@ -538,31 +742,14 @@ a.page-link:hover i {
 	width: 100%;
 }
 
-.warning-box .row button {
-	color: v.$white;
-	margin-top: 10px;
-	margin-bottom: 4px;
-}
-
-.warning-box .row a {
-	margin-right: 15px;
-}
-
-.warning-box button.delete {
-	background-color: v.$pale-red;
+.warning-box .pb-danger {
 	flex-grow: 1;
 	min-width: 100px;
+	margin: 5px 10px 0 0;
 }
 
-.warning-box button.cancel {
-	background-color: v.$pale-green;
+.warning-box .pb-success {
 	flex-grow: 5;
-}
-
-.warning-box button.delete:hover {
-	background-color: v.$pale-red-darker;
-}
-
-.warning-box button.cancel:hover {
-	background-color: v.$pale-green-darker;
+	margin-top: 5px;
+	margin: 5px 0 0 0;
 }

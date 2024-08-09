@@ -66,12 +66,6 @@
 			@endif
 		</div>
 
-		<div id="googlemaps">
-			<googlemaps 
-				:coordinates="{{ json_encode($coordinates) }}"
-			/>
-		</div>
-
     <div id="contactmain">
       <contactmain 
 				:address="{{ json_encode($address) }}"

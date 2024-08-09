@@ -3,9 +3,15 @@
 @section('content')
   <main class="home-page">
 
+    @if ($errors->any())
+      <div id="publicerror" class="lt floating">
+        <publicerror :errormessages="{{ str_replace(array('[', ']'), '', $errors) }}" errorcount="{{ count($errors) }}" />
+      </div>
+    @endif
+
     @if (session()->has('message'))
-      <div id="publicmessage" class="lt floating">
-        <publicmessage successmessage="{{ session()->get('message') }}" />
+			<div id="publicmessage" class="lt floating">
+				<publicmessage successmessage="{{ session()->get('message') }}" />
       </div>
     @endif
 
