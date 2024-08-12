@@ -12,8 +12,7 @@ return new class extends Migration
      */
     public function up(): void
     {
-			DB::statement('
-				ALTER TABLE `banners`
+			DB::statement('ALTER TABLE `banners`
 					MODIFY COLUMN `parentId` bigint(20) unsigned DEFAULT NULL;
 			');
     }
