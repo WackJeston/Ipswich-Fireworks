@@ -79,7 +79,7 @@ class HomePageController extends AdminController
 		$bottomBannerForm = $bottomBannerForm->render();
 
 		$bottomBannerTable = new DataTable('banners_REF_2');
-		// $bottomBannerTable->sequence('parentId');
+		$bottomBannerTable->sequence('parentId');
 		$bottomBannerTable->setQuery('SELECT 
 			b.id,
 			b.parentId,
@@ -120,10 +120,11 @@ class HomePageController extends AdminController
 
 		$fileNames = storeImages($request, 'homePageLZ', 'carousel');
 
+		$parentId = Banners::select('id')->where('page', 'home')->where('position', 'landingZone')->first()->id;
+
 		foreach ($fileNames as $fileName) {
 			Banners::create([
-				'page' => 'home',
-				'position' => 'landingZone',
+				'parentId' => $parentId,
 				'framing' => $request->framing,
 				'title' => $request->title,
 				'active' => true,
@@ -170,10 +171,11 @@ class HomePageController extends AdminController
 
 		$fileNames = storeImages($request, 'homePageBottom', 'carousel');
 
+		$parentId = Banners::select('id')->where('page', 'home')->where('position', 'landingZone')->first()->id;
+
 		foreach ($fileNames as $fileName) {
 			Banners::create([
-				'page' => 'home',
-				'position' => 'bottom',
+				'parentId' => $parentId,
 				'framing' => $request->framing,
 				'active' => true,
 				'assetId' => $fileName['id'],
