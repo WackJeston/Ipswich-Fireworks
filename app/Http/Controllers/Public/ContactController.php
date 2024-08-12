@@ -3,6 +3,7 @@ namespace App\Http\Controllers\Public;
 
 Use DB;
 use Illuminate\Http\Request;
+use App\Models\Contact;
 use App\Models\Enquiry;
 
 
@@ -10,33 +11,47 @@ class ContactController extends PublicController
 {
   public function show()
   {
-    $contact = [];
+		$addressRecords = Contact::select('id', 'type', 'value', 'label')->get();
 
-    $contact['email'] = DB::select('SELECT 
-      c.type, 
-      c.value,
-			c.label
-      FROM contact AS c
-      WHERE c.type = "email"'
-    );
+    $address = [];
 
-    $contact['phone'] = DB::select('SELECT 
-      c.type, 
-      c.value,
-			c.label
-      FROM contact AS c
-      WHERE c.type = "phone"'
-    );
+    foreach ($addressRecords as $record) {
+      if($record->type != 'email' && $record->type != 'phone' && $record->type != 'url') {
+        $address[$record->type] = $record->value;
+      } else {
+        $address[$record->type][] = [
+					'value' => $record->value,
+					'label' => $record->label,
+				];
+      }
+    }
 
-    $contact['url'] = DB::select('SELECT 
-      c.type, 
-      c.value,
-			c.label
-      FROM contact AS c
-      WHERE c.type = "url"'
-    );
+    $contact = [
+			'email' => DB::select('SELECT 
+				c.type, 
+				c.value,
+				c.label
+				FROM contact AS c
+				WHERE c.type = "email"'
+			),
+			'phone' => DB::select('SELECT 
+				c.type, 
+				c.value,
+				c.label
+				FROM contact AS c
+				WHERE c.type = "phone"'
+			),
+			'url' => DB::select('SELECT 
+				c.type, 
+				c.value,
+				c.label
+				FROM contact AS c
+				WHERE c.type = "url"'
+			),
+		];
 
     return view('public/contact', compact(
+			'address',
       'contact',
     ));
   }
