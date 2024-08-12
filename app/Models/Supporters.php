@@ -15,5 +15,13 @@ class Supporters extends Model
 		'link',
 		'assetId',
     'active',
+		'sequence',
   ];
+
+	protected static function booted() {
+		static::created(function ($self) {
+			$self->sequence = $self->id;
+			$self->save();
+    });
+	}
 }

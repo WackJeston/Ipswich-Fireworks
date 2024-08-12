@@ -34,13 +34,21 @@ class HomePageController extends AdminController
 		array_unshift($framingOptions2, ['value' => '', 'label' => '']);
 
 		$landingZoneBannerTable = new DataTable('banners_REF_1');
+		$landingZoneBannerTable->sequence('parentId');
 		$landingZoneBannerTable->setQuery('SELECT 
-			b.*,
+			b.id,
+			b.parentId,
+			b.title,
+			b.description,
+			b.framing,
+			b.active,
+			b.sequence,
 			a.fileName
 			FROM banners AS b
-			LEFT JOIN asset AS a ON a.id = b.assetId
-			WHERE b.page = "home" 
-			AND b.position = "landingZone"
+			INNER JOIN banners AS b2 ON b2.id = b.parentId
+			INNER JOIN asset AS a ON a.id = b.assetId
+			WHERE b2.page = "home" 
+			AND b2.position = "landingZone"
 		');
 		$landingZoneBannerTable->addColumn('id', '#');
 		$landingZoneBannerTable->addColumn('title', 'Title', 2, true);
@@ -71,13 +79,21 @@ class HomePageController extends AdminController
 		$bottomBannerForm = $bottomBannerForm->render();
 
 		$bottomBannerTable = new DataTable('banners_REF_2');
+		// $bottomBannerTable->sequence('parentId');
 		$bottomBannerTable->setQuery('SELECT 
-			b.*,
+			b.id,
+			b.parentId,
+			b.title,
+			b.description,
+			b.framing,
+			b.active,
+			b.sequence,
 			a.fileName
 			FROM banners AS b
-			LEFT JOIN asset AS a ON a.id = b.assetId
-			WHERE b.page = "home" 
-			AND b.position = "bottom"
+			INNER JOIN banners AS b2 ON b2.id = b.parentId
+			INNER JOIN asset AS a ON a.id = b.assetId
+			WHERE b2.page = "home" 
+			AND b2.position = "bottom"
 		');
 		$bottomBannerTable->addColumn('id', '#');
 		$bottomBannerTable->addColumn('framing', 'Framing', 1, true, 'select', $framingOptions2);
@@ -152,7 +168,7 @@ class HomePageController extends AdminController
 			'image-2' => 'required|image|mimes:jpg,jpeg,png,svg,webp,webp',
 		]);
 
-		$fileNames = storeImages($request, 'homePageLZ', 'carousel');
+		$fileNames = storeImages($request, 'homePageBottom', 'carousel');
 
 		foreach ($fileNames as $fileName) {
 			Banners::create([

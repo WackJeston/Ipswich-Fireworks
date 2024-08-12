@@ -19,6 +19,14 @@ class Programme extends Model
 		'time',
 		'link',
     'active',
+		'sequence',
 		'assetId'
   ];
+
+	protected static function booted() {
+		static::created(function ($self) {
+			$self->sequence = $self->id;
+			$self->save();
+    });
+	}
 }

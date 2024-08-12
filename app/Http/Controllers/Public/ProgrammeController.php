@@ -8,14 +8,15 @@ class ProgrammeController extends PublicController
 {
   public function show()
   {
-		$standard = DB::select('SELECT * FROM programme WHERE type = "standard" AND active = 1');
-		$music = DB::select('SELECT * FROM programme WHERE type = "music" AND active = 1');
+		$standard = DB::select('SELECT * FROM programme WHERE type = "standard" AND active = 1 ORDER BY sequence ASC');
+		$music = DB::select('SELECT * FROM programme WHERE type = "music" AND active = 1 ORDER BY sequence ASC');
 		$images = DB::select('SELECT 
 			p.*,
 			a.fileName
 			FROM programme AS p
 			INNER JOIN asset AS a ON a.id = p.assetId
 			AND p.active = 1
+			ORDER BY p.sequence ASC
 		');
 
 		$images = cacheImages($images, 800, 800);

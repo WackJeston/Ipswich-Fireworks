@@ -20,6 +20,7 @@ class ProgrammeController extends AdminController
 		$standardForm = $standardForm->render();
 
 		$standardTable = new DataTable('programme_REF_1');
+		$standardTable->sequence('type');
 		$standardTable->setQuery('SELECT * FROM programme WHERE type = "standard"');
 		$standardTable->addColumn('id', '#');
 		$standardTable->addColumn('value', 'Name', 2);
@@ -40,6 +41,7 @@ class ProgrammeController extends AdminController
 		$musicForm = $musicForm->render();
 
 		$musicTable = new DataTable('programme_REF_2');
+		$musicTable->sequence('type');
 		$musicTable->setQuery('SELECT 
 			p.*,
 			a.fileName

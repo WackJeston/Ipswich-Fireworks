@@ -65,10 +65,16 @@ function cacheImage(string $fileName, int $width = 0, int $height = 0, bool $tri
 
 	if (!Storage::disk('public')->exists($publicFileName)) {
 		$data = Storage::get($fileName);
+		$mimeType = Storage::mimeType($fileName);
 
 		if (!empty($data)) {
 			$manager = new ImageManager(['driver' => 'imagick']);
-			$image = $manager->make($data);
+
+			if ($mimeType == 'image/svg+xml') {
+				$image = $manager->make($data);
+			} else {
+				$image = $manager->make($data);
+			}
 
 			if($trim) {
 				$image->trim();

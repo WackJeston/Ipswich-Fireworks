@@ -21,6 +21,7 @@ class SupportersController extends AdminController
 		$form = $form->render();
 
 		$table = new DataTable('supporters');
+		$table->sequence();
 		$table->setQuery('SELECT 
 			s.*,
 			a.fileName
@@ -49,7 +50,7 @@ class SupportersController extends AdminController
 			'image' => 'required|image|mimes:jpg,jpeg,png,svg,webp',
     ]);
 
-		$fileNames = storeImages($request, 'homePageLZ', 'carousel');
+		$fileNames = storeImages($request, 'standard', 'supporters');
 
 		foreach ($fileNames as $fileName) {
 			Supporters::create([

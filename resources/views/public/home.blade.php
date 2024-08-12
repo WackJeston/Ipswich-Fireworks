@@ -41,7 +41,7 @@
 		
 		{{-- Remove after updates are complete --}}
 		<div style="display: flex; flex-direction: column; align-items: center; margin: 0 40px 50px 40px;">
-			<img style="display flex; height: 500px;" src="https://ipswich-fireworks.s3.eu-west-2.amazonaws.com/assets/homepage-banner-advert.jpeg" alt="Performance Act Advert">
+			<img style="display flex; height: 500px;" src="{{env('ASSET_PATH')}}homepage-advert.jpeg" alt="Performance Act Advert">
 		</div>
 
 		<div class="large-message-box gray-box limited">

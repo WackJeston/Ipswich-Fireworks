@@ -1,7 +1,14 @@
 @use 'site/v';
 
+.home-page #banner-homepage-top {
+	@media (min-width: 640px) {
+		padding: 0 110px 50px 110px;
+		background-color: v.$brand-alt-dark;
+	}
+}
+
 .home-page #banner-homepage-top .banner-slide {
-  height: calc(100dvh - v.$header-height);
+  height: calc(100dvh - v.$header-height - 50px);
 	min-height: 400px;
 
 	@media (max-width: 640px) {

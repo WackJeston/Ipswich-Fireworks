@@ -13,14 +13,17 @@ class HomeController extends PublicController
   {
 		$ticketDate = date("D jS F", strtotime(Settings::select('date')->where('id', 1)->first()->date));
 
-    $landingZoneBanners = DB::select('SELECT
+    $landingZoneBanners = DB::select('SELECT 
 			b.*,
 			a.fileName
 			FROM banners AS b
-			LEFT JOIN asset AS a ON a.id = b.assetId
-			WHERE b.page = "home"
-			AND b.position = "landingZone"
+			INNER JOIN banners AS b2 ON b2.id = b.parentId
+			INNER JOIN asset AS a ON a.id = b.assetId
+			WHERE b2.page = "home" 
+			AND b2.position = "landingZone"
+			AND b2.active = 1
 			AND b.active = 1
+			ORDER BY b.sequence ASC
 		');
 
 		$landingZoneBanners = cacheImages($landingZoneBanners, 2400, 2400);
@@ -30,12 +33,17 @@ class HomeController extends PublicController
 
 		$primaryInfo = DB::select('SELECT * FROM content WHERE active = 1 AND page = "home" AND position = "primaryInfo"')[0];
 
-    $bottomBanners = DB::select('SELECT
-			b.*
+    $bottomBanners = DB::select('SELECT 
+			b.*,
+			a.fileName
 			FROM banners AS b
-			WHERE b.page = "home"
-			AND b.position = "bottom"
+			INNER JOIN banners AS b2 ON b2.id = b.parentId
+			INNER JOIN asset AS a ON a.id = b.assetId
+			WHERE b2.page = "home" 
+			AND b2.position = "bottom"
+			AND b2.active = 1
 			AND b.active = 1
+			ORDER BY b.sequence ASC
 		');
 
 		$bottomBanners = cacheImages($bottomBanners, 2400, 2400);

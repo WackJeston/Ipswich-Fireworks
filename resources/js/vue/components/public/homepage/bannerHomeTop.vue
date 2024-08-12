@@ -7,7 +7,7 @@
 		</div>
 
 		<div v-if="this.banners.length == 1" v-for="banner in this.banners" class="banner-slide single-slide">
-			<img :src="banner.fileName" :alt="banner.fileName">
+			<img :src="banner.fileName" :alt="banner.fileName" :style="{objectPosition: 'center ' + banner.framing}">
 			<div class="banner-overlay"></div>
 		</div>
 

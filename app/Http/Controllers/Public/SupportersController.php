@@ -16,6 +16,7 @@ class SupportersController extends PublicController
 			FROM supporters AS s
 			INNER JOIN asset AS a ON a.id = s.assetId
 			WHERE s.active = 1
+			ORDER BY s.sequence ASC
 		');
 
 		$records = cacheImages($records, 800, 800);

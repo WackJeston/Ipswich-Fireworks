@@ -248,8 +248,6 @@
 					console.log(err);
 
 				} finally {
-					console.log(this.result);
-
 					if (this.notificationCount < this.result.length) {
 						this.newNotifications = true;
 					}
