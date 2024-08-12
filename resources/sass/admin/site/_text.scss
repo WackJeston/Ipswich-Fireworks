@@ -13,12 +13,16 @@ body, textarea {
   color: v.$black;
 }
 
-.lt h1, .lt h2, .lt h3, .lt h4, .lt h5, .lt h6, .dk h1, .dk h2, .dk h3, .dk h4, .dk h5, .dk h6, {
+.lt h1, .lt h2, .lt h3, .lt h4, .lt h5, .lt h6, .dk h1, .dk h2, .dk h3, .dk h4, .dk h5, .dk h6 {
   cursor: default;
 }
 
-h1 span {
-  color: v.$pale-red-darker;
+.text-muted {
+  color: v.$gray-1;
+}
+
+.text-red {
+  color: v.$red;
 }
 
 h2 {
@@ -41,8 +45,10 @@ h2 {
 }
 
 a:hover {
-  cursor: pointer;
-  text-decoration: none;
+	@media (min-width: 640px) {
+		cursor: pointer;
+		text-decoration: none;
+	}
 }
 
 i {

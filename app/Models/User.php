@@ -6,13 +6,14 @@ use DB;
 use Illuminate\Contracts\Auth\MustVerifyEmail;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Foundation\Auth\User as Authenticatable;
-use Illuminate\Notifications\Notifiable;
+// use Illuminate\Notifications\Notifiable;
 use Laravel\Sanctum\HasApiTokens;
 use Aws\Exception\AwsException;
 
 class User extends Authenticatable implements MustVerifyEmail
 {
-	use HasApiTokens, HasFactory, Notifiable;
+	use HasApiTokens, HasFactory;
+	// use HasApiTokens, HasFactory, Notifiable;
 
 	/**
 	 * The attributes that are mass assignable.
@@ -25,6 +26,7 @@ class User extends Authenticatable implements MustVerifyEmail
 		'lastname',
 		'email',
 		'password',
+		'klaviyoId',
 	];
 
 	/**
@@ -49,12 +51,12 @@ class User extends Authenticatable implements MustVerifyEmail
 	protected static function booted() {
 		static::created(function ($self) {
 			if ($self->admin) {
-				self::verifyEmail($self->email);
+				// self::verifyEmail($self->email);
 			}
     });
 	}
 
-	public static function getOrders(int $userId = 0) {
+	public static function getOrders(int $userId = 0, string $type = 'order') {
 		if ($userId == 0) {
 			$user = auth()->user();
 		} else {
@@ -65,8 +67,12 @@ class User extends Authenticatable implements MustVerifyEmail
 			o.*,
 			DATE_FORMAT(o.created_at, "%d/%m/%Y") AS `date`
 			FROM orders AS o
-			WHERE o.userId=?',
-			[$user->id]
+			WHERE o.userId=?
+			AND o.type=?',
+			[
+				$user->id,
+				$type
+			]
 		);
 
 		foreach ($orders as $i => $order) {
@@ -83,8 +89,8 @@ class User extends Authenticatable implements MustVerifyEmail
 				$line->variants = DB::select('SELECT
 					CONCAT(pv2.title, ": ", pv.title) AS `variant`
 					FROM order_line_variants AS olv
-					INNER JOIN product_variants AS pv ON pv.id=olv.variantId AND pv.show=1
-					INNER JOIN product_variants AS pv2 ON pv2.id=pv.parentVariantId AND pv2.show=1
+					INNER JOIN product_variants AS pv ON pv.id=olv.variantId AND pv.active=1
+					INNER JOIN product_variants AS pv2 ON pv2.id=pv.parentVariantId AND pv2.active=1
 					WHERE olv.orderLineId=?',
 					[$line->orderLineId]
 				);

@@ -24,7 +24,7 @@
     </nav>
 
 		<a href="/">
-			<img defer :src="this.asset + 'logo-white.png'" alt="logo" class="logo">
+			<img defer :src="this.publicasset + 'logo-white.png'" alt="logo" class="logo">
 		</a>
 
   </footer>
@@ -35,7 +35,7 @@
   export default {
     props: [
       'sitetitle',
-			'asset',
+			'publicasset',
       'publiclinks',
 			'socials',
     ],

@@ -14,10 +14,11 @@
 }
 
 .admin-menu h2.title {
-	display: flex;
-  padding: 0 0 20px 8px;
+	display: block;
+  padding: 0 0 20px 0;
 	margin: 0;
   font-size: 1.6rem;
+	text-align: center;
   line-height: 20px;
 }
 
@@ -36,8 +37,10 @@
 }
 
 .admin-menu .nav-link:hover {
-  border: 1px solid v.$white;
-  border-radius: 0;
+	@media (min-width: 640px) {
+		border: 1px solid v.$white;
+		border-radius: 0;
+	}
 }
 
 .admin-menu .primary-nav-link, .admin-menu .nav-sublink {
@@ -47,7 +50,9 @@
 }
 
 .admin-menu .nav-link:hover li, .admin-menu .nav-link:hover i {
-  color: v.$white;
+	@media (min-width: 640px) {
+  	color: v.$white;
+	}
 }
 
 .admin-menu .nav-link li, .admin-menu .nav-link i {

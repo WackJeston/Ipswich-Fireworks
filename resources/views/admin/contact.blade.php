@@ -1,11 +1,11 @@
-@extends('layout')
+@extends('body-admin')
 
 @section('title', 'Contact')
 
 @section('content')
   <main class="contact">
 
-    <h2 class="dk">Contact</h2>
+    <h1 class="dk">Contact</h1>
 
     @if ($errors->any())
       <div id="alerterror" class="lt">
@@ -20,7 +20,8 @@
     @endif
 
     <div id="admincontactfunctions" class="dk">
-      <admincontactfunctions 
+      <admincontactfunctions
+				pageshowmarker="{{ session()->get('pageShowMarker') }}"
 				:contact="{{ json_encode($contact) }}"
 				:editform="{{ json_encode($editForm) }}"
 				:emailform="{{ json_encode($emailForm) }}" 

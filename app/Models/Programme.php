@@ -19,6 +19,6 @@ class Programme extends Model
 		'time',
 		'link',
     'active',
-		'fileName'
+		'assetId'
   ];
 }

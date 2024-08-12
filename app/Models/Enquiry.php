@@ -25,16 +25,36 @@ class Enquiry extends Model
 
 	protected static function booted() {
 		static::created(function ($self) {
-			$emails = DB::select('SELECT
-				u.email
+			$events = DB::select('SELECT
+				u.id AS userId,
+				u.email AS userEmail,
+				n.id AS notificationId,
+				nu.standard,
+				nu.email,
+				nu.phone
 				FROM users AS u
-				INNER JOIN notification_user AS nu ON nu.userId = u.id AND nu.email = 1
-				INNER JOIN notification AS n ON n.id = nu.notificationId AND n.name = ?', 
+				INNER JOIN notification_user AS nu ON nu.userId = u.id
+				INNER JOIN notification AS n ON n.id = nu.notificationId AND n.name = ? AND n.group = "Enquiries"', 
 				[$self->type]
 			);
 
-			foreach ($emails as $i => $email) {
-				Mail::to($email)->send(new NewEnquiry($self->id));
+			foreach ($events as $i => $event) {
+				if (Notification::limitCheck($event->userId) && $event->standard) {
+					NotificationEvent::create([
+						'notificationId' => $event->notificationId,
+						'userId' => $event->userId,
+						'message' => sprintf('%s: %s', $self->name, $self->subject),
+						'pageId' => $self->id
+					]);
+				}
+
+				if ($event->email) {
+					Mail::to($event->userEmail)->send(new NewEnquiry($self->id));
+				}
+				
+				// if ($event->phone) {
+				// 	// Send SMS
+				// }
 			}
     });
 	}

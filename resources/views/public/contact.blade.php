@@ -1,4 +1,4 @@
-@extends('layout')
+@extends('body-public')
 
 @section('title', 'Contact')
 
@@ -24,13 +24,10 @@
 
     <div id="contactmain">
       <contactmain 
+				:address="{{ json_encode($address) }}"
 				:contact="{{ json_encode($contact) }}"
 			/>
     </div>
-
-		<a href="/feedback" class="large-message-box">
-			<h2>Leave Feedback</h2>
-		</a>
 
   </main>
 @endsection

@@ -6,7 +6,7 @@
 		</nav>
 
 		<a class="logo-link" href="/">
-			<img async :src="this.asset + 'logo-white.png'" alt="logo" class="logo">
+			<img async :src="this.publicasset + 'logo-white.png'" alt="logo" class="logo">
 		</a>
 
 		<div id="header-end">
@@ -30,7 +30,7 @@ export default {
 	props: [
 		'sitetitle',
 		'sitetitlemini',
-		'asset',
+		'publicasset',
 		'publiclinks',
 		'socials',
 		'sessionuser',

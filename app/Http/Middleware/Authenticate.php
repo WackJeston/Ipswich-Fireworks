@@ -25,7 +25,6 @@ class Authenticate extends Middleware
 
   public function handle($request, Closure $next, ...$guards)
   {
-
     if (str_ends_with(url()->current(), '/admin')) {
       if (Auth::check() && auth()->user()['admin'] == 1) {
 				if ($request->ajax()) {
@@ -40,7 +39,7 @@ class Authenticate extends Middleware
         if ($request->ajax()) {
           return response('Unauthorized.', 401);
         } else {
-          return redirect("/admin")->withErrors(['1' => 'Access Denied.']);
+          return redirect("/admin");
         }
       }
 

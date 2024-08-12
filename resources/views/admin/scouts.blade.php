@@ -1,4 +1,4 @@
-@extends('layout')
+@extends('body-admin')
 
 @section('title', '11th Ipswich Scout Group')
 

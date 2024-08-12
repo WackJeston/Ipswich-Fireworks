@@ -1,11 +1,11 @@
-@extends('layout')
+@extends('body-admin')
 
 @section('title', 'Users')
 
 @section('content')
   <main class="users">
 
-    <h2 class="dk">Users</h2>
+    <h1 class="dk">Users</h1>
 
     @if ($errors->any())
       <div id="alerterror" class="lt">
@@ -20,7 +20,10 @@
     @endif
 
     <div id="userscreate" class="dk">
-      <userscreate :createform="{{ json_encode($createForm) }}" />
+      <userscreate
+				pageshowmarker="{{ session()->get('pageShowMarker') }}"
+				:createform="{{ json_encode($createForm) }}"
+			/>
     </div>
 
 		@php
