@@ -1,18 +1,35 @@
 @use 'site/v';
 
-.home-page #banner-homepage-top {
-	@media (min-width: 640px) {
-		padding: 0 110px 50px 110px;
-		background-color: v.$brand-alt-dark;
+.home-page .banner-zone {
+	display: flex;
+	flex-direction: row;
+	flex-wrap: nowrap;
+}
+
+.home-page .primary-info-desktop {
+	width: 30%;
+	min-width: 300px;
+	background-color: v.$brand-alt-dark;
+	color: v.$brand-alt-light;
+	padding: 20px;
+
+	@media (max-width: 1100px) {
+		display: none;
+	}
+}
+
+.home-page .primary-info-mobile {
+	@media (min-width: 1100px) {
+		display: none;
 	}
 }
 
 .home-page #banner-homepage-top .banner-slide {
-  height: calc(100dvh - v.$header-height - 50px);
+	height: calc(100dvh - v.$header-height-mobile);
 	min-height: 400px;
 
-	@media (max-width: 640px) {
-		height: calc(100dvh - v.$header-height-mobile);
+	@media (min-width: 640px) {
+		height: calc(100dvh - v.$header-height);
 	}
 }
 
