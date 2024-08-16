@@ -43,6 +43,8 @@ import Userscreate from './vue/components/admin/usersCreate.vue'
 
 import Userprofilefunctions from './vue/components/admin/userProfileFunctions.vue'
 
+import Adminmap from './vue/components/admin/adminMap.vue'
+
 
 
 
@@ -125,3 +127,7 @@ usersCreate.component('userscreate', Userscreate).mount('#userscreate')
 
 const userProfileFunctions = createApp({})
 userProfileFunctions.component('userprofilefunctions', Userprofilefunctions).mount('#userprofilefunctions')
+
+
+const adminMap = createApp({})
+adminMap.component('adminmap', Adminmap).mount('#adminmap')

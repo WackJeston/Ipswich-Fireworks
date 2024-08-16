@@ -44,6 +44,11 @@ class AdminController extends Controller
 						"link"=>"/admin/contact",
 						"icon"=>"fa-solid fa-address-card",
 					],
+					$map = [
+						"title"=>"map",
+						"link"=>"/admin/map",
+						"icon"=>"fas fa-map-marked-alt",
+					],
 					$programme = [
 						"title"=>"programme",
 						"link"=>"/admin/programme",

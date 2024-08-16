@@ -146,6 +146,13 @@ Route::group( ['middleware' => 'auth' ], function()
     Route::post('/banner-profileAddSlide/{id}', 'addSlide');
     Route::get('/banner-profileDeleteSlide/{id}', 'deleteSlide');
   });
+
+	Route::controller(App\Http\Controllers\Admin\MapController::class)->group(function () {
+    Route::get('/admin/map', 'show');
+		Route::post('/admin-mapUploadMap', 'uploadMap');
+		Route::post('/admin-mapAddIcon', 'addIcon');
+		Route::get('/admin-mapDeleteIcon/{id}', 'deleteIcon');
+  });
 });
 
 

@@ -1,0 +1,46 @@
+@use 'site/v';
+
+.map #mapSection {
+	display: flex;
+	flex-direction: row;
+}
+
+.map #mapSection h2 {
+	color: v.$gray-2;
+	margin: 0 0 0 8px;
+}
+
+.map #mapSection small {
+	display: flex;
+	margin-left: 8px;
+}
+
+.map #mapImage {
+	position: relative;
+	display: flex;
+	border-radius: 3px;
+	max-height: calc(100vh - 200px);
+	max-width: calc(100% - 200px);
+}
+
+.map #mapIconsSection {
+	margin-left: 15px;
+}
+
+.map #mapIcons {
+	display: flex;
+	flex-wrap: wrap;
+	margin-top: 20px;
+}
+
+.map #mapIcon {
+	display: flex;
+	border-radius: 3px;
+	margin: 0 10px 10px 0;
+	cursor: pointer;
+	max-height: 50px;
+
+	@media (min-width: 640px) {
+		max-height: 80px;
+	}
+}
