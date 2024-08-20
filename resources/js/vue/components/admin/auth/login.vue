@@ -2,7 +2,7 @@
   <div class="login-form dk">
 
     <!-- Login Form -->
-    <form action="/adminLogin" method="GET" enctype="multipart/form-data">
+    <form action="/adminLogin" method="GET" enctype="multipart/form-data" class="web-box">
       <input type="hidden" name="_token" :value="csrf">
 
       <label for="email">Email<span> *</span></label>
@@ -15,7 +15,15 @@
       </label>
       <input class="password" :type="!showLoginPassword ? 'password' : 'text'" name="password" required autocomplete="one-time-code">
 
-      <input class="submit" type="submit" name="submit" value="Login">
+			<div class="checkbox-container">
+				<input type="checkbox" name="remember" id="remember">
+				<label for="remember">Remember Me</label>
+			</div>
+
+			<div class="bottom-row">
+				<a href="/admin-password-reset" class="display-link">Forgot your Password?</a>
+				<input class="submit page-button padding-large" type="submit" name="submit" value="Login">
+			</div>
     </form>
 
     <!-- <a href="/admin-registration">Register</a> -->

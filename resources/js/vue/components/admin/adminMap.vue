@@ -22,6 +22,15 @@
 			'icons',
     ],
 
+		data() {
+			return {
+				startX: 0,
+				startY: 0,
+				newX: 0,
+				newY: 0,
+			};
+		},
+
 		methods: {
 			createIcon(event) {
 				let primary = document.getElementById('mapImageContainer');
@@ -29,7 +38,7 @@
 
 				let newDiv = document.createElement('div');
 				newDiv.id = 'icon-' + count;
-				newDiv.style.position = 'absolute';
+				newDiv.style.position = 'fixed';
 				newDiv.style.top = 0;
 				newDiv.style.left = 0;
 				newDiv.setAttribute('draggable', true);
@@ -43,11 +52,37 @@
 				primary.appendChild(newDiv);
 
 				let newDiv2 = document.getElementById('icon-' + count);
-				newDiv2.addEventListener("dragstart", (event) =>
-					event.dataTransfer.setData("text/plain", "This text may be dragged"),
-				);
+				newDiv2.addEventListener("mousedown", this.mouseDown);
+			},
 
-				console.log(newDiv2);
+			mouseDown(event) {
+				this.startX = event.clientX;
+				this.startY = event.clientY;
+
+				document.addEventListener("mousemove", this.mouseMove);
+				document.addEventListener("mouseup", this.mouseUp);
+			},
+
+			mouseMove(event) {
+				this.newX = this.startX - event.clientX;
+				this.newY = this.startY - event.clientY;
+
+				this.startX = event.clientX;
+				this.startY = event.clientY;
+
+				let primary = document.getElementById('mapImageContainer');
+				let count = primary.children.length;
+
+				let newDiv = document.getElementById('icon-' + count);
+				let rect = newDiv.getBoundingClientRect();
+
+				newDiv.style.top = (newDiv.offsetTop - this.newY) + "px";
+				newDiv.style.left = (newDiv.offsetLeft - this.newX) + "px";
+			},
+
+			mouseUp() {
+				document.removeEventListener("mousemove", this.mouseMove);
+				document.removeEventListener("mouseup", this.mouseUp);
 			},
 
 			// saveMap() {

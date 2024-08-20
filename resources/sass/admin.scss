@@ -9,6 +9,7 @@
 @use 'admin/site/footer';
 
 
+@use 'admin/auth';
 @use 'admin/admin-login';
 @use 'admin/contact';
 @use 'admin/map';

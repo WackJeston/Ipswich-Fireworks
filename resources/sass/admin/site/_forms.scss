@@ -128,18 +128,22 @@ form option {
 	cursor: pointer;
 }
 
+form label {
+	color: v.$black;
+}
+
 form.web-box input:not(.radio-container input, .checkbox-container input, .submit),
 form.web-box textarea,
 form.web-box label.file-input-label,
 form.web-box select:not(.product-page .wb-content) {
-	border: 2px solid v.$gray-1;
+	border: 1px solid v.$border;
 }
 
 form.web-box input:focus:not(.radio-container input, .checkbox-container input, .submit),
 form.web-box textarea:focus,
 form.web-box label.file-input-label:hover {
 	@media (min-width: 640px) {
-		border: 2px solid v.$black;
+		border: 1px solid v.$alt-main;
 	}
 }
 
@@ -266,7 +270,7 @@ form .checkbox-container label {
 }
 
 .form-validation-failed {
-	border: 2px solid v.$red;
+	border: 1px solid v.$red;
 }
 
 form .radio-container {

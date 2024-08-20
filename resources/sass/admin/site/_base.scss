@@ -27,7 +27,7 @@ main {
 	margin: 10px;
 
 	@media (min-width: 800px) {
-		margin: 10px 20px 20px 20px;
+		margin: 30px 40px 40px 40px;
 	}
 }
 
@@ -149,9 +149,10 @@ main h2 {
 .web-box {
 	background-color: v.$white;
 	border-radius: 5px;
-	box-shadow: 0 0 6px -2px v.$trans-semi;
-	padding: 15px;
-	margin-bottom: 10px;
+	--tw-shadow: 0 4px 6px -1px rgb(0 0 0 / .1), 0 2px 4px -2px rgb(0 0 0 / .1);
+	box-shadow: 0 0 #0000, 0 0 #0000, var(--tw-shadow);
+	padding: 25px;
+	margin-bottom: 20px;
 }
 
 .web-box .wb-row {
@@ -414,6 +415,22 @@ a.page-button i {
 
 	@media (max-width: 640px) {
 		font-size: 0.9rem;
+	}
+}
+
+.page-button.padding {
+	padding: 5px 10px;
+
+	@media (max-width: 640px) {
+		padding: 3px 8px;
+	}
+}
+
+.page-button.padding-large {
+	padding: 8px 16px;
+
+	@media (max-width: 640px) {
+		padding: 6px 12px;
 	}
 }
 

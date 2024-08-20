@@ -5,7 +5,7 @@
 @section('content')
   <main class="login" id="adminLoginPage">
 
-    <h1>Admin Login</h1>
+    {{-- <h1>Admin Login</h1> --}}
 
     @if ($errors->any())
       <div id="alerterror" class="lt">
