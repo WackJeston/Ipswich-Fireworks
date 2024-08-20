@@ -3,28 +3,56 @@
 .map #mapSection {
 	display: flex;
 	flex-direction: row;
-}
 
-.map #mapSection h2 {
-	color: v.$gray-2;
-	margin: 0 0 0 8px;
-}
-
-.map #mapSection small {
-	display: flex;
-	margin-left: 8px;
-}
-
-.map #mapImage {
-	position: relative;
-	display: flex;
-	border-radius: 3px;
-	max-height: calc(100vh - 200px);
-	max-width: calc(100% - 200px);
+	@media (max-width: 640px) {
+		flex-direction: column-reverse;
+	}
 }
 
 .map #mapIconsSection {
-	margin-left: 15px;
+	@media (max-width: 640px) {
+		margin-bottom: 15px;
+	}
+	@media (min-width: 640px) {
+		margin-left: 15px;
+	}
+}
+
+.map #mapIconsSection h2 {
+	color: v.$gray-2;
+	margin: 0;
+
+	@media (min-width: 640px) {
+		margin-left: 8px;
+	}
+}
+
+.map #mapIconsSection small {
+	display: flex;
+
+	@media (min-width: 640px) {
+		margin-left: 8px;
+	}
+}
+
+.map #mapImageContainer {
+	position: relative;
+	display: flex;
+	
+	@media (max-width: 640px) {
+		width: 100%;
+	}
+	@media (min-width: 640px) {
+		max-height: calc(100vh - 200px);
+		max-width: calc(100% - 200px);
+	}
+}
+
+.map #mapImageContainer img {
+	display: flex;
+	border-radius: 3px;
+	max-width: 100%;
+	max-height: 100%;
 }
 
 .map #mapIcons {
@@ -33,7 +61,7 @@
 	margin-top: 20px;
 }
 
-.map #mapIcon {
+.map .mapIcon {
 	display: flex;
 	border-radius: 3px;
 	margin: 0 10px 10px 0;
