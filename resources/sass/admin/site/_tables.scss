@@ -26,7 +26,7 @@ thead {
 
 thead tr {
   height: 35px;
-	border-bottom: 1px solid v.$gray-1;
+	border-bottom: 1px solid v.$border;
 
 	@media (max-width: 800px) {
 		height: 30px;
@@ -103,7 +103,7 @@ tr .tr-buttons {
 
 tr .tr-buttons i {
 	position: relative;
-	color: v.$black;
+	color: v.$bg-dark;
 }
 
 tr .tr-buttons i:hover {
@@ -219,7 +219,7 @@ tfoot tr {
 	justify-content: flex-start;
 	height: 30px;
 	color: v.$black;
-	border-top: 1px solid v.$gray-1;
+	border-top: 1px solid v.$border;
 	font-size: 0.8rem;
 }
 
@@ -231,9 +231,9 @@ tfoot tr td i {
 	font-size: 0.8rem;
 }
 
-// tfoot tr td i:not(button i) {
-// 	color: v.$black;
-// }
+tfoot tr td i:not(button i) {
+	color: v.$bg-dark;
+}
 
 .data-table tfoot tr td:last-child {
 	display: flex;
@@ -281,7 +281,7 @@ tfoot button:hover {
 }
 
 tfoot button.button-off {
-	background-color: v.$gray-1;
+	background-color: v.$border;
 	cursor: default;
 }
 

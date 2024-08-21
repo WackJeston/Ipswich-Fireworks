@@ -21,7 +21,7 @@
 
 			<div class="bottom-row">
 				<a href="/admin/forgot-password" class="display-link">Forgot your Password?</a>
-				<input class="submit page-button padding-large" type="submit" name="submit" value="LOGIN">
+				<input class="submit page-button padding-large" type="submit" name="submit" value="Login">
 			</div>
     </form>
 

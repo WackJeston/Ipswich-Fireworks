@@ -24,7 +24,7 @@
 			</div>
 
 			<div class="bottom-row">
-				<input class="submit page-button padding-large" type="submit" name="submit" value="RESET PASSWORD" @click="this.checkMatching">
+				<input class="submit page-button padding-large" type="submit" name="submit" value="Reset Password" @click="this.checkMatching">
 			</div>
     </form>
 

@@ -232,7 +232,7 @@ class DataForm
 						<label for="password" class="show-password">
 							<i class="fa-solid fa-eye"></i>
 						</label>
-						<input class="password-input" type="password" id="%1$s" name="%1$s" value="%3$s" minlength="%4$s" maxlength="%5$s" placeholder="%6$s" %7$s %10$s />',
+						<input class="password-input" type="password" id="%1$s" name="%1$s" value="%3$s" minlength="%4$s" maxlength="%5$s" placeholder="%6$s" autocomplete="one-time-code" %7$s %10$s />',
 							$input['name'],
 							$input['label'],
 							$input['value'],

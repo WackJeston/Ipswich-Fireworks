@@ -11,7 +11,7 @@
       <input type="email" name="email" required>
 
 			<div class="bottom-row">
-				<input class="submit page-button padding-large" type="submit" name="submit" value="EMAIL PASSWORD RESET LINK">
+				<input class="submit page-button padding-large" type="submit" name="submit" value="Email Password Reset Link">
 			</div>
     </form>
 
