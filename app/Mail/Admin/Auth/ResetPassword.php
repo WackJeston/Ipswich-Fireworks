@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Mail;
+namespace App\Mail\Admin\Auth;
 
 use Illuminate\Bus\Queueable;
 use Illuminate\Contracts\Queue\ShouldQueue;
@@ -10,22 +10,25 @@ use Illuminate\Mail\Mailables\Envelope;
 use Illuminate\Mail\Mailables\Address;
 use Illuminate\Queue\SerializesModels;
 
-use App\Models\Enquiry;
+use App\Models\User;
+use App\Models\PasswordReset;
 
-class NewEnquiry extends Mailable
+class ResetPassword extends Mailable
 {
   use Queueable, SerializesModels;
 
-	public $record;
+	public $email;
+	public $token;
 
   /**
    * Create a new message instance.
    *
    * @return void
    */
-  public function __construct($id)
+  public function __construct($user)
   {
-    $this->record = Enquiry::find($id);
+		$this->email = $user->email;
+		$this->token = PasswordReset::select('token')->where('email', $user->email)->orderBy('created_at', 'DESC')->first()['token'];
   }
 
   /**
@@ -36,8 +39,8 @@ class NewEnquiry extends Mailable
   public function envelope()
   {
 		return new Envelope(
-      from: new Address($_ENV['MAIL_NOTIFICATION_ADDRESS'], $_ENV['APP_NAME']),
-      subject: sprintf('New Enquiry (%s)', $this->record->type),
+      from: new Address($_ENV['MAIL_FROM_ADDRESS'], $_ENV['APP_NAME']),
+      subject: 'Reset Password',
     );
   }
 
@@ -49,7 +52,7 @@ class NewEnquiry extends Mailable
   public function content()
   {
     return new Content(
-      view: 'email.notification.new-enquiry',
+      view: 'email.admin.auth.reset-password',
     );
   }
 

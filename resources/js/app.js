@@ -36,6 +36,8 @@ import Alerterror from './vue/components/admin/site/alertError.vue'
 import Alertmessage from './vue/components/admin/site/alertMessage.vue'
 
 import Adminlogin from './vue/components/admin/auth/login.vue'
+import Adminforgotpassword from './vue/components/admin/auth/forgotPassword.vue'
+import Adminresetpassword from './vue/components/admin/auth/resetPassword.vue'
 
 import Admincontactfunctions from './vue/components/admin/contactFunctions.vue'
 
@@ -114,6 +116,12 @@ alertMessage.component('alertmessage', Alertmessage).mount('#alertmessage')
 
 const adminLogin = createApp({})
 adminLogin.component('adminlogin', Adminlogin).mount('#adminlogin')
+
+const adminForgotPassword = createApp({})
+adminForgotPassword.component('adminforgotpassword', Adminforgotpassword).mount('#adminforgotpassword')
+
+const adminResetPassword = createApp({})
+adminResetPassword.component('adminresetpassword', Adminresetpassword).mount('#adminresetpassword')
 
 
 const adminContactFunctions = createApp({})

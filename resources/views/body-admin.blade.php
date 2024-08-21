@@ -46,12 +46,12 @@
 
 		@yield('content')
 
-		<div id="adminfooter">
+		{{-- <div id="adminfooter">
 			<Adminfooter
 				sitetitle="{{ env('APP_NAME') }}"
 				:adminlinks="{{ json_encode($adminLinks) }}"
 			/>
-		</div>
+		</div> --}}
 	</div>
   
 @endsection

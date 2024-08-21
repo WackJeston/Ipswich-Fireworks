@@ -20,6 +20,10 @@ tr {
 	position: relative;
 }
 
+thead {
+	margin: 10px 10px 10px 10px;
+}
+
 thead tr {
   height: 35px;
 	border-bottom: 1px solid v.$gray-1;

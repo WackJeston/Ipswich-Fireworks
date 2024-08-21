@@ -82,15 +82,15 @@
 			resetShowMarker();
 		@endphp
 
-		@if(str_contains(url()->current(), '/admin/'))
-			
-			@yield('body-admin')
-
-    @elseif (str_contains(url()->current(), '/admin'))
+		@if (str_ends_with(url()->current(), '/admin') || str_contains(url()->current(), '/admin/forgot-password') || str_contains(url()->current(), '/admin/reset-password'))
       
 			@yield('body-admin-login')
 
-		@elseif (str_contains(url()->current(), '/checkout'))
+		@elseif(str_contains(url()->current(), '/admin/'))
+			
+			@yield('body-admin')
+
+    @elseif (str_contains(url()->current(), '/checkout'))
 			
 			@yield('body-public-checkout')
 

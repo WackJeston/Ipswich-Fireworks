@@ -1,28 +1,32 @@
 @use 'site/v';
 
-.login {
+.auth {
   display: flex;
   flex-direction: column;
   align-items: center;
   height: 100vh;
-  margin-top: 10vh;
+  margin-top: 30vh;
 }
 
-.login .login-form {
+.auth .alert-box {
+  width: 100vw;
+	max-width: 460px;
+}
+
+.auth .form-container {
   display: flex;
   flex-direction: column;
   align-items: center;
   max-width: 500px;
   width: 100vw;
-  padding: 20px;
+  padding: 20px 20px 0 20px;
 }
 
-.login form {
+.auth form {
   width: 100%;
-	margin-top: 20vh;
 }
 
-.login form .bottom-row {
+.auth form .bottom-row {
 	display: flex;
 	flex-direction: row;
 	align-items: center;
@@ -30,18 +34,18 @@
 	width: 100%;
 }
 
-.login form .submit {
+.auth form .submit {
 	margin: 0 0 0 10px;
 }
 
-.login h1, .login h2 {
+.auth h1, .auth h2 {
   font-size: 2rem;
   margin: auto 0 0 0;
   opacity: 0.2;
   cursor: default;
 }
 
-.login h2 {
+.auth h2 {
 	width: 100%;
 	text-align: center;
 
@@ -50,14 +54,7 @@
 	}
 }
 
-.login .alert-container {
-  display: flex;
-  justify-content: center;
-  width: 100vw;
-  padding: 20px;
-}
-
-.login #alertmessage, .login #alerterror {
-  width: calc(100% - 20px);
-	max-width: 560px;
+.auth .form-errors small:last-child,
+.auth small:not(.form-errors small) {
+	margin-bottom: 20px;
 }

@@ -43,6 +43,10 @@ Route::group( ['middleware' => 'auth' ], function()
 {
 	Route::controller(App\Http\Controllers\Admin\AuthController::class)->group(function () {
     Route::get('/admin', 'show');
+    Route::get('/admin/forgot-password', 'forgotPassword');
+		Route::post('/adminForgotPasswordEmail', 'forgotPasswordEmail');
+    Route::get('/admin/reset-password/{email}/{token}', 'resetPassword');
+		Route::post('/adminResetPassword/{email}/{token}', 'resetPassword2');
     Route::get('/adminLogin', 'authenticate');
     Route::get('/adminLogout', 'logout');
   });

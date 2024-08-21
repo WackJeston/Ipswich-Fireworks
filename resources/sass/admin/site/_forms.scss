@@ -111,7 +111,7 @@ form textarea,
 form label.file-input-label,
 form select,
 .stripe-input {
-	margin-bottom: 10px;
+	margin-bottom: 15px;
 }
 
 form input:not(.radio-container input, .checkbox-container input, .submit),
@@ -126,10 +126,6 @@ form option {
 	background-color: white;
 	height: 33px;
 	cursor: pointer;
-}
-
-form label {
-	color: v.$black;
 }
 
 form.web-box input:not(.radio-container input, .checkbox-container input, .submit),
@@ -186,14 +182,16 @@ form label.show-password {
 }
 
 form label.show-password i {
-	margin: 2px 2px 0 0;
+	margin: 0;
 }
 
 form label:not(.file-input-label, .show-password),
 .form label {
-	font-weight: bold;
+	font-weight: 500;
 	line-height: 20px;
 	margin-left: 2px;
+	margin-bottom: 2px;
+	color: v.$black;
 }
 
 form label:not(.radio-container label) {
@@ -303,4 +301,9 @@ form .radio-container label {
 	margin: 0;
 	padding-left: 5px;
 	font-size: 0.9rem;
+}
+
+form .form-errors {
+	display: flex;
+	flex-direction: column;
 }

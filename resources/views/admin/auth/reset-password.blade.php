@@ -1,12 +1,15 @@
 @extends('body-admin-login')
 
-@section('title', 'Login')
+@section('title', 'Reset Password')
 
 @section('content')
-  <main class="auth" id="adminLoginPage">
+  <main class="auth" id="adminResetPassword">
 
-    <div id="adminlogin">
-      <adminlogin />
+    <div id="adminresetpassword">
+      <adminresetpassword 
+				email="{{ $email }}"
+				token="{{ $token }}"
+			/>
     </div>
 
     @if ($errors->any())

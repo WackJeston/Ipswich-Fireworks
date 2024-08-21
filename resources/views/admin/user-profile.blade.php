@@ -35,7 +35,6 @@
 		<div class="page-column-container columns-2">
 			<div class="page-column">
 				<ul class="web-box profile-details">
-					<li>Summary</li>
 					<li><strong>Name: </strong>{{ $user->firstName }} {{ $user->lastName }}</li>
 					<li><strong>Email: </strong>{{ $user->email }}</li>
 					@if (!is_null($user->klaviyoId))

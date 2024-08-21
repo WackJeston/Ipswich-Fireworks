@@ -6,7 +6,7 @@ use DB;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Support\Facades\Mail;
-use App\Mail\NewEnquiry;
+use App\Mail\Admin\Notifications\NewEnquiry;
 
 class Enquiry extends Model
 {

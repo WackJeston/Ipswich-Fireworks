@@ -151,8 +151,12 @@ main h2 {
 	border-radius: 5px;
 	--tw-shadow: 0 4px 6px -1px rgb(0 0 0 / .1), 0 2px 4px -2px rgb(0 0 0 / .1);
 	box-shadow: 0 0 #0000, 0 0 #0000, var(--tw-shadow);
-	padding: 25px;
+	padding: 20px 25px;
 	margin-bottom: 20px;
+
+	@media (max-width: 640px) {
+		padding: 15px 20px;
+	}
 }
 
 .web-box .wb-row {
@@ -261,11 +265,6 @@ main h2 {
 .profile-details li {
 	margin: 0;
 	padding: 4px 8px;
-}
-
-.profile-details li:first-child {
-	font-size: 1.3rem;
-	font-weight: bold;
 }
 
 .profile-details li:last-child {
@@ -528,6 +527,10 @@ i.pb-info:hover {
 
 a.display-link {
 	color: v.$baby-blue-dark;
+
+	@media (max-width: 640px) {
+		font-size: 0.9rem;
+	}
 }
 
 a.display-link:hover {

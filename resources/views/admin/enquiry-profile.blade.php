@@ -49,7 +49,6 @@
 		<div class="page-column-container columns-2">
 			<div class="page-column">
 				<ul class="web-box profile-details">
-					<li>Summary</li>
 					<li><strong>Name:</strong> {{ $enquiry->name }}</li>
 					<li><strong>Email:</strong> {{ $enquiry->email }}</li>
 					<li><strong>Phone:</strong> {{ $enquiry->phone }}</li>
