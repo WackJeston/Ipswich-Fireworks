@@ -28,6 +28,7 @@
 				startY: 0,
 				newX: 0,
 				newY: 0,
+				targetId: null,
 			};
 		},
 
@@ -55,7 +56,11 @@
 				newDiv2.addEventListener("mousedown", this.mouseDown);
 			},
 
-			mouseDown(event) {
+			mouseDown(event) {				
+				event.preventDefault();
+
+				this.targetId = event.target.parentElement.id;
+
 				this.startX = event.clientX;
 				this.startY = event.clientY;
 
@@ -70,17 +75,13 @@
 				this.startX = event.clientX;
 				this.startY = event.clientY;
 
-				let primary = document.getElementById('mapImageContainer');
-				let count = primary.children.length;
+				let target = document.getElementById(this.targetId);
 
-				let newDiv = document.getElementById('icon-' + count);
-				let rect = newDiv.getBoundingClientRect();
-
-				newDiv.style.top = (newDiv.offsetTop - this.newY) + "px";
-				newDiv.style.left = (newDiv.offsetLeft - this.newX) + "px";
+				target.style.left = (target.offsetLeft - this.newX) + "px";
+				target.style.top = (target.offsetTop - this.newY) + "px";
 			},
 
-			mouseUp() {
+			mouseUp(event) {
 				document.removeEventListener("mousemove", this.mouseMove);
 				document.removeEventListener("mouseup", this.mouseUp);
 			},

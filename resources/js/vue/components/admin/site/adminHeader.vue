@@ -151,8 +151,9 @@
 				let menu = document.querySelector("#notification-menu");
 				let button = document.querySelector("#notification-button");
 				let buttonPosition = button.getBoundingClientRect();
+				let scrollBarWidth = document.body.offsetWidth - document.querySelector('#adminheader').offsetWidth;
 
-				menu.style.right = (window.innerWidth - buttonPosition.left - button.offsetWidth) + "px";
+				menu.style.right = (window.innerWidth - buttonPosition.left - button.offsetWidth - scrollBarWidth) + "px";
 
 				if (start) {
 					setTimeout(() => {
@@ -172,10 +173,10 @@
 			setSettingsMenuPosition(start = true) {
 				let menu = document.querySelector("#settings-menu");
 				let button = document.querySelector("#settings-button");
-
 				let buttonPosition = button.getBoundingClientRect();
+				let scrollBarWidth = document.body.offsetWidth - document.querySelector('#adminheader').offsetWidth;
 
-				menu.style.right = (window.innerWidth - buttonPosition.left - button.offsetWidth) + "px";
+				menu.style.right = (window.innerWidth - buttonPosition.left - button.offsetWidth - scrollBarWidth) + "px";
 
 				if (start) {
 					setTimeout(() => {
@@ -256,6 +257,7 @@
 					this.notificationsData = [];
 
 					this.result.forEach(notification => {
+						console.log(notification);
 						this.notificationsData.push(notification);
 					});
 				}
