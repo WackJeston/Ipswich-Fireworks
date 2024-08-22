@@ -65,7 +65,8 @@
   text-align: center;
 }
 
-.admin-menu .nav-link .fa-angle-down, .admin-menu .nav-link .fa-angle-up {
+.admin-menu .nav-link .fa-angle-down,
+.admin-menu .nav-link .fa-angle-up {
   display: flex;
   align-items: center;
   justify-content: center;
@@ -73,6 +74,13 @@
   font-size: 0.9rem;
   width: 26px;
   height: 100%;
+}
+
+.admin-menu .nav-link .fa-angle-down:hover,
+.admin-menu .nav-link .fa-angle-up:hover {
+	@media (min-width: 640px) {
+		background-color: v.$bg-main;
+	}
 }
 
 .admin-menu .nav-link .fa-angle-up {
@@ -86,7 +94,7 @@
 }
 
 .admin-menu .nav-sublink {
-  border-top: 1px solid v.$bg-dark;
+  border-top: 1px solid v.$border-light;
   padding-left: 6px;
   min-height: 30px;
   max-height: 30px;
@@ -94,6 +102,12 @@
 
 .admin-menu .nav-sublink .nav-link-icon {
   margin-left: auto;
+}
+
+.admin-menu .nav-sublink:hover {
+	@media (min-width: 640px) {
+		background-color: v.$bg-main;
+	}
 }
 
 

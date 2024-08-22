@@ -85,12 +85,12 @@
         <a v-show="link['sublink']" class="primary-nav-link">
           <i :class="[link['icon']]" class="nav-link-icon"></i>
           <li>{{ capFL(link['title']) }}</li>
-          <i @click="toggleLinks(i, open = false)" v-show="link['sublink']" class="fa-solid fa-angle-down hover-background" :class="'ladown' + [i]"></i>
-          <i @click="toggleLinks(i, open = true)" v-show="link['sublink']" class="fa-solid fa-angle-up hover-background" :class="'laup' + [i]"></i>
+          <i @click="toggleLinks(i, open = false)" v-show="link['sublink']" class="fa-solid fa-angle-down" :class="'ladown' + [i]"></i>
+          <i @click="toggleLinks(i, open = true)" v-show="link['sublink']" class="fa-solid fa-angle-up" :class="'laup' + [i]"></i>
         </a>
 
         <ul :class="'sublist' + [i]" class="nav-sublinks">
-          <a v-for="(sublink, subi) in link['sublink']" :href="sublink['link']" class="nav-sublink hover-background">
+          <a v-for="(sublink, subi) in link['sublink']" :href="sublink['link']" class="nav-sublink">
             <li>{{ capFL(sublink['title']) }}</li>
             <i :class="[sublink['icon']]" class="nav-link-icon"></i>
           </a>
