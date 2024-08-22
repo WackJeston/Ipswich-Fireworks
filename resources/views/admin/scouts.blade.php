@@ -5,8 +5,6 @@
 @section('content')
   <main class="scouts">
 
-    <h1>11th Ipswich Scout Group</h1>
-
     @if ($errors->any())
       <div id="alerterror" class="lt">
         <alerterror :errormessages="{{ str_replace(array('[', ']'), '', $errors) }}" errorcount="{{ count($errors) }}" />

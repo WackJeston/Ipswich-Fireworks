@@ -18,8 +18,6 @@
 
 		<div class="page-column-container columns-2">
 			<div class="page-column">
-				<h2>Settings</h2>
-
 				@php
 					echo $form['html'];
 				@endphp

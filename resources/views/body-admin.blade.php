@@ -40,18 +40,16 @@
 					showHome="{{ json_encode(false) }}"
 					:sessionuser="{{ auth()->user() }}"
 					:settings="{{ json_encode($settings) }}"
+					pagetitle="@yield('title')"
 				/>
 			@endif
 		</div>
 
-		@yield('content')
+		<div class="sub-header">
+			<h1>@yield('title')</h1>
+		</div>
 
-		{{-- <div id="adminfooter">
-			<Adminfooter
-				sitetitle="{{ env('APP_NAME') }}"
-				:adminlinks="{{ json_encode($adminLinks) }}"
-			/>
-		</div> --}}
+		@yield('content')
 	</div>
   
 @endsection

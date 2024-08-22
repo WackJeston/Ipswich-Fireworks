@@ -5,8 +5,6 @@
 @section('content')
   <main class="map">
 
-    <h1>Map</h1>
-
     @if ($errors->any())
       <div id="alerterror" class="lt">
         <alerterror :errormessages="{{ str_replace(array('[', ']'), '', $errors) }}" errorcount="{{ count($errors) }}" />

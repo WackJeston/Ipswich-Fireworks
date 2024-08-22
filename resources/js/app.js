@@ -31,7 +31,6 @@ import Googlemaps from './vue/components/public/googleMaps.vue'
 
 // ADMIN
 import Adminheader from './vue/components/admin/site/adminHeader.vue'
-import Adminfooter from './vue/components/admin/site/adminFooter.vue'
 import Alerterror from './vue/components/admin/site/alertError.vue'
 import Alertmessage from './vue/components/admin/site/alertMessage.vue'
 
@@ -103,9 +102,6 @@ googleMaps.component('googlemaps', Googlemaps).mount('#googlemaps')
 const adminHeader = createApp({})
 adminHeader.use(VueAxios, axios)
 adminHeader.component('adminheader', Adminheader).mount('#adminheader')
-
-const adminFooter = createApp({})
-adminFooter.component('adminfooter', Adminfooter).mount('#adminfooter')
 
 const alertError = createApp({})
 alertError.component('alerterror', Alerterror).mount('#alerterror')

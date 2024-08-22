@@ -1,34 +1,36 @@
 <template>
   <header class="lt">
     <nav class="desktop-nav">
-      <a v-show="this.showhome == 'false'" href="/admin/dashboard" class="nav-button home-button header-button"><i class="fa-solid fa-house-chimney"></i></a>
-      <i v-show="this.showhome == 'true'" class="fa-solid fa-house-chimney nav-button home-button header-button" id="non-active"></i>
+      <a v-if="this.showhome == 'false'" href="/admin/dashboard" class="home-button header-button"><i class="fa-solid fa-house-chimney"></i></a>
+      <i v-if="this.showhome == 'true'" class="fa-solid fa-house-chimney home-button header-button" id="non-active"></i>
 
-			<div id="notification-header-container">
-        <div @click="this.navMenuActive = (this.navMenuActive == 'notification' ? null : 'notification'), this.newNotifications = false" class="nav-button" :class="{ 'selected' : this.navMenuActive == 'notification' },{ 'new-notifications' : this.newNotifications }" id="notification-button">
-          <i class="fa-solid fa-bell"></i>
+			<div id="notification-header-container" class="header-button-container">
+        <div @click="this.navMenuActive = (this.navMenuActive == 'notification' ? null : 'notification'), this.newNotifications = false" :class="{ 'selected' : this.navMenuActive == 'notification', 'new-notifications' : this.newNotifications }" id="notification-button">
+          <i class="fa-solid fa-bell header-button"></i>
 					<strong v-if="this.notificationCount > 0" class="notification-count">{{ this.notificationCount }}</strong>
         </div>
       </div>
 
-			<div id="settings-header-container">
-        <div @click="this.navMenuActive = (this.navMenuActive == 'settings' ? null : 'settings')" class="nav-button" :class="{ 'selected' : this.navMenuActive == 'settings' }" id="settings-button">
-          <i class="fa-solid fa-gear"></i>
+			<div id="settings-header-container" class="header-button-container">
+        <div @click="this.navMenuActive = (this.navMenuActive == 'settings' ? null : 'settings')" :class="{ 'selected' : this.navMenuActive == 'settings' }" id="settings-button">
+          <i class="fa-solid fa-gear header-button"></i>
         </div>
       </div>
 
-      <div id="user-header-container">
-        <div @click="this.navMenuActive = (this.navMenuActive == 'user' ? null : 'user')" class="header-button" :class="{ 'selected' : this.navMenuActive == 'user' }" id="user-button">
-          <p>{{ this.sessionuser.firstName }} {{ this.sessionuser.lastName }}</p>
-          <i class="fa-solid fa-user"></i>
+      <div id="user-header-container" class="header-button-container">
+        <div @click="this.navMenuActive = (this.navMenuActive == 'user' ? null : 'user')" :class="{ 'selected' : this.navMenuActive == 'user' }" id="user-button">
+					<div class="header-button">
+						<!-- <i class="fa-solid fa-user"></i> -->
+						<p>{{ this.sessionuser.firstName }} {{ this.sessionuser.lastName }}</p>
+					</div>
         </div>
       </div>
 
-      <i @click='menuActive = !menuActive' class="fa-solid fa-bars hover-background nav-button" id="menu-button"></i>
+      <i @click='menuActive = !menuActive, this.navMenuActive = null' class="fa-solid fa-bars header-button" id="menu-button"></i>
     </nav>
 
-		<div id="notification-menu" :style="[this.navMenuActive == 'notification' ? { transform: 'translate3d(0, 100%, 0)', minWidth: this.notificationMenuWidth + 'px' } : { transform: 'translate3d(0, 0, 0)', minWidth: this.notificationMenuWidth + 'px' }]">
-			<div id="notificationNav">
+		<div id="notification-menu" class="menu" :style="[this.navMenuActive == 'notification' ? { display: 'flex', minWidth: this.notificationMenuWidth + 'px' } : { minWidth: this.notificationMenuWidth + 'px' }]">
+			<div id="notificationNav" class="nav">
 				<h3>Alerts</h3>
 				<button class="page-button" @click="this.deleteAllNotifications()">Empty</button>
 			</div>
@@ -43,8 +45,12 @@
 			</div>
     </div>
 
-		<div id="settings-menu" :style="[this.navMenuActive == 'settings' ? { transform: 'translate3d(0, 100%, 0)', minWidth: this.settingsMenuWidth + 'px' } : { transform: 'translate3d(0, 0, 0)', minWidth: this.settingsMenuWidth + 'px' }]">
-      <div class="settings-group" v-for="(group, groupName) in this.settingsData">
+		<div id="settings-menu" class="menu" :style="[this.navMenuActive == 'settings' ? { display: 'flex', minWidth: this.settingsMenuWidth + 'px' } : { minWidth: this.settingsMenuWidth + 'px' }]">
+      <div id="settingsNav" class="nav">
+				<h3>Settings</h3>
+			</div>
+			
+			<div class="settings-group" v-for="(group, groupName) in this.settingsData">
 				<h4>{{ groupName }}</h4>
 				<div v-for="(settings, i) in group">
 					<span>{{ settings.name }}</span>
@@ -58,16 +64,15 @@
 			</div>
     </div>
 
-    <div id="user-menu" :style="[this.navMenuActive == 'user' ? { transform: 'translate3d(0, 100%, 0)', minWidth: this.userMenuWidth + 'px' } : { transform: 'translate3d(0, 0, 0)', minWidth: this.userMenuWidth + 'px' }]">
+    <div id="user-menu" class="menu" :style="[this.navMenuActive == 'user' ? { display: 'flex', minWidth: this.userMenuWidth + 'px' } : { minWidth: this.userMenuWidth + 'px' }]">
       <a :href="'/admin/user-profile/' + this.sessionuser.id">My Profile</a>
       <a href="/adminLogout">Log Out</a>
     </div>
 
-    <div class="menu-overlay" @click="menuActive = false" v-show="menuActive"></div>
+    <div class="menu-overlay" @click="menuActive = false" :class="{ 'menu-active': menuActive }"></div>
   </header>
 
-  <nav class="admin-menu lt"
-  :class="{ 'menu-active': menuActive, 'menu-non-active': !menuActive }">
+  <nav class="admin-menu lt" :class="{ 'menu-active': menuActive, 'menu-non-active': !menuActive }">
     <h2 class="title">Navigation</h2>
 
     <ul>
@@ -129,8 +134,13 @@
 
     methods: {
 			setUserMenuWidth(start = true) {
+				let menu = document.querySelector("#user-menu");
 				let userButton = document.querySelector("#user-header-container");
-				this.userMenuWidth = userButton.offsetWidth;
+				let buttonPosition = userButton.getBoundingClientRect();
+				this.userMenuWidth = userButton.offsetWidth + 40;
+				let scrollBarWidth = document.body.offsetWidth - document.querySelector('#adminheader').offsetWidth;
+
+				menu.style.right = (window.innerWidth - buttonPosition.left - userButton.offsetWidth - scrollBarWidth) + "px";
 
 				if (start) {
 					setTimeout(() => {
@@ -257,7 +267,6 @@
 					this.notificationsData = [];
 
 					this.result.forEach(notification => {
-						console.log(notification);
 						this.notificationsData.push(notification);
 					});
 				}

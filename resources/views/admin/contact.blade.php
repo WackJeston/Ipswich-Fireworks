@@ -5,8 +5,6 @@
 @section('content')
   <main class="contact">
 
-    <h1 class="dk">Contact</h1>
-
     @if ($errors->any())
       <div id="alerterror" class="lt">
         <alerterror :errormessages="{{ str_replace(array('[', ']'), '', $errors) }}" errorcount="{{ count($errors) }}" />

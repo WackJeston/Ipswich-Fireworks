@@ -11,64 +11,69 @@ header .desktop-nav {
   align-items: center;
   justify-content: end;
   height: 100%;
-  background-color: v.$alt-main;
+  background-color: v.$white;
+	border-bottom: 1px solid v.$bg-main;
   position: relative;
   z-index: 5;
+	padding: 0;
+
+	@media (min-width: 800px) {
+		padding: 0 28px 0 28px;
+	}
 }
 
 header .desktop-nav i {
-	font-size: 1.3rem;
+	font-size: 1.2rem;
+	color: v.$border-dark;
 }
 
-.desktop-nav .header-button.selected,
-.desktop-nav .nav-button.selected {
-	background-color: v.$bg-dark !important;
+.desktop-nav .header-button-container {
+	display: flex;
+	align-items: center;
+  position: relative;
+  height: 100%;
 }
 
 .desktop-nav .header-button {
   display: flex;
   flex-direction: row;
   align-items: center;
-  height: 100%;
+	border-radius: 6px;
+	border: 1px solid v.$white;
+	padding: 6px 10px;
+
+	@media (min-width: 800px) {
+		padding: 6px 12px;
+	}
+}
+
+.desktop-nav :not(.header-button:first-child) {
+	margin-left: 2px;
+}
+
+.desktop-nav .header-button:not(#non-active) {
   cursor: pointer;
 }
 
-.desktop-nav .header-button:hover {
-	@media (min-width: 640px) {
-		background-color: v.$bg-dark;
+.desktop-nav .header-button:hover:not(#non-active) {
+	@media (min-width: 800px) {
+		background-color: v.$bg-main;
 	}
 }
 
-.desktop-nav .nav-button {
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  height: 100%;
-  width: v.$header-height;
-	cursor: pointer;
-}
-
-.desktop-nav .nav-button:hover:not(.desktop-nav #non-active:hover, .new-notifications), .desktop-nav #user-button:hover {
-	@media (min-width: 640px) {
-		background-color: v.$bg-dark;
-	}
+.desktop-nav .selected .header-button {
+	// background-color: v.$black !important;
+	border: 1px solid v.$border-light;
+	box-shadow: v.$shadow-sm;
 }
 
 .desktop-nav .home-button {
   margin-right: auto;
 }
 
-.desktop-nav #user-header-container,
-.desktop-nav #notification-header-container,
-.desktop-nav #settings-header-container {
-  position: relative;
-  height: 100%;
-}
-
 .desktop-nav #notification-button,
 .desktop-nav #settings-button {
   position: relative;
-  padding: 0 15px;
   z-index: 7;
 }
 
@@ -77,45 +82,49 @@ header .desktop-nav i {
 	align-items: center;
 	justify-content: center;
 	position: absolute;
+	border-radius: 50%;
+	color: v.$border-dark;
+	font-size: 0.7rem;
 	top: 5px;
 	left: 5px;
-	border-radius: 50%;
-	color: v.$white;
-	font-size: 0.7rem;
+
+	@media (max-width: 800px) {
+		top: 3px;
+		left: 3px;
+	}
 }
 
-.desktop-nav #notification-button.new-notifications {
+.desktop-nav #notification-button.new-notifications .header-button,
+.desktop-nav #notification-button.new-notifications strong {
 	background-color: v.$sea-blue;
-}
-
-.desktop-nav #notification-header-container .alert {
-	background-color: v.$dull-yellow-dark;
+	color: v.$white;
 }
 
 .desktop-nav #user-button {
-	position: relative;
-  background-color: v.$bg-semi-dark;
-  padding: 0 15px;
   z-index: 7;
 }
 
-
 .desktop-nav #user-button p {
-  margin-right: 10px;
+	font-size: 0.9rem;
+  margin: 0;
+	color: v.$black;
+}
+
+.desktop-nav #user-button i {
+	color: v.$black;
 }
 
 
-
-header #notification-menu,
-header #settings-menu {
-	transition: transform 100ms ease;
-  display: flex;
+header .menu {
+	display: none;
   flex-direction: column;
-  background-color: v.$bg-dark;
+  background-color: v.$white;
+	box-shadow: v.$shadow-md;
   position: absolute;
-  bottom: 0;
-  z-index: 4;
-  border-radius: 0 0 5px 5px;
+	top: calc(100% - 4px);
+  z-index: 10;
+  border-radius: 6px;
+	border: 1px solid v.$border-light;
 	overflow: hidden;
 	padding: 6px 0 6px 0;
 
@@ -124,31 +133,36 @@ header #settings-menu {
 	}
 }
 
-header #notification-menu {
-	width: 280px;
-}
-
-header #notification-menu #notificationNav {
+header .menu .nav {
 	display: flex;
 	flex-direction: row;
 	align-items: center;
 	padding: 4px 13px 10px 13px;
+	height: 42px;
 }
 
-header #notification-menu #notificationNav h3 {
+header .menu .nav h3 {
 	margin: 0 auto 0 0;
 	line-height: 10px;
 }
 
-header #notification-menu #notificationNav button {
-	margin: 0;
+header .menu .nav button {
+	margin: 0 !important;
 }
 
-header #notification-menu .notification {
-	display: flex;
-	flex-direction: column;
-	padding: 5px 13px 7px 13px;
-	border-top: 1px solid v.$trans-semi;
+header .menu p,
+header .menu span,
+header .menu a:not(.notification a),
+header .menu h3 {
+	color: v.$black;
+}
+
+header .menu h4 {
+	color: v.$gray-2;
+}
+
+header #notification-menu {
+	width: 280px;
 }
 
 header #notification-menu #notificationsEmpty {
@@ -162,7 +176,11 @@ header #notification-menu .notification {
 	display: flex;
 	flex-direction: column;
 	padding: 5px 13px 7px 13px;
-	border-top: 1px solid v.$trans-semi;
+	border-top: 1px solid v.$bg-main;
+}
+
+header #notification-menu .notification a {
+	color: v.$gray-2;
 }
 
 header #notification-menu .notification h4 {
@@ -183,7 +201,6 @@ header #notification-menu .notification p {
 	margin: 0;
 	font-size: 0.8rem;
 	line-height: 15px;
-	color: v.$bg-main;
 }
 
 header #settings-menu {
@@ -195,6 +212,7 @@ header #settings-menu .settings-group {
 	flex-direction: column;
 	text-transform: capitalize;
 	padding: 6px 0 8px 0;
+	border-top: 1px solid v.$bg-main;
 }
 
 header #settings-menu .settings-group h4 {
@@ -212,14 +230,12 @@ header #settings-menu .settings-group div {
 }
 
 header #settings-menu .settings-group span {
-	color: v.$white;
 	font-size: 0.9rem;
 	margin-right: auto;
 }
 
 header #settings-menu .settings-group i {
 	cursor: pointer;
-	background-color: v.$bg-dark;
 	padding-left: 5px;
 }
 
@@ -233,40 +249,53 @@ header #settings-menu .settings-group i.fa-envelope {
 }
 
 header #settings-menu .settings-group i:hover {
-	@media (min-width: 640px) {
+	@media (min-width: 800px) {
 		color: v.$bg-main;
 	}
 }
 
 header #settings-menu .settings-group i:not(.active) {
-	color: v.$bg-main;
+	color: v.$black;
 }
 
 header #settings-menu .settings-group i.active {
 	color: v.$green;
 }
 
-header #user-menu {
-  transition: transform 100ms ease;
-  display: flex;
-  flex-direction: column;
-  background-color: v.$alt-main;
-  position: absolute;
-  bottom: 0;
-  right: v.$header-height;
-  z-index: 4;
-  border-radius: 0 0 5px 5px;
-	overflow: hidden;
-}
-
 header #user-menu a {
   width: 100%;
-  padding: 10px;
+  padding: 6px 10px;
 }
 
 header #user-menu a:hover {
-	@media (min-width: 640px) {
-		background-color: v.$bg-dark;
-		color: v.$white;
+	@media (min-width: 800px) {
+		background-color: v.$bg-main;
+	}
+}
+
+header #user-menu a:not(:first-child) {
+	border-top: 1px solid v.$bg-main;
+}
+
+.sub-header {
+	display: flex;
+	flex-direction: row;
+	align-items: center;
+	height: 60px;
+	background-color: v.$white;
+	box-shadow: v.$shadow-sm;
+	z-index: 3;
+	padding: 0 10px;
+
+	@media (min-width: 800px) {
+		padding: 0 40px 0 40px;
+	}
+}
+
+.sub-header h1 {
+	color: v.$black;
+
+	@media (max-width: 800px) {
+		font-size: 1.5rem;
 	}
 }

@@ -11,8 +11,6 @@
 @section('content')
   <main class="enquiries">
 
-		<h1 class="dk">Enquiries Search</h1>
-
     @if ($errors->any())
       <div id="alerterror" class="lt">
         <alerterror :errormessages="{{ str_replace(array('[', ']'), '', $errors) }}" errorcount="{{ count($errors) }}" />

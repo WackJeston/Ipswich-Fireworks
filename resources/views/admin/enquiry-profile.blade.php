@@ -1,11 +1,11 @@
 @extends('body-admin')
 
 @if ($type == 'standard')
-	@section('title', 'Enquiry')
+	@section('title', 'Enquiry Details')
 @elseif ($type == 'feedback')
-	@section('title', 'Feeback Enquiry')
+	@section('title', 'Feeback Enquiry Details')
 @elseif ($type == 'sponsor')
-	@section('title', 'New Sponsor Enquiry')
+	@section('title', 'New Sponsor Enquiry Details')
 @endif
 
 @section('content')
@@ -16,22 +16,16 @@
 				<i class="fa-solid fa-arrow-left"></i>
 				<a href="/admin/enquiries">Enquiries</a>
 			</div>
-
-			<h1 class="dk">Enquiry</h1>
 		@elseif ($type == 'feedback')
 			<div class="link-trail">
 				<i class="fa-solid fa-arrow-left"></i>
 				<a href="/admin/feedback">Feedback</a>
 			</div>
-
-			<h1 class="dk">Feeback Enquiry</h1>
 		@elseif ($type == 'sponsor')
 			<div class="link-trail">
 				<i class="fa-solid fa-arrow-left"></i>
 				<a href="/admin/new-sponsors">Sponsor Enquiries</a>
 			</div>
-
-			<h1 class="dk">New Sponsor Enquiry</h1>
 		@endif
 
     @if ($errors->any())

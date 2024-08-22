@@ -6,11 +6,15 @@
   right: -240px;
   height: 100vh;
   width: 240px;
-  background-color: v.$bg-dark;
+  background-color: v.$white;
   padding: 27px 20px 25px 20px;
   overflow-y: auto;
   z-index: 10;
   transition: transform 300ms ease;
+}
+
+.admin-menu.menu-active {
+	box-shadow: v.$shadow-lg;
 }
 
 .admin-menu h2.title {
@@ -20,6 +24,7 @@
   font-size: 1.6rem;
 	text-align: center;
   line-height: 20px;
+	color: v.$black;
 }
 
 .admin-menu ul {
@@ -30,18 +35,19 @@
 
 .admin-menu .nav-link {
   margin-bottom: 10px;
-  background-color: v.$bg-semi-dark;
-  border: 1px solid v.$trans;
-  border-radius: 5px;
-  transition: border-radius 200ms ease;
+  background-color: v.$white;
+  border: 1px solid v.$border-light;
+  border-radius: 6px;
+  // transition: border-radius 200ms ease;
+	box-shadow: v.$shadow-sm;
 }
 
-.admin-menu .nav-link:hover {
-	@media (min-width: 640px) {
-		border: 1px solid v.$white;
-		border-radius: 0;
-	}
-}
+// .admin-menu .nav-link:hover {
+// 	@media (min-width: 640px) {
+// 		border: 1px solid v.$white;
+// 		border-radius: 0;
+// 	}
+// }
 
 .admin-menu .primary-nav-link, .admin-menu .nav-sublink {
   display: flex;
@@ -49,14 +55,8 @@
   height: 30px;
 }
 
-.admin-menu .nav-link:hover li, .admin-menu .nav-link:hover i {
-	@media (min-width: 640px) {
-  	color: v.$white;
-	}
-}
-
 .admin-menu .nav-link li, .admin-menu .nav-link i {
-  color: v.$bg-main;
+  color: v.$black;
 }
 
 .admin-menu .nav-link-icon {
@@ -101,11 +101,19 @@ header .menu-overlay {
   position: absolute;
   position: fixed;
   top: 0;
-	right: 0;
+	right: 100%;
 	bottom: 0;
 	left: 0;
   cursor: pointer;
   z-index: 5;
+	background-color: v.$trans-semi;
+	opacity: 0;
+	transition: opacity 300ms ease-in-out;
+}
+
+header .menu-overlay.menu-active {
+	right: 0;
+	opacity: 1;
 }
 
 // Transitions
