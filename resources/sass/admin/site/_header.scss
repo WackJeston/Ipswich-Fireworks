@@ -163,6 +163,12 @@ header .menu h4 {
 
 header #notification-menu {
 	width: 280px;
+	max-height: 400px;
+	overflow-y: auto;
+
+	@media (max-width: 800px) {
+		max-height: 60vh;
+	}
 }
 
 header #notification-menu #notificationsEmpty {

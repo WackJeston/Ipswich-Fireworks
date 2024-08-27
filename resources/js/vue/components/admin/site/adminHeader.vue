@@ -5,9 +5,8 @@
       <i v-if="this.showhome == 'true'" class="fa-solid fa-house-chimney home-button header-button" id="non-active"></i>
 
 			<div id="notification-header-container" class="header-button-container">
-        <div @click="this.navMenuActive = (this.navMenuActive == 'notification' ? null : 'notification'), this.newNotifications = false" :class="{ 'selected' : this.navMenuActive == 'notification', 'new-notifications' : this.newNotifications }" id="notification-button">
+        <div @click="this.navMenuActive = (this.navMenuActive == 'notification' ? null : 'notification'), this.newNotifications = 0, this.setNewNotificationVariable(0)" :class="{ 'selected' : this.navMenuActive == 'notification', 'new-notifications' : this.newNotifications == 1 }" id="notification-button">
           <i class="fa-solid fa-bell header-button"></i>
-					<strong v-if="this.notificationCount > 0" class="notification-count">{{ this.notificationCount }}</strong>
         </div>
       </div>
 
@@ -31,7 +30,7 @@
 
 		<div id="notification-menu" class="menu" :style="[this.navMenuActive == 'notification' ? { display: 'flex', minWidth: this.notificationMenuWidth + 'px' } : { minWidth: this.notificationMenuWidth + 'px' }]">
 			<div id="notificationNav" class="nav">
-				<h3>Alerts</h3>
+				<h3>Alerts<span v-if="this.notificationCount > 0">: {{ this.notificationCount }}</span></h3>
 				<button class="page-button" @click="this.deleteAllNotifications()">Empty</button>
 			</div>
 
@@ -109,6 +108,8 @@
       'showhome',
       'sessionuser',
 			'settings',
+			'previousnotificationcount',
+			'newnotification',
     ],
 
     data() {
@@ -120,8 +121,8 @@
 				settingsData: this.settings,
 				notificationMenuWidth: 0,
 				notificationsData: [],
-				notificationCount: 0,
-				newNotifications: false,
+				notificationCount: this.previousnotificationcount,
+				newNotifications: this.newnotification,
       };
     },
 
@@ -234,7 +235,6 @@
         return words.join(" ");
       },
 
-			// AJAX
 			async toggleSettings(id, notificationUserId, type) {
 				try {
 					this.response = await fetch("/header-toggleNotification/" + id + "/" + notificationUserId + "/" + type);
@@ -260,10 +260,13 @@
 
 				} finally {
 					if (this.notificationCount < this.result.length) {
-						this.newNotifications = true;
+						this.newNotifications = 1;
+						this.setNewNotificationVariable();
 					}
 
 					this.notificationCount = this.result.length;
+					this.setNotificationCount();
+
 					this.notificationsData = [];
 
 					this.result.forEach(notification => {
@@ -303,6 +306,28 @@
 
 				} finally {
 					this.reloadNotifications();
+				}
+			},
+
+			async setNewNotificationVariable(toggle = 1) {
+				try {
+					this.response = await fetch("/header-setNewNotificationVariable/" + toggle);
+					this.result = await this.response.json();
+					
+				} catch (err) {
+					console.log('----ERROR----');
+					console.log(err);
+				}
+			},
+
+			async setNotificationCount() {
+				try {
+					this.response = await fetch("/header-setNotificationCount/" + this.notificationCount);
+					this.result = await this.response.json();
+					
+				} catch (err) {
+					console.log('----ERROR----');
+					console.log(err);
 				}
 			},
     },

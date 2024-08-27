@@ -7,14 +7,14 @@ use Illuminate\Database\Eloquent\Model;
 
 class NotificationEvent extends Model
 {
-    use HasFactory;
+	use HasFactory;
 
-    protected $table = 'notification_event';
+	protected $table = 'notification_event';
 
-    protected $fillable = [
-      'notificationId',
-      'userId',
-      'message',
-			'pageId',
-    ];
+	protected $fillable = [
+		'notificationId',
+		'userId',
+		'message',
+		'pageId',
+	];
 }

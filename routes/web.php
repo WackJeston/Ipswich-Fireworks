@@ -165,6 +165,8 @@ Route::get('/header-toggleNotification/{id}/{notificationUserId}/{type}', [App\H
 Route::get('/header-reloadNotifications', [App\Http\Controllers\Admin\Api\HeaderApi::class, 'reloadNotifications']);
 Route::get('/header-deleteNotification/{id}', [App\Http\Controllers\Admin\Api\HeaderApi::class, 'deleteNotification']);
 Route::get('/header-deleteAllNotifications', [App\Http\Controllers\Admin\Api\HeaderApi::class, 'deleteAllNotifications']);
+Route::get('/header-setNewNotificationVariable/{toggle}', [App\Http\Controllers\Admin\Api\HeaderApi::class, 'setNewNotificationVariable']);
+Route::get('/header-setNotificationCount/{count}', [App\Http\Controllers\Admin\Api\HeaderApi::class, 'setNotificationCount']);
 
 Route::get('/dataTable-toggleButton/{table}/{column}/{primaryColumn}/{primaryValue}', [App\Http\Controllers\Common\Api\DataTableApi::class, 'toggleButton']);
 Route::get('/dataTable-setPrimary/{table}/{column}/{primaryColumn}/{primaryValue}/{parent}/{parentId}', [App\Http\Controllers\Common\Api\DataTableApi::class, 'setPrimary']);

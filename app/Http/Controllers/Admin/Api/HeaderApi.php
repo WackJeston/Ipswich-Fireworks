@@ -51,4 +51,16 @@ class HeaderApi extends Controller
 	public function deleteAllNotifications() {
 		NotificationEvent::where('userId', auth()->user()->id)->delete();
 	}
+
+	public function setNewNotificationVariable($toggle) {
+		session()->put('newNotification', $toggle);
+
+		return true;
+	}
+
+	public function setNotificationCount(int $count = 0) {
+		session()->put('notificationCount', $count);
+
+		return true;
+	}
 }
