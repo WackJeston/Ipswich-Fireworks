@@ -5,8 +5,8 @@ use DB;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Storage;
 use Illuminate\Support\Facades\Cache;
-use App\DataClasses\DataTable;
-use App\DataClasses\DataForm;
+use App\Classes\DataTable;
+use App\Classes\DataForm;
 use App\Models\Settings;
 
 class SettingsController extends AdminController

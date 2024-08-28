@@ -5,8 +5,8 @@ namespace App\Http\Controllers\Admin;
 use DB;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Storage;
-use App\DataClasses\DataTable;
-use App\DataClasses\DataForm;
+use App\Classes\DataTable;
+use App\Classes\DataForm;
 use App\Models\Supporters;
 
 class SupportersController extends AdminController

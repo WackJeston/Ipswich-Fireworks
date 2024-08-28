@@ -20,10 +20,31 @@ class AdminController extends Controller
 				"link"=>"/admin/settings",
 				"icon"=>"fa-solid fa-gear",
 			],
-			$users = [
-				"title"=>"users",
-				"link"=>"/admin/users",
-				"icon"=>"fa-solid fa-user-astronaut",
+			$system = [
+				"title"=>"system",
+				"icon"=>"fa-solid fa-power-off",
+				"sublink"=>$subLinks = [
+					$cache = [
+						"title"=>"cache",
+						"link"=>"/admin/cache",
+						"icon"=>"fa-solid fa-database",
+					],
+					$crons = [
+						"title"=>"crons",
+						"link"=>"/admin/crons",
+						"icon"=>"fa-solid fa-clock",
+					],
+					$secrets = [
+						"title"=>"secrets",
+						"link"=>"/admin/secrets",
+						"icon"=>"fa-solid fa-key",
+					],
+					$users = [
+						"title"=>"users",
+						"link"=>"/admin/users",
+						"icon"=>"fa-solid fa-user-astronaut",
+					],
+				],
 			],
 			$website = [
 				"title"=>"website",

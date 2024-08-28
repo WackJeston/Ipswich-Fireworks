@@ -1,7 +1,7 @@
 <?php
 namespace App\Http\Controllers\Admin;
 
-use App\DataClasses\DataTable;
+use App\Classes\DataTable;
 
 
 class BannersController extends AdminController

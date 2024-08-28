@@ -4,8 +4,8 @@ namespace App\Http\Controllers\Admin;
 use DB;
 use Illuminate\Http\Request;
 use Illuminate\Validation\Rule;
-use App\DataClasses\DataTable;
-use App\DataClasses\DataForm;
+use App\Classes\DataTable;
+use App\Classes\DataForm;
 use App\Models\Banners;
 
 

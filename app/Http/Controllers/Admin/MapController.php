@@ -6,8 +6,8 @@ use DB;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Storage;
 use Illuminate\Validation\Rule;
-use App\DataClasses\DataTable;
-use App\DataClasses\DataForm;
+use App\Classes\DataTable;
+use App\Classes\DataForm;
 use App\Models\Map;
 use App\Models\MapAsset;
 

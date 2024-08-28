@@ -1,6 +1,6 @@
 <?php
 
-namespace App\DataClasses;
+namespace App\Classes;
 
 Use DB;
 use Illuminate\Http\Request;
