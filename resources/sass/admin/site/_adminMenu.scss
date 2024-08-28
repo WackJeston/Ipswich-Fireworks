@@ -7,7 +7,7 @@
   height: 100vh;
   width: 240px;
   background-color: v.$white;
-  padding: 27px 20px 25px 20px;
+  padding: 27px 15px 25px 15px;
   overflow-y: auto;
   z-index: 10;
   transition: transform 300ms ease;
@@ -38,16 +38,8 @@
   background-color: v.$white;
   border: 1px solid v.$border-light;
   border-radius: 6px;
-  // transition: border-radius 200ms ease;
 	box-shadow: v.$shadow-sm;
 }
-
-// .admin-menu .nav-link:hover {
-// 	@media (min-width: 640px) {
-// 		border: 1px solid v.$white;
-// 		border-radius: 0;
-// 	}
-// }
 
 .admin-menu .primary-nav-link, .admin-menu .nav-sublink {
   display: flex;
@@ -112,7 +104,6 @@
 
 
 header .menu-overlay {
-  position: absolute;
   position: fixed;
   top: 0;
 	right: 100%;
@@ -126,7 +117,7 @@ header .menu-overlay {
 }
 
 header .menu-overlay.menu-active {
-	right: 0;
+	right: -240px;
 	opacity: 1;
 }
 

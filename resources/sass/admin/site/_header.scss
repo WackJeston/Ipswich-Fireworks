@@ -62,7 +62,6 @@ header .desktop-nav i {
 }
 
 .desktop-nav .selected .header-button {
-	// background-color: v.$black !important;
 	border: 1px solid v.$border-light;
 	box-shadow: v.$shadow-sm;
 }
@@ -75,23 +74,6 @@ header .desktop-nav i {
 .desktop-nav #settings-button {
   position: relative;
   z-index: 7;
-}
-
-.desktop-nav #notification-button .notification-count {
-	display: flex;
-	align-items: center;
-	justify-content: center;
-	position: absolute;
-	border-radius: 50%;
-	color: v.$border-dark;
-	font-size: 0.7rem;
-	top: 5px;
-	left: 5px;
-
-	@media (max-width: 800px) {
-		top: 3px;
-		left: 3px;
-	}
 }
 
 .desktop-nav #notification-button.new-notifications .header-button,
@@ -127,6 +109,12 @@ header .menu {
 	border: 1px solid v.$border-light;
 	overflow: hidden;
 	padding: 6px 0 6px 0;
+	max-height: 400px;
+	overflow-y: auto;
+
+	@media (max-width: 800px) {
+		max-height: 60vh;
+	}
 
 	@media (max-width: 410px) {
 		left: 0;
@@ -163,12 +151,6 @@ header .menu h4 {
 
 header #notification-menu {
 	width: 280px;
-	max-height: 400px;
-	overflow-y: auto;
-
-	@media (max-width: 800px) {
-		max-height: 60vh;
-	}
 }
 
 header #notification-menu #notificationsEmpty {
