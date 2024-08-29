@@ -6,7 +6,7 @@ use Illuminate\Http\Request;
 use App\Classes\DataTable;
 use App\Classes\DataForm;
 
-class CronsController extends AdminController
+class CronJobsController extends AdminController
 {
   public function show()
   {
@@ -21,7 +21,7 @@ class CronsController extends AdminController
 		// $cronJobs->addLinkButton('enquiry-profile/?', 'fa-solid fa-folder-open', 'Open Record');
 		$cronJobs = $cronJobs->render();
 		
-    return view('admin/crons', compact(
+    return view('admin/cron-jobs', compact(
 			'cronJobs',
     ));
   }

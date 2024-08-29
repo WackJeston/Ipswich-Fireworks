@@ -1,12 +1,9 @@
 @extends('body-admin')
 
-@section('title', 'Banners')
+@section('title', 'Cache')
 
 @section('content')
-  <main class="banners">
-
-    <h1 class="dk">Banners</h1>
-
+  <main class="cache">
     @if ($errors->any())
       <div id="alerterror" class="lt">
         <alerterror :errormessages="{{ str_replace(array('[', ']'), '', $errors) }}" errorcount="{{ count($errors) }}" />
@@ -19,13 +16,14 @@
       </div>
     @endif
 
-    {{-- <div id="variantscreate" class="dk">
-      <variantscreate :createform="{{ json_encode($createForm) }}" />
-    </div> --}}
+		<div class="web-box">
+			<h4 class="no-margin">Manually Reload Cache</h4>
+			<br>
 
-    @php
-			echo $bannersTable['html'];
-		@endphp
-
+			<div class="page-button-row">
+				<a href="/settingsClearCache/public-page-home" class="page-button">Home</a>
+				<a href="/settingsClearCache/public-page-shop" class="page-button">Shop</a>
+			</div>
+		</div>
   </main>
 @endsection

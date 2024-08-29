@@ -1,9 +1,9 @@
 @extends('body-admin')
 
-@section('title', 'Settings')
+@section('title', 'Secrets Manager')
 
 @section('content')
-  <main class="settings">
+  <main class="secrets">
     @if ($errors->any())
       <div id="alerterror" class="lt">
         <alerterror :errormessages="{{ str_replace(array('[', ']'), '', $errors) }}" errorcount="{{ count($errors) }}" />
@@ -16,15 +16,14 @@
       </div>
     @endif
 
-		<div class="page-column-container columns-2">
-			<div class="page-column">
-				@php
-					echo $form['html'];
-				@endphp
-			</div>
-			<div class="page-column">
-				
-			</div>
-		</div>
+		@php
+			echo $selectForm['html'];
+		@endphp
+
+		@php
+			if (!is_null($editForm)) {
+				echo $editForm['html'];
+			}
+		@endphp
   </main>
 @endsection

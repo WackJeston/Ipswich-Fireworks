@@ -29,9 +29,9 @@ class AdminController extends Controller
 						"link"=>"/admin/cache",
 						"icon"=>"fa-solid fa-database",
 					],
-					$crons = [
-						"title"=>"crons",
-						"link"=>"/admin/crons",
+					$cronJobs = [
+						"title"=>"cron jobs",
+						"link"=>"/admin/cron-jobs",
 						"icon"=>"fa-solid fa-clock",
 					],
 					$secrets = [

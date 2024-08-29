@@ -1,9 +1,9 @@
 @extends('body-admin')
 
-@section('title', 'Settings')
+@section('title', 'Cron Jobs')
 
 @section('content')
-  <main class="settings">
+  <main class="cron-jobs">
     @if ($errors->any())
       <div id="alerterror" class="lt">
         <alerterror :errormessages="{{ str_replace(array('[', ']'), '', $errors) }}" errorcount="{{ count($errors) }}" />
@@ -15,16 +15,9 @@
         <alertmessage successmessage="{{ session()->get('message') }}" />
       </div>
     @endif
-
-		<div class="page-column-container columns-2">
-			<div class="page-column">
-				@php
-					echo $form['html'];
-				@endphp
-			</div>
-			<div class="page-column">
-				
-			</div>
-		</div>
+		
+		@php
+			echo $cronJobs['html'];
+		@endphp
   </main>
 @endsection
