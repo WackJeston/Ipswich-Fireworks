@@ -33,7 +33,7 @@ class SecretsController extends AdminController
 
 			$editForm = new DataForm(request(), '/admin-secretsUpdate/', 'Update');
 			$editForm->setTitle($secretInfo['name']);
-			$editForm->addInput('textarea', 'secret', '', $secretInfo['value'], null, null, false, null, ['style="min-height: 400px; white-space: pre-wrap;"']);
+			$editForm->addInput('textarea', 'secret', '', $secretInfo['value'], null, null, false, null, ['style="min-height: 400px;"']);
 			$editForm = $editForm->render();
 		}
 
