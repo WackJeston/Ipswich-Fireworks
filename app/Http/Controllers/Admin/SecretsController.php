@@ -13,6 +13,19 @@ class SecretsController extends AdminController
 {
   public function show(string $secret = null)
   {
+		$editForm = null;
+
+		if (!is_null($secret)) {
+			$secretInfo = AwsSecretsManager::getSecret($secret);
+
+			// dd($secretInfo['value']);
+
+			$editForm = new DataForm(request(), '/admin-secretsUpdate/', 'Update');
+			$editForm->setTitle($secretInfo['name']);
+			$editForm->addInput('textarea', 'secret', '', $secretInfo['value'], null, null, false, null, ['style="min-height: 400px;"']);
+			$editForm = $editForm->render();
+		}
+
 		$secretsData = AwsSecretsManager::listSecrets();
 
 		$secretsList = [];
@@ -22,24 +35,13 @@ class SecretsController extends AdminController
 		}
 
 		$selectForm = new DataForm(request(), '/admin-secretsSelect/', 'Select');
-		$selectForm->addInput('select', 'secret', 'Secret');
+		$selectForm->addInput('select', 'secret', 'Secret', $secretInfo['id'] ?? null);
 		$selectForm->populateOptions('secret', $secretsList, false);
 		$selectForm = $selectForm->render();
 
-		$editForm = null;
-
-		if (!is_null($secret)) {
-			$secretInfo = AwsSecretsManager::getSecret($secret);
-
-			$editForm = new DataForm(request(), '/admin-secretsUpdate/', 'Update');
-			$editForm->setTitle($secretInfo['name']);
-			$editForm->addInput('textarea', 'secret', '', $secretInfo['value'], null, null, false, null, ['style="min-height: 400px;"']);
-			$editForm = $editForm->render();
-		}
-
     return view('admin/secrets', compact(
-			'selectForm',
-			'editForm'
+			'editForm',
+			'selectForm'
 		));
   }
 

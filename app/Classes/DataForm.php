@@ -29,7 +29,7 @@ class DataForm
 			'type' => $type,
 			'name' => in_array('multiple', $attributes) ? $name . '[]' : $name,
 			'label' => $label,
-			'value' => $value,
+			'value' => htmlspecialchars($value, ENT_COMPAT),
 			'max' => $max,
 			'min' => $min,
 			'required' => $required,
@@ -176,6 +176,8 @@ class DataForm
 						break;
 
 					case 'textarea':
+						// dd($input['value']);
+
 						$html .= sprintf('
 						<label for="%1$s">%2$s%8$s</label>
 						<textarea type="text" id="%1$s" name="%1$s" minlength="%4$s" maxlength="%5$s" placeholder="%6$s" %7$s %9$s />%3$s</textarea>',
@@ -326,8 +328,8 @@ class DataForm
 					case 'selectmultiple':
 						$html .= sprintf('
 						<label for="%1$s">%2$s%5$s</label>
-						<select id="%1$s" name="%1$s" placeholder="%3$s" %4$s %6$s %7$s>
-							%8$s',
+						<select id="%1$s" name="%1$s" placeholder="%3$s" value="%8$s" %4$s %6$s %7$s>
+							%9$s',
 							$input['name'],
 							$input['label'],
 							$input['placeholder'],
@@ -335,6 +337,7 @@ class DataForm
 							$input['required'] ? '<span class="red"> *</span>' : '',
 							$input['attributes'],
 							$input['type'] == 'selectmultiple' ? 'multiple' : '',
+							$input['value'],
 							$input['emptyValue'] ? '<option></option>' : '',
 						);
 

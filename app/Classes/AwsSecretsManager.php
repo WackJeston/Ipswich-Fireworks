@@ -77,6 +77,7 @@ class AwsSecretsManager {
 				}
 
 				return [
+					'id' => $result['ARN'],
 					'name' => $result['Name'],
 					'value' => $secret,
 				];
