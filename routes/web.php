@@ -81,6 +81,8 @@ Route::group( ['middleware' => 'auth' ], function()
     Route::get('/admin/secrets', 'show');
     Route::get('/admin/secrets/{secret}', 'show');
 		Route::post('/admin-secretsSelect', 'select');
+		Route::post('/admin-secretsUpdate/{secret}', 'update');
+		Route::get('/admin-secretsDeployEnv', 'deployEnv');
   });
 
 	Route::controller(App\Http\Controllers\Admin\UsersController::class)->group(function () {

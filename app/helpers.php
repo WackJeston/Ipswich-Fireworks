@@ -267,6 +267,20 @@ function subscribeKlaviyo($userId) {
 	}
 }
 
+function write($filePath, $data = '', $mode = 'w') {
+	$fh = fopen($filePath, $mode);
+
+	if($fh) {
+		fwrite($fh, $data);
+		fclose($fh);
+
+		return $filePath;
+	}
+
+	return false;
+}
+
+
 // AWS S3
 function connectSes() {
   $connection = new SesClient([

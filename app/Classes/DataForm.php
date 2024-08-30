@@ -176,12 +176,15 @@ class DataForm
 						break;
 
 					case 'textarea':
+						$textareaValue = str_replace("\r\n", "\n", $input['value']);
+						$textareaValue = str_replace("\n\n", "\n&#013;&#010", $textareaValue);
+
 						$html .= sprintf('
 						<label for="%1$s">%2$s%8$s</label>
 						<textarea type="text" id="%1$s" name="%1$s" minlength="%4$s" maxlength="%5$s" placeholder="%6$s" %7$s %9$s>%3$s</textarea>',
 							$input['name'],
 							$input['label'],
-							$input['value'],
+							$textareaValue,
 							$input['min'],
 							$input['max'],
 							$input['placeholder'],

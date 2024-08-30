@@ -14,16 +14,23 @@ class SecretsController extends AdminController
   public function show(string $secret = null)
   {
 		$editForm = null;
+		$deploy = false;
 
 		if (!is_null($secret)) {
 			$secretInfo = AwsSecretsManager::getSecret($secret);
 
 			// dd($secretInfo['value']);
 
-			$editForm = new DataForm(request(), '/admin-secretsUpdate/', 'Update');
+			$editForm = new DataForm(request(), sprintf('/admin-secretsUpdate/%s', $secret));
 			$editForm->setTitle($secretInfo['name']);
-			$editForm->addInput('textarea', 'secret', '', $secretInfo['value'], null, null, false, null, ['style="min-height: 400px;"']);
+			$editForm->addInput('textarea', 'secret', '', $secretInfo['value'], null, null, false, null, ['rows="30" style="min-height: 400px;"']);
 			$editForm = $editForm->render();
+
+			if (str_contains($secretInfo['name'], '.env')) {
+				if ((str_contains($_SERVER['DOCUMENT_ROOT'], '/dev') && $secretInfo['name'] == '.env.dev') || (!str_contains($_SERVER['DOCUMENT_ROOT'], '/dev') && $secretInfo['name'] == '.env')) {
+					$deploy = true;
+				}
+			}
 		}
 
 		$secretsData = AwsSecretsManager::listSecrets();
@@ -41,6 +48,7 @@ class SecretsController extends AdminController
 
     return view('admin/secrets', compact(
 			'editForm',
+			'deploy',
 			'selectForm'
 		));
   }
@@ -52,35 +60,20 @@ class SecretsController extends AdminController
 		return redirect('/admin/secrets/' . $secret);
 	}
 
-	public function update(Request $request)
+	public function update(Request $request, string $secret)
 	{
-		$secret = $request->input('secret');
+		AwsSecretsManager::updateSecret($secret, $request->input('secret'));
 
-		$connection = new SecretsManagerClient([
-			'version' => 'latest',
-			'region' => $_ENV['AWS_DEFAULT_REGION'],
-			'profile' => 'default',
-		]);
+		return redirect('/admin/secrets/' . $secret, )->with('message', 'Secret has been updated.');
+	}
 
-		$args = [
-			'SecretId' => $secret,
-		];
-
-		try {
-			$secretData = $connection->getSecretValue($args);
-		} catch (\Throwable $th) {
-			throw $th;
+	public function deployEnv() {
+		$result = AwsSecretsManager::deployEnv();
+		
+		if($result['result']) {
+			return redirect('/admin/secrets/' . $result['id'], )->with('message', $result['name'] . ' has been deployed.');
+		} else {
+			return redirect('/admin/secrets/' . $result['id'], )->with('error', 'Failed to deploy ' . $result['name'] . '.');
 		}
-
-		$secretString = $secretData['SecretString'];
-
-		$editForm = new DataForm(request(), '/admin-secretsUpdate/', 'Update');
-		$editForm->addInput('textarea', 'secret', 'Secret', $secretString);
-		$editForm = $editForm->render();
-
-		return view('admin/secrets', compact(
-			'selectForm',
-			'editForm'
-		));
 	}
 }

@@ -41,17 +41,25 @@ class AwsSecretsManager {
 	}
 
 	// TODO: move to Application which uses AWS SecretManager. Add support for Secret Provider, AWS/Google etc.
-	public static function deployEnv(): bool {
-		$secretName = $GLOBALS['LIVE'] ? '.env' : '.env.dev';
+	public static function deployEnv() {
+		$secretName = str_contains($_SERVER['DOCUMENT_ROOT'], '/dev') ? '.env.dev' : '.env';
 		$secret = self::getSecret($secretName);
 
 		if($secret !== false) {
-			write(root('.env', true), $secret);
+			write(str_replace('public', '', $_SERVER['DOCUMENT_ROOT']) . '.env', $secret['value']);
 
-			return true;
+			return [
+				'result' => true,
+				'id' => $secret['id'],
+				'name' => $secretName
+			];
 		}
 
-		return false;
+		return [
+			'result' => false,
+			'id' => $secret['id'],
+			'name' => $secretName
+		];
 	}
 
 	public static function getSecret(string $secretName, ?string $versionId = null) {
@@ -79,7 +87,7 @@ class AwsSecretsManager {
 				return [
 					'id' => $result['ARN'],
 					'name' => $result['Name'],
-					'value' => str_replace("\r\n", "\n", $secret),
+					'value' => $secret,
 				];
 
 			} catch(SecretsManagerException $e) {

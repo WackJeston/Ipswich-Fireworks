@@ -16,6 +16,12 @@
       </div>
     @endif
 
+		@if ($deploy)
+			<div class="vue-button-row">
+				<a href="/admin-secretsDeployEnv/" class="page-button padding">Deploy ENV</a>
+			</div>
+		@endif
+
 		@php
 			echo $selectForm['html'];
 		@endphp

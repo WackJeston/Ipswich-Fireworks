@@ -148,8 +148,10 @@ form input.date-input {
 }
 
 form textarea {
+	display: inline-block;
 	resize: vertical;
 	min-height: 100px;
+	white-space: pre-wrap;
 }
 
 form .submit {

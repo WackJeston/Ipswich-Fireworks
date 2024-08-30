@@ -15,10 +15,6 @@ $app = new Illuminate\Foundation\Application(
 	$_ENV['APP_BASE_PATH'] ?? dirname(__DIR__),
 );
 
-if (str_contains($_SERVER['DOCUMENT_ROOT'], '/dev')) {
-	$app->loadEnvironmentFrom('.env.dev');
-}
-
 /*
 |--------------------------------------------------------------------------
 | Bind Important Interfaces
