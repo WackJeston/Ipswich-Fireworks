@@ -7,6 +7,7 @@ use Illuminate\Http\Request;
 use Illuminate\Validation\Rule;
 use App\Classes\DataTable;
 use App\Classes\DataForm;
+use App\Classes\Image;
 use App\Models\Programme;
 
 class ProgrammeController extends AdminController
@@ -94,7 +95,7 @@ class ProgrammeController extends AdminController
 			'fileName' => 'image|mimes:jpg,jpeg,png,svg,webp',
     ]);
 
-		$fileNames = storeImages($request, 'music', 'programme');
+		$fileNames = ImageCommon::storeImages($request, 'music', 'programme');
 
 		$time = null;
 

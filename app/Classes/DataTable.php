@@ -6,6 +6,7 @@ Use DB;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Session;
 use Illuminate\Support\Facades\Storage;
+use App\Classes\Image;
 
 class DataTable
 {
@@ -96,7 +97,7 @@ class DataTable
 
 		$this->table['records'] = DB::select($query);
 
-		$this->table['records'] = cacheImages($this->table['records']);
+		$this->table['records'] = ImageCommon::cacheImages($this->table['records']);
 	}
 
 	public function setTitle(string $title) {

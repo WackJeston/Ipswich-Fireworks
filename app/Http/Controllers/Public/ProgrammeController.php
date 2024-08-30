@@ -2,7 +2,7 @@
 namespace App\Http\Controllers\Public;
 
 Use DB;
-use Illuminate\Support\Facades\Storage;
+use App\Classes\Image;
 
 class ProgrammeController extends PublicController
 {
@@ -19,7 +19,7 @@ class ProgrammeController extends PublicController
 			ORDER BY p.sequence ASC
 		');
 
-		$images = cacheImages($images, 800, 800);
+		$images = ImageCommon::cacheImages($images, 800, 800);
 
     return view('public/programme', compact(
 			'standard',

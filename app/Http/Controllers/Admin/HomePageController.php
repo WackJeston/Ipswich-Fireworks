@@ -4,10 +4,10 @@ namespace App\Http\Controllers\Admin;
 
 use DB;
 use Illuminate\Http\Request;
-use Illuminate\Support\Facades\Storage;
 use Illuminate\Validation\Rule;
 use App\Classes\DataTable;
 use App\Classes\DataForm;
+use App\Classes\Image;
 use App\Models\Banners;
 use App\Models\Content;
 
@@ -118,7 +118,7 @@ class HomePageController extends AdminController
 			'title' => 'max:100',
 		]);
 
-		$fileNames = storeImages($request, 'homePageLZ', 'carousel');
+		$fileNames = ImageCommon::storeImages($request, 'homePageLZ', 'carousel');
 
 		$parentId = Banners::select('id')->where('page', 'home')->where('position', 'landingZone')->first()->id;
 
@@ -169,7 +169,7 @@ class HomePageController extends AdminController
 			'image-2' => 'required|image|mimes:jpg,jpeg,png,svg,webp,webp',
 		]);
 
-		$fileNames = storeImages($request, 'homePageBottom', 'carousel');
+		$fileNames = ImageCommon::storeImages($request, 'homePageBottom', 'carousel');
 
 		$parentId = Banners::select('id')->where('page', 'home')->where('position', 'landingZone')->first()->id;
 

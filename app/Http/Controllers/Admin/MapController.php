@@ -4,10 +4,10 @@ namespace App\Http\Controllers\Admin;
 
 use DB;
 use Illuminate\Http\Request;
-use Illuminate\Support\Facades\Storage;
 use Illuminate\Validation\Rule;
 use App\Classes\DataTable;
 use App\Classes\DataForm;
+use App\Classes\Image;
 use App\Models\Map;
 use App\Models\MapAsset;
 
@@ -26,7 +26,7 @@ class MapController extends AdminController
 			WHERE m.id = 1
 		');
 
-		$map = cacheImages($map)[0];
+		$map = ImageCommon::cacheImages($map)[0];
 
 		$icons = DB::select('SELECT 
 			ma.id,
@@ -36,7 +36,7 @@ class MapController extends AdminController
 			INNER JOIN asset AS a ON a.id = ma.assetId;
 		');
 
-		$icons = cacheImages($icons);
+		$icons = ImageCommon::cacheImages($icons);
 
 		$mapForm = new DataForm(request(), '/admin-mapUploadMap/');
 		$mapForm->setTitle('Upload Map');
@@ -73,7 +73,7 @@ class MapController extends AdminController
 
 	public function uploadMap(Request $request)
 	{
-		$fileName = storeImages($request, '1', 'map')[0];
+		$fileName = ImageCommon::storeImages($request, '1', 'map')[0];
 
 		$map = Map::firstOrCreate(['id' => 1]);
 		$map->assetId = $fileName['id'];
@@ -84,7 +84,7 @@ class MapController extends AdminController
 
 	public function addIcon(Request $request)
 	{
-		$fileNames = storeImages($request, '1', 'map');
+		$fileNames = ImageCommon::storeImages($request, '1', 'map');
 
 		foreach ($fileNames as $fileName) {
 			$mapAsset = new MapAsset();
