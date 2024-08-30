@@ -24,6 +24,11 @@ class AdminController extends Controller
 				"title"=>"system",
 				"icon"=>"fa-solid fa-power-off",
 				"sublink"=>$subLinks = [
+					$accessLevels = [
+						"title"=>"access levels",
+						"link"=>"/admin/access-levels",
+						"icon"=>"fa-solid fa-lock",
+					],
 					$cache = [
 						"title"=>"cache",
 						"link"=>"/admin/cache",

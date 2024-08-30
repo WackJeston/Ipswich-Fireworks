@@ -6,7 +6,7 @@ Use DB;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Session;
 use Illuminate\Support\Facades\Storage;
-use App\Classes\Image;
+use App\Classes\ImageCommon;
 
 class DataTable
 {

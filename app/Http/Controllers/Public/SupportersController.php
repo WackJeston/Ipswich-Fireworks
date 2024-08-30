@@ -3,7 +3,7 @@ namespace App\Http\Controllers\Public;
 
 Use DB;
 use Illuminate\Http\Request;
-use App\Classes\Image;
+use App\Classes\ImageCommon;
 use App\Models\Enquiry;
 
 class SupportersController extends PublicController

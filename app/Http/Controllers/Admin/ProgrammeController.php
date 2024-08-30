@@ -7,7 +7,7 @@ use Illuminate\Http\Request;
 use Illuminate\Validation\Rule;
 use App\Classes\DataTable;
 use App\Classes\DataForm;
-use App\Classes\Image;
+use App\Classes\ImageCommon;
 use App\Models\Programme;
 
 class ProgrammeController extends AdminController

@@ -68,6 +68,12 @@ Route::group( ['middleware' => 'auth' ], function()
   });
 
 	// SYSTEM
+	Route::controller(App\Http\Controllers\Admin\AccessLevelsController::class)->group(function () {
+    Route::get('/admin/access-levels', 'show');
+		Route::post('/accessLevelCreate', 'create');
+		Route::get('/access-levelsDelete/{id}', 'delete');
+  });
+
 	Route::controller(App\Http\Controllers\Admin\CronJobsController::class)->group(function () {
     Route::get('/admin/cron-jobs', 'show');
   });

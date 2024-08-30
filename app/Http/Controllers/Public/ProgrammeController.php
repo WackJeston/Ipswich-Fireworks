@@ -2,7 +2,7 @@
 namespace App\Http\Controllers\Public;
 
 Use DB;
-use App\Classes\Image;
+use App\Classes\ImageCommon;
 
 class ProgrammeController extends PublicController
 {

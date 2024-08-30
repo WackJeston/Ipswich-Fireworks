@@ -67,11 +67,11 @@ class ImageCommon {
 			if (property_exists($record, 'fileName')) {
 				if (is_array($record)) {
 					if (!empty($record['fileName'])) {
-						$record['fileName'] = Image::cacheImage($record['fileName'], $width, $height, $trim, $background, $webp);
+						$record['fileName'] = Self::cacheImage($record['fileName'], $width, $height, $trim, $background, $webp);
 					}
 				} else {
 					if (!empty($record->fileName)) {
-						$record->fileName = Image::cacheImage($record->fileName, $width, $height, $trim, $background, $webp);
+						$record->fileName = Self::cacheImage($record->fileName, $width, $height, $trim, $background, $webp);
 					}
 				}
 			}

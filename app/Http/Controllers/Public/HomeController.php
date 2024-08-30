@@ -4,7 +4,7 @@ namespace App\Http\Controllers\Public;
 
 use DB;
 use Illuminate\Http\Request;
-use App\Classes\Image;
+use App\Classes\ImageCommon;
 use App\Models\Settings;
 
 class HomeController extends PublicController
