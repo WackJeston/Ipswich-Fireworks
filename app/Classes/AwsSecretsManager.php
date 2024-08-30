@@ -79,7 +79,7 @@ class AwsSecretsManager {
 				return [
 					'id' => $result['ARN'],
 					'name' => $result['Name'],
-					'value' => $secret,
+					'value' => str_replace("\r\n", "\n", $secret),
 				];
 
 			} catch(SecretsManagerException $e) {
