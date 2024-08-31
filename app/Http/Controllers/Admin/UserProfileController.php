@@ -7,6 +7,7 @@ use Illuminate\Http\Request;
 use Illuminate\Validation\Rule;
 use App\Classes\DataTable;
 use App\Classes\DataForm;
+use App\Classes\AccessLevelCommon;
 use App\Models\Address;
 use App\Models\User;
 
@@ -35,6 +36,8 @@ class UserProfileController extends AdminController
 		$editForm->addInput('text', 'lastname', 'Last Name', $user->lastName, 255, 1, true);
 		$editForm->addInput('email', 'email', 'Email', $user->email, 255, 1, true);
 		$editForm->addInput('password', 'password', 'Password', null, 255, 6, false, 'New Password');
+		$editForm->addInput('select', 'accessLevelId', 'Access Level', $user->accessLevelId, 255, 1, true);
+		$editForm->populateOptions('accessLevelId', AccessLevelCommon::getAccessLevels(true), false);
 		$editForm = $editForm->render();
 
     return view('admin/user-profile', compact(

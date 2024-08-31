@@ -13,7 +13,6 @@ class AccessLevelsController extends AdminController
   public function show()
   {
 		$form = new DataForm(request(), '/accessLevelCreate', 'Create');
-		$form->setTitle('Create Access Level');
 		$form->addInput('text', 'name', 'Name', null, 255, 1, true);
 		$form->addInput('checkbox', 'default', 'Default', null, 0, 0);
 		$form->addInput('checkbox', 'master', 'Master', null, 0, 0);

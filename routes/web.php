@@ -73,6 +73,9 @@ Route::group( ['middleware' => 'auth' ], function()
 		Route::post('/accessLevelCreate', 'create');
 		Route::get('/access-levelsDelete/{id}', 'delete');
   });
+	Route::controller(App\Http\Controllers\Admin\AccessLevelProfileController::class)->group(function () {
+    Route::get('/admin/access-level-profile/{id}', 'show');
+  });
 
 	Route::controller(App\Http\Controllers\Admin\CronJobsController::class)->group(function () {
     Route::get('/admin/cron-jobs', 'show');

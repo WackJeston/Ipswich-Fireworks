@@ -5,7 +5,7 @@ use Illuminate\Support\Facades\Storage;
 use Illuminate\Support\Facades\Cache;
 
 class CacheCommon {
-	function getCachedRecords(string $key) {
+	public static function getCachedRecords(string $key) {
 		if (Cache::has($key)) {
 			return Cache::get($key);
 		}
@@ -13,7 +13,7 @@ class CacheCommon {
 		return false;
 	}
 	
-	function cacheRecords(string $key, array $records, int $seconds = null) {
+	public static function cacheRecords(string $key, array $records, int $seconds = null) {
 		if (Cache::has($key)) {
 			$records = Cache::get($key);
 	
@@ -29,7 +29,7 @@ class CacheCommon {
 		return $records;
 	}
 	
-	function cachePdf(string $fileName, bool $overWrite = false) {
+	public static function cachePdf(string $fileName, bool $overWrite = false) {
 		$publicFileName = sprintf('pdfs/%s.pdf', explode('.', $fileName)[0]);
 	
 		if (!Storage::disk('public')->exists($publicFileName) || $overWrite) {
