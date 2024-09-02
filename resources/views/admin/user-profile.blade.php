@@ -35,6 +35,7 @@
 				<ul class="web-box profile-details">
 					<li><strong>Name: </strong>{{ $user->firstName }} {{ $user->lastName }}</li>
 					<li><strong>Email: </strong>{{ $user->email }}</li>
+					<li><strong>Access Level: </strong>{{ $user->accessLevel }}</li>
 					@if (!is_null($user->klaviyoId))
 						<li><strong>Klaviyo ID: </strong>{{ $user->klaviyoId }}</li>
 					@endif

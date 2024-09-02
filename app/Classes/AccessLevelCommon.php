@@ -27,4 +27,34 @@ class AccessLevelCommon {
 	public static function getMaster() {
 		return AccessLevel::select('id')->where('master', 1)->first()['id'];
 	}
+
+	public static function authorise(string $accessLevelsData = null) {
+		$accessLevels = [
+			self::getMaster()
+		];
+
+		foreach (explode(', ', $accessLevelsData) as $i => $accessLevel) {
+			$record = DB::select('SELECT 
+				id 
+				FROM access_levels 
+				WHERE name = ?
+				AND id NOT IN (?, ?)',
+				[
+					strtolower($accessLevel),
+					self::getMaster(),
+					self::getDefault()
+				]
+			);
+
+			if (!empty($record)) {
+				$accessLevels[] = $record['id'];
+			}
+		}
+
+		if (in_array(auth()->user()->accessLevelId, $accessLevels)) {
+			return true;
+		} else {
+			return false;
+		}
+	}
 }

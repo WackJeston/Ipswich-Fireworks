@@ -40,7 +40,7 @@ class UsersController extends AdminController
 		$usersTable->addColumn('id', '#');
 		$usersTable->addColumn('name', 'Name');
 		$usersTable->addColumn('email', 'Email', 2);
-		$usersTable->addColumn('accessLevel', 'Access Level', 2, true, 'select', $accessLevels);
+		$usersTable->addColumn('accessLevel', 'Access Level', 2, true);
 		$usersTable->addColumn('date', 'Created At', 2, true);
 		$usersTable->addLinkButton('user-profile/?', 'fa-solid fa-folder-open', 'Open Record');
 		$usersTable = $usersTable->render();
