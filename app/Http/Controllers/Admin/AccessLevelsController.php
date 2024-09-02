@@ -5,6 +5,7 @@ use DB;
 use Illuminate\Http\Request;
 use App\Classes\DataTable;
 use App\Classes\DataForm;
+use App\Classes\AccessLevelCommon;
 
 use App\Models\AccessLevel;
 
@@ -12,6 +13,10 @@ class AccessLevelsController extends AdminController
 {
   public function show()
   {
+		if (!AccessLevelCommon::authorise()) {
+			return back()->withErrors(['1' => 'Not Authorised']);
+		}
+		
 		$form = new DataForm(request(), '/accessLevelCreate', 'Create');
 		$form->addInput('text', 'name', 'Name', null, 255, 1, true);
 		$form->addInput('checkbox', 'default', 'Default', null, 0, 0);

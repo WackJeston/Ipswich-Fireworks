@@ -19,6 +19,12 @@ class UserProfileController extends AdminController
     if (User::find($id) == null) {
       return redirect('/admin/users')->withErrors(['1' => 'User not found']);
     }
+		
+		$authorised = AccessLevelCommon::authorise();
+
+		if (!$authorised && $id != auth()->user()->id) {
+			return back()->withErrors(['1' => 'Not Authorised']);
+		}
 
     $user = DB::select(sprintf('SELECT
       u.*,
@@ -38,15 +44,12 @@ class UserProfileController extends AdminController
 		$editForm->addInput('text', 'lastname', 'Last Name', $user->lastName, 255, 1, true);
 		$editForm->addInput('email', 'email', 'Email', $user->email, 255, 1, true);
 		$editForm->addInput('password', 'password', 'Password', null, 255, 6, false, 'New Password');
-
-		if (AccessLevelCommon::authorise()) {
-			$editForm->addInput('select', 'accessLevelId', 'Access Level', $user->accessLevelId, 255, 1, true);
-			$editForm->populateOptions('accessLevelId', AccessLevelCommon::getAccessLevels(true), false);
-		}
-
+		$editForm->addInput('select', 'accessLevelId', 'Access Level', $user->accessLevelId, 255, 1, true);
+		$editForm->populateOptions('accessLevelId', AccessLevelCommon::getAccessLevels(true), false);
 		$editForm = $editForm->render();
 
     return view('admin/user-profile', compact(
+			'authorised',
       'user',
 			'billingAddress',
 			'editForm',

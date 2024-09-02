@@ -6,6 +6,7 @@ use Illuminate\Http\Request;
 use App\Classes\AwsSecretsManager;
 use App\Classes\DataTable;
 use App\Classes\DataForm;
+use App\Classes\AccessLevelCommon;
 use Aws\SecretsManager\SecretsManagerClient;
 use Aws\SecretsManager\Exception\SecretsManagerException;
 
@@ -13,6 +14,10 @@ class SecretsController extends AdminController
 {
   public function show(string $secret = null)
   {
+		if (!AccessLevelCommon::authorise()) {
+			return back()->withErrors(['1' => 'Not Authorised']);
+		}
+
 		$editForm = null;
 		$deploy = false;
 

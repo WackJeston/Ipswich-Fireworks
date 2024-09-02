@@ -15,6 +15,10 @@ class UsersController extends AdminController
 {
   public function show()
   {
+		if (!AccessLevelCommon::authorise()) {
+			return back()->withErrors(['1' => 'Not Authorised']);
+		}
+		
 		$accessLevels = AccessLevelCommon::getAccessLevels(true);
 
 		$createForm = new DataForm(request(), '/usersCreate', 'Add');

@@ -4,11 +4,13 @@
 
 @section('content')
   <main class="user-profile">
-
-    <div class="link-trail">
-      <i class="fa-solid fa-arrow-left"></i>
-      <a href="/admin/users">Users</a>
-    </div>
+		
+		@if ($authorised)
+			<div class="link-trail">
+				<i class="fa-solid fa-arrow-left"></i>
+				<a href="/admin/users">Users</a>
+			</div>
+		@endif
 
     @if ($errors->any())
       <div id="alerterror" class="lt">

@@ -5,11 +5,16 @@ use DB;
 use Illuminate\Http\Request;
 use App\Classes\DataTable;
 use App\Classes\DataForm;
+use App\Classes\AccessLevelCommon;
 
 class CronJobsController extends AdminController
 {
   public function show()
   {
+		if (!AccessLevelCommon::authorise()) {
+			return back()->withErrors(['1' => 'Not Authorised']);
+		}
+		
 		$cronJobs = new DataTable('cron_jobs');
 		$cronJobs->setQuery('SELECT * FROM cron_jobs', [], 'id', 'ASC');
 		$cronJobs->addColumn('id', '#');
