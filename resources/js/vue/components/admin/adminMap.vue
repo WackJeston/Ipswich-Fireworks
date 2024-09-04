@@ -51,7 +51,7 @@
 				newImg.style.height = '100px';
 
 				let sizeHandle = document.createElement('i');
-				sizeHandle.className = 'fas fa-expand-arrows-alt';
+				sizeHandle.className = 'fa-solid fa-up-right-and-down-left-from-center fa-rotate-90';
 				sizeHandle.style.position = 'absolute';
 				sizeHandle.style.bottom = '4px';
 				sizeHandle.style.right = '4px';
