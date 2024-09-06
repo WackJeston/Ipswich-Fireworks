@@ -10,6 +10,8 @@
 			<div id="mapIcons">
 				<img v-for="(icon, i) in this.icons" :src="icon.fileName" alt="Map Icon Image" class="mapIcon" @click="this.createIcon($event)">
 			</div>
+
+			<button @click="this.saveMap" id="mapSave" class="page-button padding-large pb-dark">Save Map</button>
 		</div>
 	</div>
 </template>
@@ -52,33 +54,57 @@
 
 				let sizeHandle = document.createElement('i');
 				sizeHandle.className = 'fa-solid fa-up-right-and-down-left-from-center fa-rotate-90';
+				sizeHandle.id = 'sizeHandle';
 				sizeHandle.style.position = 'absolute';
-				sizeHandle.style.bottom = '4px';
-				sizeHandle.style.right = '4px';
+				sizeHandle.style.bottom = '0';
+				sizeHandle.style.right = '-20px';
 				sizeHandle.style.fontSize = '1rem';
-				sizeHandle.style.color = 'white';
+				sizeHandle.style.color = '#c0c0c0';
 				sizeHandle.style.cursor = 'nwse-resize';
 
+				let deleteButton = document.createElement('i');
+				deleteButton.className = 'fa-solid fa-trash';
+				deleteButton.id = 'deleteButton';
+				deleteButton.style.position = 'absolute';
+				deleteButton.style.bottom = '22px';
+				deleteButton.style.right = '-22px';
+				deleteButton.style.display = 'flex';
+				deleteButton.style.alignItems = 'center';
+				deleteButton.style.justifyContent = 'center';
+				deleteButton.style.fontSize = '0.7rem';
+				deleteButton.style.borderRadius = '5px';
+				deleteButton.style.padding = '4px 5px 5px 4px';
+				deleteButton.style.color = 'white';
+				deleteButton.style.backgroundColor = '#dc3545';
+				deleteButton.style.cursor = 'pointer';
 
 				newDiv.appendChild(newImg);
 				newDiv.appendChild(sizeHandle);
+				newDiv.appendChild(deleteButton);
 				primary.appendChild(newDiv);
 
 				let newDiv2 = document.getElementById('icon-' + count);
 				newDiv2.addEventListener("mousedown", this.mouseDown);
+
+				let deleteButton2 = document.getElementById('deleteButton');
+				deleteButton2.addEventListener("click", this.deleteIcon);
 			},
 
 			mouseDown(event) {
+				event.preventDefault();
+
+				this.targetId = event.target.parentElement.id;
+
+				this.startX = event.clientX;
+				this.startY = event.clientY;
+
 				if (event.target.tagName === 'IMG') {
-					event.preventDefault();
-
-					this.targetId = event.target.parentElement.id;
-
-					this.startX = event.clientX;
-					this.startY = event.clientY;
-
 					document.addEventListener("mousemove", this.mouseMove);
 					document.addEventListener("mouseup", this.mouseUp);
+				
+				} else if (event.target.id === 'sizeHandle') {
+					document.addEventListener("mousemove", this.sizeMove);
+					document.addEventListener("mouseup", this.sizeUp);
 				}
 			},
 
@@ -87,26 +113,30 @@
 				let target = document.getElementById(this.targetId);
 				let targetPosition = target.getBoundingClientRect();
 
-				let x = targetPosition.x - primaryImage.x;
-				let y = targetPosition.y - primaryImage.y;
-
 				let maxX = primaryImage.width - targetPosition.width;
 				let maxY = primaryImage.height - targetPosition.height;
 
 				let targetX = target.offsetLeft - (this.startX - event.clientX);
 				let targetY = target.offsetTop - (this.startY - event.clientY);
 
-				if ((x >= 0 && x <= maxX) || (x < 1 && targetX > 0) || (x > (maxX - 1) && targetX < maxX)) {
-					this.newX = this.startX - event.clientX;
-					this.startX = event.clientX;
-					target.style.left = (target.offsetLeft - this.newX) + "px";
+				// Ensure the new position does not exceed the parent's borders
+				if (targetX < 0) {
+					targetX = 0;
+				} else if (targetX > maxX) {
+					targetX = maxX;
 				}
 
-				if ((y >= 0 && y <= maxY) || (y < 1 && targetY > 0) || (y > (maxY - 1) && targetY < maxY)) {					
-					this.newY = this.startY - event.clientY;
-					this.startY = event.clientY;
-					target.style.top = (target.offsetTop - this.newY) + "px";
+				if (targetY < 0) {
+					targetY = 0;
+				} else if (targetY > maxY) {
+					targetY = maxY;
 				}
+
+				target.style.left = targetX + "px";
+				target.style.top = targetY + "px";
+
+				this.startX = event.clientX;
+				this.startY = event.clientY;
 			},
 
 			mouseUp(event) {
@@ -114,18 +144,119 @@
 				document.removeEventListener("mouseup", this.mouseUp);
 			},
 
-			// saveMap() {
-			// 	let primary = document.getElementById('mapImage');
+			sizeMove(event) {
+				let target = document.getElementById(this.targetId);
+				let image = target.querySelector('img');
+				let parent = target.parentElement;
 
-			// 	let record = {
-			// 		asset: this.map.assetId,
-			// 		canvas: {
-			// 			height: primary.height(),
-			// 			width: primary.width()
-			// 		},
-			// 		images: []
-			// 	};
-			// }
+				this.newX = this.startX - event.clientX;
+				this.startX = event.clientX;
+
+				this.newY = this.startY - event.clientY;
+				this.startY = event.clientY;
+
+				let aspectRatio = image.offsetWidth / image.offsetHeight;
+
+				let newWidth = image.offsetWidth - this.newX;
+				let newHeight = newWidth / aspectRatio;
+
+				// Ensure the new dimensions do not exceed the parent's borders
+				if (newWidth > parent.clientWidth) {
+					newWidth = parent.clientWidth;
+					newHeight = newWidth / aspectRatio;
+				}
+
+				if (newHeight > parent.clientHeight) {
+					newHeight = parent.clientHeight;
+					newWidth = newHeight * aspectRatio;
+				}
+
+				// Ensure the new dimensions do not fall below the minimum size
+				const minSize = 20;
+				if (newWidth < minSize) {
+					newWidth = minSize;
+					newHeight = newWidth / aspectRatio;
+				}
+
+				if (newHeight < minSize) {
+					newHeight = minSize;
+					newWidth = newHeight * aspectRatio;
+				}
+
+				image.style.width = newWidth + "px";
+				image.style.height = newHeight + "px";
+			},
+
+			sizeUp(event) {
+				document.removeEventListener("mousemove", this.sizeMove);
+				document.removeEventListener("mouseup", this.sizeUp);
+			},
+
+			deleteIcon(event) {
+				let target = event.target.parentElement;
+				target.remove();
+			},
+
+			async saveMap() {
+				let primary = document.getElementById('mapImage');
+
+				let config = {
+					asset: this.map.assetId,
+					canvas: {
+						height: primary.offsetHeight,
+						width: primary.offsetWidth
+					},
+					images: []
+				};
+
+				let icons = primary.parentElement.children;
+
+				for (let i = 0; i < icons.length; i++) {
+					let icon = icons[i];
+
+					if (icon.tagName !== 'IMG') {
+						let iconImage = icon.querySelector('img');
+
+						let iconSize = {
+							height: iconImage.offsetHeight,
+							width: iconImage.offsetWidth
+						};
+
+						let iconPosition = {
+							top: icon.offsetTop,
+							left: icon.offsetLeft
+						};
+
+						config.images.push({
+							asset: iconImage.getAttribute('src'),
+							size: iconSize,
+							position: iconPosition
+						});
+					}
+				}
+				
+				console.log(encodeURIComponent(config));
+				console.log(JSON.stringify(config));
+
+				// try {
+				// 	// this.response = await fetch(`/admin-mapSave/${encodeURIComponent(config)}/`);
+				// 	this.response = await fetch(`/admin-mapSave/${encodeURIComponent(config)}`, {
+				// 		// method: "POST", 
+				// 		// body: JSON.stringify(config),
+				// 		headers: { 
+				// 			"Content-type": "application/json; charset=UTF-8"
+				// 		}
+				// 	});
+				// 	this.result = await this.response.json();
+					
+				// } catch (err) {
+				// 	console.log('----ERROR----');
+				// 	console.log(err);
+				// } finally {
+				// 	console.log('----FINALLY----');
+				// 	console.log(this.result);
+				// }
+			}
 		},
   };
 </script>

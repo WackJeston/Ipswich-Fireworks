@@ -473,6 +473,28 @@ i.pb-success:hover {
 	}
 }
 
+button.pb-dark,
+a.pb-dark {
+	background-color: v.$bg-dark;
+}
+
+i.pb-dark {
+	color: v.$bg-dark !important;
+}
+
+button.pb-dark:hover,
+a.pb-dark:hover {
+	@media (min-width: 640px) {
+		background-color: v.$bg-dark;
+	}
+}
+
+i.pb-dark:hover {
+	@media (min-width: 640px) {
+		color: v.$bg-dark !important;
+	}
+}
+
 button.pb-danger,
 a.pb-danger {
 	background-color: v.$red;

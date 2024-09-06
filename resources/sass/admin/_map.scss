@@ -10,6 +10,9 @@
 }
 
 .map #mapIconsSection {
+	display: flex;
+	flex-direction: column;
+
 	@media (max-width: 640px) {
 		margin-bottom: 15px;
 	}
@@ -71,4 +74,9 @@
 	@media (min-width: 640px) {
 		max-height: 80px;
 	}
+}
+
+.map button#mapSave {
+	margin-top: auto;
+	margin-left: auto;
 }
