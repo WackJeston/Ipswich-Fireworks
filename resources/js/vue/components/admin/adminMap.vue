@@ -40,46 +40,29 @@
 				let count = primary.children.length;
 
 				let newDiv = document.createElement('div');
+				newDiv.className = 'mapIcon';
 				newDiv.id = 'icon-' + count;
-				newDiv.style.position = 'absolute';
-				newDiv.style.cursor = 'grab';
-				newDiv.style.top = 0;
-				newDiv.style.left = 0;
 				newDiv.setAttribute('draggable', true);
 
 				let newImg = document.createElement('img');
 				newImg.src = event.target.src;
-				newImg.style.width = '100px';
-				newImg.style.height = '100px';
 
 				let sizeHandle = document.createElement('i');
-				sizeHandle.className = 'fa-solid fa-up-right-and-down-left-from-center fa-rotate-90';
+				sizeHandle.className = 'sizeHandle fa-solid fa-up-right-and-down-left-from-center fa-rotate-90';
 				sizeHandle.id = 'sizeHandle';
-				sizeHandle.style.position = 'absolute';
-				sizeHandle.style.bottom = '0';
-				sizeHandle.style.right = '-20px';
-				sizeHandle.style.fontSize = '1rem';
-				sizeHandle.style.color = '#c0c0c0';
-				sizeHandle.style.cursor = 'nwse-resize';
+
+				let sizeHandleInput = document.createElement('input');
+				sizeHandleInput.id = 'sizeHandleInput';
+				sizeHandleInput.type = 'number';
+				sizeHandleInput.value = newImg.style.height;
 
 				let deleteButton = document.createElement('i');
-				deleteButton.className = 'fa-solid fa-trash';
+				deleteButton.className = 'deleteButton fa-solid fa-trash';
 				deleteButton.id = 'deleteButton';
-				deleteButton.style.position = 'absolute';
-				deleteButton.style.bottom = '22px';
-				deleteButton.style.right = '-22px';
-				deleteButton.style.display = 'flex';
-				deleteButton.style.alignItems = 'center';
-				deleteButton.style.justifyContent = 'center';
-				deleteButton.style.fontSize = '0.7rem';
-				deleteButton.style.borderRadius = '5px';
-				deleteButton.style.padding = '4px 5px 5px 4px';
-				deleteButton.style.color = 'white';
-				deleteButton.style.backgroundColor = '#dc3545';
-				deleteButton.style.cursor = 'pointer';
 
 				newDiv.appendChild(newImg);
 				newDiv.appendChild(sizeHandle);
+				newDiv.appendChild(sizeHandleInput);
 				newDiv.appendChild(deleteButton);
 				primary.appendChild(newDiv);
 
@@ -172,7 +155,7 @@
 				}
 
 				// Ensure the new dimensions do not fall below the minimum size
-				const minSize = 20;
+				const minSize = 30;
 				if (newWidth < minSize) {
 					newWidth = minSize;
 					newHeight = newWidth / aspectRatio;

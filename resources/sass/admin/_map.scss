@@ -3,6 +3,8 @@
 .map #mapSection {
 	display: flex;
 	flex-direction: row;
+	padding: 0;
+	overflow: hidden;
 
 	@media (max-width: 640px) {
 		flex-direction: column-reverse;
@@ -12,12 +14,10 @@
 .map #mapIconsSection {
 	display: flex;
 	flex-direction: column;
+	padding: 20px 25px;
 
 	@media (max-width: 640px) {
-		margin-bottom: 15px;
-	}
-	@media (min-width: 640px) {
-		margin-left: 15px;
+		padding: 15px 20px;
 	}
 }
 
@@ -46,16 +46,59 @@
 		width: 100%;
 	}
 	@media (min-width: 640px) {
-		max-height: calc(100vh - 200px);
-		max-width: calc(100% - 200px);
+		max-height: calc(100vh - 160px);
+		max-width: calc(100% - 160px);
 	}
 }
 
 .map #mapImageContainer img {
 	display: flex;
-	border-radius: 3px;
 	max-width: 100%;
 	max-height: 100%;
+}
+
+.map #mapImageContainer .mapIcon {
+	position: absolute;
+	top: 0;
+	left: 0;
+	cursor: grab;
+}
+
+.map #mapImageContainer .mapIcon img {
+	width: 100px;
+	height: 100px;
+}
+
+.map #mapImageContainer .mapIcon .sizeHandle {
+	position: absolute;
+	bottom: 0;
+	right: -20px;
+	font-size: 1rem;
+	color: v.$bg-light;
+	cursor: nwse-resize;
+}
+
+.map #mapImageContainer .mapIcon .sizeHandleInput {
+	position: absolute;
+	bottom: 0;
+	right: -40px;
+	width: 40px;
+	height: 20px;
+}
+
+.map #mapImageContainer .mapIcon .deleteButton {
+	position: absolute;
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	bottom: 22px;
+	right: -20px;
+	padding: 4px 5px 5px 4px;
+	border-radius: 5px;
+	background-color: v.$red;
+	color: white;
+	font-size: 0.7rem;
+	cursor: pointer;
 }
 
 .map #mapIcons {
@@ -64,7 +107,7 @@
 	margin-top: 20px;
 }
 
-.map .mapIcon {
+.map #mapIcons .mapIcon {
 	display: flex;
 	border-radius: 3px;
 	margin: 0 10px 10px 0;
