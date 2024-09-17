@@ -14,7 +14,7 @@
 
 			<form class="data-form" >
 				<label for="size">Size</label>
-				<input type="number" name="size" @change="this.saveIconData($event)">
+				<input type="number" name="size" min="30" @change="this.saveIconData($event)">
 
 				<label for="title">Title</label>
 				<input type="text" name="title" @change="this.saveIconData($event)">
@@ -64,7 +64,7 @@
 				newDiv.setAttribute('draggable', true);
 				newDiv.dataset.id = count;
 				newDiv.dataset.width = null;
-				newDiv.dataset.height = null;
+				newDiv.dataset.height = 100;
 				newDiv.dataset.title = null;
 				newDiv.dataset.description = null;
 				newDiv.dataset.startTime = null;
@@ -73,57 +73,34 @@
 				let newImg = document.createElement('img');
 				newImg.src = event.target.src;
 
+				let deleteButton = document.createElement('i');
+				deleteButton.className = 'deleteButton fa-solid fa-trash';
+				deleteButton.id = 'deleteButton';
+
 				let sizeHandle = document.createElement('i');
 				sizeHandle.className = 'sizeHandle fa-solid fa-up-right-and-down-left-from-center fa-rotate-90';
 				sizeHandle.id = 'sizeHandle';
 
-				// let deleteButton = document.createElement('i');
-				// deleteButton.className = 'deleteButton fa-solid fa-trash';
-				// deleteButton.id = 'deleteButton';
-
-				// let titleInput = document.createElement('input');
-				// titleInput.className = 'titleInput';
-				// titleInput.id = 'titleInput';
-				// titleInput.type = 'text';
-				// titleInput.placeholder = 'Title';
-
-				// let timeInput = document.createElement('input');
-				// timeInput.className = 'timeInput';
-				// timeInput.id = 'timeInput';
-				// timeInput.type = 'time';
-
-				// let sizeHandleInput = document.createElement('input');
-				// sizeHandleInput.className = 'sizeHandleInput';
-				// sizeHandleInput.id = 'sizeHandleInput';
-				// sizeHandleInput.type = 'number';
-				// sizeHandleInput.value = 100;
-
 				newDiv.appendChild(newImg);
+				newDiv.appendChild(deleteButton);
 				newDiv.appendChild(sizeHandle);
-				// newDiv.appendChild(deleteButton);
-				// newDiv.appendChild(titleInput);
-				// newDiv.appendChild(timeInput);
-				// newDiv.appendChild(sizeHandleInput);
 				primary.appendChild(newDiv);
 
 				let newDiv2 = document.getElementById('icon-' + count);
 				newDiv2.addEventListener("mousedown", this.mouseDown);
 
-				// let deleteButton2 = newDiv2.querySelector('.deleteButton');
-				// deleteButton2.addEventListener("click", this.deleteIcon);
-
-				// let sizeHandleInput2 = newDiv2.querySelector('.sizeHandleInput');
-				// sizeHandleInput2.addEventListener("change", this.inputSizeChange);
+				let deleteButton2 = newDiv2.querySelector('.deleteButton');
+				deleteButton2.addEventListener("click", this.deleteIcon);
 			},
 
 			selectIcon(event) {
 				let selected = document.querySelector('.mapIcon.selected');
 				
-				if (selected) {
-					selected.classList.remove('selected');
-				}
-				
 				if (!selected || selected !== event.target.parentElement) {
+					if (selected) {
+						selected.classList.remove('selected');
+					}
+
 					let target = event.target.parentElement;
 
 					this.selectedIcon = target.dataset.id;
@@ -147,7 +124,13 @@
 			saveIconData(event) {
 				if (this.selectedIcon != null) {
 					let icon = document.querySelector('#mapImageContainer #icon-' + this.selectedIcon);
-					icon.dataset[event.target.name] = event.target.value;
+					let name = event.target.name;
+
+					if (name == 'size') {
+						this.inputSizeChange(event);
+					} else {
+						// icon.dataset[name] = event.target.value;
+					}
 				}
 			},
 
@@ -266,9 +249,9 @@
 			},
 
 			inputSizeChange(event) {
-				let target = event.target.parentElement;
+				let target = document.querySelector('.mapIcon.selected');
+				let parent = document.querySelector('#mapImageContainer');
 				let image = target.querySelector('img');
-				let parent = target.parentElement;
 
 				let aspectRatio = image.offsetWidth / image.offsetHeight;
 

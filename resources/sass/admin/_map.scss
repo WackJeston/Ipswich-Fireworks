@@ -126,37 +126,11 @@
 	align-items: center;
 	justify-content: center;
 	bottom: 22px;
-	right: -20px;
+	right: -22px;
 	padding: 4px 5px 5px 4px;
 	border-radius: 5px;
 	background-color: v.$red;
 	color: white;
 	font-size: 0.7rem;
 	cursor: pointer;
-}
-
-.map #mapImageContainer .mapIcon input {
-	position: absolute;
-	left: calc(100% + 26px);
-	height: 20px;
-	box-shadow: v.$shadow-md;
-	border: 1px solid v.$border-light;
-	border-radius: 6px;
-	padding: 1px 2px 1px 4px;
-	color: v.$black;
-}
-
-.map #mapImageContainer .mapIcon  input.titleInput {
-	bottom: 48px;
-	width: 120px;
-}
-
-.map #mapImageContainer .mapIcon  input.timeInput {
-	bottom: 22px;
-	width: 120px;
-}
-
-.map #mapImageContainer .mapIcon  input.sizeHandleInput {
-	bottom: -2px;
-	width: 60px;
 }
