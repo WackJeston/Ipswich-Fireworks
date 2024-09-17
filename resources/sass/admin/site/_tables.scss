@@ -128,25 +128,15 @@ tr .tr-buttons .button-label {
 tr .tr-buttons .button-label p {
   position: absolute;
   bottom: -20px;
-  right: 117%;
-  background-color: v.$bg-dark;
-  color: v.$white;
+  right: calc(100% - 2px);
+  background-color: v.$white;
+	box-shadow: v.$shadow-md;
+	border: 1px solid v.$border-light;
+  border-radius: 6px;
   padding: 6px 10px 6px 8px;
-  border-radius: 5px;
   font-family: 'Nunito', sans-serif;
   font-size: 0.9rem;
   font-weight: 600;
-}
-
-tr .tr-buttons .button-label div {
-  position: absolute;
-  bottom: 2px;
-  right: 100%;
-  height: 12px;
-  width: 12px;
-  background-color: v.$bg-dark;
-  transform: rotate(45deg);
-  border-radius: 0 3px 0 10px;
 }
 
 table .empty-table {

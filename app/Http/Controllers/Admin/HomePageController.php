@@ -54,7 +54,7 @@ class HomePageController extends AdminController
 		$landingZoneBannerTable->addColumn('title', 'Title', 2, true);
 		$landingZoneBannerTable->addColumn('framing', 'Framing', 1, true, 'select', $framingOptions2);
 		$landingZoneBannerTable->addColumn('active', 'Active', 1, false, 'toggle');
-		$landingZoneBannerTable->addJsButton('showImage', ['record:fileName'], 'fa-solid fa-eye', 'View Image');
+		$landingZoneBannerTable->addJsButton('showImage', ['record:fileName'], 'fa-solid fa-image', 'View Image');
 		$landingZoneBannerTable->addJsButton('showDeleteWarning', ['string:Banner', 'record:id', 'url:/admin-home-pageDeleteLandingZoneBanner/?'], 'fa-solid fa-trash-can', 'Delete Banner');
 		$landingZoneBannerTable = $landingZoneBannerTable->render();
 
@@ -98,7 +98,7 @@ class HomePageController extends AdminController
 		$bottomBannerTable->addColumn('id', '#');
 		$bottomBannerTable->addColumn('framing', 'Framing', 1, true, 'select', $framingOptions2);
 		$bottomBannerTable->addColumn('active', 'Active', 1, false, 'toggle');
-		$bottomBannerTable->addJsButton('showImage', ['record:fileName'], 'fa-solid fa-eye', 'View Image');
+		$bottomBannerTable->addJsButton('showImage', ['record:fileName'], 'fa-solid fa-image', 'View Image');
 		$bottomBannerTable->addJsButton('showDeleteWarning', ['string:Banner', 'record:id', 'url:/admin-home-pageDeleteLandingZoneBanner/?'], 'fa-solid fa-trash-can', 'Delete Banner');
 		$bottomBannerTable = $bottomBannerTable->render();
 

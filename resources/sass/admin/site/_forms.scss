@@ -73,18 +73,18 @@ form input[type="color"] {
 	width: 100px;
 }
 
-form.web-box,
-.web-box form {
+form.data-form,
+.data-form form {
 	position: relative;
 }
 
-form.web-box .submit,
-.web-box form .submit {
+form.data-form .submit,
+.data-form form .submit {
 	margin-right: auto;
 }
 
-form.web-box i,
-.web-box form i {
+form.data-form i,
+.data-form form i {
 	display: flex;
 	align-items: center;
 	justify-content: center;
@@ -98,8 +98,8 @@ form.web-box i,
 	cursor: pointer;
 }
 
-form.web-box i:hover:not(.show-password i),
-.web-box form i:hover:not(.show-password i) {
+form.data-form i:hover:not(.show-password i),
+.data-form form i:hover:not(.show-password i) {
 	@media (min-width: 640px) {
 		background-color: v.$black;
 		color: v.$white;
@@ -128,16 +128,16 @@ form option {
 	cursor: pointer;
 }
 
-form.web-box input:not(.radio-container input, .checkbox-container input, .submit),
-form.web-box textarea,
-form.web-box label.file-input-label,
-form.web-box select:not(.product-page .wb-content) {
+form.data-form input:not(.radio-container input, .checkbox-container input, .submit),
+form.data-form textarea,
+form.data-form label.file-input-label,
+form.data-form select:not(.product-page .wb-content) {
 	border: 1px solid v.$border;
 }
 
-form.web-box input:focus:not(.radio-container input, .checkbox-container input, .submit),
-form.web-box textarea:focus,
-form.web-box label.file-input-label:hover {
+form.data-form input:focus:not(.radio-container input, .checkbox-container input, .submit),
+form.data-form textarea:focus,
+form.data-form label.file-input-label:hover {
 	@media (min-width: 640px) {
 		border: 1px solid v.$alt-main;
 	}
@@ -165,7 +165,7 @@ form .submit {
 	padding: 5px 10px;
 }
 
-form .submit:not(.web-box .submit, .product-page-main .submit) {
+form .submit:not(.data-form .submit, .product-page-main .submit) {
 	width: 80%;
 	margin: 5px auto 5px auto;
 }

@@ -58,7 +58,7 @@ class MapController extends AdminController
 		');
 		$mapAssetTable->addColumn('id', '#');
 		$mapAssetTable->addColumn('name', 'Name', 2, true);
-		$mapAssetTable->addJsButton('showImage', ['record:fileName'], 'fa-solid fa-eye', 'View Image');
+		$mapAssetTable->addJsButton('showImage', ['record:fileName'], 'fa-solid fa-image', 'View Image');
 		$mapAssetTable->addJsButton('showDeleteWarning', ['string:Banner', 'record:id', 'url:/admin-mapDeleteIcon/?'], 'fa-solid fa-trash-can', 'Delete Banner');
 		$mapAssetTable = $mapAssetTable->render();
 

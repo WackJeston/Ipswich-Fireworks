@@ -11,7 +11,7 @@
 	}
 }
 
-.map #mapIconsSection {
+.map #mapEditSection {
 	display: flex;
 	flex-direction: column;
 	padding: 20px 25px;
@@ -21,7 +21,7 @@
 	}
 }
 
-.map #mapIconsSection h2 {
+.map #mapEditSection h2 {
 	color: v.$gray-2;
 	margin: 0;
 
@@ -30,12 +30,50 @@
 	}
 }
 
-.map #mapIconsSection small {
+.map #mapEditSection small {
 	display: flex;
 
 	@media (min-width: 640px) {
 		margin-left: 8px;
 	}
+}
+
+.map #mapEditSection #mapIcons {
+	display: flex;
+	flex-wrap: wrap;
+	overflow-y: auto;
+	margin-top: 20px;
+	margin-bottom: 30px;
+	max-height: 200px;
+}
+
+.map #mapEditSection #mapIcons .mapIcon {
+	display: flex;
+	border-radius: 3px;
+	margin: 0 10px 10px 0;
+	cursor: pointer;
+	max-height: 50px;
+
+	@media (min-width: 640px) and (max-width: 1100px) {
+		max-height: 60px;
+	}
+
+	@media (min-width: 1100px) {
+		max-height: 80px;
+	}
+}
+
+.map #mapEditSection form {
+  background-color: v.$white;
+	box-shadow: v.$shadow-md;
+	border: 1px solid v.$border-light;
+  border-radius: 6px;
+  padding: 12px 12px 16px 12px;
+	margin-bottom: 30px;
+}
+
+.map #mapEditSection button#mapSave {
+	margin: auto 0 5px 0;
 }
 
 .map #mapImageContainer {
@@ -46,13 +84,13 @@
 		width: 100%;
 	}
 	@media (min-width: 640px) {
-		max-height: calc(100vh - 160px);
 		max-width: calc(100% - 160px);
 	}
 }
 
 .map #mapImageContainer img {
 	display: flex;
+	object-fit: contain;
 	max-width: 100%;
 	max-height: 100%;
 }
@@ -62,6 +100,10 @@
 	top: 0;
 	left: 0;
 	cursor: grab;
+}
+
+.map #mapImageContainer .mapIcon.selected {
+	outline: 1px solid v.$dull-yellow;
 }
 
 .map #mapImageContainer .mapIcon img {
@@ -76,14 +118,6 @@
 	font-size: 1rem;
 	color: v.$bg-light;
 	cursor: nwse-resize;
-}
-
-.map #mapImageContainer .mapIcon .sizeHandleInput {
-	position: absolute;
-	bottom: 0;
-	right: -40px;
-	width: 40px;
-	height: 20px;
 }
 
 .map #mapImageContainer .mapIcon .deleteButton {
@@ -101,25 +135,28 @@
 	cursor: pointer;
 }
 
-.map #mapIcons {
-	display: flex;
-	flex-wrap: wrap;
-	margin-top: 20px;
+.map #mapImageContainer .mapIcon input {
+	position: absolute;
+	left: calc(100% + 26px);
+	height: 20px;
+	box-shadow: v.$shadow-md;
+	border: 1px solid v.$border-light;
+	border-radius: 6px;
+	padding: 1px 2px 1px 4px;
+	color: v.$black;
 }
 
-.map #mapIcons .mapIcon {
-	display: flex;
-	border-radius: 3px;
-	margin: 0 10px 10px 0;
-	cursor: pointer;
-	max-height: 50px;
-
-	@media (min-width: 640px) {
-		max-height: 80px;
-	}
+.map #mapImageContainer .mapIcon  input.titleInput {
+	bottom: 48px;
+	width: 120px;
 }
 
-.map button#mapSave {
-	margin-top: auto;
-	margin-left: auto;
+.map #mapImageContainer .mapIcon  input.timeInput {
+	bottom: 22px;
+	width: 120px;
+}
+
+.map #mapImageContainer .mapIcon  input.sizeHandleInput {
+	bottom: -2px;
+	width: 60px;
 }

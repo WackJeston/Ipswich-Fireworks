@@ -434,7 +434,6 @@ class DataTable
 											$html .= sprintf('
 											<div class="button-label">
 												<p>%s</p>
-												<div></div>
 											</div>', $button['label']);
 										}
 										
@@ -450,7 +449,6 @@ class DataTable
 										$html .= sprintf('
 										<div class="button-label">
 											<p>%s</p>
-											<div></div>
 										</div>', $button['label']);
 									}
 									

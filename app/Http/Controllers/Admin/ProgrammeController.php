@@ -57,7 +57,7 @@ class ProgrammeController extends AdminController
 		$musicTable->addColumn('time', 'Time', 2, true);
 		$musicTable->addColumn('link', 'Link' , 3, true);
 		$musicTable->addColumn('active', 'Active', 2, false, 'toggle');
-		$musicTable->addJsButton('showImage', ['record:fileName'], 'fa-solid fa-eye', 'View Image');
+		$musicTable->addJsButton('showImage', ['record:fileName'], 'fa-solid fa-image', 'View Image');
 		$musicTable->addJsButton('showDeleteWarning', ['string:Programme', 'record:id', 'url:/programmeDelete/?'], 'fa-solid fa-trash-can', 'Delete Item');
 		$musicTable = $musicTable->render();
 
