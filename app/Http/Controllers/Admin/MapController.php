@@ -106,18 +106,20 @@ class MapController extends AdminController
 
 	public function saveMap(Request $request)
 	{
-		$config = json_decode($request);
+		return json_encode($request);
 
-		$map = Map::firstOrCreate([
-			'id' => 1,
-		]);
+		// $config = json_decode($request);
 
-		$map->update([
-			'canvasWidth' => $config->canvas->width,
-			'canvasHeight' => $config->canvas->height,
-			'images' => json_encode($config->images),
-		]);
+		// $map = Map::firstOrCreate([
+		// 	'id' => 1,
+		// ]);
 
-		return true;
+		// $map->update([
+		// 	'canvasWidth' => $config->canvas->width,
+		// 	'canvasHeight' => $config->canvas->height,
+		// 	'images' => json_encode($config->images),
+		// ]);
+
+		// return true;
 	}
 }

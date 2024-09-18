@@ -12,15 +12,15 @@
 				<img v-for="(icon, i) in this.icons" :src="icon.fileName" alt="Map Icon Image" class="mapIcon" @click="this.createIcon($event)">
 			</div>
 
-			<form class="data-form" >
+			<form class="data-form" v-show="this.selectedIcon != null">
 				<label for="size">Size</label>
-				<input type="number" name="size" min="30" @change="this.saveIconData($event)">
+				<input type="number" name="size" min="30" @change="this.saveIconData($event)" @keyup="this.saveIconData($event)">
 
 				<label for="title">Title</label>
-				<input type="text" name="title" @change="this.saveIconData($event)">
+				<input type="text" name="title" @keyup="this.saveIconData($event)">
 
 				<label for="description">Description</label>
-				<textarea name="description" @change="this.saveIconData($event)"></textarea>
+				<textarea name="description" @keyup="this.saveIconData($event)"></textarea>
 
 				<label for="start-time">Start Time</label>
 				<input type="time" name="start-time" @change="this.saveIconData($event)">
@@ -65,8 +65,8 @@
 				newDiv.dataset.id = count;
 				newDiv.dataset.width = null;
 				newDiv.dataset.height = 100;
-				newDiv.dataset.title = null;
-				newDiv.dataset.description = null;
+				newDiv.dataset.title = '';
+				newDiv.dataset.description = '';
 				newDiv.dataset.startTime = null;
 				newDiv.dataset.endTime = null;
 
@@ -99,13 +99,24 @@
 				if (!selected || selected !== event.target.parentElement) {
 					if (selected) {
 						selected.classList.remove('selected');
+
+						let sizeHandle = selected.querySelector('#sizeHandle');
+						sizeHandle.style.display = 'none';
+
+						let deleteButton = selected.querySelector('#deleteButton');
+						deleteButton.style.display = 'none';
 					}
 
 					let target = event.target.parentElement;
+					target.classList.add('selected');
+
+					let sizeHandle = target.querySelector('#sizeHandle');
+					sizeHandle.style.display = 'flex';
+
+					let deleteButton = target.querySelector('#deleteButton');
+					deleteButton.style.display = 'flex';
 
 					this.selectedIcon = target.dataset.id;
-
-					target.classList.add('selected');
 
 					let sizeInput = document.querySelector('#mapEditSection input[name="size"]');
 					let titleInput = document.querySelector('#mapEditSection input[name="title"]');
@@ -127,11 +138,75 @@
 					let name = event.target.name;
 
 					if (name == 'size') {
-						this.inputSizeChange(event);
+						let size = this.inputSizeChange(event);
+
+						icon.dataset.height = size[0];
+						icon.dataset.width = size[1];
+
+					} else if (name == 'start-time') {
+						if (event.target.value == '') {
+							icon.dataset.startTime = null;
+						} else {
+							icon.dataset.startTime = event.target.value;
+						}
+
+					} else if (name == 'end-time') {
+						if (event.target.value == '') {
+							icon.dataset.endTime = null;
+						} else {
+							icon.dataset.endTime = event.target.value;
+						}
+
 					} else {
-						// icon.dataset[name] = event.target.value;
+						icon.dataset[name] = event.target.value;
 					}
 				}
+			},
+
+			inputSizeChange(event) {
+				let target = document.querySelector('.mapIcon.selected');
+				let parent = document.querySelector('#mapImageContainer');
+				let image = target.querySelector('img');
+
+				let aspectRatio = image.offsetWidth / image.offsetHeight;
+
+				let newWidth = event.target.value;
+				let newHeight = newWidth / aspectRatio;
+
+				// Ensure the new dimensions do not exceed the parent's borders
+				if (newWidth > parent.clientWidth) {
+					newWidth = parent.clientWidth;
+					newHeight = newWidth / aspectRatio;
+				}
+
+				if (newHeight > parent.clientHeight) {
+					newHeight = parent.clientHeight;
+					newWidth = newHeight * aspectRatio;
+				}
+
+				// Ensure the new dimensions do not fall below the minimum size
+				const minSize = 30;
+				if (newWidth < minSize) {
+					newWidth = minSize;
+					newHeight = newWidth / aspectRatio;
+				}
+
+				if (newHeight < minSize) {
+					newHeight = minSize;
+					newWidth = newHeight * aspectRatio;
+				}
+
+				image.style.width = newWidth + "px";
+				image.style.height = newHeight + "px";
+
+				return [newHeight, newWidth];
+			},
+
+			deleteIcon(event) {
+				let target = event.target.parentElement;
+				target.remove();
+
+				this.selectedIcon = null;
 			},
 
 			mouseDown(event) {
@@ -248,48 +323,6 @@
 				document.removeEventListener("mouseup", this.sizeUp);
 			},
 
-			inputSizeChange(event) {
-				let target = document.querySelector('.mapIcon.selected');
-				let parent = document.querySelector('#mapImageContainer');
-				let image = target.querySelector('img');
-
-				let aspectRatio = image.offsetWidth / image.offsetHeight;
-
-				let newWidth = event.target.value;
-				let newHeight = newWidth / aspectRatio;
-
-				// Ensure the new dimensions do not exceed the parent's borders
-				if (newWidth > parent.clientWidth) {
-					newWidth = parent.clientWidth;
-					newHeight = newWidth / aspectRatio;
-				}
-
-				if (newHeight > parent.clientHeight) {
-					newHeight = parent.clientHeight;
-					newWidth = newHeight * aspectRatio;
-				}
-
-				// Ensure the new dimensions do not fall below the minimum size
-				const minSize = 30;
-				if (newWidth < minSize) {
-					newWidth = minSize;
-					newHeight = newWidth / aspectRatio;
-				}
-
-				if (newHeight < minSize) {
-					newHeight = minSize;
-					newWidth = newHeight * aspectRatio;
-				}
-
-				image.style.width = newWidth + "px";
-				image.style.height = newHeight + "px";
-			},
-
-			deleteIcon(event) {
-				let target = event.target.parentElement;
-				target.remove();
-			},
-
 			async saveMap() {
 				let primary = document.getElementById('mapImage');
 
@@ -311,8 +344,8 @@
 						let iconImage = icon.querySelector('img');
 
 						let iconSize = {
-							height: iconImage.offsetHeight,
-							width: iconImage.offsetWidth
+							height: iconImage.dataset.height,
+							width: iconImage.dataset.width
 						};
 
 						let iconPosition = {
@@ -323,32 +356,28 @@
 						config.images.push({
 							asset: iconImage.getAttribute('src'),
 							size: iconSize,
-							position: iconPosition
+							position: iconPosition,
+							title: icon.dataset.title,
+							description: icon.dataset.description,
+							startTime: icon.dataset.startTime,
+							endTime: icon.dataset.endTime
 						});
 					}
 				}
 				
-				console.log(encodeURIComponent(config));
-				console.log(JSON.stringify(config));
+				console.log(config);
 
-				// try {
-				// 	// this.response = await fetch(`/admin-mapSave/${encodeURIComponent(config)}/`);
-				// 	this.response = await fetch(`/admin-mapSave/${encodeURIComponent(config)}`, {
-				// 		// method: "POST", 
-				// 		// body: JSON.stringify(config),
-				// 		headers: { 
-				// 			"Content-type": "application/json; charset=UTF-8"
-				// 		}
-				// 	});
-				// 	this.result = await this.response.json();
+				try {
+					this.response = await fetch(`/admin-mapSave`, {data: config});
+					this.result = await this.response.json();
 					
-				// } catch (err) {
-				// 	console.log('----ERROR----');
-				// 	console.log(err);
-				// } finally {
-				// 	console.log('----FINALLY----');
-				// 	console.log(this.result);
-				// }
+				} catch (err) {
+					console.log('----ERROR----');
+					console.log(err);
+				} finally {
+					console.log('----FINALLY----');
+					console.log(this.result);
+				}
 			}
 		},
   };

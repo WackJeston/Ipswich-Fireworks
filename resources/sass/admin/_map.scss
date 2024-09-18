@@ -6,7 +6,7 @@
 	padding: 0;
 	overflow: hidden;
 
-	@media (max-width: 640px) {
+	@media (max-width: 950px) {
 		flex-direction: column-reverse;
 	}
 }
@@ -16,7 +16,7 @@
 	flex-direction: column;
 	padding: 20px 25px;
 
-	@media (max-width: 640px) {
+	@media (max-width: 950px) {
 		padding: 15px 20px;
 	}
 }
@@ -25,7 +25,7 @@
 	color: v.$gray-2;
 	margin: 0;
 
-	@media (min-width: 640px) {
+	@media (min-width: 950px) {
 		margin-left: 8px;
 	}
 }
@@ -33,7 +33,7 @@
 .map #mapEditSection small {
 	display: flex;
 
-	@media (min-width: 640px) {
+	@media (min-width: 950px) {
 		margin-left: 8px;
 	}
 }
@@ -54,12 +54,8 @@
 	cursor: pointer;
 	max-height: 50px;
 
-	@media (min-width: 640px) and (max-width: 1100px) {
+	@media (min-width: 640px) {
 		max-height: 60px;
-	}
-
-	@media (min-width: 1100px) {
-		max-height: 80px;
 	}
 }
 
@@ -80,10 +76,10 @@
 	position: relative;
 	display: flex;
 	
-	@media (max-width: 640px) {
+	@media (max-width: 950px) {
 		width: 100%;
 	}
-	@media (min-width: 640px) {
+	@media (min-width: 950px) {
 		max-width: calc(100% - 160px);
 	}
 }
@@ -112,6 +108,7 @@
 }
 
 .map #mapImageContainer .mapIcon .sizeHandle {
+	display: none;
 	position: absolute;
 	bottom: 0;
 	right: -20px;
@@ -122,7 +119,7 @@
 
 .map #mapImageContainer .mapIcon .deleteButton {
 	position: absolute;
-	display: flex;
+	display: none;
 	align-items: center;
 	justify-content: center;
 	bottom: 22px;
