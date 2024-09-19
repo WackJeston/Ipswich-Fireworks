@@ -75,6 +75,7 @@
 .map #mapImageContainer {
 	position: relative;
 	display: flex;
+	margin-bottom: auto;
 	
 	@media (max-width: 950px) {
 		width: 100%;

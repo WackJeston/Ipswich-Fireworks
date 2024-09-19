@@ -67,8 +67,8 @@
 				newDiv.id = 'icon-' + count;
 				newDiv.setAttribute('draggable', true);
 				newDiv.dataset.id = count;
-				newDiv.dataset.width = null;
 				newDiv.dataset.height = 100;
+				newDiv.dataset.width = null;
 				newDiv.dataset.title = '';
 				newDiv.dataset.description = '';
 				newDiv.dataset.startTime = null;
@@ -99,45 +99,61 @@
 
 			createExistingIcon(existingIcon) {
 				let primary = document.getElementById('mapImageContainer');
-				let count = primary.children.length;
-				
-				let newDiv = document.createElement('div');
-				newDiv.className = 'mapIcon';
-				newDiv.id = 'icon-' + count;
-				newDiv.setAttribute('draggable', true);
-				newDiv.style.top = existingIcon.position.top + 'px' ?? '0px';
-				newDiv.style.left = existingIcon.position.left + 'px' ?? '0px';
-				newDiv.dataset.id = count;
-				newDiv.dataset.width = existingIcon.size.width ?? 100;
-				newDiv.dataset.height = existingIcon.size.height ?? 100;
-				newDiv.dataset.title = existingIcon.title;
-				newDiv.dataset.description = existingIcon.description;
-				newDiv.dataset.startTime = existingIcon.startTime;
-				newDiv.dataset.endTime = existingIcon.endTime;
 
-				let newImg = document.createElement('img');
-				newImg.src = existingIcon.asset;
-				newImg.style.width = existingIcon.size.width + 'px' ?? '100px';
-				newImg.style.height = existingIcon.size.height + 'px' ?? '100px';
+				if (primary.offsetHeight == 0 || primary.offsetWidth == 0) {
+					setTimeout(() => {
+						this.createExistingIcon(existingIcon);
+					}, 100);
 
-				let deleteButton = document.createElement('i');
-				deleteButton.className = 'deleteButton fa-solid fa-trash';
-				deleteButton.id = 'deleteButton';
+				} else {
+					let count = primary.children.length;
 
-				let sizeHandle = document.createElement('i');
-				sizeHandle.className = 'sizeHandle fa-solid fa-up-right-and-down-left-from-center fa-rotate-90';
-				sizeHandle.id = 'sizeHandle';
+					let heightRatio = (primary.offsetHeight / this.map.canvasHeight);
+					let widthRatio = primary.offsetWidth / this.map.canvasWidth;
 
-				newDiv.appendChild(newImg);
-				newDiv.appendChild(deleteButton);
-				newDiv.appendChild(sizeHandle);
-				primary.appendChild(newDiv);
+					let newIconPositionTop = existingIcon.position.top * heightRatio;
+					let newIconPositionLeft = existingIcon.position.left * widthRatio;
+					let newIconHeight = existingIcon.size.height * heightRatio;
+					let newIconWidth = existingIcon.size.width * widthRatio;
+					
+					let newDiv = document.createElement('div');
+					newDiv.className = 'mapIcon';
+					newDiv.id = 'icon-' + count;
+					newDiv.setAttribute('draggable', true);
+					newDiv.style.top = newIconPositionTop + 'px' ?? '0px';
+					newDiv.style.left = newIconPositionLeft + 'px' ?? '0px';
+					newDiv.dataset.id = count;
+					newDiv.dataset.height = newIconHeight ?? 100;
+					newDiv.dataset.width = newIconWidth ?? 100;
+					newDiv.dataset.title = existingIcon.title;
+					newDiv.dataset.description = existingIcon.description;
+					newDiv.dataset.startTime = existingIcon.startTime;
+					newDiv.dataset.endTime = existingIcon.endTime;
 
-				let newDiv2 = document.getElementById('icon-' + count);
-				newDiv2.addEventListener("mousedown", this.mouseDown);
+					let newImg = document.createElement('img');
+					newImg.src = existingIcon.asset;
+					newImg.style.width = newIconWidth + 'px' ?? '100px';
+					newImg.style.height = newIconHeight + 'px' ?? '100px';
 
-				let deleteButton2 = newDiv2.querySelector('.deleteButton');
-				deleteButton2.addEventListener("click", this.deleteIcon);
+					let deleteButton = document.createElement('i');
+					deleteButton.className = 'deleteButton fa-solid fa-trash';
+					deleteButton.id = 'deleteButton';
+
+					let sizeHandle = document.createElement('i');
+					sizeHandle.className = 'sizeHandle fa-solid fa-up-right-and-down-left-from-center fa-rotate-90';
+					sizeHandle.id = 'sizeHandle';
+
+					newDiv.appendChild(newImg);
+					newDiv.appendChild(deleteButton);
+					newDiv.appendChild(sizeHandle);
+					primary.appendChild(newDiv);
+
+					let newDiv2 = document.getElementById('icon-' + count);
+					newDiv2.addEventListener("mousedown", this.mouseDown);
+
+					let deleteButton2 = newDiv2.querySelector('.deleteButton');
+					deleteButton2.addEventListener("click", this.deleteIcon);
+				}
 			},
 
 			selectIcon(event) {
@@ -171,7 +187,7 @@
 					let startTimeInput = document.querySelector('#mapEditSection input[name="start-time"]');
 					let endTimeInput = document.querySelector('#mapEditSection input[name="end-time"]');
 
-					sizeInput.value = target.dataset.height;
+					sizeInput.value = Math.round(target.dataset.height);
 					titleInput.value = target.dataset.title;
 					descriptionInput.value = target.dataset.description;
 					startTimeInput.value = target.dataset.startTime;
