@@ -93,9 +93,12 @@
 
 .map #mapImageContainer .mapIcon {
 	position: absolute;
+	cursor: grab;
+}
+
+.map #mapImageContainer .mapIcon.new {
 	top: 0;
 	left: 0;
-	cursor: grab;
 }
 
 .map #mapImageContainer .mapIcon.selected {

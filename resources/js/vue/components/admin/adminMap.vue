@@ -53,13 +53,17 @@
 			};
 		},
 
+		mounted() {
+			this.map.images.forEach((existingIcon) => this.createExistingIcon(existingIcon))
+		},
+
 		methods: {
 			createIcon(event) {
 				let primary = document.getElementById('mapImageContainer');
 				let count = primary.children.length;
 
 				let newDiv = document.createElement('div');
-				newDiv.className = 'mapIcon';
+				newDiv.className = 'mapIcon new';
 				newDiv.id = 'icon-' + count;
 				newDiv.setAttribute('draggable', true);
 				newDiv.dataset.id = count;
@@ -72,6 +76,49 @@
 
 				let newImg = document.createElement('img');
 				newImg.src = event.target.src;
+
+				let deleteButton = document.createElement('i');
+				deleteButton.className = 'deleteButton fa-solid fa-trash';
+				deleteButton.id = 'deleteButton';
+
+				let sizeHandle = document.createElement('i');
+				sizeHandle.className = 'sizeHandle fa-solid fa-up-right-and-down-left-from-center fa-rotate-90';
+				sizeHandle.id = 'sizeHandle';
+
+				newDiv.appendChild(newImg);
+				newDiv.appendChild(deleteButton);
+				newDiv.appendChild(sizeHandle);
+				primary.appendChild(newDiv);
+
+				let newDiv2 = document.getElementById('icon-' + count);
+				newDiv2.addEventListener("mousedown", this.mouseDown);
+
+				let deleteButton2 = newDiv2.querySelector('.deleteButton');
+				deleteButton2.addEventListener("click", this.deleteIcon);
+			},
+
+			createExistingIcon(existingIcon) {
+				let primary = document.getElementById('mapImageContainer');
+				let count = primary.children.length;
+				
+				let newDiv = document.createElement('div');
+				newDiv.className = 'mapIcon';
+				newDiv.id = 'icon-' + count;
+				newDiv.setAttribute('draggable', true);
+				newDiv.style.top = existingIcon.position.top + 'px' ?? '0px';
+				newDiv.style.left = existingIcon.position.left + 'px' ?? '0px';
+				newDiv.dataset.id = count;
+				newDiv.dataset.width = existingIcon.size.width ?? 100;
+				newDiv.dataset.height = existingIcon.size.height ?? 100;
+				newDiv.dataset.title = existingIcon.title;
+				newDiv.dataset.description = existingIcon.description;
+				newDiv.dataset.startTime = existingIcon.startTime;
+				newDiv.dataset.endTime = existingIcon.endTime;
+
+				let newImg = document.createElement('img');
+				newImg.src = existingIcon.asset;
+				newImg.style.width = existingIcon.size.width + 'px' ?? '100px';
+				newImg.style.height = existingIcon.size.height + 'px' ?? '100px';
 
 				let deleteButton = document.createElement('i');
 				deleteButton.className = 'deleteButton fa-solid fa-trash';
@@ -344,8 +391,8 @@
 						let iconImage = icon.querySelector('img');
 
 						let iconSize = {
-							height: iconImage.dataset.height,
-							width: iconImage.dataset.width
+							height: icon.dataset.height,
+							width: icon.dataset.width
 						};
 
 						let iconPosition = {
@@ -364,19 +411,23 @@
 						});
 					}
 				}
-				
-				console.log(config);
 
 				try {
-					this.response = await fetch(`/admin-mapSave`, {data: config});
+					this.response = await fetch(`/admin-mapSave/`, {
+						method: "POST",
+						body: JSON.stringify(config),
+						headers: {
+							'Content-Type': 'application/json',
+							'Accept': 'application/json',
+							'url': '/admin-mapSave/',
+							'X-CSRF-TOKEN': document.querySelector('meta[name="csrf-token"]').getAttribute('content')
+						},
+					});
 					this.result = await this.response.json();
 					
 				} catch (err) {
 					console.log('----ERROR----');
 					console.log(err);
-				} finally {
-					console.log('----FINALLY----');
-					console.log(this.result);
 				}
 			}
 		},

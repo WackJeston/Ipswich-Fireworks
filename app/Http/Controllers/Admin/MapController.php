@@ -10,6 +10,7 @@ use App\Classes\DataForm;
 use App\Classes\ImageCommon;
 use App\Models\Map;
 use App\Models\MapAsset;
+use App\Models\NotificationEvent;
 
 
 class MapController extends AdminController
@@ -27,6 +28,7 @@ class MapController extends AdminController
 		');
 
 		$map = ImageCommon::cacheImages($map)[0];
+		$map->images = json_decode($map->images, true);
 
 		$icons = DB::select('SELECT 
 			ma.id,
@@ -106,20 +108,16 @@ class MapController extends AdminController
 
 	public function saveMap(Request $request)
 	{
-		return json_encode($request);
+		$map = Map::firstOrCreate([
+			'id' => 1,
+		]);
 
-		// $config = json_decode($request);
-
-		// $map = Map::firstOrCreate([
-		// 	'id' => 1,
-		// ]);
-
-		// $map->update([
-		// 	'canvasWidth' => $config->canvas->width,
-		// 	'canvasHeight' => $config->canvas->height,
-		// 	'images' => json_encode($config->images),
-		// ]);
-
-		// return true;
+		$map->update([
+			'assetId' => $request->asset,
+			'canvasHeight' => $request->canvas['height'],
+			'canvasWidth' => $request->canvas['width'],
+			'images' => json_encode($request->images),
+			'active' => 1,
+		]);
 	}
 }

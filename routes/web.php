@@ -138,7 +138,7 @@ Route::group( ['middleware' => 'auth' ], function()
 		Route::post('/admin-mapUploadMap', 'uploadMap');
 		Route::post('/admin-mapAddIcon', 'addIcon');
 		Route::get('/admin-mapDeleteIcon/{id}', 'deleteIcon');
-		Route::get('/admin-mapSave', 'saveMap');
+		Route::post('/admin-mapSave', 'saveMap');
   });
 
 	Route::controller(App\Http\Controllers\Admin\ProgrammeController::class)->group(function () {
