@@ -7,8 +7,22 @@ use Illuminate\Foundation\Auth\EmailVerificationRequest;
 // PUBLIC -----------------------------------------------------------------------------------
 Route::get('/', [App\Http\Controllers\Public\HomeController::class, 'show']);
 
+Route::controller(App\Http\Controllers\Public\ContactController::class)->group(function () {
+  Route::get('/contact', 'show');
+  Route::get('/contactCreateEnquiry', 'createEnquiry');
+});
+
+Route::controller(App\Http\Controllers\Public\FeedbackController::class)->group(function () {
+	Route::get('/feedback', 'show');
+	Route::get('/feedbackCreateEnquiry', 'createEnquiry');
+});
+
 Route::controller(App\Http\Controllers\Public\FindUsController::class)->group(function () {
 	Route::get('/find-us', 'show');
+});
+
+Route::controller(App\Http\Controllers\Public\MapController::class)->group(function () {
+	Route::get('/map', 'show');
 });
 
 Route::controller(App\Http\Controllers\Public\ProgrammeController::class)->group(function () {
@@ -22,16 +36,6 @@ Route::controller(App\Http\Controllers\Public\ScoutsController::class)->group(fu
 Route::controller(App\Http\Controllers\Public\SupportersController::class)->group(function () {
 	Route::get('/supporters', 'show');
 	Route::get('/supportersCreateEnquiry', 'createEnquiry');
-});
-
-Route::controller(App\Http\Controllers\Public\ContactController::class)->group(function () {
-  Route::get('/contact', 'show');
-  Route::get('/contactCreateEnquiry', 'createEnquiry');
-});
-
-Route::controller(App\Http\Controllers\Public\FeedbackController::class)->group(function () {
-	Route::get('/feedback', 'show');
-	Route::get('/feedbackCreateEnquiry', 'createEnquiry');
 });
 
 Route::controller(App\Http\Controllers\Public\SitemapController::class)->group(function () {

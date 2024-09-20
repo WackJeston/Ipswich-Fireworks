@@ -8,9 +8,24 @@ use DB;
 class Application {
 	public static function initiatePublic() {
 		$publicLinks = [
+			$contact = [
+				"title"=>"contact us",
+				"link"=>"/contact",
+				"icon"=>"fa-solid fa-address-card",
+			],
+			$feedback = [
+				"title"=>"leave feedback",
+				"link"=>"/feedback",
+				"icon"=>"fa-solid fa-message",
+			],
 			$findUs = [
 				"title"=>"find us",
 				"link"=>"/find-us",
+				"icon"=>"fa-solid fa-map-location-dot",
+			],
+			$map = [
+				"title"=>"map",
+				"link"=>"/map",
 				"icon"=>"fa-solid fa-map-location-dot",
 			],
 			$programme = [
@@ -22,16 +37,6 @@ class Application {
 				"title"=>"11th Ipswich Scout Group",
 				"link"=>"/scouts",
 				"icon"=>"fa-solid fa-people-group",
-			],
-			$contact = [
-				"title"=>"contact us",
-				"link"=>"/contact",
-				"icon"=>"fa-solid fa-address-card",
-			],
-			$feedback = [
-				"title"=>"leave feedback",
-				"link"=>"/feedback",
-				"icon"=>"fa-solid fa-message",
 			],
 			$sponsors = [
 				"title"=>"supporters & sponsors",
