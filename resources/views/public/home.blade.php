@@ -56,9 +56,9 @@
 		@endif
 		
 		{{-- Remove after updates are complete --}}
-		<div style="display: flex; flex-direction: column; align-items: center; margin: 30px 40px 50px 40px;">
+		{{-- <div style="display: flex; flex-direction: column; align-items: center; margin: 30px 40px 50px 40px;">
 			<img style="display flex; height: 500px;" src="{{env('ASSET_PATH')}}homepage-advert.jpeg" alt="Performance Act Advert">
-		</div>
+		</div> --}}
 
 		<div class="large-message-box gray-box limited">
 			<h2>ONLINE TICKETS ONLY<br>TICKETS NOT AVAILABLE ANYWHERE ELSE<br>NO PAYMENT TAKEN AT GATES</h2>
