@@ -171,7 +171,7 @@ class HomePageController extends AdminController
 
 		$fileNames = ImageCommon::storeImages($request, 'homePageBottom', 'carousel');
 
-		$parentId = Banners::select('id')->where('page', 'home')->where('position', 'landingZone')->first()->id;
+		$parentId = Banners::select('id')->where('page', 'home')->where('position', 'bottom')->first()->id;
 
 		foreach ($fileNames as $fileName) {
 			Banners::create([

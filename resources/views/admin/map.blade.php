@@ -21,6 +21,7 @@
       <adminmap
 				:map="{{ json_encode($map) }}"
 				:icons="{{ json_encode($icons) }}"
+				:programme="{{ json_encode($programme) }}"
 			/>
     </div>
 

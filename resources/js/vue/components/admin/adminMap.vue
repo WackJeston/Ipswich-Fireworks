@@ -22,14 +22,12 @@
 				<label for="description">Description</label>
 				<textarea name="description" @keyup="this.saveIconData($event)"></textarea>
 
-				<label for="start-time">Start Time</label>
-				<input type="time" name="start-time" @change="this.saveIconData($event)">
-
-				<label for="end-time">End Time</label>
-				<input type="time" name="end-time" @change="this.saveIconData($event)">
+				<label for="programme">Programme</label>
+				<select name="programme" @change="this.saveIconData($event)" multiple>
+					<option value="0">Select a Programme</option>
+					<option v-for="(programme, i) in this.programme" :value="programme.id">{{ programme.value }}</option>
+				</select>
 			</form>
-
-			<button @click="this.saveMap" id="mapSave" class="page-button padding-large pb-dark">Save Map</button>
 		</div>
 	</div>
 </template>
@@ -40,6 +38,7 @@
     props: [
 			'map',
 			'icons',
+			'programme',
     ],
 
 		data() {
@@ -50,6 +49,7 @@
 				newY: 0,
 				targetId: null,
 				selectedIcon: null,
+				submitIcon:  null,
 			};
 		},
 
@@ -71,8 +71,7 @@
 				newDiv.dataset.width = null;
 				newDiv.dataset.title = '';
 				newDiv.dataset.description = '';
-				newDiv.dataset.startTime = null;
-				newDiv.dataset.endTime = null;
+				newDiv.dataset.programme = [];
 
 				let newImg = document.createElement('img');
 				newImg.src = event.target.src;
@@ -428,6 +427,8 @@
 					}
 				}
 
+				this.submitIcon = 'loading';
+
 				try {
 					this.response = await fetch(`/admin-mapSave/`, {
 						method: "POST",
@@ -444,6 +445,13 @@
 				} catch (err) {
 					console.log('----ERROR----');
 					console.log(err);
+
+					this.submitIcon = null;
+
+				} finally {
+					if (this.result == true) {
+						this.submitIcon = 'success';
+					}
 				}
 			}
 		},

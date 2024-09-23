@@ -64,12 +64,15 @@ class MapController extends AdminController
 		$mapAssetTable->addJsButton('showDeleteWarning', ['string:Banner', 'record:id', 'url:/admin-mapDeleteIcon/?'], 'fa-solid fa-trash-can', 'Delete Banner');
 		$mapAssetTable = $mapAssetTable->render();
 
+		$programme = DB::select('SELECT id, value FROM programme WHERE active = 1 AND type = "music"');
+
     return view('admin/map', compact(
 			'map',
 			'icons',
 			'mapForm',
 			'iconForm',
 			'mapAssetTable',
+			'programme',
     ));
   }
 
@@ -119,5 +122,7 @@ class MapController extends AdminController
 			'images' => json_encode($request->images),
 			'active' => 1,
 		]);
+
+		return true;
 	}
 }

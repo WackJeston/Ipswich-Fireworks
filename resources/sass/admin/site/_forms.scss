@@ -154,6 +154,10 @@ form textarea {
 	white-space: pre-wrap;
 }
 
+form select[multiple] {
+	height: auto;
+}
+
 form .submit {
 	background-color: v.$bg-dark;
 	border: none;

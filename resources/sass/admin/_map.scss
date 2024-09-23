@@ -69,7 +69,18 @@
 }
 
 .map #mapEditSection button#mapSave {
+	position: relative;
 	margin: auto 0 5px 0;
+}
+
+.map #mapEditSection button#mapSave div {
+	position: absolute;
+	right: 6px;
+	top: 0;
+	bottom: 0;
+	display: flex;
+	align-items: center;
+	justify-content: center;
 }
 
 .map #mapImageContainer {

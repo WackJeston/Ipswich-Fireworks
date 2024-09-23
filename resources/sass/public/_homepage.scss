@@ -49,6 +49,12 @@
 	@media (max-width: 500px) {
 		bottom: 100px;
 	}
+
+	@media (min-width: 1100px) {
+		justify-content: flex-end;
+		bottom: 60px;
+		right: 60px;
+	}
 }
 
 .home-page #banner-homepage-top a {

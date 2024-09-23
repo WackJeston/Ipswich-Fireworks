@@ -1,5 +1,7 @@
 <template>
-  <img :src="this.map.fileName" alt="Map Image">
+	<div class="content">
+		<img :src="this.map.fileName" alt="Map Image">
+	</div>
 </template>
 
 
