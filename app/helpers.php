@@ -11,190 +11,23 @@ use App\Models\Asset;
 use App\Models\Products;
 use App\Models\User;
 
-function getCachedRecords(string $key) {
-	if (Cache::has($key)) {
-		return Cache::get($key);
+function write($filePath, $data = '', $mode = 'w') {
+	$fh = fopen($filePath, $mode);
+
+	if($fh) {
+		fwrite($fh, $data);
+		fclose($fh);
+
+		return $filePath;
 	}
 
 	return false;
-}
-
-function cacheRecords(string $key, array $records, int $seconds = null) {
-	if (Cache::has($key)) {
-		$records = Cache::get($key);
-
-	} else {
-		if ($seconds == null) {
-			$seconds = strtotime(date("Y-m-d 02:00", strtotime('tomorrow'))) - strtotime(now());
-			// $seconds = 300;
-		}
-
-		Cache::put($key, $records, $seconds);
-	}
-
-	return $records;
-}
-
-function cachePdf(string $fileName, bool $overWrite = false) {
-	$publicFileName = sprintf('pdfs/%s.pdf', explode('.', $fileName)[0]);
-
-	if (!Storage::disk('public')->exists($publicFileName) || $overWrite) {
-		$data = Storage::get('pdfs/' . $fileName);
-
-		if (!empty($data)) {
-			Storage::disk('public')->put($publicFileName, $data);
-		}
-	}
-		
-	return Storage::disk('public')->url($publicFileName);
 }
 
 function resetShowMarker() {
 	if ((empty(session()->get('_previous')['url']) && empty(session()->get('pageShowMarkerPrevious')[0])) || !in_array(explode('?', url()->current())[0], [explode('?', session()->get('pageShowMarkerPrevious'))[0], explode('?', session()->get('_previous')['url'])[0]])) {
 		session()->put('pageShowMarker', false);
 	}
-}
-
-function cacheImage(string $fileName, int $width = 0, int $height = 0, bool $trim = false, string $background = null, bool $webp = true):string {
-	$publicFileName = sprintf('images/%s%s%s.%s', 
-		explode('.', $fileName)[0], 
-		($width > 0 || $height > 0) ? sprintf('-%d-%d', $width, $height) : '',
-		$trim ? '-trim' : '',
-		$webp ? 'webp' : explode('.', $fileName)[1]
-	);
-
-	if (!Storage::disk('public')->exists($publicFileName)) {
-		$data = Storage::get($fileName);
-		$mimeType = Storage::mimeType($fileName);
-
-		if (!empty($data)) {
-			$manager = new ImageManager(['driver' => 'imagick']);
-
-			if ($mimeType == 'image/svg+xml') {
-				$image = $manager->make($data);
-			} else {
-				$image = $manager->make($data);
-			}
-
-			if($trim) {
-				$image->trim();
-			}
-
-			if ($width > 0 || $height > 0) {
-				$width = $width > 0 ? $width : null;
-				$height = $height > 0 ? $height : null;
-
-				$image->resize($width, $height, function($constraint) {
-					$constraint->aspectRatio();
-					// $constraint->upsize();
-				});
-
-				if (!is_null($background)) {
-					$image->resizeCanvas($width, $height, 'center', false, $background);
-				}
-			}
-			
-			if($webp) {
-				$image->encode('webp');
-			}
-			
-			Storage::disk('public')->put($publicFileName, $image);
-			ImageOptimizer::optimize(env('ASSET_PATH_SERVER') . $publicFileName);
-		}
-	}
-		
-	return Storage::disk('public')->url($publicFileName);
-}
-
-function cacheImages($records, int $width = 0, int $height = 0, bool $trim = false, string $background = null, bool $webp = true) {
-	foreach ($records as $i => $record) {
-		if (property_exists($record, 'fileName')) {
-			if (is_array($record)) {
-				if (!empty($record['fileName'])) {
-					$record['fileName'] = cacheImage($record['fileName'], $width, $height, $trim, $background, $webp);
-				}
-			} else {
-				if (!empty($record->fileName)) {
-					$record->fileName = cacheImage($record->fileName, $width, $height, $trim, $background, $webp);
-				}
-			}
-		}
-		
-	}
-
-	return $records;
-}
-
-function preloadImage(string $url, bool $first = false) {
-	if (session()->has('preloaded-images')) {
-		if ($first) {
-			$records = [];
-		} else {
-			$records = session()->get('preloaded-images');
-		}
-
-		if (!in_array($url, $records)) {
-			$records[] = $url;
-			session()->put('preloaded-images', $records);
-		}
-
-	} else {
-		$records = [$url];
-		session()->put('preloaded-images', $records);
-	}
-}
-
-function storeImages(Request $request, $id, string $type):array {
-	$array = [];
-	$fileNames = [];
-
-	foreach ($request->file() as $i => $file) {
-		if (str_starts_with($i, 'image')) {
-			$array[] = $file;
-		}
-	}
-
-	foreach ($array as $i => $file) {
-		$mimeType = explode('/', $file->getMimeType())[1];
-
-		if ($mimeType == 'jpeg') {
-			$mimeType = 'jpg';
-		}
-
-		$fileName = sprintf('images/%s-%s-%s-%s.%s',
-			$type,
-			$id,
-			$_SERVER['REQUEST_TIME'],
-			rtrim(explode('.', str_replace([' ', '(', ')'], '-', $file->getClientOriginalName()))[0], '-'),
-			$mimeType
-		);
-
-		Storage::put($fileName, file_get_contents($file));
-
-		$asset = Asset::create([
-			'name' => $file->getClientOriginalName(),
-			'fileName' => $fileName,
-		]);
-		
-		$fileNames[] = [
-			'id' => $asset->id,
-			'new' => $asset->fileName,
-			'old' => $asset->name,
-		];
-	}
-
-	return $fileNames;
-}
-
-function storeImageFromString(string $fileName, string $data) {
-	Storage::put('images/' . $fileName, $data);
-
-	$asset = Asset::create([
-		'name' => $fileName,
-		'fileName' => $fileName,
-	]);
-
-	return $asset->id;
 }
 
 // Klaviyo
@@ -266,6 +99,7 @@ function subscribeKlaviyo($userId) {
 		}
 	}
 }
+
 
 // AWS S3
 function connectSes() {

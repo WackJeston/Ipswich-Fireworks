@@ -1,6 +1,6 @@
 <?php
 
-namespace App\DataClasses;
+namespace App\Classes;
 
 use Illuminate\Http\Request;
 
@@ -29,7 +29,7 @@ class DataForm
 			'type' => $type,
 			'name' => in_array('multiple', $attributes) ? $name . '[]' : $name,
 			'label' => $label,
-			'value' => $value,
+			'value' => htmlspecialchars($value, ENT_COMPAT),
 			'max' => $max,
 			'min' => $min,
 			'required' => $required,
@@ -103,7 +103,7 @@ class DataForm
 			}
 
 			$html .= sprintf('
-			<input type="hidden" name="_token" value="%s" />', $this->form['token']);
+			<input type="hidden" name="_token" value="%s">', $this->form['token']);
 
 			foreach ($this->form['inputs'] as $i => $input) {
 				switch ($input['type']) {
@@ -112,7 +112,7 @@ class DataForm
 					case 'url':
 						$html .= sprintf('
 						<label for="%1$s">%2$s%8$s</label>
-						<input type="%9$s" id="%1$s" name="%1$s" value="%3$s" minlength="%4$s" maxlength="%5$s" placeholder="%6$s" %7$s %10$s />',
+						<input type="%9$s" id="%1$s" name="%1$s" value="%3$s" minlength="%4$s" maxlength="%5$s" placeholder="%6$s" %7$s %10$s>',
 							$input['name'],
 							$input['label'],
 							$input['value'],
@@ -129,7 +129,7 @@ class DataForm
 					case 'date':
 						$html .= sprintf('
 						<label for="%1$s">%2$s%8$s</label>
-						<input class="date-input" type="date" id="%1$s" name="%1$s" value="%3$s" minlength="%4$s" maxlength="%5$s" placeholder="%6$s" %7$s %9$s />',
+						<input class="date-input" type="date" id="%1$s" name="%1$s" value="%3$s" minlength="%4$s" maxlength="%5$s" placeholder="%6$s" %7$s %9$s>',
 							$input['name'],
 							$input['label'],
 							date('Y-m-d', strtotime($input['value'])),
@@ -146,7 +146,7 @@ class DataForm
 					case 'dateTime':
 						$html .= sprintf('
 						<label for="%1$s">%2$s%8$s</label>
-						<input class="date-input" type="datetime-local" step="1" id="%1$s" name="%1$s" value="%3$s" minlength="%4$s" maxlength="%5$s" placeholder="%6$s" %7$s %9$s />',
+						<input class="date-input" type="datetime-local" step="1" id="%1$s" name="%1$s" value="%3$s" minlength="%4$s" maxlength="%5$s" placeholder="%6$s" %7$s %9$s>',
 							$input['name'],
 							$input['label'],
 							date('Y-m-d H:i:s', strtotime($input['value'])),
@@ -162,7 +162,7 @@ class DataForm
 					case 'time':
 						$html .= sprintf('
 						<label for="%1$s">%2$s%8$s</label>
-						<input class="date-input" type="time" id="%1$s" name="%1$s" value="%3$s" minlength="%4$s" maxlength="%5$s" placeholder="%6$s" %7$s %9$s />',
+						<input class="date-input" type="time" id="%1$s" name="%1$s" value="%3$s" minlength="%4$s" maxlength="%5$s" placeholder="%6$s" %7$s %9$s>',
 							$input['name'],
 							$input['label'],
 							date('H:i:s', strtotime($input['value'])),
@@ -176,12 +176,15 @@ class DataForm
 						break;
 
 					case 'textarea':
+						$textareaValue = str_replace("\r\n", "\n", $input['value']);
+						$textareaValue = str_replace("\n\n", "\n&#013;&#010", $textareaValue);
+
 						$html .= sprintf('
 						<label for="%1$s">%2$s%8$s</label>
-						<textarea type="text" id="%1$s" name="%1$s" minlength="%4$s" maxlength="%5$s" placeholder="%6$s" %7$s %9$s />%3$s</textarea>',
+						<textarea type="text" id="%1$s" name="%1$s" minlength="%4$s" maxlength="%5$s" placeholder="%6$s" %7$s %9$s>%3$s</textarea>',
 							$input['name'],
 							$input['label'],
-							$input['value'],
+							$textareaValue,
 							$input['min'],
 							$input['max'],
 							$input['placeholder'],
@@ -195,7 +198,7 @@ class DataForm
 					case 'number':
 						$html .= sprintf('
 						<label for="%1$s">%2$s%8$s</label>
-						<input type="number" id="%1$s" name="%1$s" value="%3$s" step="any" %4$s %5$s placeholder="%6$s" %7$s %9$s />',
+						<input type="number" id="%1$s" name="%1$s" value="%3$s" step="any" %4$s %5$s placeholder="%6$s" %7$s %9$s>',
 							$input['name'],
 							$input['label'],
 							$input['value'],
@@ -213,7 +216,7 @@ class DataForm
 					case 'telephone':
 						$html .= sprintf('
 						<label for="%1$s">%2$s%8$s</label>
-						<input type="tel" id="%1$s" name="%1$s" value="%3$s" step="any" %4$s %5$s placeholder="%6$s" %7$s %9$s />',
+						<input type="tel" id="%1$s" name="%1$s" value="%3$s" step="any" %4$s %5$s placeholder="%6$s" %7$s %9$s>',
 							$input['name'],
 							$input['label'],
 							$input['value'],
@@ -232,7 +235,7 @@ class DataForm
 						<label for="password" class="show-password">
 							<i class="fa-solid fa-eye"></i>
 						</label>
-						<input class="password-input" type="password" id="%1$s" name="%1$s" value="%3$s" minlength="%4$s" maxlength="%5$s" placeholder="%6$s" autocomplete="one-time-code" %7$s %10$s />',
+						<input class="password-input" type="password" id="%1$s" name="%1$s" value="%3$s" minlength="%4$s" maxlength="%5$s" placeholder="%6$s" autocomplete="one-time-code" %7$s %10$s>',
 							$input['name'],
 							$input['label'],
 							$input['value'],
@@ -250,7 +253,7 @@ class DataForm
 					case 'color':
 						$html .= sprintf('
 						<label for="%1$s">%2$s%6$s</label>
-						<input class="date-input" type="color" id="%1$s" name="%1$s" value="%3$s" placeholder="%4$s" %5$s %7$s />',
+						<input class="date-input" type="color" id="%1$s" name="%1$s" value="%3$s" placeholder="%4$s" %5$s %7$s>',
 							$input['name'],
 							$input['label'],
 							$input['value'],
@@ -273,7 +276,7 @@ class DataForm
 							foreach ($input['options'] as $i2 => $option) {
 								$html .= sprintf('
 								<div>
-									<input type="radio" id="%2$s" name="%3$s" value="%1$s" %4$s />
+									<input type="radio" id="%2$s" name="%3$s" value="%1$s" %4$s>
 									<label for="%2$s">%2$s</label>
 								</div>',
 									$option['value'],
@@ -290,7 +293,7 @@ class DataForm
 					case 'checkbox':
 						$html .= sprintf('
 						<div class="checkbox-container">
-							<input type="checkbox" id="%1$s" name="%1$s" %3$s minlength="%4$s" maxlength="%5$s" placeholder="%6$s" %7$s %9$s />
+							<input type="checkbox" id="%1$s" name="%1$s" %3$s minlength="%4$s" maxlength="%5$s" placeholder="%6$s" %7$s %9$s>
 							<label for="%1$s">%2$s%8$s</label>
 						</div>',
 							$input['name'],
@@ -326,8 +329,8 @@ class DataForm
 					case 'selectmultiple':
 						$html .= sprintf('
 						<label for="%1$s">%2$s%5$s</label>
-						<select id="%1$s" name="%1$s" placeholder="%3$s" %4$s %6$s %7$s>
-							%8$s',
+						<select id="%1$s" name="%1$s" placeholder="%3$s" value="%8$s" %4$s %6$s %7$s>
+							%9$s',
 							$input['name'],
 							$input['label'],
 							$input['placeholder'],
@@ -335,6 +338,7 @@ class DataForm
 							$input['required'] ? '<span class="red"> *</span>' : '',
 							$input['attributes'],
 							$input['type'] == 'selectmultiple' ? 'multiple' : '',
+							$input['value'],
 							$input['emptyValue'] ? '<option></option>' : '',
 						);
 

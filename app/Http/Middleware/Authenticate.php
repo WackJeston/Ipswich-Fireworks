@@ -4,7 +4,9 @@ namespace App\Http\Middleware;
 
 use Illuminate\Auth\Middleware\Authenticate as Middleware;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\View;
 use Illuminate\Http\Request;
+use App\Classes\Application;
 use Closure;
 
 class Authenticate extends Middleware
@@ -42,6 +44,8 @@ class Authenticate extends Middleware
           return redirect("/admin");
         }
       }
+
+			Application::initiateAdmin();
 
     } elseif (!str_contains(url()->current(), '/admin') && !str_contains(url()->current(), '/verify-email') && !Auth::check()) {
 			if ($request->ajax()) {

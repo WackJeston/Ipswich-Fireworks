@@ -5,8 +5,9 @@ use DB;
 use Hash;
 use Illuminate\Http\Request;
 use Illuminate\Validation\Rule;
-use App\DataClasses\DataTable;
-use App\DataClasses\DataForm;
+use App\Classes\DataTable;
+use App\Classes\DataForm;
+use App\Classes\AccessLevelCommon;
 use App\Models\Address;
 use App\Models\User;
 
@@ -18,11 +19,19 @@ class UserProfileController extends AdminController
     if (User::find($id) == null) {
       return redirect('/admin/users')->withErrors(['1' => 'User not found']);
     }
+		
+		$authorised = AccessLevelCommon::authorise();
+
+		if (!$authorised && $id != auth()->user()->id) {
+			return back()->withErrors(['1' => 'Not Authorised']);
+		}
 
     $user = DB::select(sprintf('SELECT
-      *
-      FROM users
-      WHERE id = %d
+      u.*,
+			al.name AS accessLevel
+      FROM users AS u
+			LEFT JOIN access_levels AS al ON u.accessLevelId = al.id
+      WHERE u.id = %d
       LIMIT 1
     ', $id));
 
@@ -35,9 +44,12 @@ class UserProfileController extends AdminController
 		$editForm->addInput('text', 'lastname', 'Last Name', $user->lastName, 255, 1, true);
 		$editForm->addInput('email', 'email', 'Email', $user->email, 255, 1, true);
 		$editForm->addInput('password', 'password', 'Password', null, 255, 6, false, 'New Password');
+		$editForm->addInput('select', 'accessLevelId', 'Access Level', $user->accessLevelId, 255, 1, true);
+		$editForm->populateOptions('accessLevelId', AccessLevelCommon::getAccessLevels(true), false);
 		$editForm = $editForm->render();
 
     return view('admin/user-profile', compact(
+			'authorised',
       'user',
 			'billingAddress',
 			'editForm',
@@ -51,13 +63,15 @@ class UserProfileController extends AdminController
       'firstname' => 'max:100',
       'lastname' => 'max:100',
       'email' => ['email', 'max:100', Rule::unique('users')->ignore($id)],
-      'password' => 'nullable|min:6|max:100'
+      'password' => 'nullable|min:6|max:100',
+			'accessLevelId' => 'required|exists:access_levels,id'
     ]);
 
     User::where('id', $id)->update([
       'firstname' => $request->firstname,
       'lastname' => $request->lastname,
       'email' => $request->email,
+			'accessLevelId' => $request->accessLevelId,
     ]);
 
     if ($request->password) {

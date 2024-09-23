@@ -3,8 +3,8 @@
 namespace App\Http\Controllers\Public;
 
 use DB;
-use Illuminate\Support\Facades\Storage;
 use Illuminate\Http\Request;
+use App\Classes\ImageCommon;
 use App\Models\Settings;
 
 class HomeController extends PublicController
@@ -26,9 +26,9 @@ class HomeController extends PublicController
 			ORDER BY b.sequence ASC
 		');
 
-		$landingZoneBanners = cacheImages($landingZoneBanners, 2400, 2400);
+		$landingZoneBanners = ImageCommon::cacheImages($landingZoneBanners, 2400, 2400);
 		if (!empty($landingZoneBanners)) {
-			preloadImage($landingZoneBanners[0]->fileName);
+			ImageCommon::preloadImage($landingZoneBanners[0]->fileName);
 		}
 
 		$primaryInfo = DB::select('SELECT * FROM content WHERE active = 1 AND page = "home" AND position = "primaryInfo"')[0];
@@ -46,7 +46,7 @@ class HomeController extends PublicController
 			ORDER BY b.sequence ASC
 		');
 
-		$bottomBanners = cacheImages($bottomBanners, 2400, 2400);
+		$bottomBanners = ImageCommon::cacheImages($bottomBanners, 2400, 2400);
 
     return view('public/home', compact(
       'landingZoneBanners',

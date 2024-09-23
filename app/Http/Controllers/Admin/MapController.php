@@ -4,12 +4,13 @@ namespace App\Http\Controllers\Admin;
 
 use DB;
 use Illuminate\Http\Request;
-use Illuminate\Support\Facades\Storage;
 use Illuminate\Validation\Rule;
-use App\DataClasses\DataTable;
-use App\DataClasses\DataForm;
+use App\Classes\DataTable;
+use App\Classes\DataForm;
+use App\Classes\ImageCommon;
 use App\Models\Map;
 use App\Models\MapAsset;
+use App\Models\NotificationEvent;
 
 
 class MapController extends AdminController
@@ -26,7 +27,8 @@ class MapController extends AdminController
 			WHERE m.id = 1
 		');
 
-		$map = cacheImages($map)[0];
+		$map = ImageCommon::cacheImages($map)[0];
+		$map->images = json_decode($map->images, true);
 
 		$icons = DB::select('SELECT 
 			ma.id,
@@ -36,7 +38,7 @@ class MapController extends AdminController
 			INNER JOIN asset AS a ON a.id = ma.assetId;
 		');
 
-		$icons = cacheImages($icons);
+		$icons = ImageCommon::cacheImages($icons);
 
 		$mapForm = new DataForm(request(), '/admin-mapUploadMap/');
 		$mapForm->setTitle('Upload Map');
@@ -58,9 +60,11 @@ class MapController extends AdminController
 		');
 		$mapAssetTable->addColumn('id', '#');
 		$mapAssetTable->addColumn('name', 'Name', 2, true);
-		$mapAssetTable->addJsButton('showImage', ['record:fileName'], 'fa-solid fa-eye', 'View Image');
+		$mapAssetTable->addJsButton('showImage', ['record:fileName'], 'fa-solid fa-image', 'View Image');
 		$mapAssetTable->addJsButton('showDeleteWarning', ['string:Banner', 'record:id', 'url:/admin-mapDeleteIcon/?'], 'fa-solid fa-trash-can', 'Delete Banner');
 		$mapAssetTable = $mapAssetTable->render();
+
+		$programme = DB::select('SELECT id, value FROM programme WHERE active = 1 AND type = "music"');
 
     return view('admin/map', compact(
 			'map',
@@ -68,12 +72,13 @@ class MapController extends AdminController
 			'mapForm',
 			'iconForm',
 			'mapAssetTable',
+			'programme',
     ));
   }
 
 	public function uploadMap(Request $request)
 	{
-		$fileName = storeImages($request, '1', 'map')[0];
+		$fileName = ImageCommon::storeImages($request, '1', 'map')[0];
 
 		$map = Map::firstOrCreate(['id' => 1]);
 		$map->assetId = $fileName['id'];
@@ -84,7 +89,7 @@ class MapController extends AdminController
 
 	public function addIcon(Request $request)
 	{
-		$fileNames = storeImages($request, '1', 'map');
+		$fileNames = ImageCommon::storeImages($request, '1', 'map');
 
 		foreach ($fileNames as $fileName) {
 			$mapAsset = new MapAsset();
@@ -102,5 +107,22 @@ class MapController extends AdminController
 		$mapAsset->delete();
 
 		return redirect('/admin/map');
+	}
+
+	public function saveMap(Request $request)
+	{
+		$map = Map::firstOrCreate([
+			'id' => 1,
+		]);
+
+		$map->update([
+			'assetId' => $request->asset,
+			'canvasHeight' => $request->canvas['height'],
+			'canvasWidth' => $request->canvas['width'],
+			'images' => json_encode($request->images),
+			'active' => 1,
+		]);
+
+		return true;
 	}
 }

@@ -4,11 +4,13 @@
 
 @section('content')
   <main class="user-profile">
-
-    <div class="link-trail">
-      <i class="fa-solid fa-arrow-left"></i>
-      <a href="/admin/users">Users</a>
-    </div>
+		
+		@if ($authorised)
+			<div class="link-trail">
+				<i class="fa-solid fa-arrow-left"></i>
+				<a href="/admin/users">Users</a>
+			</div>
+		@endif
 
     @if ($errors->any())
       <div id="alerterror" class="lt">
@@ -35,6 +37,7 @@
 				<ul class="web-box profile-details">
 					<li><strong>Name: </strong>{{ $user->firstName }} {{ $user->lastName }}</li>
 					<li><strong>Email: </strong>{{ $user->email }}</li>
+					<li><strong>Access Level: </strong>{{ $user->accessLevel }}</li>
 					@if (!is_null($user->klaviyoId))
 						<li><strong>Klaviyo ID: </strong>{{ $user->klaviyoId }}</li>
 					@endif

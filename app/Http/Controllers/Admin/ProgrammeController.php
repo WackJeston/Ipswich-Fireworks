@@ -5,8 +5,9 @@ namespace App\Http\Controllers\Admin;
 use DB;
 use Illuminate\Http\Request;
 use Illuminate\Validation\Rule;
-use App\DataClasses\DataTable;
-use App\DataClasses\DataForm;
+use App\Classes\DataTable;
+use App\Classes\DataForm;
+use App\Classes\ImageCommon;
 use App\Models\Programme;
 
 class ProgrammeController extends AdminController
@@ -56,7 +57,7 @@ class ProgrammeController extends AdminController
 		$musicTable->addColumn('time', 'Time', 2, true);
 		$musicTable->addColumn('link', 'Link' , 3, true);
 		$musicTable->addColumn('active', 'Active', 2, false, 'toggle');
-		$musicTable->addJsButton('showImage', ['record:fileName'], 'fa-solid fa-eye', 'View Image');
+		$musicTable->addJsButton('showImage', ['record:fileName'], 'fa-solid fa-image', 'View Image');
 		$musicTable->addJsButton('showDeleteWarning', ['string:Programme', 'record:id', 'url:/programmeDelete/?'], 'fa-solid fa-trash-can', 'Delete Item');
 		$musicTable = $musicTable->render();
 
@@ -94,7 +95,7 @@ class ProgrammeController extends AdminController
 			'fileName' => 'image|mimes:jpg,jpeg,png,svg,webp',
     ]);
 
-		$fileNames = storeImages($request, 'music', 'programme');
+		$fileNames = ImageCommon::storeImages($request, 'music', 'programme');
 
 		$time = null;
 

@@ -4,9 +4,9 @@ namespace App\Http\Controllers\Admin;
 
 use DB;
 use Illuminate\Http\Request;
-use Illuminate\Support\Facades\Storage;
-use App\DataClasses\DataTable;
-use App\DataClasses\DataForm;
+use App\Classes\DataTable;
+use App\Classes\DataForm;
+use App\Classes\ImageCommon;
 use App\Models\Supporters;
 
 class SupportersController extends AdminController
@@ -32,7 +32,7 @@ class SupportersController extends AdminController
 		$table->addColumn('name', 'Name', 2);
 		$table->addColumn('link', 'Link', 2, true);
 		$table->addColumn('active', 'Active', 1, false, 'toggle');
-		$table->addJsButton('showImage', ['record:fileName'], 'fa-solid fa-eye', 'View Image');
+		$table->addJsButton('showImage', ['record:fileName'], 'fa-solid fa-image', 'View Image');
 		$table->addJsButton('showDeleteWarning', ['string:Supporter', 'record:id', 'url:/supportersDelete/?'], 'fa-solid fa-trash-can', 'Delete Supporter');
 		$table = $table->render();
 		
@@ -50,7 +50,7 @@ class SupportersController extends AdminController
 			'image' => 'required|image|mimes:jpg,jpeg,png,svg,webp',
     ]);
 
-		$fileNames = storeImages($request, 'standard', 'supporters');
+		$fileNames = ImageCommon::storeImages($request, 'standard', 'supporters');
 
 		foreach ($fileNames as $fileName) {
 			Supporters::create([

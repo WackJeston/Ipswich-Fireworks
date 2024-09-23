@@ -1,11 +1,12 @@
 <?php
 
-namespace App\DataClasses;
+namespace App\Classes;
 
 Use DB;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Session;
 use Illuminate\Support\Facades\Storage;
+use App\Classes\ImageCommon;
 
 class DataTable
 {
@@ -96,7 +97,7 @@ class DataTable
 
 		$this->table['records'] = DB::select($query);
 
-		$this->table['records'] = cacheImages($this->table['records']);
+		$this->table['records'] = ImageCommon::cacheImages($this->table['records']);
 	}
 
 	public function setTitle(string $title) {
@@ -433,7 +434,6 @@ class DataTable
 											$html .= sprintf('
 											<div class="button-label">
 												<p>%s</p>
-												<div></div>
 											</div>', $button['label']);
 										}
 										
@@ -449,7 +449,6 @@ class DataTable
 										$html .= sprintf('
 										<div class="button-label">
 											<p>%s</p>
-											<div></div>
 										</div>', $button['label']);
 									}
 									

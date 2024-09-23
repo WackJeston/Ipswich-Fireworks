@@ -1,10 +1,9 @@
 @extends('body-admin')
 
-@section('title', 'Map')
+@section('title', 'Access Levels')
 
 @section('content')
-  <main class="map">
-
+  <main class="access-levels">
     @if ($errors->any())
       <div id="alerterror" class="lt">
         <alerterror :errormessages="{{ str_replace(array('[', ']'), '', $errors) }}" errorcount="{{ count($errors) }}" />
@@ -16,20 +15,10 @@
         <alertmessage successmessage="{{ session()->get('message') }}" />
       </div>
     @endif
-
-		<div id="adminmap" class="dk">
-      <adminmap
-				:map="{{ json_encode($map) }}"
-				:icons="{{ json_encode($icons) }}"
-				:programme="{{ json_encode($programme) }}"
-			/>
-    </div>
-
+		
 		@php
-			echo $mapForm['html'];
-			echo $iconForm['html'];
-			echo $mapAssetTable['html'];
+			echo $form['html'];
+			echo $table['html'];
 		@endphp
-
   </main>
 @endsection

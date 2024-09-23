@@ -24,7 +24,7 @@ body {
 }
 
 main {
-	margin: 10px;
+	margin: 20px 10px;
 
 	@media (min-width: 800px) {
 		margin: 30px 40px 40px 40px;
@@ -63,8 +63,9 @@ main h2 {
 	left: -25px;
 
 	@media (max-width: 800px) {
-		top: -8px;
-		left: -3px;
+		top: -5px;
+		left: 0px;
+		margin-bottom: 10px;
 	}
 }
 
@@ -253,21 +254,20 @@ main h2 {
 
 .profile-details {
 	margin-top: 0;
-	// margin-bottom: 10px !important;
 	padding: 0;
-	// flex-grow: 0 !important;
-
-	// @media (min-width: 800px) {
-	// 	margin-bottom: 20px !important;
-	// }
 }
 
 .profile-details li {
 	margin: 0;
-	padding: 4px 8px;
+	padding: 6px 25px;
+}
+
+.profile-details li:first-child {
+	padding-top: 16px;
 }
 
 .profile-details li:last-child {
+	padding-bottom: 16px;
 	border-radius: 0 0 5px 5px;
 }
 
@@ -473,6 +473,28 @@ i.pb-success:hover {
 	}
 }
 
+button.pb-dark,
+a.pb-dark {
+	background-color: v.$bg-dark;
+}
+
+i.pb-dark {
+	color: v.$bg-dark !important;
+}
+
+button.pb-dark:hover,
+a.pb-dark:hover {
+	@media (min-width: 640px) {
+		background-color: v.$bg-dark;
+	}
+}
+
+i.pb-dark:hover {
+	@media (min-width: 640px) {
+		color: v.$bg-dark !important;
+	}
+}
+
 button.pb-danger,
 a.pb-danger {
 	background-color: v.$red;
@@ -604,6 +626,14 @@ h1 .string-container {
 .vue-button-row .page-button .button-end-icon {
 	margin-left: 5px;
 	margin-right: 0;
+}
+
+.no-padding {
+	padding: 0;
+}
+
+.no-margin {
+	margin: 0;
 }
 
 // Alerts ---------------------------------------
@@ -797,4 +827,9 @@ h1 .string-container {
 	.hide-mobile {
 		display: none;
 	}
+}
+
+// common styles
+.d-none {
+	display: none;
 }

@@ -1,12 +1,9 @@
 @extends('body-admin')
 
-@section('title', 'Banners')
+@section('title', 'Secrets Manager')
 
 @section('content')
-  <main class="banners">
-
-    <h1 class="dk">Banners</h1>
-
+  <main class="secrets">
     @if ($errors->any())
       <div id="alerterror" class="lt">
         <alerterror :errormessages="{{ str_replace(array('[', ']'), '', $errors) }}" errorcount="{{ count($errors) }}" />
@@ -19,13 +16,20 @@
       </div>
     @endif
 
-    {{-- <div id="variantscreate" class="dk">
-      <variantscreate :createform="{{ json_encode($createForm) }}" />
-    </div> --}}
+		@if ($deploy)
+			<div class="vue-button-row">
+				<a href="/admin-secretsDeployEnv/" class="page-button padding">Deploy ENV</a>
+			</div>
+		@endif
 
-    @php
-			echo $bannersTable['html'];
+		@php
+			echo $selectForm['html'];
 		@endphp
 
+		@php
+			if (!is_null($editForm)) {
+				echo $editForm['html'];
+			}
+		@endphp
   </main>
 @endsection

@@ -4,10 +4,10 @@ namespace App\Http\Controllers\Admin;
 
 use DB;
 use Illuminate\Http\Request;
-use Illuminate\Support\Facades\Storage;
 use Illuminate\Validation\Rule;
-use App\DataClasses\DataTable;
-use App\DataClasses\DataForm;
+use App\Classes\DataTable;
+use App\Classes\DataForm;
+use App\Classes\ImageCommon;
 use App\Models\Banners;
 use App\Models\Content;
 
@@ -54,7 +54,7 @@ class HomePageController extends AdminController
 		$landingZoneBannerTable->addColumn('title', 'Title', 2, true);
 		$landingZoneBannerTable->addColumn('framing', 'Framing', 1, true, 'select', $framingOptions2);
 		$landingZoneBannerTable->addColumn('active', 'Active', 1, false, 'toggle');
-		$landingZoneBannerTable->addJsButton('showImage', ['record:fileName'], 'fa-solid fa-eye', 'View Image');
+		$landingZoneBannerTable->addJsButton('showImage', ['record:fileName'], 'fa-solid fa-image', 'View Image');
 		$landingZoneBannerTable->addJsButton('showDeleteWarning', ['string:Banner', 'record:id', 'url:/admin-home-pageDeleteLandingZoneBanner/?'], 'fa-solid fa-trash-can', 'Delete Banner');
 		$landingZoneBannerTable = $landingZoneBannerTable->render();
 
@@ -98,7 +98,7 @@ class HomePageController extends AdminController
 		$bottomBannerTable->addColumn('id', '#');
 		$bottomBannerTable->addColumn('framing', 'Framing', 1, true, 'select', $framingOptions2);
 		$bottomBannerTable->addColumn('active', 'Active', 1, false, 'toggle');
-		$bottomBannerTable->addJsButton('showImage', ['record:fileName'], 'fa-solid fa-eye', 'View Image');
+		$bottomBannerTable->addJsButton('showImage', ['record:fileName'], 'fa-solid fa-image', 'View Image');
 		$bottomBannerTable->addJsButton('showDeleteWarning', ['string:Banner', 'record:id', 'url:/admin-home-pageDeleteLandingZoneBanner/?'], 'fa-solid fa-trash-can', 'Delete Banner');
 		$bottomBannerTable = $bottomBannerTable->render();
 
@@ -118,7 +118,7 @@ class HomePageController extends AdminController
 			'title' => 'max:100',
 		]);
 
-		$fileNames = storeImages($request, 'homePageLZ', 'carousel');
+		$fileNames = ImageCommon::storeImages($request, 'homePageLZ', 'carousel');
 
 		$parentId = Banners::select('id')->where('page', 'home')->where('position', 'landingZone')->first()->id;
 
@@ -169,9 +169,9 @@ class HomePageController extends AdminController
 			'image-2' => 'required|image|mimes:jpg,jpeg,png,svg,webp,webp',
 		]);
 
-		$fileNames = storeImages($request, 'homePageBottom', 'carousel');
+		$fileNames = ImageCommon::storeImages($request, 'homePageBottom', 'carousel');
 
-		$parentId = Banners::select('id')->where('page', 'home')->where('position', 'landingZone')->first()->id;
+		$parentId = Banners::select('id')->where('page', 'home')->where('position', 'bottom')->first()->id;
 
 		foreach ($fileNames as $fileName) {
 			Banners::create([

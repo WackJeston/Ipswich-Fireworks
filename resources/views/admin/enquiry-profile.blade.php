@@ -1,32 +1,20 @@
 @extends('body-admin')
 
-@if ($type == 'standard')
+@if ($enquiry->type == 'standard')
 	@section('title', 'Enquiry Details')
-@elseif ($type == 'feedback')
+@elseif ($enquiry->type == 'feedback')
 	@section('title', 'Feeback Enquiry Details')
-@elseif ($type == 'sponsor')
+@elseif ($enquiry->type == 'sponsor')
 	@section('title', 'New Sponsor Enquiry Details')
 @endif
 
 @section('content')
   <main class="enquiry-profile">
-
-    @if ($type == 'standard')
-			<div class="link-trail">
-				<i class="fa-solid fa-arrow-left"></i>
-				<a href="/admin/enquiries">Enquiries</a>
-			</div>
-		@elseif ($type == 'feedback')
-			<div class="link-trail">
-				<i class="fa-solid fa-arrow-left"></i>
-				<a href="/admin/feedback">Feedback</a>
-			</div>
-		@elseif ($type == 'sponsor')
-			<div class="link-trail">
-				<i class="fa-solid fa-arrow-left"></i>
-				<a href="/admin/new-sponsors">Sponsor Enquiries</a>
-			</div>
-		@endif
+		
+    <div class="link-trail">
+			<i class="fa-solid fa-arrow-left"></i>
+			<a href="/admin/enquiries">Enquiries</a>
+		</div>
 
     @if ($errors->any())
       <div id="alerterror" class="lt">
@@ -47,7 +35,7 @@
 					<li><strong>Email:</strong> {{ $enquiry->email }}</li>
 					<li><strong>Phone:</strong> {{ $enquiry->phone }}</li>
 					<li><strong>Date:</strong> {{ date('d/m/Y H:m:s', strtotime($enquiry->created_at)) }}</li>
-					@if ($type != 'sponsor')
+					@if ($enquiry->type != 'sponsor')
 						<li><strong>Subject:</strong> {{ $enquiry->subject }}</li>
 					@endif			
 				</ul>

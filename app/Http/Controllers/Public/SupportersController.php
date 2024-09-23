@@ -2,8 +2,8 @@
 namespace App\Http\Controllers\Public;
 
 Use DB;
-use Illuminate\Support\Facades\Storage;
 use Illuminate\Http\Request;
+use App\Classes\ImageCommon;
 use App\Models\Enquiry;
 
 class SupportersController extends PublicController
@@ -19,7 +19,7 @@ class SupportersController extends PublicController
 			ORDER BY s.sequence ASC
 		');
 
-		$records = cacheImages($records, 800, 800);
+		$records = ImageCommon::cacheImages($records, 800, 800);
 
     return view('public/supporters', compact(
 			'records',

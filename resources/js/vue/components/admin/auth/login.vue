@@ -2,7 +2,7 @@
   <div class="form-container dk">
 
     <!-- Login Form -->
-    <form action="/adminLogin" method="GET" enctype="multipart/form-data" class="web-box">
+    <form action="/adminLogin" method="GET" enctype="multipart/form-data" class="web-box data-form">
       <input type="hidden" name="_token" :value="csrf">
 
       <label for="email">Email<span> *</span></label>
