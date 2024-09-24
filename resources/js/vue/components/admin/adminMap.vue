@@ -32,7 +32,6 @@
 
 				<label for="programme">Programme</label>
 				<select name="programme" @change="this.saveIconData($event)" multiple>
-					<option value="0">Select a Programme</option>
 					<option v-for="(programme, i) in this.programme" :value="programme.id">{{ programme.value }}</option>
 				</select>
 			</form>
