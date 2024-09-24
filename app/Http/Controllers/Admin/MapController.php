@@ -66,6 +66,14 @@ class MapController extends AdminController
 
 		$programme = DB::select('SELECT id, value FROM programme WHERE active = 1 AND type = "music"');
 
+		$scripts = [
+		[
+			'path' => '/js/multiselect-dropdown.js',
+			'loadType' => 'defer',
+			'onLoad' => sprintf('initiateMultiSelect()'),
+		]
+		];
+
     return view('admin/map', compact(
 			'map',
 			'icons',
@@ -73,8 +81,18 @@ class MapController extends AdminController
 			'iconForm',
 			'mapAssetTable',
 			'programme',
+			'scripts',
     ));
   }
+
+	public function toggleMap()
+	{
+		$map = Map::firstOrCreate(['id' => 1]);
+		$map->active = !$map->active;
+		$map->save();
+
+		return json_encode($map->active);
+	}
 
 	public function uploadMap(Request $request)
 	{

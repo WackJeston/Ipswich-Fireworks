@@ -4,45 +4,50 @@ namespace App\Classes;
 use Illuminate\Support\Facades\View;
 use App\Classes\AccessLevelCommon;
 use DB;
+use App\Models\Map;
 
 class Application {
 	public static function initiatePublic() {
-		$publicLinks = [
-			$contact = [
-				"title"=>"contact us",
-				"link"=>"/contact",
-				"icon"=>"fa-solid fa-address-card",
-			],
-			$feedback = [
-				"title"=>"leave feedback",
-				"link"=>"/feedback",
-				"icon"=>"fa-solid fa-message",
-			],
-			$findUs = [
-				"title"=>"find us",
-				"link"=>"/find-us",
-				"icon"=>"fa-solid fa-map-location-dot",
-			],
-			$map = [
+		$publicLinks[] = [
+			"title"=>"contact us",
+			"link"=>"/contact",
+			"icon"=>"fa-solid fa-address-card",
+		];
+		$publicLinks[] = [
+			"title"=>"leave feedback",
+			"link"=>"/feedback",
+			"icon"=>"fa-solid fa-message",
+		];
+		$publicLinks[] = [
+			"title"=>"find us",
+			"link"=>"/find-us",
+			"icon"=>"fa-solid fa-map-location-dot",
+		];
+		
+		$map = Map::firstOrCreate(['id' => 1]);
+		
+		if ($map->active) {
+			$publicLinks[] = [
 				"title"=>"map",
 				"link"=>"/map",
 				"icon"=>"fa-solid fa-map-location-dot",
-			],
-			$programme = [
-				"title"=>"programme",
-				"link"=>"/programme",
-				"icon"=>"fa-regular fa-rectangle-list",
-			],
-			$scouts = [
-				"title"=>"11th Ipswich Scout Group",
-				"link"=>"/scouts",
-				"icon"=>"fa-solid fa-people-group",
-			],
-			$sponsors = [
-				"title"=>"supporters & sponsors",
-				"link"=>"/supporters",
-				"icon"=>"fa-solid fa-heart-pulse",
-			],
+			];
+		}
+
+		$publicLinks[] = [
+			"title"=>"programme",
+			"link"=>"/programme",
+			"icon"=>"fa-regular fa-rectangle-list",
+		];
+		$publicLinks[] = [
+			"title"=>"11th Ipswich Scout Group",
+			"link"=>"/scouts",
+			"icon"=>"fa-solid fa-people-group",
+		];
+		$publicLinks[] = [
+			"title"=>"supporters & sponsors",
+			"link"=>"/supporters",
+			"icon"=>"fa-solid fa-heart-pulse",
 		];
 
 		$socials = [

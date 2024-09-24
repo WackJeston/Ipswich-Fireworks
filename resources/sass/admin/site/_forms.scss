@@ -26,7 +26,6 @@ form .input-label-container {
 }
 
 form input,
-// form label,
 form select,
 form option,
 form textarea,
@@ -41,7 +40,7 @@ form .file-input-label {
 form.data-form input,
 form.data-form label:not(.radio-container label),
 form.data-form select,
-form.data-form option,
+form.data-form .multiselect-dropdown,
 form.data-form .checkbox-container {
 	max-width: 550px;
 
@@ -65,7 +64,7 @@ form.data-form .submit {
 form .input-label-container input,
 form .input-label-container label:not(.radio-container label),
 form .input-label-container select,
-form .input-label-container option {
+form .input-label-container .multiselect-dropdown {
 	min-width: 50px;
 }
 
@@ -110,6 +109,7 @@ form input:not(form input:last-child, .radio-container input, .checkbox-containe
 form textarea,
 form label.file-input-label,
 form select,
+form .multiselect-dropdown,
 .stripe-input {
 	margin-bottom: 15px;
 }
@@ -118,8 +118,7 @@ form input:not(.radio-container input, .checkbox-container input, .submit),
 form textarea,
 form label.file-input-label,
 form label.file-input-label input,
-form select,
-form option {
+form select {
 	padding: 5px 8px;
 	border-radius: 5px;
 	color: v.$black;
@@ -131,7 +130,8 @@ form option {
 form.data-form input:not(.radio-container input, .checkbox-container input, .submit),
 form.data-form textarea,
 form.data-form label.file-input-label,
-form.data-form select:not(.product-page .wb-content) {
+form.data-form select:not(.product-page .wb-content),
+form.data-form .multiselect-dropdown {
 	border: 1px solid v.$border;
 }
 
@@ -154,8 +154,18 @@ form textarea {
 	white-space: pre-wrap;
 }
 
-form select[multiple] {
-	height: auto;
+form .multiselect-dropdown {
+	width: 100% !important;
+}
+
+form .multiselect-dropdown-list div {
+	display: flex;
+	flex-direction: row;
+	align-items: center;
+}
+
+form .multiselect-dropdown-list div input {
+	margin: 0 6px 4px 0 !important;
 }
 
 form .submit {

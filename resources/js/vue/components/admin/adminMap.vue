@@ -1,4 +1,12 @@
 <template>
+	<div class="vue-button-row">
+		<div>
+			<button v-if="this.active" @click="this.toggleActive()" class="page-button pb-success" type="button"><i class="fa-solid fa-toggle-on"></i>On</button>
+			<button v-else @click="this.toggleActive()" class="page-button pb-danger" type="button"><i class="fa-solid fa-toggle-off"></i>Off</button>
+		</div>
+		<div></div>
+	</div>
+
 	<div class="web-box" id="mapSection">
 		<div id="mapImageContainer">
 			<img :src="this.map.fileName" alt="Map Image" id="mapImage">
@@ -28,10 +36,17 @@
 					<option v-for="(programme, i) in this.programme" :value="programme.id">{{ programme.value }}</option>
 				</select>
 			</form>
+
+			<button @click="this.saveMap" id="mapSave" class="page-button padding-large pb-dark">
+				Save Map
+				<div>
+					<i v-if="this.submitIcon == 'loading'" class="fa-solid fa-spinner fa-spin"></i>
+					<i v-else-if="this.submitIcon == 'success'" class="fa-solid fa-check"></i>
+				</div>
+			</button>
 		</div>
 	</div>
 </template>
-
 
 <script>
   export default {
@@ -43,6 +58,7 @@
 
 		data() {
 			return {
+				active: this.map.active,
 				startX: 0,
 				startY: 0,
 				newX: 0,
@@ -50,6 +66,7 @@
 				targetId: null,
 				selectedIcon: null,
 				submitIcon:  null,
+				value: null,
 			};
 		},
 
@@ -58,6 +75,20 @@
 		},
 
 		methods: {
+			async toggleActive() {
+				try {
+					this.response = await fetch('/admin-mapToggleMap');
+					this.result = await this.response.json();
+					
+				} catch (err) {
+					console.log('----ERROR----');
+					console.log(err);
+				
+				} finally {
+					this.active = this.result;
+				}
+			},
+
 			createIcon(event) {
 				let primary = document.getElementById('mapImageContainer');
 				let count = primary.children.length;
@@ -126,8 +157,8 @@
 					newDiv.dataset.width = newIconWidth ?? 100;
 					newDiv.dataset.title = existingIcon.title;
 					newDiv.dataset.description = existingIcon.description;
-					newDiv.dataset.startTime = existingIcon.startTime;
-					newDiv.dataset.endTime = existingIcon.endTime;
+					// newDiv.dataset.startTime = existingIcon.startTime;
+					// newDiv.dataset.endTime = existingIcon.endTime;
 
 					let newImg = document.createElement('img');
 					newImg.src = existingIcon.asset;
@@ -183,14 +214,14 @@
 					let sizeInput = document.querySelector('#mapEditSection input[name="size"]');
 					let titleInput = document.querySelector('#mapEditSection input[name="title"]');
 					let descriptionInput = document.querySelector('#mapEditSection textarea[name="description"]');
-					let startTimeInput = document.querySelector('#mapEditSection input[name="start-time"]');
-					let endTimeInput = document.querySelector('#mapEditSection input[name="end-time"]');
+					// let startTimeInput = document.querySelector('#mapEditSection input[name="start-time"]');
+					// let endTimeInput = document.querySelector('#mapEditSection input[name="end-time"]');
 
 					sizeInput.value = Math.round(target.dataset.height);
 					titleInput.value = target.dataset.title;
 					descriptionInput.value = target.dataset.description;
-					startTimeInput.value = target.dataset.startTime;
-					endTimeInput.value = target.dataset.endTime;
+					// startTimeInput.value = target.dataset.startTime;
+					// endTimeInput.value = target.dataset.endTime;
 				}
 			},
 
@@ -205,19 +236,19 @@
 						icon.dataset.height = size[0];
 						icon.dataset.width = size[1];
 
-					} else if (name == 'start-time') {
-						if (event.target.value == '') {
-							icon.dataset.startTime = null;
-						} else {
-							icon.dataset.startTime = event.target.value;
-						}
+					// } else if (name == 'start-time') {
+					// 	if (event.target.value == '') {
+					// 		icon.dataset.startTime = null;
+					// 	} else {
+					// 		icon.dataset.startTime = event.target.value;
+					// 	}
 
-					} else if (name == 'end-time') {
-						if (event.target.value == '') {
-							icon.dataset.endTime = null;
-						} else {
-							icon.dataset.endTime = event.target.value;
-						}
+					// } else if (name == 'end-time') {
+					// 	if (event.target.value == '') {
+					// 		icon.dataset.endTime = null;
+					// 	} else {
+					// 		icon.dataset.endTime = event.target.value;
+					// 	}
 
 					} else {
 						icon.dataset[name] = event.target.value;
@@ -421,8 +452,8 @@
 							position: iconPosition,
 							title: icon.dataset.title,
 							description: icon.dataset.description,
-							startTime: icon.dataset.startTime,
-							endTime: icon.dataset.endTime
+							// startTime: icon.dataset.startTime,
+							// endTime: icon.dataset.endTime
 						});
 					}
 				}

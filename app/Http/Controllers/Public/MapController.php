@@ -19,6 +19,10 @@ class MapController extends PublicController
 			WHERE m.id = 1
 		');
 
+		if (!$map[0]->active) {
+			return redirect('/');
+		}
+
 		$map = ImageCommon::cacheImages($map)[0];
 		$map->images = json_decode($map->images, true);
 
