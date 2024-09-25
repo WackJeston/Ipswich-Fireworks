@@ -124,27 +124,39 @@
 	height: 100px;
 }
 
-.map #mapImageContainer .mapIcon .sizeHandle {
-	display: none;
-	position: absolute;
-	bottom: 0;
-	right: -20px;
-	font-size: 1rem;
-	color: v.$bg-light;
-	cursor: nwse-resize;
-}
-
 .map #mapImageContainer .mapIcon .deleteButton {
 	position: absolute;
 	display: none;
 	align-items: center;
 	justify-content: center;
-	bottom: 22px;
-	right: -22px;
+	bottom: 25px;
+	right: -24px;
 	padding: 4px 5px 5px 4px;
-	border-radius: 5px;
+	border-radius: 3px;
 	background-color: v.$red;
 	color: white;
-	font-size: 0.7rem;
+	font-size: 0.8rem;
 	cursor: pointer;
+}
+
+.map #mapImageContainer .mapIcon .sizeHandle {
+	display: none;
+	position: absolute;
+	bottom: 0;
+	right: -22px;
+	font-size: 1rem;
+	color: v.$bg-light;
+	cursor: nwse-resize;
+}
+
+.map #mapImageContainer .mapIcon .angleHandle {
+	display: none;
+	position: absolute;
+	// bottom: calc(100% + 2px);
+	// left: calc(100% + 2px);
+	bottom: 0;
+	right: -22px;
+	font-size: 1rem;
+	color: v.$bg-light;
+	cursor: nwse-resize;
 }

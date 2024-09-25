@@ -66,13 +66,11 @@ class MapController extends AdminController
 
 		$programme = DB::select('SELECT id, value FROM programme WHERE active = 1 AND type = "music"');
 
-		$scripts = [
-		[
+		$scripts = [[
 			'path' => '/js/multiselect-dropdown.js',
 			'loadType' => 'defer',
-			'onLoad' => sprintf('initiateMultiSelect()'),
-		]
-		];
+			'onLoad' => '',
+		]];
 
     return view('admin/map', compact(
 			'map',

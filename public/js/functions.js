@@ -20,29 +20,6 @@ function loadingScreen() {
 	}, 3400);
 };
 
-function initiateMultiSelect() {
-	let targets = document.querySelectorAll('select[multiple]');
-
-	targets.forEach((target) => {
-		target.setAttribute('multiselect-search', true);
-		target.setAttribute('multiselect-select-all', true);
-
-		let input = target.parentElement.querySelector('input.multiselect-input-search');
-
-		// use observer to detect when input is available
-
-		// while (input == null) {
-		// 	setTimeout(() => {
-		// 		input = target.parentElement.querySelector('input.multiselect-input-search');
-		// 	}, 1000);
-		// }
-		
-		input.addEventListener('keyup', () => {
-			console.log('test');
-		});
-	});
-};
-
 async function orbitalVistionLoad3dModel(key, id) {
 	try {
 		this.expiviInstance = new ExpiviComponent.default({

@@ -24,6 +24,9 @@
 				<label for="size">Size</label>
 				<input type="number" name="size" min="30" @change="this.saveIconData($event)" @keyup="this.saveIconData($event)">
 
+				<label for="angle">Angle</label>
+				<input type="number" name="angle" min="0" max="360" @change="this.saveIconData($event)" @keyup="this.saveIconData($event)">
+
 				<label for="title">Title</label>
 				<input type="text" name="title" @keyup="this.saveIconData($event)">
 
@@ -31,7 +34,7 @@
 				<textarea name="description" @keyup="this.saveIconData($event)"></textarea>
 
 				<label for="programme">Programme</label>
-				<select name="programme" @change="this.saveIconData($event)" multiple>
+				<select name="programme" @change="this.saveIconData($event)" multiple multiselect-search="true" multiselect-select-all="true">
 					<option v-for="(programme, i) in this.programme" :value="programme.id">{{ programme.value }}</option>
 				</select>
 			</form>
@@ -65,7 +68,6 @@
 				targetId: null,
 				selectedIcon: null,
 				submitIcon:  null,
-				value: null,
 			};
 		},
 
@@ -99,6 +101,7 @@
 				newDiv.dataset.id = count;
 				newDiv.dataset.height = 100;
 				newDiv.dataset.width = null;
+				newDiv.dataset.angle = 0;
 				newDiv.dataset.title = '';
 				newDiv.dataset.description = '';
 				newDiv.dataset.programme = [];
@@ -114,9 +117,14 @@
 				sizeHandle.className = 'sizeHandle fa-solid fa-up-right-and-down-left-from-center fa-rotate-90';
 				sizeHandle.id = 'sizeHandle';
 
+				let angleHandle = document.createElement('i');
+				angleHandle.className = 'angleHandle fa-solid fa-turn-down fa-rotate-90';
+				angleHandle.id = 'angleHandle';
+
 				newDiv.appendChild(newImg);
 				newDiv.appendChild(deleteButton);
 				newDiv.appendChild(sizeHandle);
+				newDiv.appendChild(angleHandle);
 				primary.appendChild(newDiv);
 
 				let newDiv2 = document.getElementById('icon-' + count);
@@ -154,10 +162,10 @@
 					newDiv.dataset.id = count;
 					newDiv.dataset.height = newIconHeight ?? 100;
 					newDiv.dataset.width = newIconWidth ?? 100;
+					newDiv.dataset.angle = existingIcon.angle ?? 0;
 					newDiv.dataset.title = existingIcon.title;
 					newDiv.dataset.description = existingIcon.description;
-					// newDiv.dataset.startTime = existingIcon.startTime;
-					// newDiv.dataset.endTime = existingIcon.endTime;
+					newDiv.dataset.programme = existingIcon.programme;
 
 					let newImg = document.createElement('img');
 					newImg.src = existingIcon.asset;
@@ -172,9 +180,14 @@
 					sizeHandle.className = 'sizeHandle fa-solid fa-up-right-and-down-left-from-center fa-rotate-90';
 					sizeHandle.id = 'sizeHandle';
 
+					let angleHandle = document.createElement('i');
+					angleHandle.className = 'angleHandle fa-solid fa-turn-down fa-rotate-90';
+					angleHandle.id = 'angleHandle';
+
 					newDiv.appendChild(newImg);
 					newDiv.appendChild(deleteButton);
 					newDiv.appendChild(sizeHandle);
+					newDiv.appendChild(angleHandle);
 					primary.appendChild(newDiv);
 
 					let newDiv2 = document.getElementById('icon-' + count);
@@ -200,6 +213,9 @@
 					}
 
 					let target = event.target.parentElement;
+
+					this.selectedIcon = target.dataset.id;
+
 					target.classList.add('selected');
 
 					let sizeHandle = target.querySelector('#sizeHandle');
@@ -208,19 +224,17 @@
 					let deleteButton = target.querySelector('#deleteButton');
 					deleteButton.style.display = 'flex';
 
-					this.selectedIcon = target.dataset.id;
-
 					let sizeInput = document.querySelector('#mapEditSection input[name="size"]');
+					let angleInput = document.querySelector('#mapEditSection input[name="angle"]');
 					let titleInput = document.querySelector('#mapEditSection input[name="title"]');
 					let descriptionInput = document.querySelector('#mapEditSection textarea[name="description"]');
-					// let startTimeInput = document.querySelector('#mapEditSection input[name="start-time"]');
-					// let endTimeInput = document.querySelector('#mapEditSection input[name="end-time"]');
+					let programmeInput = document.querySelector('#mapEditSection select[name="programme"]');
 
 					sizeInput.value = Math.round(target.dataset.height);
+					angleInput.value = target.dataset.angle;
 					titleInput.value = target.dataset.title;
 					descriptionInput.value = target.dataset.description;
-					// startTimeInput.value = target.dataset.startTime;
-					// endTimeInput.value = target.dataset.endTime;
+					programmeInput.value = target.dataset.programme;
 				}
 			},
 
@@ -234,20 +248,6 @@
 
 						icon.dataset.height = size[0];
 						icon.dataset.width = size[1];
-
-					// } else if (name == 'start-time') {
-					// 	if (event.target.value == '') {
-					// 		icon.dataset.startTime = null;
-					// 	} else {
-					// 		icon.dataset.startTime = event.target.value;
-					// 	}
-
-					// } else if (name == 'end-time') {
-					// 	if (event.target.value == '') {
-					// 		icon.dataset.endTime = null;
-					// 	} else {
-					// 		icon.dataset.endTime = event.target.value;
-					// 	}
 
 					} else {
 						icon.dataset[name] = event.target.value;
@@ -448,11 +448,11 @@
 						config.images.push({
 							asset: iconImage.getAttribute('src'),
 							size: iconSize,
+							angle: icon.dataset.angle,
 							position: iconPosition,
 							title: icon.dataset.title,
 							description: icon.dataset.description,
-							// startTime: icon.dataset.startTime,
-							// endTime: icon.dataset.endTime
+							programme: icon.dataset.programme
 						});
 					}
 				}
