@@ -118,7 +118,7 @@
 				sizeHandle.id = 'sizeHandle';
 
 				let angleHandle = document.createElement('i');
-				angleHandle.className = 'angleHandle fa-solid fa-turn-down fa-rotate-90';
+				angleHandle.className = 'angleHandle fa-solid fa-turn-down';
 				angleHandle.id = 'angleHandle';
 
 				newDiv.appendChild(newImg);
@@ -206,11 +206,14 @@
 					if (selected) {
 						selected.classList.remove('selected');
 
+						let deleteButton = selected.querySelector('#deleteButton');
+						deleteButton.style.display = 'none';
+
 						let sizeHandle = selected.querySelector('#sizeHandle');
 						sizeHandle.style.display = 'none';
 
-						let deleteButton = selected.querySelector('#deleteButton');
-						deleteButton.style.display = 'none';
+						let angleHandle = selected.querySelector('#angleHandle');
+						angleHandle.style.display = 'none';
 					}
 
 					let target = event.target.parentElement;
@@ -298,8 +301,8 @@
 					newWidth = newHeight * aspectRatio;
 				}
 
-				image.style.width = newWidth + "px";
 				image.style.height = newHeight + "px";
+				image.style.width = newWidth + "px";
 
 				return [newHeight, newWidth];
 			},
@@ -415,11 +418,11 @@
 					newWidth = newHeight * aspectRatio;
 				}
 
-				image.style.width = newWidth + "px";
 				image.style.height = newHeight + "px";
+				image.style.width = newWidth + "px";
 
 				target.dataset.height = newHeight;
-				target.dataset.width = newHeight;
+				target.dataset.width = newWidth;
 				
 				let sizeInput = document.querySelector('#mapEditSection input[name="size"]');
 				sizeInput.value = newHeight;
