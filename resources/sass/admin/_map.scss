@@ -125,8 +125,8 @@
 }
 
 .map #mapImageContainer .mapIcon .deleteButton {
-	position: absolute;
 	display: none;
+	position: absolute;
 	align-items: center;
 	justify-content: center;
 	bottom: 25px;
@@ -152,10 +152,10 @@
 .map #mapImageContainer .mapIcon .angleHandle {
 	display: none;
 	position: absolute;
-	// bottom: calc(100% + 2px);
-	// left: calc(100% + 2px);
-	bottom: 0;
-	right: -22px;
+	top: -12px;
+	right: -16px;
+	// bottom: 0;
+	// right: -22px;
 	font-size: 1rem;
 	color: v.$bg-light;
 	cursor: nwse-resize;

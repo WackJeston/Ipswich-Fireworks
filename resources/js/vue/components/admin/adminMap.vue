@@ -159,6 +159,7 @@
 					newDiv.setAttribute('draggable', true);
 					newDiv.style.top = newIconPositionTop + 'px' ?? '0px';
 					newDiv.style.left = newIconPositionLeft + 'px' ?? '0px';
+					newDiv.style.transform = `rotate(${existingIcon.angle}deg)` ?? '0deg';
 					newDiv.dataset.id = count;
 					newDiv.dataset.height = newIconHeight ?? 100;
 					newDiv.dataset.width = newIconWidth ?? 100;
@@ -181,7 +182,7 @@
 					sizeHandle.id = 'sizeHandle';
 
 					let angleHandle = document.createElement('i');
-					angleHandle.className = 'angleHandle fa-solid fa-turn-down fa-rotate-90';
+					angleHandle.className = 'angleHandle fa-solid fa-turn-down';
 					angleHandle.id = 'angleHandle';
 
 					newDiv.appendChild(newImg);
@@ -218,11 +219,14 @@
 
 					target.classList.add('selected');
 
+					let deleteButton = target.querySelector('#deleteButton');
+					deleteButton.style.display = 'flex';
+
 					let sizeHandle = target.querySelector('#sizeHandle');
 					sizeHandle.style.display = 'flex';
 
-					let deleteButton = target.querySelector('#deleteButton');
-					deleteButton.style.display = 'flex';
+					let angleHandle = target.querySelector('#angleHandle');
+					angleHandle.style.display = 'flex';
 
 					let sizeInput = document.querySelector('#mapEditSection input[name="size"]');
 					let angleInput = document.querySelector('#mapEditSection input[name="angle"]');
@@ -248,6 +252,12 @@
 
 						icon.dataset.height = size[0];
 						icon.dataset.width = size[1];
+
+					} else if (name == 'angle') {
+						let target = document.querySelector('.mapIcon.selected');
+						target.style.transform = `rotate(${event.target.value}deg)`;
+
+						icon.dataset.angle = event.target.value;
 
 					} else {
 						icon.dataset[name] = event.target.value;
@@ -304,7 +314,7 @@
 			mouseDown(event) {
 				this.selectIcon(event);
 
-				if (!(event.target.tagName === 'IMG' || event.target.id === 'sizeHandle')) {
+				if (!(event.target.tagName === 'IMG' || event.target.id === 'sizeHandle' || event.target.id === 'angleHandle')) {
 					return;
 				}
 
@@ -315,6 +325,8 @@
 				this.startX = event.clientX;
 				this.startY = event.clientY;
 
+				console.log(event.target);
+
 				if (event.target.tagName === 'IMG') {
 					document.addEventListener("mousemove", this.mouseMove);
 					document.addEventListener("mouseup", this.mouseUp);
@@ -322,6 +334,9 @@
 				} else if (event.target.id === 'sizeHandle') {
 					document.addEventListener("mousemove", this.sizeMove);
 					document.addEventListener("mouseup", this.sizeUp);
+				} else if (event.target.id === 'angleHandle') {
+					document.addEventListener("mousemove", this.rotateMove);
+					document.addEventListener("mouseup", this.rotateUp);
 				}
 			},
 
@@ -413,6 +428,30 @@
 			sizeUp(event) {
 				document.removeEventListener("mousemove", this.sizeMove);
 				document.removeEventListener("mouseup", this.sizeUp);
+			},
+
+			rotateMove(event) {
+				let target = document.getElementById(this.targetId);
+				let rect = target.getBoundingClientRect();
+				let centerX = rect.left + rect.width / 2;
+				let centerY = rect.top + rect.height / 2;
+
+				let angle = Math.atan2(event.clientY - centerY, event.clientX - centerX) * (180 / Math.PI);
+				angle = angle + 45;
+
+				target.style.transform = `rotate(${angle}deg)`;
+
+				angle = Math.round(angle);
+
+				target.dataset.angle = angle;
+
+				let angleInput = document.querySelector('#mapEditSection input[name="angle"]');
+				angleInput.value = angle;
+			},
+
+			rotateUp(event) {
+				document.removeEventListener("mousemove", this.rotateMove);
+				document.removeEventListener("mouseup", this.rotateUp);
 			},
 
 			async saveMap() {
