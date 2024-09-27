@@ -23,8 +23,17 @@ class MapController extends PublicController
 			return redirect('/');
 		}
 
+		$map[0]->images = json_decode($map[0]->images, true);
+
+		foreach ($map[0]->images as $i => $image) {
+			if ($image['programme'] != 'null') {
+				foreach (explode($image['programme']) as $i2 => $programme) {
+					dd($programme);
+				}
+			}
+		}
+
 		$map = ImageCommon::cacheImages($map)[0];
-		$map->images = json_decode($map->images, true);
 
     return view('public/map', compact(
 			'map',

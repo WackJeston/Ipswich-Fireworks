@@ -262,6 +262,12 @@
 
 						icon.dataset.angle = event.target.value;
 
+					} else if (name == 'programme') {
+						let dropdown = event.target.parentElement.querySelector('.multiselect-dropdown');
+
+						console.log(dropdown);
+						console.log(dropdown.value);
+
 					} else {
 						icon.dataset[name] = event.target.value;
 					}
@@ -327,8 +333,6 @@
 
 				this.startX = event.clientX;
 				this.startY = event.clientY;
-
-				console.log(event.target);
 
 				if (event.target.tagName === 'IMG') {
 					document.addEventListener("mousemove", this.mouseMove);

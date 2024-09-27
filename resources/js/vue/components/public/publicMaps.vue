@@ -12,8 +12,6 @@
     ],
 		
 		mounted() {
-			console.log(this.map);
-
 			this.map.images.forEach((existingIcon) => this.createExistingIcon(existingIcon))
 		},
 
@@ -46,6 +44,9 @@
 					newImg.style.top = newIconPositionTop + 'px' ?? '0px';
 					newImg.style.left = newIconPositionLeft + 'px' ?? '0px';
 					newImg.style.transform = `rotate(${existingIcon.angle}deg)` ?? '0deg';
+					newImg.dataset.title = existingIcon.title;
+					newImg.dataset.description = existingIcon.description;
+					newImg.dataset.programme = existingIcon.programme;
 
 					primary.appendChild(newImg);
 				}
