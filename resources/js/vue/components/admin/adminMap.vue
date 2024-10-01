@@ -34,7 +34,7 @@
 				<textarea name="description" @keyup="this.saveIconData($event)"></textarea>
 
 				<label for="programme">Programme</label>
-				<select name="programme" @change="this.saveIconData($event)" multiple multiselect-search="true" multiselect-select-all="true">
+				<select name="programme" id="programmeSelect" @change="this.saveIconData($event)" multiple multiselect-search="true" multiselect-select-all="true">
 					<option v-for="(programme, i) in this.programme" :value="programme.id">{{ programme.value }}</option>
 				</select>
 			</form>
@@ -72,7 +72,7 @@
 		},
 
 		mounted() {
-			this.map.images.forEach((existingIcon) => this.createExistingIcon(existingIcon))
+			this.map.images.forEach((existingIcon) => this.createExistingIcon(existingIcon));
 		},
 
 		methods: {
@@ -241,7 +241,37 @@
 					angleInput.value = target.dataset.angle;
 					titleInput.value = target.dataset.title;
 					descriptionInput.value = target.dataset.description;
-					programmeInput.value = target.dataset.programme;
+
+					let options = programmeInput.querySelectorAll('option');
+					let programmeIds = target.dataset.programme.split(',');
+
+					options.forEach((option) => {
+						if (programmeIds.includes(option.value)) {
+							option.selected = true;
+						} else {
+							option.selected = false;
+						}
+					});
+
+					let programmeOptions = [];
+
+					this.programme.forEach((programme) => {
+						if (programmeIds.includes(programme.id.toString())) {
+							programmeOptions.push(programme.value);
+						}
+					});
+
+					let programmeElements = document.querySelectorAll('.multiselect-dropdown-list div:not(.multiselect-dropdown-all-selector)');
+
+					programmeElements.forEach((element) => {
+						let input = element.querySelector('input');
+						let label = element.querySelector('label');
+
+						if (programmeOptions.includes(label.innerText)) {
+							input.checked = true;
+							element.classList.add('checked');
+						}
+					});
 				}
 			},
 
@@ -262,11 +292,21 @@
 
 						icon.dataset.angle = event.target.value;
 
-					} else if (name == 'programme') {
-						let dropdown = event.target.parentElement.querySelector('.multiselect-dropdown');
+					} else if (name == 'programme') {						
+						var newProgramme = [];
+						let options = event.target.parentElement.querySelectorAll('.multiselect-dropdown-list .checked:not(.multiselect-dropdown-all-selector)');
 
-						console.log(dropdown);
-						console.log(dropdown.value);
+						options.forEach((option) => {
+							let value = option.querySelector('label').innerText;
+
+							this.programme.forEach((programme) => {
+								if (programme.value == value) {
+									newProgramme.push(programme.id);
+								}
+							});
+						});
+
+						icon.dataset.programme = newProgramme;
 
 					} else {
 						icon.dataset[name] = event.target.value;
