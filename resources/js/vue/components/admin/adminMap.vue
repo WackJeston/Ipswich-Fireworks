@@ -242,10 +242,10 @@
 					titleInput.value = target.dataset.title;
 					descriptionInput.value = target.dataset.description;
 
-					let options = programmeInput.querySelectorAll('option');
+					let programmeOptions = programmeInput.querySelectorAll('option');
 					let programmeIds = target.dataset.programme.split(',');
 
-					options.forEach((option) => {
+					programmeOptions.forEach((option) => {
 						if (programmeIds.includes(option.value)) {
 							option.selected = true;
 						} else {
@@ -253,25 +253,7 @@
 						}
 					});
 
-					let programmeOptions = [];
-
-					this.programme.forEach((programme) => {
-						if (programmeIds.includes(programme.id.toString())) {
-							programmeOptions.push(programme.value);
-						}
-					});
-
-					let programmeElements = document.querySelectorAll('.multiselect-dropdown-list div:not(.multiselect-dropdown-all-selector)');
-
-					programmeElements.forEach((element) => {
-						let input = element.querySelector('input');
-						let label = element.querySelector('label');
-
-						if (programmeOptions.includes(label.innerText)) {
-							input.checked = true;
-							element.classList.add('checked');
-						}
-					});
+					programmeInput.loadOptions();
 				}
 			},
 
@@ -292,21 +274,16 @@
 
 						icon.dataset.angle = event.target.value;
 
-					} else if (name == 'programme') {						
+					} else if (name == 'programme') {
 						var newProgramme = [];
-						let options = event.target.parentElement.querySelectorAll('.multiselect-dropdown-list .checked:not(.multiselect-dropdown-all-selector)');
 
-						options.forEach((option) => {
-							let value = option.querySelector('label').innerText;
-
-							this.programme.forEach((programme) => {
-								if (programme.value == value) {
-									newProgramme.push(programme.id);
-								}
-							});
+						Object.keys(event.target.selectedOptions).forEach((option) => {
+							newProgramme.push(event.target.selectedOptions[option].value);
 						});
 
-						icon.dataset.programme = newProgramme;
+						console.log(newProgramme);
+
+						icon.dataset.programme = newProgramme.join(',');
 
 					} else {
 						icon.dataset[name] = event.target.value;
