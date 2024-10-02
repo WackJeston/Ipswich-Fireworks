@@ -27,8 +27,8 @@ class MapController extends PublicController
 
 		foreach ($map[0]->images as $i => $image) {
 			if ($image['programme'] != 'null') {
-				foreach (explode($image['programme']) as $i2 => $programme) {
-					dd($programme);
+				foreach (explode(',', $image['programme']) as $i2 => $programme) {
+					// dd($programme);
 				}
 			}
 		}
