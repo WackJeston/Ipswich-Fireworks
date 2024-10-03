@@ -1,22 +1,72 @@
 @use 'site/v';
 
+.map h1 {
+	margin-bottom: 0;
+}
+
+.map h4 {
+	margin-top: 0;
+}
+
 .map h1,
-.map .content {
+.map h4 {
+	display: flex;
 	margin-left: auto;
 	margin-right: auto;
-	max-width: 800px;
+	max-width: 1200px;
+
+	@media (max-width: 800px) {
+		margin-left: 20px;
+		margin-right: 20px;
+	}
+}
+
+.map .content {
+	display: flex;
+	flex-direction: column;
+	margin-left: auto;
+	margin-right: auto;
+	max-width: 1200px;
+
+	@media (min-width: 800px) {
+		flex-direction: row-reverse;
+		padding-bottom: 30px;
+	}
 }
 
 .map #mapImageContainer {
+	display: flex;
 	position: relative;
 	overflow: hidden;
-	border-radius: 30px;
+
+	@media (min-width: 800px) {
+		border-radius: 30px;
+	}
 }
 
 .map #mapImageContainer img {
 	width: 100%;
+	max-width: 700px;
 }
 
 .map #mapImageContainer .mapIcon {
 	position: absolute;
+	cursor: pointer;
+}
+
+.map #mapInfoContainer {
+	display: flex;
+	flex-grow: 1;
+	flex-direction: column;
+	margin-left: 20px;
+	margin-right: 20px;
+
+	@media (min-width: 800px) {
+		width: 200px;
+	}
+}
+
+.map #mapInfoContainer h2,
+.map #mapInfoContainer p {
+	margin-bottom: 0;
 }

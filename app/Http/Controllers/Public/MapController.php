@@ -25,11 +25,15 @@ class MapController extends PublicController
 
 		$map[0]->images = json_decode($map[0]->images, true);
 
-		foreach ($map[0]->images as $i => $image) {
+		foreach ($map[0]->images as $i => $image) {			
 			if ($image['programme'] != 'null') {
-				foreach (explode(',', $image['programme']) as $i2 => $programme) {
-					// dd($programme);
-				}
+				$map[0]->images[$i]['programme'] = DB::select('SELECT 
+					p.*
+					FROM programme AS p
+					WHERE p.id = ?
+					AND p.active = 1',
+					[$image['programme']]
+				);
 			}
 		}
 
