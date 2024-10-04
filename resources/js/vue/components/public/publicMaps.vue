@@ -6,7 +6,6 @@
 
 			<ul class="programme">
 				<li>
-					<h3>Name (Stage) time <a href="link">link</a></h3>
 				</li>
 			</ul>
 		</div>
@@ -79,15 +78,40 @@
 						if (event.target.dataset.programme != 'null') {
 							let programme = JSON.parse(event.target.dataset.programme);
 
+							console.log(programme);
+
 							let programmeList = mapInfoContainer.querySelector('.programme');
-							programmeList.innerHTML = '';
+							programmeList.innerHTML = '<li><h2>PROGRAMME</h2></li>';
 
 							programme.forEach((item) => {
 								let itemElement = document.createElement('li');
 
-								console.log(item.value);
+								let string = '';
 
-								itemElement.innerHTML = `<h3>${item.value} (${item.stage}) ${item.time} <a href="${item.link}">item.link</a></h3>`;
+								if (item.link != null) {
+									string += `<a href="${item.link}">`;
+								}
+								
+								string += `<strong>${item.value}</strong>`;
+
+								string += '<span>';
+
+								if (item.stage != null) {
+									string += ` (${item.stage})`;
+								}
+
+								if (item.time != null) {
+									string += ` ${item.time}`;
+								}
+
+								string += '</span>';
+
+								if (item.link != null) {
+									string += '</a>';
+								}
+
+								itemElement.innerHTML = string;
+								
 								programmeList.appendChild(itemElement);
 							});
 						} else {

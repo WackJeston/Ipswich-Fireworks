@@ -27,13 +27,13 @@ class MapController extends PublicController
 
 		foreach ($map[0]->images as $i => $image) {			
 			if ($image['programme'] != 'null') {
-				$map[0]->images[$i]['programme'] = DB::select('SELECT 
+				$map[0]->images[$i]['programme'] = DB::select(sprintf('SELECT 
 					p.*
 					FROM programme AS p
-					WHERE p.id = ?
-					AND p.active = 1',
-					[$image['programme']]
-				);
+					WHERE p.id IN (%s)
+					AND p.active = 1', 
+					$image['programme']
+				));
 			}
 		}
 
