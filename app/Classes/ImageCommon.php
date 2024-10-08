@@ -12,7 +12,7 @@ use App\Models\Asset;
 
 class ImageCommon {
 	public static function cacheImage(string $fileName, int $width = 0, int $height = 0, bool $trim = false, string $background = null, bool $webp = true):string {
-		$publicFileName = sprintf('images/%s%s%s.%s', 
+		$publicFileName = sprintf('%s%s%s.%s', 
 			explode('.', $fileName)[0], 
 			($width > 0 || $height > 0) ? sprintf('-%d-%d', $width, $height) : '',
 			$trim ? '-trim' : '',
