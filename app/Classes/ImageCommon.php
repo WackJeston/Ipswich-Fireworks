@@ -20,7 +20,11 @@ class ImageCommon {
 		);
 	
 		if (!Storage::disk('public')->exists($publicFileName)) {
-			// dd(Storage::get($fileName));
+			// dd(Storage::allFiles());
+
+			// if (is_null(Storage::get($fileName))) {
+			// 	dd();
+			// }
 
 			$data = Storage::get($fileName);
 			$mimeType = Storage::mimeType($fileName);
